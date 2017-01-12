@@ -9,23 +9,21 @@ namespace HistoricBlog.DAL.Entities
 {
     public class Post : BaseId
     {
-        [MaxLength(500), Required]
-        public virtual string Title { get; set; }
-        [MaxLength(5000), Required]
-        public virtual string ShortDescription { get; set; }
-        [MaxLength(5000), Required]
-        public virtual string Description { get; set; }
-        [Required]
-        public virtual string UrlSlug { get; set; }
-        [MaxLength(100), Required]
-        public virtual bool Published { get; set; }
-        [Required]
-        public virtual DateTime PostedOn { get; set; }
-        [Required]
-        public virtual DateTime? Modified { get; set; }
-        [ForeignKey("CategoryId"), Required]
-        public virtual Category Category { get; set; }
-        [ForeignKey("TagId"), Required]
+        [MaxLength(500)]
+        public string Title { get; set; }
+        [MaxLength(5000)]
+        public string ShortDescription { get; set; }
+
+        public string Description { get; set; }
+
+        public bool IsPublished { get; set; }
+
+        public DateTime PostedOn { get; set; }
+
+        public DateTime? Modified { get; set; }
+
+        public int CategoryId { get; set; }
+
         public virtual IList<Tag> Tags { get; set; }
     }
 }

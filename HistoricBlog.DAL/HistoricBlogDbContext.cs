@@ -15,7 +15,7 @@ namespace HistoricBlog.DAL
         public virtual DbSet<Tag> Tags { get; set; }
 
         public HistoricBlogDbContext()
-            : base("Default")
+            : base("HistoricBlog")
         {
 
         }

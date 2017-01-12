@@ -7,13 +7,9 @@ namespace HistoricBlog.DAL.Entities
 {
     public class Tag: BaseId
     {
-        [Required]
-        public virtual string Name { get; set; }
-        [Required]
-        public virtual string UrlSlug { get; set; }
-        [Required]
-        public virtual string Description { get; set; }
-        [Required]
+
+        public string Name { get; set; }
+
         public virtual IList<Post> Posts { get; set; }
     }
 }
