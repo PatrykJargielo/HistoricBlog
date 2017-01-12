@@ -1,0 +1,6 @@
+10:06:40,911 [C:\Users\Billennium\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog\HistoricBlog.Web\Controllers\HomeController.cs] ERROR - Sprawdzenie czy logger w kontrolerze dziala
+10:07:33,853 [C:\Users\Billennium\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog\HistoricBlog.Web\Controllers\HomeController.cs] ERROR - Sprawdzenie czy logger w kontrolerze dziala
+10:07:37,532 [C:\Users\Billennium\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog\HistoricBlog.Web\Controllers\HomeController.cs] ERROR - Sprawdzenie czy loguje kontakty
+10:13:02,166 [C:\Users\Billennium\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog\HistoricBlog.Web\Controllers\HomeController.cs] ERROR - Sprawdzenie czy logger w kontrolerze dziala
+10:13:05,608 [C:\Users\Billennium\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog\HistoricBlog.Web\Controllers\HomeController.cs] ERROR - Sprawdzenie czy loguje kontakty
+10:14:23,966 [C:\Users\Billennium\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog\HistoricBlog.Web\Controllers\HomeController.cs] ERROR - Sprawdzenie czy logger w kontrolerze dziala
