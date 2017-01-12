@@ -225,6 +225,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HistoricBlog.BLL.Logger\HistoricBlog.BLL.Logger.csproj">
+      <Project>{00269d9e-a707-49db-9134-60ab0ec2fa2f}</Project>
+      <Name>HistoricBlog.BLL.Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HistoricBlog.BLL\HistoricBlog.BLL.csproj">
+      <Project>{65f6ebd1-b0b2-404d-ad3f-b0e68ca4295d}</Project>
+      <Name>HistoricBlog.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HistoricBlog.DAL\HistoricBlog.DAL.csproj">
       <Project>{b804d12d-1726-4c2f-9e4f-ab9d455f56b6}</Project>
       <Name>HistoricBlog.DAL</Name>

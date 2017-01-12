@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity.Migrations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HistoricBlog.DAL.Users;
 
 namespace HistoricBlog.DAL.Migrations
 {
@@ -13,6 +10,25 @@ namespace HistoricBlog.DAL.Migrations
         {
             AutomaticMigrationsEnabled = false;
             ContextKey = "HistoricBlog";
+        }
+
+        protected override void Seed(HistoricBlogDbContext context)
+        {
+            List<User> Users = new List<User>();
+            Users.Add(new User()
+            {
+                Id = 1,
+                Name = "Admin",
+                Surname = "Admin",
+                Login ="admin",
+                Password = "admin",
+                Role = null,
+                Email = "admin@admin.pl",
+                Comment = null,
+                Rating = null
+            });
+            
+            context.Users.AddOrUpdate(Users.ToArray());
         }
     }
 }

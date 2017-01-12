@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using HistoricBlog.DAL.Entities.BaseEntity;
+using HistoricBlog.DAL.Base;
+using HistoricBlog.DAL.Posts;
 
 
 namespace HistoricBlog.DAL.Entities
 {
-    public class Tag: BaseId
+    public class Tag: BaseEntity
     {
-
         public string Name { get; set; }
-
         public virtual IList<Post> Posts { get; set; }
     }
 }

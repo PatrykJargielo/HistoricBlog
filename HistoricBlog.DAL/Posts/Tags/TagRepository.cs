@@ -1,11 +1,9 @@
-﻿using HistoricBlog.DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using HistoricBlog.DAL.Base;
+using HistoricBlog.DAL.Entities;
+using HistoricBlog.DAL.Repositories.Interfaces;
 
-namespace HistoricBlog.DAL
+namespace HistoricBlog.DAL.Repositories
 {
     public class TagRepository : GenericRepository<Tag>, ITagRepository
     {

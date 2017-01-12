@@ -40,13 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Users\IUserService.cs" />
+    <Compile Include="Users\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HistoricBlog.BLL.Logger\HistoricBlog.BLL.Logger.csproj">
       <Project>{00269D9E-A707-49DB-9134-60AB0EC2FA2F}</Project>
       <Name>HistoricBlog.BLL.Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HistoricBlog.DAL\HistoricBlog.DAL.csproj">
+      <Project>{B804D12D-1726-4C2F-9E4F-AB9D455F56B6}</Project>
+      <Name>HistoricBlog.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
