@@ -8,7 +8,7 @@ using HistoricBlog.DAL.Entities;
 
 namespace HistoricBlog.DAL
 {
-    class HistoricBlogDbContext : DbContext
+    public class HistoricBlogDbContext : DbContext
     {
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }

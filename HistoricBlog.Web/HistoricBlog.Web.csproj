@@ -162,6 +162,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="AutofacConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DataModule.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -224,9 +225,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HistoricBlog.BLL.Logger\HistoricBlog.BLL.Logger.csproj">
-      <Project>{00269d9e-a707-49db-9134-60ab0ec2fa2f}</Project>
-      <Name>HistoricBlog.BLL.Logger</Name>
+    <ProjectReference Include="..\HistoricBlog.DAL\HistoricBlog.DAL.csproj">
+      <Project>{b804d12d-1726-4c2f-9e4f-ab9d455f56b6}</Project>
+      <Name>HistoricBlog.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
