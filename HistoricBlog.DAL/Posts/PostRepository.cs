@@ -5,10 +5,10 @@ namespace HistoricBlog.DAL.Posts
 {
     public class PostRepository : GenericRepository<Post>, IPostRepository
     {
-        public Post GetSingle(int postId)
+        public PostRepository(HistoricBlogDbContext historicBlogDbContext) : base(historicBlogDbContext)
         {
-            var query = GetAll().FirstOrDefault(x => x.Id == postId);
-            return query;
+
         }
+
     }
 }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HistoricBlog.DAL.Base;
 
 namespace HistoricBlog.DAL.Posts.Ratings
 {
-    interface IRatingRepository
+    interface IRatingRepository : IGenericRepository<Rating>
     {
+
     }
 }

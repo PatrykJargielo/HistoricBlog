@@ -6,64 +6,72 @@ using System.Linq.Expressions;
 
 namespace HistoricBlog.DAL.Base
 {
-    public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
+    public abstract class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
-        private readonly HistoricBlogDbContext _db = null;
-        private readonly DbSet<T> _table = null;
+        private readonly HistoricBlogDbContext _historicBlogDbContext;
+        private readonly DbSet<T> _table;
 
-        public GenericRepository()
+        protected GenericRepository(HistoricBlogDbContext historicBlogDbContext)
         {
-            this._db = new HistoricBlogDbContext();
-            _table = _db.Set<T>();
+            _historicBlogDbContext = historicBlogDbContext;
+            _table = historicBlogDbContext.Set<T>();
         }
-        //public GenericRepository(HistoricBlogDbContext db)
-        //{
-        //    this._db = db;
-        //    _table = db.Set<T>();
-        //}
 
-        public virtual IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate = null)
+        public virtual GenericResult<IEnumerable<T>> GetAll(Expression<Func<T, bool>> predicate = null)
         {
-            if (predicate !=null)
+            var result = new GenericResult<IEnumerable<T>>();
+            if (predicate !=null) 
             {
-                return _table.Where(predicate);
+                result.Result = _table.Where(predicate);
+                return result;
             }
             else
             {
-                return _table.AsEnumerable();
+                result.Result = _table.AsEnumerable();
+                return result;
             }
         }
-        public IEnumerable<T> FindBy(Expression<Func<T,bool>> predicate)
+        public virtual GenericResult<IEnumerable<T>> FindBy(Expression<Func<T,bool>> predicate)
         {
-            IEnumerable<T> query = _db.Set<T>().Where(predicate);
-            return query;
+            var result = new GenericResult<IEnumerable<T>> {Result = _historicBlogDbContext.Set<T>().Where(predicate)};
+            return result;
         }
-        public virtual void Add(T obj)
+        public virtual GenericResult<T>Add(T obj)
         {
-            _table.Add(obj);
+            var result = new GenericResult<T> {Result = _table.Add(obj)};
+            return result;
+        }
+        public  GenericResult<T>Delete(T obj)
+        {
+            var result = new GenericResult<T> {Result = _table.Remove(obj)};
+            return result;
+        }
+        public  GenericResult<T>Delete(Expression<Func<T, bool>> predicate)
+        {
+            var result = new GenericResult<T> {Result = _table.First(predicate)};
+            _table.Remove(result.Result);
+            return result;
+        }
 
-        }
-        public T Delete(T obj)
+        public virtual GenericResult<T>Edit(T obj)
         {
-            _table.Remove(obj);
-            return obj;
-        }
-        public T Delete(Expression<Func<T, bool>> predicate)
-        {
-            T entityToDelete = _table.First(predicate);
-            _table.Remove(entityToDelete);
-            return entityToDelete;
-        }
-
-        public virtual void Edit(T obj)
-        {
-            _table.Attach(obj);
-            _db.Entry(obj).State = EntityState.Modified;
+            var result = new GenericResult<T> {Result = _table.Attach(obj)};
+            _historicBlogDbContext.Entry(obj).State = EntityState.Modified;
+            return result;
         }
 
         public virtual void Save()
         {
-            _db.SaveChanges();
+            _historicBlogDbContext.SaveChanges();
+        }
+
+        public  GenericResult<T> GetById(int id)
+        {
+
+            GenericResult<IEnumerable<T>> allEntitiesById = GetAll(x => x.Id == id);
+            var result = new GenericResult<T> {Result = allEntitiesById.Result.FirstOrDefault()};
+
+            return result;
         }
     }
 }

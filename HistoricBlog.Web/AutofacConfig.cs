@@ -18,7 +18,7 @@ namespace HistoricBlog.Web
             builder.RegisterAssemblyTypes(asembly).Where(t => t.Name.EndsWith("Repository")).AsImplementedInterfaces().InstancePerRequest().PropertiesAutowired();
             
             builder.RegisterControllers(typeof(MvcApplication).Assembly).PropertiesAutowired();
-
+            builder.RegisterModule(new DataModule());
             // Register dependencies in filter attributes
             builder.RegisterFilterProvider();
 

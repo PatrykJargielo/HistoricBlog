@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using HistoricBlog.DAL.Base;
-using HistoricBlog.DAL.Posts;
 
-
-namespace HistoricBlog.DAL.Entities
+namespace HistoricBlog.DAL.Posts.Tags
 {
     public class Tag: BaseEntity
     {

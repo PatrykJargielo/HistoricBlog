@@ -2,8 +2,12 @@
 
 namespace HistoricBlog.DAL.Users
 {
-    public class UserRepository :GenericRepository<User>, IUserRepository
+    public class UserRepository : GenericRepository<User>, IUserRepository
     {
-        
+        public UserRepository(HistoricBlogDbContext historicBlogDbContext) : base(historicBlogDbContext)
+        {
+        }
+
+
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using HistoricBlog.DAL.Entities;
 using HistoricBlog.DAL.Base;
 using HistoricBlog.DAL.Posts.Comments;
 using HistoricBlog.DAL.Posts.Ratings;
+using HistoricBlog.DAL.Users.Roles;
 
 namespace HistoricBlog.DAL.Users
 {

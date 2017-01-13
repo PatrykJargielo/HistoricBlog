@@ -5,11 +5,10 @@ namespace HistoricBlog.DAL.Posts.Categories
 {
     public class CategoriesRepository : GenericRepository<Category>, ICategoryRepository
     {
-        public Category GetSingle(int categoryId)
+        public CategoriesRepository(HistoricBlogDbContext historicBlogDbContext) : base(historicBlogDbContext)
         {
-            var query = GetAll().FirstOrDefault(x => x.Id == categoryId);
-            return query;
         }
+
     }
 }
 

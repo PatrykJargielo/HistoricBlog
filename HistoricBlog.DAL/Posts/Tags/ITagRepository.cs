@@ -1,10 +1,9 @@
 ﻿using HistoricBlog.DAL.Base;
-using HistoricBlog.DAL.Entities;
 
-namespace HistoricBlog.DAL.Repositories.Interfaces
+namespace HistoricBlog.DAL.Posts.Tags
 {
     public interface ITagRepository : IGenericRepository<Tag>
     {
-        Tag GetSingle(int tagId);
+
     }
 }

@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HistoricBlog.DAL.Base;
 
 namespace HistoricBlog.DAL.Posts.Ratings
+
 {
-    class RatingRepository
+    class RatingRepository: GenericRepository<Rating>, IRatingRepository
     {
+        public RatingRepository(HistoricBlogDbContext historicBlogDbContext) : base(historicBlogDbContext)
+        {
+
+        }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System.Data.Entity;
-using HistoricBlog.DAL.Entities;
 using HistoricBlog.DAL.Posts;
 using HistoricBlog.DAL.Posts.Categories;
 using HistoricBlog.DAL.Posts.Comments;
 using HistoricBlog.DAL.Posts.Ratings;
+using HistoricBlog.DAL.Posts.Tags;
 using HistoricBlog.DAL.Users;
+using HistoricBlog.DAL.Users.Permission;
+using HistoricBlog.DAL.Users.Roles;
 
 namespace HistoricBlog.DAL
 {

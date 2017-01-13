@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using HistoricBlog.DAL.Base;
-using HistoricBlog.DAL.Entities;
 using HistoricBlog.DAL.Posts.Categories;
+using HistoricBlog.DAL.Posts.Tags;
 using HistoricBlog.DAL.Users;
 
 namespace HistoricBlog.DAL.Posts

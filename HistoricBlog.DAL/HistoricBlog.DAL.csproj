@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseEntity.cs" />
+    <Compile Include="Base\GenericResult.cs" />
     <Compile Include="Migrations\201701121430348_second.cs" />
     <Compile Include="Migrations\201701121430348_second.Designer.cs">
       <DependentUpon>201701121430348_second.cs</DependentUpon>
@@ -64,8 +65,12 @@
     <Compile Include="Posts\Ratings\Rating.cs" />
     <Compile Include="Posts\Ratings\RatingRepository.cs" />
     <Compile Include="Posts\Tags\Tag.cs" />
-    <Compile Include="Users\Permission.cs" />
-    <Compile Include="Users\Role.cs" />
+    <Compile Include="Users\Permission\IPermissionRepository.cs" />
+    <Compile Include="Users\Roles\IRoleRepository.cs" />
+    <Compile Include="Users\Permission\Permission.cs" />
+    <Compile Include="Users\Permission\PermissionRepository.cs" />
+    <Compile Include="Users\Roles\Role.cs" />
+    <Compile Include="Users\Roles\RoleRepository.cs" />
     <Compile Include="Users\User.cs" />
     <Compile Include="HistoricBlogDbContext.cs" />
     <Compile Include="Migrations\201701121245249_init.cs" />

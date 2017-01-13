@@ -4,15 +4,17 @@ using System.Linq.Expressions;
 
 namespace HistoricBlog.DAL.Base
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T> where T : IBaseEntity
     {
-        IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate = null);
-        IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate);
-        void Add(T obj);
-        T Delete(T obj);
-        T Delete(Expression<Func<T, bool>> predicate);
-        void Edit(T obj);
+        GenericResult<IEnumerable<T>> GetAll(Expression<Func<T, bool>> predicate = null);
+        GenericResult<IEnumerable<T>> FindBy(Expression<Func<T, bool>> predicate);
+        GenericResult<T> Add(T obj);
+        GenericResult<T> Delete(T obj);
+        GenericResult<T> Delete(Expression<Func<T, bool>> predicate);
+        GenericResult<T>Edit(T obj);
         void Save();
+
+        GenericResult<T>GetById(int id);
     }
 
 }
