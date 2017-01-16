@@ -61,7 +61,6 @@ namespace HistoricBlog.DAL.Base
 
         public virtual void Save()
         {
-            _historicBlogDbContext.GetValidationErrors();
             _historicBlogDbContext.SaveChanges();
         }
 
