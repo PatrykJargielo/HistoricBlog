@@ -14,6 +14,12 @@ namespace HistoricBlog.Web
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+               name: "DataCon",
+               url: "{controller}/{action}/{id}",
+               defaults: new { controller = "Data", action = "GetPosts", id = UrlParameter.Optional }
+           );
         }
     }
 }
