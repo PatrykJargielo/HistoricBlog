@@ -22,5 +22,10 @@ namespace HistoricBlog.DAL.Posts
         public virtual IList<Category> Category { get; set; }
         public virtual IList<Tag> Tag { get; set; }
         public virtual User User { get; set; }
+
+        public override List<string> Validation()
+        {
+            return Validation();
+        }
     }
 }

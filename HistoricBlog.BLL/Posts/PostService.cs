@@ -23,24 +23,7 @@ namespace HistoricBlog.BLL.Posts
             _postRepository = postRepository;
         }
 
-        public override GenericResult<Post> Create(Post post)
-        {
-            var genericResult = new GenericResult<Post>();
-
-            //jakaś tam logika specyficzna dla serwisu
-            var postMinimumLength = 10;
-            bool descriptionIsLongEnough = post.Description.Length > postMinimumLength;
-            if (!descriptionIsLongEnough)
-            {
-                var message = $"Twój komentarz mniej niż 10 słów {post.Description}";
-                genericResult.IsVaild = false;
-                LoggerService.Log(message);
-                genericResult.Message = message;
-            }
-
-            
-            return Create(post, genericResult);
-        }
+      
 
         public override GenericResult<Post> Update(Post entity)
         {
@@ -50,6 +33,11 @@ namespace HistoricBlog.BLL.Posts
         }
 
         public override GenericResult<Post> Delete(Post entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override GenericResult<Post> Create(Post entity)
         {
             throw new NotImplementedException();
         }

@@ -22,62 +22,68 @@ namespace HistoricBlog.BLL.Base
             return result;
         }
 
+
         public abstract GenericResult<T> Create(T entity);
-
-
+       
+        
         protected GenericResult<T> Create(T entity,GenericResult<T> result)
         {
-            result.AssignResult(entity);
-            return Create(result);
-        }
-
-        private GenericResult<T> Create(GenericResult<T> result)
-        {
-            if (result.IsVaild)
+            List<string> errors = entity.Validation();
+            bool hasErrors = errors.Any();
+            if (hasErrors)
             {
-                _genericRepository.Add(result.Result);
+                result.IsVaild = false;
+                result.Messages = errors;
+            }
+            else
+            {
+                result.IsVaild = true;
+                result = _genericRepository.Add(entity);
                 _genericRepository.Save();
             }
 
-            return result;
+            return result;;
         }
 
         public abstract GenericResult<T> Update(T entity);
 
         protected GenericResult<T> Update(T entity, GenericResult<T> result)
         {
-            result.AssignResult(entity);
-            return Update(result);
-        }
-       
-        private GenericResult<T> Update(GenericResult<T> result)
-        {
-            if (result.IsVaild)
+            List<string> errors = entity.Validation();
+            bool hasErrors = errors.Any();
+            if (hasErrors)
             {
-                _genericRepository.Edit(result.Result);
-                _genericRepository.Save();
-                
+                result.IsVaild = false;
+                result.Messages = errors;
             }
+            else
+            {
+                result.IsVaild = true;
+                result = _genericRepository.Edit(result.Result);
+                _genericRepository.Save();
+            }
+
             return result;
         }
-
 
         public abstract GenericResult<T> Delete(T entity);
 
         protected GenericResult<T> Delete(T entity, GenericResult<T> result)
         {
-            result.AssignResult(entity);
-            return Delete(result);
-        }
-
-        public GenericResult<T> Delete(GenericResult<T> result)
-        {
-            if (result.IsVaild)
+            List<string> errors = entity.Validation();
+            bool hasErrors = errors.Any();
+            if (hasErrors)
             {
-                _genericRepository.Delete(result.Result);
-                _genericRepository.Save();
-                
+                result.IsVaild = false;
+                result.Messages = errors;
             }
+            else
+            {
+                result.IsVaild = true;
+                result = _genericRepository.Delete(result.Result);
+                _genericRepository.Save();
+            }
+
             return result;
         }
 

@@ -8,5 +8,9 @@ namespace HistoricBlog.DAL.Posts.Categories
         public string Name { get; set; }  
 
         public virtual IList<Post> Posts { get; set; }
+        public override List<string> Validation()
+        {
+            return Validation();
+        }
     }
 }

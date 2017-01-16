@@ -7,5 +7,9 @@ namespace HistoricBlog.DAL.Users.Roles
     {
         public string Name { get; set; }
         public IList<Permission.Permission> Permission { get; set; }
+        public override List<string> Validation()
+        {
+            return Validation();
+        }
     }
 }

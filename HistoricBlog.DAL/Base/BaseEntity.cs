@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Security.AccessControl;
 
 namespace HistoricBlog.DAL.Base
 {
@@ -6,5 +8,7 @@ namespace HistoricBlog.DAL.Base
     {
         [Key]
         public int Id { get; set; }
+
+        public abstract List<string> Validation();
     }
 }

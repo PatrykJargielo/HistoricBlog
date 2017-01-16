@@ -2,7 +2,7 @@
 
 namespace HistoricBlog.DAL.Users.Roles
 {
-    interface IRoleRepository : IGenericRepository<Role>
+    public interface IRoleRepository : IGenericRepository<Role>
     {
 
     }
