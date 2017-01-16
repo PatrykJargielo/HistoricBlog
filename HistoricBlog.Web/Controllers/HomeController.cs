@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using HistoricBlog.BLL.Posts;
 
 namespace HistoricBlog.Web.Controllers
 {

@@ -3,41 +3,55 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HistoricBlog.BLL.Base;
+using HistoricBlog.BLL.Logger;
+using HistoricBlog.DAL.Base;
 using HistoricBlog.DAL.Posts;
 using HistoricBlog.DAL.Posts.Tags;
 using HistoricBlog.DAL.Users;
 
 namespace HistoricBlog.BLL.Posts
 {
-    class PostService : IPostService
+    public class PostService : GenericService<Post>,IPostService
     {
-        private IPostRepository _postRepository;
+        private readonly IPostRepository _postRepository;
 
-        public PostService(IPostRepository postRepository)
+        public ILoggerService LoggerService;
+
+        public PostService(IPostRepository postRepository) : base(postRepository)
         {
             _postRepository = postRepository;
         }
 
-
-
-        public IEnumerable<Post> GetPosts()
+        public override GenericResult<Post> Create(Post post)
         {
-            // _postRepository.GetAll().ToList();
-            //Automaper --- > List Postów
+            var genericResult = new GenericResult<Post>();
 
-            List<Post> postOfDoom = new List<Post>();
+            //jakaś tam logika specyficzna dla serwisu
+            var postMinimumLength = 10;
+            bool descriptionIsLongEnough = post.Description.Length > postMinimumLength;
+            if (!descriptionIsLongEnough)
+            {
+                var message = $"Twój komentarz mniej niż 10 słów {post.Description}";
+                genericResult.IsVaild = false;
+                LoggerService.Log(message);
+                genericResult.Message = message;
+            }
 
-            Post test = new Post();
-            test.Id = 1;
-            test.Modified = DateTime.Today;
-            test.PostedOn = DateTime.Today;
-            test.ShortDescription = "dd";
-            test.Tag = new List<Tag> { new Tag { Name = "dd" }, new Tag { Name = "bb" } };
-            test.Title = "testitle";
-            test.User = new User() { Id = 1, Name = "bop", Surname = "dd" };
-            postOfDoom.Add(test);
+            
+            return Create(post, genericResult);
+        }
 
-            return postOfDoom;
+        public override GenericResult<Post> Update(Post entity)
+        {
+            var result = new GenericResult<Post>();
+            return Update(entity, result);
+            
+        }
+
+        public override GenericResult<Post> Delete(Post entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

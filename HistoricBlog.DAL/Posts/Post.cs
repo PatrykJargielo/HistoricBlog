@@ -14,6 +14,8 @@ namespace HistoricBlog.DAL.Posts
         public string Title { get; set; }
         [MaxLength(5000)]
         public string ShortDescription { get; set; }
+        [MaxLength(500)]
+        [MinLength(10,ErrorMessage = "Minimal Lenght should be atleast 10")]
         public string Description { get; set; }
         public DateTime PostedOn { get; set; }
         public DateTime? Modified { get; set; }
