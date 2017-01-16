@@ -24,14 +24,10 @@ namespace HistoricBlog.BLL.Base
 
         public abstract GenericResult<T> Create(T entity);
 
-        private void Assign(T entity, GenericResult<T> result)
-        {
-            if (result.IsVaild) result.Result = entity;
-        }
 
         protected GenericResult<T> Create(T entity,GenericResult<T> result)
         {
-            Assign(entity,result);
+            result.AssignResult(entity);
             return Create(result);
         }
 
@@ -50,7 +46,7 @@ namespace HistoricBlog.BLL.Base
 
         protected GenericResult<T> Update(T entity, GenericResult<T> result)
         {
-            Assign(entity, result);
+            result.AssignResult(entity);
             return Update(result);
         }
        
@@ -70,7 +66,7 @@ namespace HistoricBlog.BLL.Base
 
         protected GenericResult<T> Delete(T entity, GenericResult<T> result)
         {
-            Assign(entity,result);
+            result.AssignResult(entity);
             return Delete(result);
         }
 

@@ -11,5 +11,10 @@ namespace HistoricBlog.DAL.Base
         public string Message { get; set; }
         public bool IsVaild { get; set; }
         public T Result { get; set; }
+
+        public void AssignResult(T entity)
+        {
+            if(IsVaild) Result = entity;
+        }
     }
 }
