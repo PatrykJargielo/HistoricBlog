@@ -14,7 +14,7 @@ namespace HistoricBlog.DAL.Posts
     {
         public string Title { get; set; }
         public string ShortDescription { get; set; }
-        public string Description { get; set; }
+        public string Content { get; set; }
         public DateTime PostedOn { get; set; }
         public DateTime? Modified { get; set; }
         public virtual IList<Category> Categories { get; set; }
@@ -28,16 +28,14 @@ namespace HistoricBlog.DAL.Posts
 
             ValidateTitle(errorList);
             ValidateShortDescription(errorList);
-    
-            if (User == null) errorList.Add("There is no user assagined to this post!");
-            
-            if(Categories == null) errorList.Add("There is no list of categories assagined to this post!");           
-
+            ValidateCategoryPresence(errorList);
+           
             return errorList;
         }
 
         private void ValidateTitle(List<string> errorList)
         {
+            if(string.IsNullOrEmpty(Title)) errorList.Add("There is no title in your post!");
             const int maximumTitleLength = 50;
             const int minimumTitleLength = 10;
             if (Title.Length > maximumTitleLength) errorList.Add("Your title length is too long!");
@@ -45,14 +43,20 @@ namespace HistoricBlog.DAL.Posts
 
         }
 
+        private void ValidateCategoryPresence( List<string> errorList)
+        {
+            if (Categories == null) errorList.Add("There is no list of categories assagined to this post!");
+        }
+
         private void ValidateShortDescription(List<string> errorList)
         {
+            if(string.IsNullOrEmpty(ShortDescription)) errorList.Add("There is no short description in your post");
             const int maximumShortDescriptionLength = 500;
             const int minimumShortDescriptionLength = 10;
             if (ShortDescription.Length > maximumShortDescriptionLength) errorList.Add("Your short description length is too long!");
             if (ShortDescription.Length < minimumShortDescriptionLength) errorList.Add("Your short description length is too short!");
         }
-        
-       
+
+
     }
 }

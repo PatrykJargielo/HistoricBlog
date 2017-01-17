@@ -22,19 +22,7 @@ namespace HistoricBlog.DAL.Users
         public virtual IList<Comment> Comment { get; set; }
         public virtual IList<Rating> Rating { get; set; }
         public virtual IList<Role> Role { get; set; }
-        private bool IsMailVaild(string email)
-        {
-            try
-            {
-                var mailAddress = new MailAddress(email);
-
-                return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
-        }
+       
 
         public override List<string> Validation()
         {
@@ -54,13 +42,22 @@ namespace HistoricBlog.DAL.Users
             ValidateRegExLogIn(this.Login, errorMessage);
             ValidateRegPassword(this.Password, errorMessage);
 
-
-            if (!IsMailVaild(Email))
-            {
-                errorMessage.Add("Your e-mail is not correct");
-            }
+            ValidateEmail(errorMessage);
       
             return errorMessage;
+        }
+
+        private void ValidateEmail(List<string> errorMessage)
+        {
+            try
+            {
+                var mailAddress = new MailAddress(this.Email);
+            }
+            catch (Exception)
+            {
+
+                errorMessage.Add("Your e-mail is not correct");
+            }
         }
 
         private void ValidatePropertyLength(string valueValidate, List<string> errorMessage)

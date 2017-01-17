@@ -14,8 +14,9 @@ namespace HistoricBlog.DAL.Posts.Comments
         public override List<string> Validation()
         {
             List<string> validationMessages = new List<string>();
+           
             ValidateMaximalLength(validationMessages);
-            ValidateMaximalLength(validationMessages);
+            ValidateMinimalLength(validationMessages);
 
             return validationMessages;
         }
@@ -29,8 +30,8 @@ namespace HistoricBlog.DAL.Posts.Comments
 
         private void ValidateMinimalLength(List<string> validationMessages)
         {
-            var maximalLength = 0;
-            bool isValidLength = CommentText.Length > maximalLength;
+            var minimalLength = 2;
+            bool isValidLength = CommentText.Length > minimalLength;
             if (!isValidLength) validationMessages.Add($"Comment lenght should not be empty");
 
         }

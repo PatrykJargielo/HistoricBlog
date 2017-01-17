@@ -28,13 +28,13 @@ namespace HistoricBlog.DAL.Posts.Tags
 
         private void ValidateTagNameLength(List<string> errorMessage)
         {
-            const int maximumNameLenght = 20;
-            const int minimumNameLenght = 3;
+            const int maximumNameLength = 20;
+            const int minimumNameLength = 3;
 
-            bool isValidNameLength = Name.Length < minimumNameLenght && Name.Length > maximumNameLenght;
-            if (isValidNameLength)
+            bool isValidNameLength = Name.Length >= minimumNameLength && Name.Length <= maximumNameLength;
+            if (!isValidNameLength)
             {
-                errorMessage.Add($"Name length must be between {minimumNameLenght} and {maximumNameLenght} characters ");
+                errorMessage.Add($"Name length must be between {minimumNameLength} and {maximumNameLength} characters ");
             }
         }
     }
