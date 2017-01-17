@@ -12,17 +12,15 @@ namespace HistoricBlog.Web.ViewModels.Posts
         public string Title { get; set; }
         public string ShortDescription { get; set; }
  
-        public string Description { get; set; }
-
-        public bool IsPublished { get; set; }
+        public string Content { get; set; }      
 
         public DateTime PostedOn { get; set; }
 
         public DateTime? Modified { get; set; }
 
-        public virtual IList<CategoryViewModel> Category { get; set; }
+        public virtual IList<CategoryViewModel> Categories { get; set; }
 
-        public virtual IList<TagViewModel> Tag { get; set; }
+        public virtual IList<TagViewModel> Tags { get; set; }
 
         public virtual UserViewModel User { get; set; }
     }

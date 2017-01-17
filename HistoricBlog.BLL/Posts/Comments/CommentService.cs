@@ -19,23 +19,6 @@ namespace HistoricBlog.BLL.Posts.Comments
             _commentRepository = commentRepository;
         }
 
-        public override DAL.Base.GenericResult<Comment> Create(Comment entity)
-        {
-            var result = new GenericResult<Comment>();
-            return Create(entity, result);
-        }
-
-        public override DAL.Base.GenericResult<Comment> Delete(Comment entity)
-        {
-            var result = new GenericResult<Comment>();
-            return Delete(entity, result);
-        } 
-
-        public override DAL.Base.GenericResult<Comment> Update(Comment entity)
-        {
-            var result = new GenericResult<Comment>();
-            return Update(entity, result);
-        }
 
         public GenericResult<IEnumerable<Comment>> GetAllPostComments(int postId)
         {

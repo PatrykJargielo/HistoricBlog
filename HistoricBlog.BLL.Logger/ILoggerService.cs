@@ -9,5 +9,7 @@ namespace HistoricBlog.BLL.Logger
         void Error(string message);
         void Error(string message, Exception exception);
 
+        void Debug(string message);
+
     }
 }

@@ -17,18 +17,19 @@ namespace HistoricBlog.DAL.Base
             _table = historicBlogDbContext.Set<T>();
         }
 
-        public virtual GenericResult<IEnumerable<T>> GetAll(Expression<Func<T, bool>> predicate)
+        public virtual GenericResult<IEnumerable<T>> GetAll(Expression<Func<T, bool>> predicate = null)
         {
             var result = new GenericResult<IEnumerable<T>>();
-            result.Result = _table.Where(predicate);
-            return result;
-        }
-
-        public virtual GenericResult<IEnumerable<T>> GetAll()
-        {
-            var result = new GenericResult<IEnumerable<T>>();
-            result.Result = _table.AsEnumerable();
-            return result;
+            if (predicate != null)
+            {
+                result.Result = _table.Where(predicate);
+                return result;
+            }
+            else
+            {
+                result.Result = _table.AsEnumerable();
+                return result;
+            }
         }
         public virtual GenericResult<IEnumerable<T>> FindBy(Expression<Func<T,bool>> predicate)
         {

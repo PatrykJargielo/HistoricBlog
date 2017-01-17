@@ -16,18 +16,15 @@ namespace HistoricBlog.BLL.Base
             _genericRepository = genericRepository;
         }
 
-        public GenericResult<IEnumerable<T>> GetAll()
+        public virtual GenericResult<IEnumerable<T>> GetAll()
         {
             var result = _genericRepository.GetAll();
             return result;
         }
-
-
-        public abstract GenericResult<T> Create(T entity);
-       
         
-        protected GenericResult<T> Create(T entity,GenericResult<T> result)
+        public virtual GenericResult<T> Create(T entity)
         {
+            GenericResult<T> result = new GenericResult<T>();
             List<string> errors = entity.Validation();
             bool hasErrors = errors.Any();
             if (hasErrors)
@@ -42,13 +39,14 @@ namespace HistoricBlog.BLL.Base
                 _genericRepository.Save();
             }
 
-            return result;;
+            return result;
         }
 
-        public abstract GenericResult<T> Update(T entity);
+      
 
-        protected GenericResult<T> Update(T entity, GenericResult<T> result)
+        public virtual GenericResult<T> Update(T entity)
         {
+            GenericResult<T> result = new GenericResult<T>();
             List<string> errors = entity.Validation();
             bool hasErrors = errors.Any();
             if (hasErrors)
@@ -66,10 +64,11 @@ namespace HistoricBlog.BLL.Base
             return result;
         }
 
-        public abstract GenericResult<T> Delete(T entity);
 
-        protected GenericResult<T> Delete(T entity, GenericResult<T> result)
+
+        public virtual GenericResult<T> Delete(T entity)
         {
+            GenericResult<T> result = new GenericResult<T>();
             List<string> errors = entity.Validation();
             bool hasErrors = errors.Any();
             if (hasErrors)

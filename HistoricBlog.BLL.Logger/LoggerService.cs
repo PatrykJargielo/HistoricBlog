@@ -24,7 +24,12 @@ namespace HistoricBlog.BLL.Logger
 
         public void Log(string message)
         {
-            throw new NotImplementedException();
+            _log.Info(message);
+        }
+
+        public void Debug(string message)
+        {
+            _log.Debug(message);
         }
     }
 }

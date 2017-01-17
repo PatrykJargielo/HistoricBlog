@@ -1,6 +1,5 @@
 ﻿using System.Data.SqlClient;
 using HistoricBlog.DAL.Base;
-using HistoricBlog.DAL.Users.Roles;
 
 namespace HistoricBlog.DAL.Users
 {

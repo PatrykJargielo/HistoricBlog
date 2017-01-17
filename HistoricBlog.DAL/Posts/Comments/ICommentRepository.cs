@@ -2,7 +2,7 @@
 
 namespace HistoricBlog.DAL.Posts.Comments
 {
-    interface ICommentRepository : IGenericRepository<Comment>
+    public interface ICommentRepository : IGenericRepository<Comment>
     {
     }
 }

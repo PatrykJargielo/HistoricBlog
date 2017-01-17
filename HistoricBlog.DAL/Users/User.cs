@@ -6,7 +6,6 @@ using System.Net.Mail;
 using HistoricBlog.DAL.Base;
 using HistoricBlog.DAL.Posts.Comments;
 using HistoricBlog.DAL.Posts.Ratings;
-using HistoricBlog.DAL.Users.Roles;
 using System.Text.RegularExpressions;
 
 namespace HistoricBlog.DAL.Users
@@ -19,9 +18,9 @@ namespace HistoricBlog.DAL.Users
         public string Email { get; set; }
         public string Password { get; set; }
         
-        public virtual IList<Comment> Comment { get; set; }
-        public virtual IList<Rating> Rating { get; set; }
-        public virtual IList<Role> Role { get; set; }
+        public virtual IList<Comment> Comments { get; set; }
+        public virtual IList<Rating> Ratings { get; set; }
+        public virtual IList<Role> Roles { get; set; }
        
 
         public override List<string> Validation()

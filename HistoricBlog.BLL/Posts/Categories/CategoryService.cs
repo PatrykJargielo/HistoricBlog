@@ -18,22 +18,5 @@ namespace HistoricBlog.BLL.Posts.Categories
             _categoryRepository = categoryRepository;
         }
 
-        public override GenericResult<Category> Update(Category entity)
-        {
-            var result = new GenericResult<Category>();
-            return Update(entity, result);
-            }
-
-        public override GenericResult<Category> Delete(Category entity)
-        {
-            var result = new GenericResult<Category>();
-            return Delete(entity, result);
-        }
-
-        public override GenericResult<Category> Create(Category entity)
-        {
-            var result = new GenericResult<Category>();
-            return Create(entity, result);
-        }
     }
 }

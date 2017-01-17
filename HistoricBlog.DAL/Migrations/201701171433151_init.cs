@@ -1,5 +1,6 @@
 namespace HistoricBlog.DAL.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
     
     public partial class init : DbMigration
@@ -20,55 +21,45 @@ namespace HistoricBlog.DAL.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Title = c.String(maxLength: 500),
+                        Title = c.String(),
                         ShortDescription = c.String(),
-                        Description = c.String(),
-                        IsPublished = c.Boolean(nullable: false),
+                        Content = c.String(),
                         PostedOn = c.DateTime(nullable: false),
                         Modified = c.DateTime(),
+                        User_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Tags",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Users", t => t.User_Id)
+                .Index(t => t.User_Id);
             
             CreateTable(
                 "dbo.Comments",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        CommentText = c.String(),
+                        CommentedOn = c.DateTime(nullable: false),
+                        Post_Id = c.Int(),
                         User_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Posts", t => t.Post_Id)
                 .ForeignKey("dbo.Users", t => t.User_Id)
+                .Index(t => t.Post_Id)
                 .Index(t => t.User_Id);
             
             CreateTable(
-                "dbo.Permissions",
+                "dbo.Users",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
+                        Surname = c.String(),
+                        Login = c.String(),
+                        Email = c.String(),
+                        Password = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Roles",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        User_Id = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.User_Id)
-                .Index(t => t.User_Id);
             
             CreateTable(
                 "dbo.Ratings",
@@ -86,15 +77,32 @@ namespace HistoricBlog.DAL.Migrations
                 .Index(t => t.UserId_Id);
             
             CreateTable(
-                "dbo.Users",
+                "dbo.Roles",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        Surname = c.String(),
-                        Login = c.String(),
-                        Email = c.String(),
-                        Password = c.String(),
+                        User_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Users", t => t.User_Id)
+                .Index(t => t.User_Id);
+            
+            CreateTable(
+                "dbo.Permissions",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Tags",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -112,6 +120,19 @@ namespace HistoricBlog.DAL.Migrations
                 .Index(t => t.Category_Id);
             
             CreateTable(
+                "dbo.PermissionRoles",
+                c => new
+                    {
+                        Permission_Id = c.Int(nullable: false),
+                        Role_Id = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Permission_Id, t.Role_Id })
+                .ForeignKey("dbo.Permissions", t => t.Permission_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Roles", t => t.Role_Id, cascadeDelete: true)
+                .Index(t => t.Permission_Id)
+                .Index(t => t.Role_Id);
+            
+            CreateTable(
                 "dbo.TagPosts",
                 c => new
                     {
@@ -124,52 +145,43 @@ namespace HistoricBlog.DAL.Migrations
                 .Index(t => t.Tag_Id)
                 .Index(t => t.Post_Id);
             
-            CreateTable(
-                "dbo.RolePermissions",
-                c => new
-                    {
-                        Role_Id = c.Int(nullable: false),
-                        Permission_Id = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.Role_Id, t.Permission_Id })
-                .ForeignKey("dbo.Roles", t => t.Role_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Permissions", t => t.Permission_Id, cascadeDelete: true)
-                .Index(t => t.Role_Id)
-                .Index(t => t.Permission_Id);
-            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Roles", "User_Id", "dbo.Users");
-            DropForeignKey("dbo.Ratings", "UserId_Id", "dbo.Users");
-            DropForeignKey("dbo.Comments", "User_Id", "dbo.Users");
-            DropForeignKey("dbo.Ratings", "PostId_Id", "dbo.Posts");
-            DropForeignKey("dbo.RolePermissions", "Permission_Id", "dbo.Permissions");
-            DropForeignKey("dbo.RolePermissions", "Role_Id", "dbo.Roles");
+            DropForeignKey("dbo.Posts", "User_Id", "dbo.Users");
             DropForeignKey("dbo.TagPosts", "Post_Id", "dbo.Posts");
             DropForeignKey("dbo.TagPosts", "Tag_Id", "dbo.Tags");
+            DropForeignKey("dbo.Roles", "User_Id", "dbo.Users");
+            DropForeignKey("dbo.PermissionRoles", "Role_Id", "dbo.Roles");
+            DropForeignKey("dbo.PermissionRoles", "Permission_Id", "dbo.Permissions");
+            DropForeignKey("dbo.Ratings", "UserId_Id", "dbo.Users");
+            DropForeignKey("dbo.Ratings", "PostId_Id", "dbo.Posts");
+            DropForeignKey("dbo.Comments", "User_Id", "dbo.Users");
+            DropForeignKey("dbo.Comments", "Post_Id", "dbo.Posts");
             DropForeignKey("dbo.PostCategories", "Category_Id", "dbo.Categories");
             DropForeignKey("dbo.PostCategories", "Post_Id", "dbo.Posts");
-            DropIndex("dbo.RolePermissions", new[] { "Permission_Id" });
-            DropIndex("dbo.RolePermissions", new[] { "Role_Id" });
             DropIndex("dbo.TagPosts", new[] { "Post_Id" });
             DropIndex("dbo.TagPosts", new[] { "Tag_Id" });
+            DropIndex("dbo.PermissionRoles", new[] { "Role_Id" });
+            DropIndex("dbo.PermissionRoles", new[] { "Permission_Id" });
             DropIndex("dbo.PostCategories", new[] { "Category_Id" });
             DropIndex("dbo.PostCategories", new[] { "Post_Id" });
+            DropIndex("dbo.Roles", new[] { "User_Id" });
             DropIndex("dbo.Ratings", new[] { "UserId_Id" });
             DropIndex("dbo.Ratings", new[] { "PostId_Id" });
-            DropIndex("dbo.Roles", new[] { "User_Id" });
             DropIndex("dbo.Comments", new[] { "User_Id" });
-            DropTable("dbo.RolePermissions");
+            DropIndex("dbo.Comments", new[] { "Post_Id" });
+            DropIndex("dbo.Posts", new[] { "User_Id" });
             DropTable("dbo.TagPosts");
+            DropTable("dbo.PermissionRoles");
             DropTable("dbo.PostCategories");
-            DropTable("dbo.Users");
-            DropTable("dbo.Ratings");
-            DropTable("dbo.Roles");
-            DropTable("dbo.Permissions");
-            DropTable("dbo.Comments");
             DropTable("dbo.Tags");
+            DropTable("dbo.Permissions");
+            DropTable("dbo.Roles");
+            DropTable("dbo.Ratings");
+            DropTable("dbo.Users");
+            DropTable("dbo.Comments");
             DropTable("dbo.Posts");
             DropTable("dbo.Categories");
         }

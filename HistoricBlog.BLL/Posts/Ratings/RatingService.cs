@@ -18,24 +18,6 @@ namespace HistoricBlog.BLL.Posts.Ratings
             _ratingRepository = ratingRepository;
         }
 
-        public override GenericResult<Rating> Update(Rating entity)
-        {
-            var result = new GenericResult<Rating>();
-            return Update(entity, result);
-
-        }
-
-        public override GenericResult<Rating> Delete(Rating entity)
-        {
-            var result = new GenericResult<Rating>();
-            return Delete(entity, result);
-        }
-
-        public override GenericResult<Rating> Create(Rating entity)
-        {
-            var result = new GenericResult<Rating>();
-
-            return Create(entity, result);
-        }
+   
     }
 }

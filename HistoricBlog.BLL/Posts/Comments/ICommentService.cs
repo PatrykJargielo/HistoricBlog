@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HistoricBlog.DAL.Base;
 
 namespace HistoricBlog.BLL.Posts.Comments
 {
     public interface ICommentService : IGenericService<Comment>
     {
-        IEnumerable<Comment> GetPostComments(int postId);
+        GenericResult<IEnumerable<Comment>> GetAllPostComments(int postId);
     }
 }

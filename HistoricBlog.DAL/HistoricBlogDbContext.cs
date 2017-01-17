@@ -5,8 +5,6 @@ using HistoricBlog.DAL.Posts.Comments;
 using HistoricBlog.DAL.Posts.Ratings;
 using HistoricBlog.DAL.Posts.Tags;
 using HistoricBlog.DAL.Users;
-using HistoricBlog.DAL.Users.Permission;
-using HistoricBlog.DAL.Users.Roles;
 
 namespace HistoricBlog.DAL
 {

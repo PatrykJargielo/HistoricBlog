@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using HistoricBlog.DAL.Base;
-using HistoricBlog.DAL.Users.Roles;
 
-namespace HistoricBlog.DAL.Users.Permission
+namespace HistoricBlog.DAL.Users
 {
-    public class Permission : BaseEntity
+    public class Role : BaseEntity
     {
         public string Name { get; set; }
-        public IList<Role> Role { get; set; }
+        public virtual IList<Permission> Permission { get; set; }
+
         public override List<string> Validation()
         {
             List<string> errorList = new List<string>();
-            return errorList
+            return errorList;
         }
     }
 }

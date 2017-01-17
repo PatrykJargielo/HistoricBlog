@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using HistoricBlog.DAL.Posts.Comments;
+using HistoricBlog.DAL.Posts.Ratings;
 using HistoricBlog.DAL.Users;
 
 namespace HistoricBlog.DAL.Migrations
@@ -10,25 +12,26 @@ namespace HistoricBlog.DAL.Migrations
         {
             AutomaticMigrationsEnabled = false;
             ContextKey = "HistoricBlog";
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(HistoricBlogDbContext context)
         {
-            List<User> Users = new List<User>();
-            Users.Add(new User()
+            List<User> users = new List<User>();
+            users.Add(new User()
             {
                 Id = 1,
                 Name = "Admin",
                 Surname = "Admin",
                 Login ="admin",
                 Password = "admin",
-                Role = null,
+                Roles = new List<Role>(),
                 Email = "admin@admin.pl",
-                Comment = null,
-                Rating = null
+                Comments = new List<Comment>(),
+                Ratings = new List<Rating>()
             });
             
-            context.Users.AddOrUpdate(Users.ToArray());
+            context.Users.AddOrUpdate(users.ToArray());
         }
     }
 }
