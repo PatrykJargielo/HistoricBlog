@@ -13,7 +13,26 @@ namespace HistoricBlog.DAL.Posts.Comments
         public DateTime CommentedOn { get; set; }
         public override List<string> Validation()
         {
-            return Validation();
+            List<string> validationMessages = new List<string>();
+            ValidateMaximalLength(validationMessages);
+            ValidateMaximalLength(validationMessages);
+
+            return validationMessages;
+        }
+
+        private void ValidateMaximalLength(List<string> validationMessages)
+        {
+            var maximalLength = 300;
+            bool isValidLength = CommentText.Length < maximalLength;
+            if (!isValidLength) validationMessages.Add($"Comment lenght should be less than {maximalLength}");
+        }
+
+        private void ValidateMinimalLength(List<string> validationMessages)
+        {
+            var maximalLength = 0;
+            bool isValidLength = CommentText.Length > maximalLength;
+            if (!isValidLength) validationMessages.Add($"Comment lenght should not be empty");
+
         }
     }
 }
