@@ -28,18 +28,24 @@ namespace HistoricBlog.BLL.Posts
         public override GenericResult<Post> Update(Post entity)
         {
             var result = new GenericResult<Post>();
+            entity.Modified = DateTime.Now;
             return Update(entity, result);
             
         }
 
         public override GenericResult<Post> Delete(Post entity)
         {
-            throw new NotImplementedException();
+            var result = new GenericResult<Post>();
+            return Delete(entity,result);
         }
 
         public override GenericResult<Post> Create(Post entity)
         {
-            throw new NotImplementedException();
+            var result = new GenericResult<Post>();
+            entity.PostedOn = DateTime.Now; 
+            result.Result = entity;
+           
+            return Create(entity, new GenericResult<Post>());
         }
     }
 }
