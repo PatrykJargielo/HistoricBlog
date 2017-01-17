@@ -42,11 +42,13 @@
   <ItemGroup>
     <Compile Include="Base\GenericService.cs" />
     <Compile Include="Base\IGenericService.cs" />
+    <Compile Include="Posts\Categories\CategoryService.cs" />
     <Compile Include="Posts\Categories\ICategoryService.cs" />
     <Compile Include="Posts\Comments\ICommentService.cs" />
     <Compile Include="Posts\IPostService.cs" />
     <Compile Include="Posts\PostService.cs" />
     <Compile Include="Posts\Ratings\IRatingService.cs" />
+    <Compile Include="Posts\Ratings\RatingService.cs" />
     <Compile Include="Posts\Tags\ITagService.cs" />
     <Compile Include="Posts\Tags\TagService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
