@@ -10,7 +10,8 @@ namespace HistoricBlog.DAL.Users.Permission
         public IList<Role> Role { get; set; }
         public override List<string> Validation()
         {
-            return Validation();
+            List<string> errorList = new List<string>();
+            return errorList
         }
     }
 }
