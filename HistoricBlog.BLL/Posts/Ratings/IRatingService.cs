@@ -10,7 +10,6 @@ namespace HistoricBlog.BLL.Posts.Ratings
 {
     public interface IRatingService : IGenericService<Rating>
     {
-        IEnumerable<Rating> GetRatings(int postId);
-        Rating AddRating(int postId, int ratingValue);
+
     }
 }
