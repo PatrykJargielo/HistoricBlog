@@ -43,9 +43,8 @@ namespace HistoricBlog.BLL.Posts
         {
             var result = new GenericResult<Post>();
             entity.PostedOn = DateTime.Now; 
-            result.Result = entity;
            
-            return Create(entity, new GenericResult<Post>());
+            return Create(entity, result);
         }
     }
 }
