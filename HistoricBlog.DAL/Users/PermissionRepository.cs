@@ -7,7 +7,7 @@ using HistoricBlog.DAL.Base;
 
 namespace HistoricBlog.DAL.Users
 {
-    class PermissionRepository : GenericRepository<Permission>, IPermissionRepository
+    public class PermissionRepository : GenericRepository<Permission>, IPermissionRepository
     {
         public PermissionRepository(HistoricBlogDbContext historicBlogDbContext) : base(historicBlogDbContext)
         {

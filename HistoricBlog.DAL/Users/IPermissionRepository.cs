@@ -2,7 +2,7 @@
 
 namespace HistoricBlog.DAL.Users
 {
-    interface IPermissionRepository : IGenericRepository<Permission>
+    public interface IPermissionRepository : IGenericRepository<Permission>
     {
 
     }

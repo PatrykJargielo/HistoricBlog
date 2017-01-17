@@ -7,7 +7,7 @@ using HistoricBlog.DAL.Base;
 
 namespace HistoricBlog.DAL.Posts.Comments
 {
-    class CommentRepository : GenericRepository<Comment>, ICommentRepository
+    public class CommentRepository : GenericRepository<Comment>, ICommentRepository
     {
         public CommentRepository(HistoricBlogDbContext historicBlogDbContext) : base(historicBlogDbContext)
         {

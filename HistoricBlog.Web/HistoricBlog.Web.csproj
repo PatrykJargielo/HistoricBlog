@@ -164,9 +164,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="AutofacConfig.cs" />
+    <Compile Include="AutofacModule\AutofacConfig.cs" />
+    <Compile Include="AutofacModule\RepositoryModule.cs" />
+    <Compile Include="AutofacModule\ServiceModule.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DataModule.cs" />
+    <Compile Include="AutofacModule\DataModule.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

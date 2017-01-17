@@ -9,7 +9,7 @@ using HistoricBlog.DAL.Posts.Categories;
 
 namespace HistoricBlog.BLL.Posts.Categories
 {
-    class CategoryService : GenericService<Category>, ICategoryService
+    public class CategoryService : GenericService<Category>, ICategoryService
     {
         private IGenericRepository<Category> _categoryRepository;
 

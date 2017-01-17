@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using HistoricBlog.DAL;
 
-namespace HistoricBlog.Web
+namespace HistoricBlog.Web.AutofacModule
 {
     public class DataModule : Module
     {

@@ -2,7 +2,7 @@
 
 namespace HistoricBlog.DAL.Posts.Ratings
 {
-    interface IRatingRepository : IGenericRepository<Rating>
+    public interface IRatingRepository : IGenericRepository<Rating>
     {
 
     }

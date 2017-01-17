@@ -9,7 +9,7 @@ using HistoricBlog.DAL.Posts.Ratings;
 
 namespace HistoricBlog.BLL.Posts.Ratings
 {
-    class RatingService : GenericService<Rating>, IRatingService
+    public class RatingService : GenericService<Rating>, IRatingService
     {
         private IGenericRepository<Rating> _ratingRepository;
 
