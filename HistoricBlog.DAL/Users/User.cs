@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Dynamic;
 using System.Net.Mail;
+using System.Reflection;
 using HistoricBlog.DAL.Base;
 using HistoricBlog.DAL.Posts.Comments;
 using HistoricBlog.DAL.Posts.Ratings;
 using System.Text.RegularExpressions;
+using static System.Configuration.ConfigurationManager;
 
 namespace HistoricBlog.DAL.Users
 {
@@ -17,94 +20,72 @@ namespace HistoricBlog.DAL.Users
         public string Login { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        
+
         public virtual IList<Comment> Comments { get; set; }
         public virtual IList<Rating> Ratings { get; set; }
         public virtual IList<Role> Roles { get; set; }
-       
+
 
         public override List<string> Validation()
         {
+            string emailRegex = AppSettings["emailexp"];
+            string loginRegex = AppSettings["loginexp"];
+            string passwordRegex = AppSettings["passwordexp"];
+            string credentialsRegex = AppSettings["credentialsexp"];
+
             var errorMessage = new List<string>();
 
-            ValidatePropertyExist(this.Name, errorMessage);
-            ValidatePropertyExist(this.Surname, errorMessage);
-            ValidatePropertyExist(this.Login, errorMessage);
 
-            ValidatePropertyLength(this.Name, errorMessage);
-            ValidatePropertyLength(this.Surname, errorMessage);
-            ValidatePropertyLength(this.Login, errorMessage);
+            ValidateStringProperty(this.Name, errorMessage);
+            ValidateStringProperty(this.Surname, errorMessage);
+            ValidateStringProperty(this.Login, errorMessage);
 
-            ValidateRegExCredentials(this.Name, errorMessage);
-            ValidateRegExCredentials(this.Surname, errorMessage);
-
-            ValidateRegExLogIn(this.Login, errorMessage);
-            ValidateRegPassword(this.Password, errorMessage);
-
-            ValidateEmail(errorMessage);
-      
+            ValidateStringWithRegex(Email, errorMessage, emailRegex);
+            ValidateStringWithRegex(Login, errorMessage, loginRegex);
+            ValidateStringWithRegex(Password, errorMessage, passwordRegex);
+            ValidateStringWithRegex(Name, errorMessage, credentialsRegex);
+            ValidateStringWithRegex(Surname, errorMessage, credentialsRegex);
             return errorMessage;
         }
 
-        private void ValidateEmail(List<string> errorMessage)
+        private void ValidateStringWithRegex(string valueValidate, List<string> errorMessage, string regex)
         {
-            try
+            if (string.IsNullOrEmpty(valueValidate))
             {
-                var mailAddress = new MailAddress(this.Email);
+                errorMessage.Add($"Please provide {valueValidate}");
+                return;
             }
-            catch (Exception)
-            {
 
-                errorMessage.Add("Your e-mail is not correct");
+            Match match = Regex.Match(valueValidate, regex);
+            if (!match.Success)
+            {
+                errorMessage.Add($"Your {valueValidate} is invalid");
             }
+
         }
 
-        private void ValidatePropertyLength(string valueValidate, List<string> errorMessage)
+        private void ValidateStringProperty(string valueValidate, List<string> errorMessage)
         {
+            
+            if (string.IsNullOrEmpty(valueValidate))
+            {
+                errorMessage.Add($"Please provide {valueValidate}");
+                return;
+            }
+
             const int minimumLength = 3;
             const int maximumLength = 50;
 
-            if (valueValidate.Length < minimumLength && valueValidate.Length > maximumLength)
+            bool isInRange = valueValidate.Length >= minimumLength && valueValidate.Length <= maximumLength;
+            if (!isInRange)
             {
                 errorMessage.Add($"The value should be between {minimumLength} and {maximumLength}");
             }
-        }
 
-        private void ValidatePropertyExist(string valueValidate, List<string> errorMessage)
-        {
-            if (String.IsNullOrEmpty(valueValidate))
-            {
-                errorMessage.Add($"Please provide {valueValidate}");
-            }
-        }
 
-        private void ValidateRegExCredentials(string valueValidate, List<string> errorMessage)
-        {
-            Match match = Regex.Match(valueValidate, @"[A-Za-z]");
-            if (!match.Success)
-            {
-                errorMessage.Add($"Your {valueValidate} is invalid");
-            }
-        }
-
-        private void ValidateRegExLogIn(string valueValidate, List<string> errorMessage)
-        {
-            Match match = Regex.Match(valueValidate, @"^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$");
-            if (!match.Success)
-            {
-                errorMessage.Add($"Your {valueValidate} is invalid");
-            }
-        }
-        private void ValidateRegPassword(string valueValidate, List<string> errorMessage)
-        {
-            Match match = Regex.Match(valueValidate, @"^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$");
-            if (!match.Success)
-            {
-                errorMessage.Add($"Your {valueValidate} is invalid");
-            }
         }
     }
 }
 
-    
+
 

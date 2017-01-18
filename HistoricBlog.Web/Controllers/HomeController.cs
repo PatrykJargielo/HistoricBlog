@@ -35,11 +35,22 @@ namespace HistoricBlog.Web.Controllers
 
         public ActionResult Index()
         {
-            Exception ex = new Exception();
-            LoggerService.Error(ex);
-            LoggerService.Log("Jestem piękny!");
-            LoggerService.Debug("Jestem piękny inaczej!");
-            GetPosts();
+            User exampleUser = new User()
+            {
+                Name = "jacek2314141",
+                Surname = "grdfgfdg43543",
+                Email = "12213213",
+                Password = "saaadada"
+            };
+
+            List<string> errorMessage  = exampleUser.Validation();
+       
+
+            //Exception ex = new Exception();
+            //LoggerService.Error(ex);
+            //LoggerService.Log("Jestem piękny!");
+            //LoggerService.Debug("Jestem piękny inaczej!");
+            //GetPosts();
             return View();
         }
 

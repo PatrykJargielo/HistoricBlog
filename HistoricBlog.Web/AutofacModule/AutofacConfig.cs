@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Configuration;
 using System.Reflection;
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
+
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 namespace HistoricBlog.Web.AutofacModule
 {
@@ -10,7 +13,6 @@ namespace HistoricBlog.Web.AutofacModule
     {
         public static void SetUpAutofac()
         {
-
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly).PropertiesAutowired();
             builder.RegisterModule(new ServiceModule());
