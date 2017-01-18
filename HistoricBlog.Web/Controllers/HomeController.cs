@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using AutoMapper;
+using HistoricBlog.BLL.Config;
 using HistoricBlog.BLL.Logger;
 using HistoricBlog.BLL.Posts;
 using HistoricBlog.BLL.Users;
@@ -35,22 +36,24 @@ namespace HistoricBlog.Web.Controllers
 
         public ActionResult Index()
         {
-            User exampleUser = new User()
-            {
-                Name = "jacek2314141",
-                Surname = "grdfgfdg43543",
-                Email = "12213213",
-                Password = "saaadada"
-            };
+         
+  
+            //User exampleUser = new User()
+            //{
+            //    Name = "jacek2314141",
+            //    Surname = "grdfgfdg43543",
+            //    Email = "12213213",
+            //    Password = "saaadada"
+            //};
 
-            List<string> errorMessage  = exampleUser.Validation();
+            //List<string> errorMessage  = exampleUser.Validation();
 
 
-            Exception ex = new Exception();
-            LoggerService.Error(ex);
-            LoggerService.Log("Jestem piękny!");
-            LoggerService.Debug("Jestem piękny inaczej!");
-            GetPosts();
+            //Exception ex = new Exception();
+            //LoggerService.Error(ex);
+            //LoggerService.Log("Jestem piękny!");
+            //LoggerService.Debug("Jestem piękny inaczej!");
+            //GetPosts();
             return View();
         }
 

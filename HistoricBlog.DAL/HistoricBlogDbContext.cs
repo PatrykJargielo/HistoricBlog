@@ -5,6 +5,7 @@ using HistoricBlog.DAL.Posts.Comments;
 using HistoricBlog.DAL.Posts.Ratings;
 using HistoricBlog.DAL.Posts.Tags;
 using HistoricBlog.DAL.Users;
+using HistoricBlog.DAL.Configs;
 
 namespace HistoricBlog.DAL
 {
@@ -18,6 +19,7 @@ namespace HistoricBlog.DAL
         public virtual DbSet<Permission>Permissions { get; set; }
         public virtual DbSet<Rating> Ratings { get; set; }
         public virtual DbSet<Comment>Comments { get; set; }
+        public virtual DbSet<Config> Config { get; set; }
 
         public HistoricBlogDbContext()
             : base("HistoricBlogDB")

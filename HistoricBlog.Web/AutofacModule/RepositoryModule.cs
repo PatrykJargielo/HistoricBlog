@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using HistoricBlog.DAL.Configs;
 using HistoricBlog.DAL.Posts;
 using HistoricBlog.DAL.Posts.Categories;
 using HistoricBlog.DAL.Users;
@@ -12,6 +13,7 @@ namespace HistoricBlog.Web.AutofacModule
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<ConfigRepository>().As<IConfigRepository>().InstancePerRequest();
             builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerRequest();
             builder.RegisterType<PostRepository>().As<IPostRepository>().InstancePerRequest();
             builder.RegisterType<CommentRepository>().As<ICommentRepository>().InstancePerRequest();

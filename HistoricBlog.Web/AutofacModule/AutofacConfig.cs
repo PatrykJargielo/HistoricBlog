@@ -14,6 +14,7 @@ namespace HistoricBlog.Web.AutofacModule
         public static void SetUpAutofac()
         {
             var builder = new ContainerBuilder();
+
             builder.RegisterControllers(typeof(MvcApplication).Assembly).PropertiesAutowired();
             builder.RegisterModule(new ServiceModule());
             builder.RegisterModule(new DataModule());

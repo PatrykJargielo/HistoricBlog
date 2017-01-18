@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,6 +43,9 @@
   <ItemGroup>
     <Compile Include="Base\GenericService.cs" />
     <Compile Include="Base\IGenericService.cs" />
+    <Compile Include="Config\ConfigurationService.cs" />
+    <Compile Include="Config\EKeyConfig.cs" />
+    <Compile Include="Config\IConfigurationService.cs" />
     <Compile Include="Posts\Categories\CategoryService.cs" />
     <Compile Include="Posts\Categories\ICategoryService.cs" />
     <Compile Include="Posts\Comments\CommentService.cs" />
