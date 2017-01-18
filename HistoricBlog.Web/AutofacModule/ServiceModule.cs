@@ -16,10 +16,9 @@ namespace HistoricBlog.Web.AutofacModule
             builder.RegisterType<UserService>().As<IUserService>();
             builder.RegisterType<PostService>().As<IPostService>();
             builder.RegisterType<CommentService>().As<ICommentService>();
-         
-            builder.RegisterType<TagService>().As<ITagService>().InstancePerRequest();
-            builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerRequest();
-            builder.RegisterType<RatingService>().As<IRatingService>().InstancePerRequest();
+            builder.RegisterType<TagService>().As<ITagService>();
+            builder.RegisterType<CategoryService>().As<ICategoryService>();
+            builder.RegisterType<RatingService>().As<IRatingService>();
         }
     }
 }
