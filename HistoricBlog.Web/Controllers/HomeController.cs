@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using AutoMapper;
@@ -33,6 +34,10 @@ namespace HistoricBlog.Web.Controllers
 
         public ActionResult Index()
         {
+            Exception ex = new Exception();
+            LoggerService.Error(ex);
+            LoggerService.Log("Jestem piękny!");
+            LoggerService.Debug("Jestem piękny inaczej!");
             GetUsers();
             return View();
         }
