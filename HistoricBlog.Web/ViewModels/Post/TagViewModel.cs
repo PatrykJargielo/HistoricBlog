@@ -10,6 +10,5 @@ namespace HistoricBlog.Web.ViewModels.Posts
     public class TagViewModel : BaseViewModel
     {
         public string Name { get; set; }
-     //   public virtual IList<PostViewModel> Posts { get; set; }
     }
 }

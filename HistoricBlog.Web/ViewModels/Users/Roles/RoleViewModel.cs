@@ -5,12 +5,11 @@ using System.Web;
 
 namespace HistoricBlog.Web.ViewModels.Users.Roles
 {
-    public class RoleViewModel
+    public class RoleViewModel : BaseViewModel
     {
-        public class Permission : BaseViewModel
-        {
-            public string Name { get; set; }
-            public IList<RoleViewModel> Role { get; set; }
-        }
+
+        public string Name { get; set; }
+
+
     }
 }

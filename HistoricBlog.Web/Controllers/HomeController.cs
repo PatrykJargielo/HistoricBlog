@@ -44,13 +44,13 @@ namespace HistoricBlog.Web.Controllers
             };
 
             List<string> errorMessage  = exampleUser.Validation();
-       
 
-            //Exception ex = new Exception();
-            //LoggerService.Error(ex);
-            //LoggerService.Log("Jestem piękny!");
-            //LoggerService.Debug("Jestem piękny inaczej!");
-            //GetPosts();
+
+            Exception ex = new Exception();
+            LoggerService.Error(ex);
+            LoggerService.Log("Jestem piękny!");
+            LoggerService.Debug("Jestem piękny inaczej!");
+            GetPosts();
             return View();
         }
 
@@ -86,21 +86,5 @@ namespace HistoricBlog.Web.Controllers
 
             return Mapper.Map<IEnumerable<PostViewModel>>(posts);
         }
-
-        //public IEnumerable<UserViewModel> GetUsers()
-        //{
-        //    Mapper.Initialize(cfg =>
-        //    {
-        //        cfg.CreateMap<User, UserViewModel>();
-        //        cfg.CreateMap<Comment, CommentViewModel>();
-        //        cfg.CreateMap<Rating, RatingViewModel>();
-        //        cfg.CreateMap<Role, RoleViewModel>();
-        //    });
-
-        //    GenericResult<IEnumerable<User>> users = _userService.GetAll();
-        //    return Mapper.Map<IEnumerable<UserViewModel>>(users.Result);
-        //}
-
-
     }
 }

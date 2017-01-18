@@ -11,6 +11,5 @@ namespace HistoricBlog.Web.ViewModels.Posts
     {
         public string Name { get; set; }
 
-      //  public virtual IList<PostViewModel> Posts { get; set; }
     }
 }
