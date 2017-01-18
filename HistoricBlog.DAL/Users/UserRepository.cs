@@ -9,22 +9,6 @@ namespace HistoricBlog.DAL.Users
         {
         }
 
-        /// TOMEK MANAGER~~~~~~~~~
-        /// 
-        //public GenericRepository<User> CreateAdminUser(User user, Role role)
-        //{
-        //   SqlTransaction tran = conn.BeginTransaction()
-            
-                
-        //        // create
-        //   tran.Commit();
-        //        // add role to user
-        //   tran.Dispose();
-
-            
-
-        //}
-
 
     }
 }
