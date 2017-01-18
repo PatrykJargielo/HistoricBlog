@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
@@ -10,16 +11,7 @@ namespace HistoricBlog.Web.AutofacModule
         public static void SetUpAutofac()
         {
 
-            var asembly = AppDomain.CurrentDomain.GetAssemblies();
-
             var builder = new ContainerBuilder();
-
-            builder.RegisterAssemblyTypes(asembly).Where(t => t.Name.EndsWith("Service")).AsImplementedInterfaces();
-            builder.RegisterAssemblyTypes(asembly)
-                .Where(t => t.Name.EndsWith("Repository"))
-                .AsImplementedInterfaces()
-                .InstancePerRequest();
-            
             builder.RegisterControllers(typeof(MvcApplication).Assembly).PropertiesAutowired();
             builder.RegisterModule(new ServiceModule());
             builder.RegisterModule(new DataModule());

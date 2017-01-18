@@ -13,12 +13,12 @@ namespace HistoricBlog.Web.AutofacModule
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<UserService>().As<IUserService>();
-            builder.RegisterType<PostService>().As<IPostService>();
-            builder.RegisterType<CommentService>().As<ICommentService>();
-            builder.RegisterType<TagService>().As<ITagService>();
-            builder.RegisterType<CategoryService>().As<ICategoryService>();
-            builder.RegisterType<RatingService>().As<IRatingService>();
+            builder.RegisterType<UserService>().As<IUserService>().PropertiesAutowired();
+            builder.RegisterType<PostService>().As<IPostService>().PropertiesAutowired();
+            builder.RegisterType<CommentService>().As<ICommentService>().PropertiesAutowired();
+            builder.RegisterType<TagService>().As<ITagService>().PropertiesAutowired();
+            builder.RegisterType<CategoryService>().As<ICategoryService>().PropertiesAutowired();
+            builder.RegisterType<RatingService>().As<IRatingService>().PropertiesAutowired();
         }
     }
 }
