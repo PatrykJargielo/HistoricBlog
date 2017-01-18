@@ -2,7 +2,7 @@
 
 namespace HistoricBlog.BLL.Logger
 {
-    class LoggerService : ILoggerService
+    public class LoggerService : ILoggerService
     {
 
         private static readonly log4net.ILog _log = LogHelper.GetLogger();

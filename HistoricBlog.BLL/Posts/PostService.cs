@@ -16,7 +16,7 @@ namespace HistoricBlog.BLL.Posts
     {
         private readonly IPostRepository _postRepository;
 
-        public ILoggerService LoggerService;
+        public ILoggerService LoggerService { get; set; }
 
         public PostService(IPostRepository postRepository) : base(postRepository)
         {
