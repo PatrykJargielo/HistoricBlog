@@ -20,7 +20,7 @@ namespace HistoricBlog.DAL
         public virtual DbSet<Comment>Comments { get; set; }
 
         public HistoricBlogDbContext()
-            : base("HistoricBlog")
+            : base("HistoricBlogDB")
         {
 
         }

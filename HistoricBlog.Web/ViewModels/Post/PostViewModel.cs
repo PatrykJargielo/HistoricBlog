@@ -1,11 +1,9 @@
-﻿using HistoricBlog.BLL.Posts.Tags;
-using HistoricBlog.Web.ViewModels.Users;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using HistoricBlog.Web.ViewModels.Posts;
+using HistoricBlog.Web.ViewModels.Users;
 
-namespace HistoricBlog.Web.ViewModels.Posts
+namespace HistoricBlog.Web.ViewModels.Post
 {
     public class PostViewModel : BaseViewModel
     {
@@ -18,7 +16,7 @@ namespace HistoricBlog.Web.ViewModels.Posts
 
         public DateTime? Modified { get; set; }
 
-        public virtual IList<CategoryViewModel> Categories { get; set; }
+       public virtual IList<CategoryViewModel> Categories { get; set; }
 
         public virtual IList<TagViewModel> Tags { get; set; }
 

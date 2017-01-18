@@ -13,6 +13,7 @@ using HistoricBlog.DAL.Posts.Comments;
 using HistoricBlog.DAL.Posts.Ratings;
 using HistoricBlog.DAL.Posts.Tags;
 using HistoricBlog.DAL.Users;
+using HistoricBlog.Web.ViewModels.Post;
 using HistoricBlog.Web.ViewModels.Posts;
 using HistoricBlog.Web.ViewModels.Users;
 using HistoricBlog.Web.ViewModels.Users.Roles;
@@ -38,7 +39,7 @@ namespace HistoricBlog.Web.Controllers
             LoggerService.Error(ex);
             LoggerService.Log("Jestem piękny!");
             LoggerService.Debug("Jestem piękny inaczej!");
-            GetUsers();
+            GetPosts();
             return View();
         }
 
@@ -56,36 +57,38 @@ namespace HistoricBlog.Web.Controllers
         }
 
 
-        //public IEnumerable<PostViewModel> GetPosts()
-        //{
-        //    Mapper.Initialize(cfg => {
-        //        cfg.CreateMap<Post, PostViewModel>();
-        //        cfg.CreateMap<Category, CategoryViewModel>();
-        //        cfg.CreateMap<Tag, TagViewModel>();
-        //        cfg.CreateMap<User, UserViewModel>();
-
-        //    });
-
-
-
-        //    GenericResult<IEnumerable<Post>> posts = _postService.GetAll();
-        //    IEnumerable<PostViewModel> postsView = Mapper.Map<IEnumerable<PostViewModel>>(posts.Result);
-
-        //    return Mapper.Map<IEnumerable<PostViewModel>>(posts);
-        //}
-
-        public IEnumerable<UserViewModel> GetUsers()
+        public IEnumerable<PostViewModel> GetPosts()
         {
-            Mapper.Initialize(cfg => {
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Post, PostViewModel>();
+                cfg.CreateMap<Category, CategoryViewModel>();
+                cfg.CreateMap<Tag, TagViewModel>();
                 cfg.CreateMap<User, UserViewModel>();
                 cfg.CreateMap<Comment, CommentViewModel>();
-                cfg.CreateMap<Rating, RatingViewModel>();
-                cfg.CreateMap<Role, RoleViewModel>();
             });
 
-            GenericResult<IEnumerable<User>> users = _userService.GetAll();
-            return Mapper.Map<IEnumerable<UserViewModel>>(users.Result);
+
+
+            GenericResult<IEnumerable<Post>> posts = _postService.GetAll();
+            IEnumerable<PostViewModel> postsView = Mapper.Map<IEnumerable<PostViewModel>>(posts.Result);
+
+            return Mapper.Map<IEnumerable<PostViewModel>>(posts);
         }
+
+        //public IEnumerable<UserViewModel> GetUsers()
+        //{
+        //    Mapper.Initialize(cfg =>
+        //    {
+        //        cfg.CreateMap<User, UserViewModel>();
+        //        cfg.CreateMap<Comment, CommentViewModel>();
+        //        cfg.CreateMap<Rating, RatingViewModel>();
+        //        cfg.CreateMap<Role, RoleViewModel>();
+        //    });
+
+        //    GenericResult<IEnumerable<User>> users = _userService.GetAll();
+        //    return Mapper.Map<IEnumerable<UserViewModel>>(users.Result);
+        //}
 
 
     }

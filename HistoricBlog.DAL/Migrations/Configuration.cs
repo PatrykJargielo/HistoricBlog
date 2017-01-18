@@ -14,7 +14,7 @@ namespace HistoricBlog.DAL.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "HistoricBlog";
+            ContextKey = "HistoricBlogDB";
             AutomaticMigrationDataLossAllowed = true;
         }
 

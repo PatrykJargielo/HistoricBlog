@@ -15,7 +15,7 @@ namespace HistoricBlog.Web.ViewModels.Users
         public string Email { get; set; }
         public string Password { get; set; }
         public virtual IList<CommentViewModel> Comments { get; set; }
-        public virtual IList<RatingViewModel> Ratings { get; set; }
-        public virtual IList<RoleViewModel> Roles { get; set; }
+        //public virtual IList<RatingViewModel> Ratings { get; set; }
+        ///public virtual IList<RoleViewModel> Roles { get; set; }
     }
 }
