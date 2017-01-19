@@ -39,8 +39,9 @@ namespace HistoricBlog.WebApi.Controllers
         {
             var result = _commentService.GetById(id);
             Mapper.Initialize(
-                cfg => cfg.CreateMap<Comment,CommentViewModel>()
-            );
+                cfg => { cfg.CreateMap<Comment, CommentViewModel>();
+                    cfg.CreateMap<User, UserInfoModel>();
+                });
    
             if (!result.IsVaild)
             {
@@ -65,7 +66,9 @@ namespace HistoricBlog.WebApi.Controllers
             };
 
             Mapper.Initialize(
-               cfg => cfg.CreateMap<Comment, CommentViewModel>()
+               cfg => { cfg.CreateMap<Comment, CommentViewModel>();
+                   cfg.CreateMap<User, UserInfoModel>();
+               }
            );
 
             if (id == 0)
