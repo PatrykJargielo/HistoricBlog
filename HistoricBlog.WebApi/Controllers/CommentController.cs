@@ -4,13 +4,23 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
+using HistoricBlog.BLL.Logger;
 using HistoricBlog.BLL.Posts.Comments;
+using HistoricBlog.DAL.Posts;
+using HistoricBlog.DAL.Posts.Categories;
+using HistoricBlog.DAL.Posts.Comments;
+using HistoricBlog.DAL.Posts.Tags;
+using HistoricBlog.DAL.Users;
+using HistoricBlog.WebApi.Models.Post;
+using HistoricBlog.WebApi.Models.Users;
 
 namespace HistoricBlog.WebApi.Controllers
 {
     public class CommentController : ApiController
     {
         private readonly ICommentService _commentService;
+        public ILoggerService LoggerService { get; set; }
 
         public CommentController(ICommentService commentService)
         {
@@ -18,34 +28,34 @@ namespace HistoricBlog.WebApi.Controllers
         }
 
         [HttpGet]
-        // GET: api/Comment
-        public IEnumerable<string> Get()
-        {
-            
-            var result = _commentService.GetAll().Result.FirstOrDefault();
-           
-            return new string[] { "value1", "value2" };
-        }
-
         // GET: api/Comment/5
-        public string Get(int id)
+        public HttpResponseMessage Get(int id)
         {
-            return "value";
+            var result = _commentService.GetCommentsById(id);
+            Mapper.Initialize(
+                cfg => cfg.CreateMap<Comment,CommentViewModel>()
+            );
+
+            var comments = Mapper.Map<IEnumerable<CommentViewModel>>(result.Result);
+            return Request.CreateResponse(HttpStatusCode.OK,comments);
         }
 
         // POST: api/Comment
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody]string value)
         {
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         // PUT: api/Comment/5
-        public void Put(int id, [FromBody]string value)
+        public HttpResponseMessage Put(int id, [FromBody]string value)
         {
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         // DELETE: api/Comment/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }

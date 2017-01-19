@@ -12,6 +12,8 @@ namespace HistoricBlog.BLL.Posts.Comments
 {
     public interface ICommentService : IGenericService<Comment>
     {
-        GenericResult<IEnumerable<Comment>> GetAllPostComments(int postId);
+        GenericResult<IEnumerable<Comment>> GetCommentsByPostId(int postId);
+
+        GenericResult<IEnumerable<Comment>> GetCommentsById(int commentId);
     }
 }
