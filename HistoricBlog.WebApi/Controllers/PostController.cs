@@ -9,6 +9,11 @@ using HistoricBlog.BLL.Logger;
 using HistoricBlog.BLL.Posts;
 using HistoricBlog.WebApi.Models.Post;
 using HistoricBlog.DAL.Posts;
+using HistoricBlog.DAL.Posts.Categories;
+using HistoricBlog.DAL.Posts.Comments;
+using HistoricBlog.DAL.Posts.Tags;
+using HistoricBlog.DAL.Users;
+using HistoricBlog.WebApi.Models.Users;
 
 namespace HistoricBlog.WebApi.Controllers
 {
@@ -27,13 +32,17 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var result = _postService.GetAll();
-            Mapper.Initialize(
-                cfg => cfg.CreateMap<Post, PostViewModel>()
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Post, PostViewModel>();
+                cfg.CreateMap<Category, CategoryViewModel>();
+                cfg.CreateMap<Tag, TagViewModel>();
+                cfg.CreateMap<User, UserViewModel>();
+                cfg.CreateMap<Comment, CommentViewModel>();
+            });
 
-                );
             var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
             return Request.CreateResponse(HttpStatusCode.OK, posts);
-
         }
 
         [HttpGet]
@@ -41,10 +50,15 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Get(int id)
         {
             var result = _postService.GetPostById(id);
-            Mapper.Initialize(
-                cfg => cfg.CreateMap<Post, PostViewModel>()
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Post, PostViewModel>();
+                cfg.CreateMap<Category, CategoryViewModel>();
+                cfg.CreateMap<Tag, TagViewModel>();
+                cfg.CreateMap<User, UserViewModel>();
+                cfg.CreateMap<Comment, CommentViewModel>();
+            });
 
-                );
             var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
             return Request.CreateResponse(HttpStatusCode.OK, posts);
 
@@ -56,10 +70,14 @@ namespace HistoricBlog.WebApi.Controllers
         {
             var result = _postService.Create(post);
 
-            Mapper.Initialize(
-                cfg => cfg.CreateMap<Post, PostViewModel>()
-
-            );
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Post, PostViewModel>();
+                cfg.CreateMap<Category, CategoryViewModel>();
+                cfg.CreateMap<Tag, TagViewModel>();
+                cfg.CreateMap<User, UserViewModel>();
+                cfg.CreateMap<Comment, CommentViewModel>();
+            });
             var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
 
             return Request.CreateResponse(HttpStatusCode.OK, posts);
@@ -75,6 +93,7 @@ namespace HistoricBlog.WebApi.Controllers
         // DELETE: api/Post/5
         public void Delete(int id)
         {
+
         }
     }
 }
