@@ -16,10 +16,11 @@ namespace HistoricBlog.Tests
     {
 
         [TestMethod]
-        public void GetConfig_FromDatabaseIfThereIs()
+        public void GetConfig_EmailRegexp_FromDatabaseIfThereIs()
         {
             //Arrange
             var fixture = new Fixture();
+            var emailKey = EKeyConfig.Emailexp;
             var emailRegexp = fixture.Create<string>();
             var loginRegexp = fixture.Create<string>();
             var passwordRegexp = fixture.Create<string>();
@@ -54,12 +55,14 @@ namespace HistoricBlog.Tests
             var historicalBlogDbContextMock = new Mock<HistoricBlogDbContext>();
 
             historicalBlogDbContextMock.Setup(context => context.Config).Returns(configMock.Object);
+            historicalBlogDbContextMock.Setup(context => context.Set<Config>()).Returns(configMock.Object);
             var configRepository = new ConfigRepository(historicalBlogDbContextMock.Object);
             var configService = new ConfigurationService(configRepository);
             
             //Act
-           
+            var result = configService.GetConfig(emailKey);
             //Assert
+            Assert.AreEqual(result.Result,configs.First().ConfigurationValue);
         }
 
         [TestMethod]
