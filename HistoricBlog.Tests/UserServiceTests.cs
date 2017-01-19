@@ -33,17 +33,8 @@ namespace HistoricBlog.Tests
 
             var users = new List<User>
             {
-                fixture.Build<User>()
-                    .With(x => x.Login, login)
-                    .With(x => x.Password, password)
-                    .With(x => x.Name, name)
-                    .With(x => x.Surname, surname)
-                    .With(x => x.Email, email)
-                    .With(x => x.Comments,comments )
-                    .With(x => x.Roles,roles )
-                    .With(x => x.Ratings,ratings )
-                    .Create(),
-
+                new User()
+                { Login = login,Password = password,Name = name,Surname = surname,Email = email,Comments = null,Roles =null,Ratings = null}
             }.AsQueryable();
 
             var userMock = UserMock(users);
@@ -56,9 +47,10 @@ namespace HistoricBlog.Tests
             var userRepository = new UserRepository(historicalBlogDbContextMock.Object);
             var userService = new UserService(userRepository);
 
-            var userFromService = userService.GetAll().Result;
+            var userFromService = userService.GetAll().Result.FirstOrDefault();
+    
 
-            // Assert.AreEqual(users.FirstOrDefault().Login, user.Login);
+             Assert.AreEqual(users.FirstOrDefault()?.Login, userFromService?.Login);
 
             //Assert.AreEqual(users.First().Password, userFromService.FirstOrDefault());
         }
