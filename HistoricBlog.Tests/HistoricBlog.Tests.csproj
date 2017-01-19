@@ -74,6 +74,7 @@
     <Compile Include="ConfigTests\ConfigurationServiceTests.cs" />
     <Compile Include="ConfigTests\ConfigurationManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -13,7 +13,6 @@ namespace HistoricBlog.BLL.Users
         {
             _userRepository = userRepository;
         }
-
-
+        
     }
 }
