@@ -7,6 +7,7 @@ using System.Web.Http;
 using AutoMapper;
 using HistoricBlog.BLL.Logger;
 using HistoricBlog.BLL.Users;
+using HistoricBlog.DAL.Posts.Comments;
 using HistoricBlog.DAL.Users;
 using HistoricBlog.WebApi.Models.Post;
 using HistoricBlog.WebApi.Models.Users;
@@ -24,10 +25,12 @@ namespace HistoricBlog.WebApi.Controllers
         }
         // GET: api/User
         [HttpGet]
-        public HttpResponseMessage Get(string name)
+        public HttpResponseMessage Get(int id)
         {
-            var result = _userService.GetUsersByName(name);
+            var result = _userService.GetById(id);
             Mapper.Initialize(x => x.CreateMap<User, UserViewModel>());
+
+      
             if (!result.IsVaild)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Result is invalid");
@@ -37,7 +40,8 @@ namespace HistoricBlog.WebApi.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
-            var users = Mapper.Map<IEnumerable<CommentViewModel>>(result.Result);
+
+            var users = Mapper.Map<IEnumerable<UserViewModel>>(result.Result);
 
             return Request.CreateResponse(HttpStatusCode.OK, users);
         }

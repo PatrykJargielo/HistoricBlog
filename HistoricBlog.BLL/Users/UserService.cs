@@ -16,6 +16,8 @@ namespace HistoricBlog.BLL.Users
         }
         public GenericResult<IEnumerable<User>> GetUsersByName(string userName)
         {
+            var result = _userRepository;
+            
             return _userRepository.FindBy(user => user.Name == userName);
         }
     }
