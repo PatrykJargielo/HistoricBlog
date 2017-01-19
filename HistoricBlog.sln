@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoricBlog.BLL", "Histori
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoricBlog.BLL.Logger", "HistoricBlog.BLL.Logger\HistoricBlog.BLL.Logger.csproj", "{00269D9E-A707-49DB-9134-60AB0EC2FA2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoricBlog.Tests", "HistoricBlog.Tests\HistoricBlog.Tests.csproj", "{4DC94AC2-41FD-496B-BFEB-9E5B8F418851}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{00269D9E-A707-49DB-9134-60AB0EC2FA2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00269D9E-A707-49DB-9134-60AB0EC2FA2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00269D9E-A707-49DB-9134-60AB0EC2FA2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DC94AC2-41FD-496B-BFEB-9E5B8F418851}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DC94AC2-41FD-496B-BFEB-9E5B8F418851}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DC94AC2-41FD-496B-BFEB-9E5B8F418851}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DC94AC2-41FD-496B-BFEB-9E5B8F418851}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
