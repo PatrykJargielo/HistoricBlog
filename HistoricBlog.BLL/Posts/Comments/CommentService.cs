@@ -29,5 +29,11 @@ namespace HistoricBlog.BLL.Posts.Comments
         {
             return _commentRepository.FindBy(comment => comment.Id == commentId);
         }
+
+        public override GenericResult<Comment> Create(Comment entity)
+        {
+            //TO DO : GetLoggedUser!!!
+            return base.Create(entity);
+        }
     }
 }
