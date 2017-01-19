@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using HistoricBlog.WebApi.AutofacModule;
 using Microsoft.Owin;
 using Owin;
 
@@ -13,6 +14,7 @@ namespace HistoricBlog.WebApi
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            AutofacConfig.SetUpAutofac();
         }
     }
 }

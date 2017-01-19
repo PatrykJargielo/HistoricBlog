@@ -45,6 +45,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.3.0\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.4.0.1\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -234,6 +242,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="AutofacModule\AutofacConfig.cs" />
+    <Compile Include="AutofacModule\DataModule.cs" />
+    <Compile Include="AutofacModule\RepositoryModule.cs" />
+    <Compile Include="AutofacModule\ServiceModule.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -242,7 +254,16 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BaseViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Post\CategoryViewModel.cs" />
+    <Compile Include="Models\Post\CommentViewModel.cs" />
+    <Compile Include="Models\Post\PostViewModel.cs" />
+    <Compile Include="Models\Post\RatingViewModel.cs" />
+    <Compile Include="Models\Post\TagViewModel.cs" />
+    <Compile Include="Models\Users\Permissions\PermissionViewModel.cs" />
+    <Compile Include="Models\Users\Roles\RoleViewModel.cs" />
+    <Compile Include="Models\Users\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -318,6 +339,20 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HistoricBlog.BLL.Logger\HistoricBlog.BLL.Logger.csproj">
+      <Project>{00269D9E-A707-49DB-9134-60AB0EC2FA2F}</Project>
+      <Name>HistoricBlog.BLL.Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HistoricBlog.BLL\HistoricBlog.BLL.csproj">
+      <Project>{65F6EBD1-B0B2-404D-AD3F-B0E68CA4295D}</Project>
+      <Name>HistoricBlog.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HistoricBlog.DAL\HistoricBlog.DAL.csproj">
+      <Project>{B804D12D-1726-4C2F-9E4F-AB9D455F56B6}</Project>
+      <Name>HistoricBlog.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
