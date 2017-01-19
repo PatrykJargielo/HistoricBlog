@@ -13,6 +13,6 @@ namespace HistoricBlog.BLL.Base
         GenericResult<T> Update(T entity);
         GenericResult<T> Delete(T entity);
         GenericResult<T> Create(T entity);
-
+        GenericResult<IEnumerable<T>> GetById(int id);
     }
 }
