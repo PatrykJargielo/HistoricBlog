@@ -71,7 +71,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ConfigurationServiceTests.cs" />
+    <Compile Include="ConfigTests\ConfigurationServiceTests.cs" />
+    <Compile Include="ConfigTests\ConfigurationManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +80,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HistoricBlog.BLL.Logger\HistoricBlog.BLL.Logger.csproj">
+      <Project>{00269D9E-A707-49DB-9134-60AB0EC2FA2F}</Project>
+      <Name>HistoricBlog.BLL.Logger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HistoricBlog.BLL\HistoricBlog.BLL.csproj">
       <Project>{65F6EBD1-B0B2-404D-AD3F-B0E68CA4295D}</Project>
       <Name>HistoricBlog.BLL</Name>

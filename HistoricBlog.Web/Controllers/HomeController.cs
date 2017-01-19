@@ -25,19 +25,21 @@ namespace HistoricBlog.Web.Controllers
     {
         private readonly IPostService _postService;
         private readonly IUserService _userService;
+        private readonly IConfigurationService _configurationService;
         public ILoggerService LoggerService { get; set; }
 
-        public HomeController(IPostService postService, IUserService userService)
+        public HomeController(IPostService postService, IUserService userService, IConfigurationService configurationService)
         {
             _postService = postService;
             _userService = userService;
+            _configurationService = configurationService;
         }
      
 
         public ActionResult Index()
         {
-         
-  
+
+            
             //User exampleUser = new User()
             //{
             //    Name = "jacek2314141",

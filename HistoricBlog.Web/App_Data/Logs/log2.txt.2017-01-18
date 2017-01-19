@@ -1,0 +1,87 @@
+10:06:40,911 [C:\Users\Billennium\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog\HistoricBlog.Web\Controllers\HomeController.cs] ERROR - Sprawdzenie czy logger w kontrolerze dziala
+10:07:33,853 [C:\Users\Billennium\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog\HistoricBlog.Web\Controllers\HomeController.cs] ERROR - Sprawdzenie czy logger w kontrolerze dziala
+10:07:37,532 [C:\Users\Billennium\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog\HistoricBlog.Web\Controllers\HomeController.cs] ERROR - Sprawdzenie czy loguje kontakty
+10:13:02,166 [C:\Users\Billennium\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog\HistoricBlog.Web\Controllers\HomeController.cs] ERROR - Sprawdzenie czy logger w kontrolerze dziala
+10:13:05,608 [C:\Users\Billennium\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog\HistoricBlog.Web\Controllers\HomeController.cs] ERROR - Sprawdzenie czy loguje kontakty
+10:14:23,966 [C:\Users\Billennium\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog\HistoricBlog.Web\Controllers\HomeController.cs] ERROR - Sprawdzenie czy logger w kontrolerze dziala
+09:05:26,344 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:05:26,353 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:05:26,357 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:07:47,706 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:07:47,715 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:07:47,719 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:07:47,901 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:07:47,904 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:07:47,907 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:10:40,842 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:10:40,852 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:10:40,855 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:13:32,993 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:13:33,002 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:13:33,006 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:16:51,433 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:16:51,442 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:16:51,445 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:18:13,073 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:18:13,083 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:18:13,086 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:22:17,050 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:22:17,062 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:22:17,065 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:25:32,226 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:25:32,236 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:25:32,240 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:30:34,593 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:30:34,603 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:30:34,607 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:34:53,439 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:34:53,450 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:34:53,453 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:38:59,657 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:38:59,668 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:38:59,672 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:40:13,661 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:40:13,673 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:40:13,676 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:41:37,946 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:41:37,956 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:41:37,960 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:43:57,728 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:43:57,739 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:43:57,743 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:44:44,973 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:44:44,984 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:44:44,988 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:49:00,600 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:49:00,610 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:49:00,614 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:49:28,605 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:49:28,616 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:49:28,619 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:50:13,705 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:50:13,716 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:50:13,719 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:51:46,773 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:51:46,783 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:51:46,786 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:52:44,347 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:52:44,357 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:52:44,361 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:54:13,364 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:54:13,375 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:54:13,381 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:56:02,356 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:56:02,367 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:56:02,370 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:56:45,356 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:56:45,366 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:56:45,369 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:57:29,874 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:57:29,886 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:57:29,889 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+09:59:48,685 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+09:59:48,696 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+09:59:48,700 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!
+10:00:49,826 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] ERROR - Zg³oszono wyj¹tek typu 'System.Exception'.
+10:00:49,836 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] INFO - Jestem piêkny!
+10:00:49,839 [C:\Users\Tomek\Documents\Visual Studio 2015\Projects\HistoricBlog\HistoricBlog.BLL.Logger\LoggerService.cs] DEBUG - Jestem piêkny inaczej!

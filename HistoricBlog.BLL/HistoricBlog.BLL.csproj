@@ -43,8 +43,10 @@
   <ItemGroup>
     <Compile Include="Base\GenericService.cs" />
     <Compile Include="Base\IGenericService.cs" />
+    <Compile Include="Config\ConfigurationManager.cs" />
     <Compile Include="Config\ConfigurationService.cs" />
     <Compile Include="Config\EKeyConfig.cs" />
+    <Compile Include="Config\IConfigurationManager.cs" />
     <Compile Include="Config\IConfigurationService.cs" />
     <Compile Include="Posts\Categories\CategoryService.cs" />
     <Compile Include="Posts\Categories\ICategoryService.cs" />

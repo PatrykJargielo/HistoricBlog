@@ -6,7 +6,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using HistoricBlog.DAL.Configs;
-using static System.Configuration.ConfigurationManager;
 using HistoricBlog.DAL.Base;
 using HistoricBlog.BLL.Logger;
 
@@ -14,13 +13,15 @@ namespace HistoricBlog.BLL.Config
 {
     public class ConfigurationService : IConfigurationService
     {
-        private readonly ConfigRepository _configRepository;
+        private readonly IConfigRepository _configRepository;
+        private readonly IConfigurationManager _configurationManager;
         public ILoggerService LoggerService { get; set; }
 
 
-        public ConfigurationService(ConfigRepository configRepository)
+        public ConfigurationService(IConfigRepository configRepository, IConfigurationManager configurationManager)
         {
             _configRepository = configRepository;
+            _configurationManager = configurationManager;
         }
         public GenericResult<string> GetConfig(EKeyConfig key)
         {
@@ -38,7 +39,7 @@ namespace HistoricBlog.BLL.Config
                 return genericResult;
             }
             //nie ma wartosci w bazie to sprawdzam w webconfig
-            var keyFromWebConfig = AppSettings[keyString];
+            var keyFromWebConfig = _configurationManager.GetAppSetting(keyString);
             //jezeli wartosc web.configa jest pobrana to zwracam ja
             if (!string.IsNullOrEmpty(keyFromWebConfig))
             {

@@ -1,5 +1,6 @@
 ﻿
 using Autofac;
+using HistoricBlog.BLL.Config;
 using HistoricBlog.BLL.Logger;
 using HistoricBlog.BLL.Posts;
 using HistoricBlog.BLL.Posts.Categories;
@@ -21,6 +22,8 @@ namespace HistoricBlog.Web.AutofacModule
             builder.RegisterType<CategoryService>().As<ICategoryService>().PropertiesAutowired();
             builder.RegisterType<RatingService>().As<IRatingService>().PropertiesAutowired();
             builder.RegisterType<LoggerService>().As<ILoggerService>();
+            builder.RegisterType<ConfigurationManager>().As<IConfigurationManager>();
+            builder.RegisterType<ConfigurationService>().As<IConfigurationService>().PropertiesAutowired();
         }
     }
 }
