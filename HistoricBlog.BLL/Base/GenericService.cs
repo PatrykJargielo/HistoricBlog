@@ -19,6 +19,7 @@ namespace HistoricBlog.BLL.Base
         public virtual GenericResult<IEnumerable<T>> GetAll()
         {
             var result = _genericRepository.GetAll();
+            result.IsVaild = true;
             return result;
         }
         
@@ -34,9 +35,9 @@ namespace HistoricBlog.BLL.Base
             }
             else
             {
-                result.IsVaild = true;
                 result = _genericRepository.Add(entity);
                 _genericRepository.Save();
+                result.IsVaild = true;
             }
 
             return result;
@@ -56,9 +57,10 @@ namespace HistoricBlog.BLL.Base
             }
             else
             {
-                result.IsVaild = true;
+                
                 result = _genericRepository.Edit(result.Result);
                 _genericRepository.Save();
+                result.IsVaild = true;
             }
 
             return result;
@@ -78,14 +80,18 @@ namespace HistoricBlog.BLL.Base
             }
             else
             {
-                result.IsVaild = true;
+                
                 result = _genericRepository.Delete(result.Result);
                 _genericRepository.Save();
+                result.IsVaild = true;
             }
 
             return result;
         }
 
-       
+        public GenericResult<IEnumerable<T>> GetById(int id)
+        {
+            return _genericRepository.FindBy(x=> x.Id == id);
+        }
     }
 }

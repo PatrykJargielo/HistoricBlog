@@ -14,7 +14,6 @@ namespace HistoricBlog.DAL.Base
         GenericResult<T>Edit(T obj);
         void Save();
 
-        GenericResult<T>GetById(int id);
     }
 
 }
