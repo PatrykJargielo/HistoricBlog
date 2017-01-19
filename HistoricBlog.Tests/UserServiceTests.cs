@@ -51,8 +51,6 @@ namespace HistoricBlog.Tests
     
 
              Assert.AreEqual(users.FirstOrDefault()?.Login, userFromService?.Login);
-
-            //Assert.AreEqual(users.First().Password, userFromService.FirstOrDefault());
         }
 
         private static Mock<DbSet<User>> UserMock(IQueryable<User> users) 
