@@ -65,13 +65,5 @@ namespace HistoricBlog.DAL.Base
             _historicBlogDbContext.SaveChanges();
         }
 
-        public  GenericResult<T> GetById(int id)
-        {
-
-            GenericResult<IEnumerable<T>> allEntitiesById = GetAll(x => x.Id == id);
-            var result = new GenericResult<T> {Result = allEntitiesById.Result.FirstOrDefault()};
-
-            return result;
-        }
     }
 }
