@@ -20,15 +20,8 @@ namespace HistoricBlog.BLL.Posts.Comments
         }
 
 
-        public GenericResult<IEnumerable<Comment>> GetCommentsByPostId(int postId)
-        {
-            return _commentRepository.GetAll(x => x.Post.Id == postId);
-        }
-
-        public GenericResult<IEnumerable<Comment>> GetCommentsById(int commentId)
-        {
-            return _commentRepository.FindBy(comment => comment.Id == commentId);
-        }
+  
+        
 
         public override GenericResult<Comment> Create(Comment entity)
         {

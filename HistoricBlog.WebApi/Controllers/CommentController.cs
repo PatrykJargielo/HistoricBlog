@@ -37,18 +37,15 @@ namespace HistoricBlog.WebApi.Controllers
         // GET: api/Comment/5
         public HttpResponseMessage Get(int id)
         {
-            var result = _commentService.GetCommentsById(id);
+            var result = _commentService.GetById(id);
             Mapper.Initialize(
                 cfg => cfg.CreateMap<Comment,CommentViewModel>()
             );
-
+   
             if (!result.IsVaild)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Result is invalid");
-            }
-            if (!result.Result.Any())
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
+                var messages = string.Concat(result.Messages.ToArray());
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
             }
 
             var comments = Mapper.Map<IEnumerable<CommentViewModel>>(result.Result);
@@ -60,26 +57,35 @@ namespace HistoricBlog.WebApi.Controllers
         // POST: api/Comment
         public HttpResponseMessage Post(int id,[FromBody]string commentText)
         {
-            var result = new GenericResult<IEnumerable<Comment>>();
+            var result = new GenericResult<Comment>();
             var comment = new Comment()
             {
                 Id = id,
                 CommentText = commentText
             };
-            //if(id>0) = _commentService.Update(comment);
-            if (!result.IsVaild) return Request.CreateResponse();
+
+            Mapper.Initialize(
+               cfg => cfg.CreateMap<Comment, CommentViewModel>()
+           );
+
+            if (id == 0)
+            {
+                
+                result = _commentService.Update(comment);
+              
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            if (!result.IsVaild)
+            {
+                var messages = string.Concat(result.Messages.ToArray());
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
+            }
+
+            
+            result = _commentService.Create(comment);
+          
             return Request.CreateResponse(HttpStatusCode.OK);
         }
-
-       
-
-        [HttpPut]
-        // PUT: api/Comment/5
-        public HttpResponseMessage Put(int id, [FromBody]string value)
-        {
-            return Request.CreateResponse(HttpStatusCode.OK);
-        }
-
 
         [HttpDelete]
         // DELETE: api/Comment/5
