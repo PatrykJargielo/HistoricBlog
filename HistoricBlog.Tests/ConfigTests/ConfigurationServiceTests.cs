@@ -24,13 +24,79 @@ namespace HistoricBlog.Tests.ConfigTests
         public void GetConfig_EmailRegexp_FromDatabaseIfThereIs()
         {
             //Arrange
+            var emailKey = EKeyConfig.Emailexp;
+            var configs = GetFullListOfConfig();
+
+            var configMock = GetDbSetConfigForTests(configs);
+
+            SetupDbContext(configMock);
+
+            var configService = GetFuConfigurationServiceForTests();
+
+            //Act
+            var result = configService.GetConfig(emailKey);
+            //Assert
+            Assert.AreEqual(result.Result,configs.First().ConfigurationValue);
+        }
+
+        [TestMethod]
+        public void GetConfig_EmailRegexp_FromXmlIfThereIsntInDatabase()
+        {
+            //Arrange
             var fixture = new Fixture();
             var emailKey = EKeyConfig.Emailexp;
+            var expectedResult = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}";
+            var configs = new List<Config>().AsQueryable();
+
+            var configMock = GetDbSetConfigForTests(configs);
+
+            SetupDbContext(configMock);
+
+            var configService = GetFuConfigurationServiceForTests();
+
+            //Act
+            var result = configService.GetConfig(emailKey);
+
+            //Assert
+            Assert.AreEqual(result.Result, expectedResult);
+        }
+
+        [TestMethod]
+        public void GetConfig_WithWrongKey()
+        {
+            //Arrange
+            var fixture = new Fixture();
+            var randomKey = EKeyConfig.RandomKey;
+            var expectedResult = false;
+            var configs = GetFullListOfConfig();
+            var mock = GetDbSetConfigForTests(configs);
+            SetupDbContext(mock);
+            var configService = GetFuConfigurationServiceForTests();
+            //Act
+            var result = configService.GetConfig(randomKey);
+
+            //Assert
+            Assert.AreEqual(result.IsVaild,expectedResult);
+
+        }
+
+        private ConfigurationService GetFuConfigurationServiceForTests()
+        {
+            _configRepository = new ConfigRepository(_historicalBlogDbContextMock.Object);
+            var configService = new ConfigurationService(_configRepository, _configurationManager);
+            configService.LoggerService = _loggerServiceMock.Object;
+            return configService;
+        }
+
+        private IQueryable<Config> GetFullListOfConfig()
+        {
+            var fixture = new Fixture();
+           
             var emailRegexp = fixture.Create<string>();
             var loginRegexp = fixture.Create<string>();
             var passwordRegexp = fixture.Create<string>();
             var credentialRegexp = fixture.Create<string>();
-            
+          
             var configs = new List<Config>
             {
                 fixture.Build<Config>()
@@ -51,52 +117,17 @@ namespace HistoricBlog.Tests.ConfigTests
                     .Create()
             }.AsQueryable();
 
-            var configMock = new Mock<DbSet<Config>>();
-            SetupDbSetConfig(configMock, configs);
-            SetupDbContext(configMock);
-
-            _configRepository = new ConfigRepository(_historicalBlogDbContextMock.Object);
-            var configService = new ConfigurationService(_configRepository, _configurationManager);
-
-            configService.LoggerService = _loggerServiceMock.Object;
-            //Act
-            var result = configService.GetConfig(emailKey);
-            //Assert
-            Assert.AreEqual(result.Result,configs.First().ConfigurationValue);
+            return configs;
         }
 
-        [TestMethod]
-        public void GetConfig_EmailRegexp_FromXmlIfThereIsntInDatabase()
+        private Mock<DbSet<Config>> GetDbSetConfigForTests(IQueryable<Config> configsQueryable )
         {
-            //Arrange
-            var fixture = new Fixture();
-            var emailKey = EKeyConfig.Emailexp;
-            var expectedResult = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}";
-            var configs = new List<Config>().AsQueryable();
-
-            var configMock = new Mock<DbSet<Config>>();
-
-            SetupDbSetConfig(configMock, configs);
-            
-            SetupDbContext(configMock);
-           
-            var configRepository = new ConfigRepository(_historicalBlogDbContextMock.Object);
-            var configService = new ConfigurationService(configRepository,_configurationManager);
-            configService.LoggerService = _loggerServiceMock.Object;
-            
-            //Act
-            var result = configService.GetConfig(emailKey);
-
-            //Assert
-            Assert.AreEqual(result.Result, expectedResult);
-        }
-
-        private void SetupDbSetConfig(Mock<DbSet<Config>> configSetMock, IQueryable<Config> configsQueryable )
-        {
-            configSetMock.As<IQueryable<Config>>().Setup(cm => cm.Provider).Returns(configsQueryable.Provider);
-            configSetMock.As<IQueryable<Config>>().Setup(cm => cm.Expression).Returns(configsQueryable.Expression);
-            configSetMock.As<IQueryable<Config>>().Setup(cm => cm.ElementType).Returns(configsQueryable.ElementType);
-            configSetMock.As<IQueryable<Config>>().Setup(cm => cm.GetEnumerator()).Returns(configsQueryable.GetEnumerator());
+            var configDbSetMock = new Mock<DbSet<Config>>();
+            configDbSetMock.As<IQueryable<Config>>().Setup(cm => cm.Provider).Returns(configsQueryable.Provider);
+            configDbSetMock.As<IQueryable<Config>>().Setup(cm => cm.Expression).Returns(configsQueryable.Expression);
+            configDbSetMock.As<IQueryable<Config>>().Setup(cm => cm.ElementType).Returns(configsQueryable.ElementType);
+            configDbSetMock.As<IQueryable<Config>>().Setup(cm => cm.GetEnumerator()).Returns(configsQueryable.GetEnumerator());
+            return configDbSetMock;
         }
 
         private void SetupDbContext(Mock<DbSet<Config>> configSetMock)

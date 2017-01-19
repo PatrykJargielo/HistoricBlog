@@ -12,11 +12,6 @@ namespace HistoricBlog.BLL.Config
 {
     public interface IConfigurationService
     {
-        //GetRegexConfig(string emailregex)
-        //{
-            
-        //}
-
         GenericResult<string> GetConfig(EKeyConfig key);
 
 

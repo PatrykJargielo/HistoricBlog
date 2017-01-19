@@ -2,6 +2,6 @@
 {
     public enum EKeyConfig
     {
-        Emailexp,Loginexp,Passwordexp, Credentialsexp,
+        Emailexp,Loginexp,Passwordexp, Credentialsexp,RandomKey
     }
 }
