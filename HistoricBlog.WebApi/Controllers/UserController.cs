@@ -4,31 +4,54 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
+using HistoricBlog.BLL.Logger;
+using HistoricBlog.BLL.Users;
+using HistoricBlog.DAL.Users;
+using HistoricBlog.WebApi.Models.Post;
+using HistoricBlog.WebApi.Models.Users;
 
 namespace HistoricBlog.WebApi.Controllers
 {
     public class UserController : ApiController
     {
-        // GET: api/User
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        private IUserService _userService;
+        public ILoggerService LoggerService { get; set; }
 
-        // GET: api/User/5
-        public string Get(int id)
+        public UserController(IUserService userService)
         {
-            return "value";
+            _userService = userService;
+        }
+        // GET: api/User
+        [HttpGet]
+        public HttpResponseMessage Get(string name)
+        {
+            var result = _userService.GetUsersByName(name);
+            Mapper.Initialize(x => x.CreateMap<User, UserViewModel>());
+            if (!result.IsVaild)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Result is invalid");
+
+            }
+            if (!result.Result.Any())
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            var users = Mapper.Map<IEnumerable<CommentViewModel>>(result.Result);
+
+            return Request.CreateResponse(HttpStatusCode.OK, users);
         }
 
         // POST: api/User
         public void Post([FromBody]string value)
         {
+            Request.CreateResponse(HttpStatusCode.OK);
         }
 
         // PUT: api/User/5
         public void Put(int id, [FromBody]string value)
         {
+            Request.CreateResponse(HttpStatusCode.OK);
         }
 
         // DELETE: api/User/5

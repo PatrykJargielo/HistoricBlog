@@ -1,4 +1,5 @@
-﻿using HistoricBlog.BLL.Base;
+﻿using System.Collections.Generic;
+using HistoricBlog.BLL.Base;
 using HistoricBlog.BLL.Logger;
 using HistoricBlog.DAL.Base;
 using HistoricBlog.DAL.Users;
@@ -13,6 +14,9 @@ namespace HistoricBlog.BLL.Users
         {
             _userRepository = userRepository;
         }
-        
+        public GenericResult<IEnumerable<User>> GetUsersByName(string userName)
+        {
+            return _userRepository.FindBy(user => user.Name == userName);
+        }
     }
 }
