@@ -11,6 +11,6 @@ namespace HistoricBlog.BLL.Posts
 {
     public interface IPostService : IGenericService<Post>
     {
-
+        GenericResult<IEnumerable<Post>> GetPostById(int postId);
     }
 }

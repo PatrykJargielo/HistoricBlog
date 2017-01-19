@@ -40,5 +40,11 @@ namespace HistoricBlog.BLL.Posts
             entity.Modified = entity.PostedOn;
             return base.Create(entity);
         }
+
+        public GenericResult<IEnumerable<Post>> GetPostById(int postId)
+        {
+            
+            return _postRepository.GetAll(p => p.Id == postId);
+        }
     }
 }
