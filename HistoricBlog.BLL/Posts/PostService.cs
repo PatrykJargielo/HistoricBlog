@@ -46,5 +46,7 @@ namespace HistoricBlog.BLL.Posts
             
             return _postRepository.GetAll(p => p.Id == postId);
         }
+
+
     }
 }

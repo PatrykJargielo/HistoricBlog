@@ -41,8 +41,16 @@ namespace HistoricBlog.WebApi.Controllers
                 cfg.CreateMap<Comment, CommentViewModel>();
             });
 
+            if (!result.IsVaild)
+            {
+                var messages = string.Concat(result.Messages.ToArray());
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
+            }
+
             var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
+
             return Request.CreateResponse(HttpStatusCode.OK, posts);
+
         }
 
         [HttpGet]
@@ -59,14 +67,21 @@ namespace HistoricBlog.WebApi.Controllers
                 cfg.CreateMap<Comment, CommentViewModel>();
             });
 
+            if (!result.IsVaild)
+            {
+                var messages = string.Concat(result.Messages.ToArray());
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
+            }
+
             var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
+
             return Request.CreateResponse(HttpStatusCode.OK, posts);
 
         }
 
-        [HttpPut]
+        [HttpPost]
         // POST: api/Post
-        public HttpResponseMessage Put(Post post)
+        public HttpResponseMessage Post(Post post)
         {
             var result = _postService.Create(post);
 
@@ -78,21 +93,49 @@ namespace HistoricBlog.WebApi.Controllers
                 cfg.CreateMap<User, UserViewModel>();
                 cfg.CreateMap<Comment, CommentViewModel>();
             });
+
+            if (!result.IsVaild)
+            {
+                var messages = string.Concat(result.Messages.ToArray());
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
+            }
+
             var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
 
             return Request.CreateResponse(HttpStatusCode.OK, posts);
 
         }
 
+        [HttpPut]
         // PUT: api/Post/5
-        public void Put(int id, [FromBody]string value)
+        public HttpResponseMessage Put(Post post, [FromBody]string value)
         {
+            var result = _postService.Update(post);
+
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Post, PostViewModel>();
+                cfg.CreateMap<Category, CategoryViewModel>();
+                cfg.CreateMap<Tag, TagViewModel>();
+                cfg.CreateMap<User, UserViewModel>();
+                cfg.CreateMap<Comment, CommentViewModel>();
+            });
+            if (!result.IsVaild)
+            {
+                var messages = string.Concat(result.Messages.ToArray());
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
+            }
+
+            var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
+
+            return Request.CreateResponse(HttpStatusCode.OK, posts);
 
         }
-
+        [HttpDelete]
         // DELETE: api/Post/5
         public void Delete(int id)
         {
+
 
         }
     }
