@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HistoricBlog.DAL.Base;
+using HistoricBlog.DAL.Posts;
 
 namespace HistoricBlog.BLL.Posts.Comments
 {
@@ -19,15 +20,30 @@ namespace HistoricBlog.BLL.Posts.Comments
             _commentRepository = commentRepository;
         }
 
-
-        public GenericResult<IEnumerable<Comment>> GetCommentsByPostId(int postId)
+        public override GenericResult<Comment> Create(Comment entity)
         {
-            return _commentRepository.GetAll(x => x.Post.Id == postId);
+            //TO DO : GetLoggedUser!!!
+            return base.Create(entity);
         }
 
-        public GenericResult<IEnumerable<Comment>> GetCommentsById(int commentId)
+        public GenericResult<IEnumerable<Comment>> GetCommentsByUserId(int userId)
         {
-            return _commentRepository.FindBy(comment => comment.Id == commentId);
+            var result = _commentRepository.FindBy(comment => comment.User.Id == userId);
+            result.IsVaild = true;
+            return result;
+        }
+
+        public GenericResult<Comment> UpadteCommentById(int commentId, string text)
+        {
+            var result = base.GetById(commentId);
+            if (result.IsVaild && result.Result !=null)
+            {
+                Comment comment = result.Result;
+                comment.CommentText = text;
+                return base.Update(comment);
+            }
+
+            return result;
         }
     }
 }

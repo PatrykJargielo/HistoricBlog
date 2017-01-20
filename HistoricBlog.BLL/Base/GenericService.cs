@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.XPath;
 using HistoricBlog.DAL.Base;
 
 namespace HistoricBlog.BLL.Base
@@ -89,12 +90,21 @@ namespace HistoricBlog.BLL.Base
             return result;
         }
 
-        public GenericResult<IEnumerable<T>> GetById(int id)
+        public GenericResult<T> DeleteById(int id)
+        {
+            var result = _genericRepository.Delete(x => x.Id == id);
+            return result;
+        }
+
+        public GenericResult<T> GetById(int id)
         {
             var result = _genericRepository.FindBy(x => x.Id == id);
-
+            GenericResult<T> genericResult = new GenericResult<T>();
+            genericResult.Result = result.Result.FirstOrDefault();
+            
             result.IsVaild = true;
-            return result;
+            
+            return genericResult;
         }
     }
 }
