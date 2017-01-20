@@ -38,16 +38,17 @@ namespace HistoricBlog.WebApi.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
-
-            
             var users = Mapper.Map<IEnumerable<UserViewModel>>(result.Result);
 
             return Request.CreateResponse(HttpStatusCode.OK, users.FirstOrDefault());
         }
 
         // POST: api/User
+        [HttpPost]
         public void Post([FromBody]string value)
         {
+        //    var result = _userService.Create();
+
             Request.CreateResponse(HttpStatusCode.OK);
         }
 

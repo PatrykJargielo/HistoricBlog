@@ -6,19 +6,14 @@ using HistoricBlog.DAL.Users;
 
 namespace HistoricBlog.BLL.Users
 {
-    public class UserService : GenericService<User>,IUserService
+    public class UserService : GenericService<User>, IUserService
     {
         private readonly IUserRepository _userRepository;
-      
+
         public UserService(IUserRepository userRepository) : base(userRepository)
         {
             _userRepository = userRepository;
         }
-        public GenericResult<IEnumerable<User>> GetUsersByName(string userName)
-        {
-            var result = _userRepository;
-            
-            return _userRepository.FindBy(user => user.Name == userName);
-        }
+
     }
 }
