@@ -14,6 +14,7 @@ using HistoricBlog.DAL.Posts.Comments;
 using HistoricBlog.DAL.Posts.Tags;
 using HistoricBlog.DAL.Users;
 using HistoricBlog.WebApi.Models.Users;
+using HistoricBlog.DAL.Base;
 
 namespace HistoricBlog.WebApi.Controllers
 {
@@ -57,7 +58,7 @@ namespace HistoricBlog.WebApi.Controllers
         // GET: api/Post/5
         public HttpResponseMessage Get(int id)
         {
-            var result = _postService.GetPostById(id);
+            var result = _postService.GetById(id);
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Post, PostViewModel>();
@@ -79,11 +80,39 @@ namespace HistoricBlog.WebApi.Controllers
 
         }
 
-        [HttpPost]
-        // POST: api/Post
-        public HttpResponseMessage Post(Post post)
+        //[HttpPost]
+        //// POST: api/Post
+        //public HttpResponseMessage Post(Post post)
+        //{
+        //    var result = _postService.Create(post);
+
+        //    Mapper.Initialize(cfg =>
+        //    {
+        //        cfg.CreateMap<Post, PostViewModel>();
+        //        cfg.CreateMap<Category, CategoryViewModel>();
+        //        cfg.CreateMap<Tag, TagViewModel>();
+        //        cfg.CreateMap<User, UserViewModel>();
+        //        cfg.CreateMap<Comment, CommentViewModel>();
+        //    });
+
+        //    if (!result.IsVaild)
+        //    {
+        //        var messages = string.Concat(result.Messages.ToArray());
+        //        return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
+        //    }
+
+        //    var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
+
+        //    return Request.CreateResponse(HttpStatusCode.OK, posts);
+
+        //}
+        public HttpResponseMessage Post(int id, [FromBody]string commentText)
         {
-            var result = _postService.Create(post);
+            var result = new GenericResult<Post>();
+            var post = new Post()
+            {
+                Id = id,
+            };
 
             Mapper.Initialize(cfg =>
             {
@@ -94,17 +123,25 @@ namespace HistoricBlog.WebApi.Controllers
                 cfg.CreateMap<Comment, CommentViewModel>();
             });
 
+            if (id == 0)
+            {
+
+                result = _postService.Update(post);
+
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
             if (!result.IsVaild)
             {
                 var messages = string.Concat(result.Messages.ToArray());
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
             }
 
-            var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
 
-            return Request.CreateResponse(HttpStatusCode.OK, posts);
+            result = _postService.Create(post);
 
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
+
 
         [HttpPut]
         // PUT: api/Post/5

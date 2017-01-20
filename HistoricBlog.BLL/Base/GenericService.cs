@@ -92,6 +92,7 @@ namespace HistoricBlog.BLL.Base
         public GenericResult<IEnumerable<T>> GetById(int id)
         {
             var result = _genericRepository.FindBy(x => x.Id == id);
+
             result.IsVaild = true;
             return result;
         }
