@@ -38,10 +38,6 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Get(int id)
         {
             var result = _commentService.GetById(id);
-            Mapper.Initialize(
-                cfg => { cfg.CreateMap<Comment, CommentViewModel>();
-                });
-   
             if (!result.IsVaild)
             {
                 var messages = string.Concat(result.Messages.ToArray());
