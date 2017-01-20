@@ -40,5 +40,7 @@ namespace HistoricBlog.BLL.Posts
             entity.Modified = entity.PostedOn;
             return base.Create(entity);
         }
+
+
     }
 }

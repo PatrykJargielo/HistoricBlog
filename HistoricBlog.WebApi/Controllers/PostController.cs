@@ -33,14 +33,6 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var result = _postService.GetAll();
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Post, PostViewModel>();
-                cfg.CreateMap<Category, CategoryViewModel>();
-                cfg.CreateMap<Tag, TagViewModel>();
-                cfg.CreateMap<User, UserViewModel>();
-                cfg.CreateMap<Comment, CommentViewModel>();
-            });
 
             if (!result.IsVaild)
             {
@@ -59,14 +51,6 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Get(int id)
         {
             var result = _postService.GetById(id);
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Post, PostViewModel>();
-                cfg.CreateMap<Category, CategoryViewModel>();
-                cfg.CreateMap<Tag, TagViewModel>();
-                cfg.CreateMap<User, UserViewModel>();
-                cfg.CreateMap<Comment, CommentViewModel>();
-            });
 
             if (!result.IsVaild)
             {
@@ -106,74 +90,50 @@ namespace HistoricBlog.WebApi.Controllers
         //    return Request.CreateResponse(HttpStatusCode.OK, posts);
 
         //}
-        public HttpResponseMessage Post(int id, [FromBody]string commentText)
-        {
-            var result = new GenericResult<Post>();
-            var post = new Post()
-            {
-                Id = id,
-            };
+        //[HttpPost]
+        //public HttpResponseMessage Post(int id, [FromBody]string commentText)
+        //{
+        //    var result = new GenericResult<Post>();
+        //    var post = new Post()
+        //    {
+        //        Id = id,
+        //    };
 
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Post, PostViewModel>();
-                cfg.CreateMap<Category, CategoryViewModel>();
-                cfg.CreateMap<Tag, TagViewModel>();
-                cfg.CreateMap<User, UserViewModel>();
-                cfg.CreateMap<Comment, CommentViewModel>();
-            });
+        //    if (id == 0)
+        //    {
 
-            if (id == 0)
-            {
+        //        result = _postService.Create(post);
 
-                result = _postService.Update(post);
-
-                return Request.CreateResponse(HttpStatusCode.OK);
-            }
-            if (!result.IsVaild)
-            {
-                var messages = string.Concat(result.Messages.ToArray());
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
-            }
+        //        return Request.CreateResponse(HttpStatusCode.OK);
+        //    }
+        //    if (!result.IsVaild)
+        //    {
+        //        var messages = string.Concat(result.Messages.ToArray());
+        //        return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
+        //    }
 
 
-            result = _postService.Create(post);
+        //    result = _postService.Update(post);
 
-            return Request.CreateResponse(HttpStatusCode.OK);
-        }
+        //    return Request.CreateResponse(HttpStatusCode.OK);
+        //}
 
+        //[HttpDelete]
+        //// DELETE: api/Post/5
+        //public HttpResponseMessage Delete(int id)
+        //{
+        //    //var result = _postService.d
 
-        [HttpPut]
-        // PUT: api/Post/5
-        public HttpResponseMessage Put(Post post, [FromBody]string value)
-        {
-            var result = _postService.Update(post);
+        //    //if (!result.IsVaild)
+        //    //{
+        //    //    var messages = string.Concat(result.Messages.ToArray());
+        //    //    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
+        //    //}
 
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Post, PostViewModel>();
-                cfg.CreateMap<Category, CategoryViewModel>();
-                cfg.CreateMap<Tag, TagViewModel>();
-                cfg.CreateMap<User, UserViewModel>();
-                cfg.CreateMap<Comment, CommentViewModel>();
-            });
-            if (!result.IsVaild)
-            {
-                var messages = string.Concat(result.Messages.ToArray());
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
-            }
+        //    //var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
 
-            var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
+        //    return Request.CreateResponse(HttpStatusCode.OK, posts);
 
-            return Request.CreateResponse(HttpStatusCode.OK, posts);
-
-        }
-        [HttpDelete]
-        // DELETE: api/Post/5
-        public void Delete(int id)
-        {
-
-
-        }
+        //}
     }
 }
