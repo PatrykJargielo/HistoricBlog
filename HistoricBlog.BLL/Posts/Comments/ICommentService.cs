@@ -12,8 +12,15 @@ namespace HistoricBlog.BLL.Posts.Comments
 {
     public interface ICommentService : IGenericService<Comment>
     {
+        GenericResult<Comment> DeleteCommentWithId(int id);
+
         GenericResult<IEnumerable<Comment>> GetCommentsByPostId(int postId);
 
-        GenericResult<IEnumerable<Comment>> GetCommentsById(int commentId);
+        GenericResult<IEnumerable<Comment>> GetCommentByPostIdAndByCommentId(int postId, int commentId);
+
+        GenericResult<IEnumerable<Comment>> GetCommentsByUserId(int userId);
+
+        GenericResult<IEnumerable<Comment>> GetCommentByUserIdAndByCommentId(int userId, int commentId);
+
     }
 }
