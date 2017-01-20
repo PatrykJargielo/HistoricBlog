@@ -1,13 +1,40 @@
 ﻿using System.Reflection;
 using System.Web.Http;
 using Autofac;
+using Autofac.Integration.Mvc;
+using System.Web.Mvc;
 using Autofac.Integration.WebApi;
 
 namespace HistoricBlog.WebApi.AutofacModule
 {
     public class AutofacConfig
     {
-        public static void SetUpAutofac()
+        public static void SetUpAutofacMvc()
+        {
+            var builder = new ContainerBuilder();
+            
+            builder.RegisterControllers(typeof(WebApiApplication).Assembly).PropertiesAutowired();
+
+            builder.RegisterModelBinders(typeof(WebApiApplication).Assembly);
+            builder.RegisterModelBinderProvider();
+
+            // OPTIONAL: Register web abstractions like HttpContextBase.
+            builder.RegisterModule<AutofacWebTypesModule>();
+
+            // OPTIONAL: Enable property injection in view pages.
+            builder.RegisterSource(new ViewRegistrationSource());
+            
+
+            builder.RegisterModule(new ServiceModule());
+            builder.RegisterModule(new DataModule());
+            builder.RegisterModule(new RepositoryModule());
+
+            // Set the dependency resolver to be Autofac.
+            var container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+        }
+
+        public static void SetUpAutoFacWebApi()
         {
             var builder = new ContainerBuilder();
 
