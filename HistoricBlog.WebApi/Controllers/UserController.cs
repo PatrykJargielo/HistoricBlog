@@ -45,17 +45,50 @@ namespace HistoricBlog.WebApi.Controllers
 
         // POST: api/User
         [HttpPost]
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody]UserViewModel user)
         {
-            //    var result = _userService.Create();
+            var newUserFields= new User
+            {
+                Name = user.Name,
+                Surname = user.Surname,
+                Email = user.Email,
+                Login = user.Login,
+                Password = user.Password
+            };
 
-            Request.CreateResponse(HttpStatusCode.OK);
+            var result = _userService.Create(newUserFields);
+            if (!result.IsVaild)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Result is invalid");
+
+            }
+            var newUser = Mapper.Map<IEnumerable<UserViewModel>>(result.Result);
+            return Request.CreateResponse(HttpStatusCode.OK, newUser);
         }
 
         // PUT: api/User/5
+        [HttpPut]
         public void Put(int id, [FromBody]string value)
         {
-            Request.CreateResponse(HttpStatusCode.OK);
+            //var result = _userService.GetById(id);
+
+            //var newUserFields = new User()
+            //{
+            //    Name = user.Name,
+            //    Surname = user.Surname,
+            //    Email = user.Email,
+            //    Login = user.Login,
+            //    Password = user.Password
+            //};
+
+            ////result = _userService.Create(newUserFields);
+            //if (!result.IsVaild)
+            //{
+            //    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Result is invalid");
+
+            //}
+            //var newUser = Mapper.Map<IEnumerable<UserViewModel>>(result.Result);
+            //return Request.CreateResponse(HttpStatusCode.OK, newUser);
         }
 
         // DELETE: api/User/5
@@ -63,7 +96,7 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Delete(int id)
         {
             var result = _userService.DeleteById(id);
-            
+
             if (result.IsVaild)
             {
                 var userDeleted = Mapper.Map<IEnumerable<UserViewModel>>(result.Result);
