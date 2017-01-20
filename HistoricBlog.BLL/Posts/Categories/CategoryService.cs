@@ -18,5 +18,12 @@ namespace HistoricBlog.BLL.Posts.Categories
             _categoryRepository = categoryRepository;
         }
 
+        public GenericResult<Category> GetCategoryByName(string name)
+        {
+            var result = new GenericResult<Category>();
+            result.Result = _categoryRepository.FindBy(category => category.Name == name).Result.FirstOrDefault();
+            result.IsVaild = true;
+            return result;
+        }
     }
 }

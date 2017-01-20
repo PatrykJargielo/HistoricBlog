@@ -1,4 +1,5 @@
 ﻿using HistoricBlog.BLL.Base;
+using HistoricBlog.DAL.Base;
 using HistoricBlog.DAL.Posts.Categories;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,6 @@ namespace HistoricBlog.BLL.Posts.Categories
 {
     public interface ICategoryService : IGenericService<Category>
     {
+        GenericResult<Category> GetCategoryByName(string name);
     }
 }

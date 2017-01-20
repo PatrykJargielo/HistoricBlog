@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HistoricBlog.BLL.Logger;
 using HistoricBlog.BLL.Posts.Categories;
+using HistoricBlog.DAL.Posts.Categories;
 using HistoricBlog.WebApi.Models.Post;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ using System.Web.Http;
 
 namespace HistoricBlog.WebApi.Controllers
 {
+
+    [RoutePrefix("api/category/{id}")]
     public class CategoryController : ApiController
     {
         private readonly ICategoryService _categoryService;
@@ -39,23 +42,34 @@ namespace HistoricBlog.WebApi.Controllers
 
         // POST: api/Comment
         [HttpPost]
-        public HttpResponseMessage Post([FromBody]string categoryName)
+        public HttpResponseMessage Post([FromBody]string name)
         {
-            
+            var getResult = _categoryService.GetCategoryByName(name);
+            if (getResult.Result == null)
+            {
+                Category category = new Category() { Name = name };
+                List<string> validationOutput = category.Validation();
+                if (validationOutput.Any()) return Request.CreateResponse(HttpStatusCode.OK, validationOutput);
+
+                var createResult = _categoryService.Create(category);
+                if (createResult.IsVaild) return Request.CreateResponse(HttpStatusCode.OK);
+      
+                return Request.CreateResponse(HttpStatusCode.InternalServerError,"There was an error with your request");
+            }
 
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
+        
 
         // DELETE: api/Category/5
-        [HttpDelete]
         public HttpResponseMessage Delete(int id)
         {
-            var getResult = _categoryService.DeleteById(id);
-            if (!getResult.IsVaild)
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, getResult.Messages);
+            var deleteResult = _categoryService.DeleteById(id);
+            if (!deleteResult.IsVaild)
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, deleteResult.Messages);
 
-            return Request.CreateResponse(HttpStatusCode.OK,"Category delete success");
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
 
