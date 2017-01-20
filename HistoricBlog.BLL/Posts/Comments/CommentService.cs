@@ -76,8 +76,6 @@ namespace HistoricBlog.BLL.Posts.Comments
             comment.Post = postEntity;
 
             result = Create(comment);
-
-            result.IsVaild = true;
             return result;
         }
     }
