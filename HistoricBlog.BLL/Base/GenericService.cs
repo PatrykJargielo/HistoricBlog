@@ -92,6 +92,7 @@ namespace HistoricBlog.BLL.Base
         public GenericResult<T> DeleteById(int id)
         {
             var result = _genericRepository.Delete(x => x.Id == id);
+            result.IsVaild = true;
             return result;
         }
 

@@ -4,15 +4,23 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using HistoricBlog.BLL.Users;
 
 namespace HistoricBlog.WebApi.Controllers
 {
     [Authorize]
     public class ValuesController : ApiController
     {
+        public IUserService _IUserService { get; set; }
+        public ValuesController(IUserService iUserService)
+        {
+            
+        }
         // GET api/values
+        [HttpGet]
         public IEnumerable<string> Get()
         {
+
             return new string[] { "value1", "value2" };
         }
 
@@ -23,6 +31,7 @@ namespace HistoricBlog.WebApi.Controllers
         }
 
         // POST api/values
+        [HttpPost]
         public void Post([FromBody]string value)
         {
         }
