@@ -29,7 +29,27 @@ namespace HistoricBlog.WebApi.Controllers
         {
             var result = _commentService.GetById(id);
 
-            if (!result.Result.Any())
+            if (result.Result == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+
+            if (!result.IsVaild)
+            {
+                var messages = result.Messages;
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, messages);
+            }
+
+            var comments = Mapper.Map<IEnumerable<CommentViewModel>>(result.Result);
+
+            return Request.CreateResponse(HttpStatusCode.OK, comments);
+        }
+
+        [HttpPut]
+        public HttpResponseMessage Put(int id,[FromBody] string text)
+        {
+            var result = _commentService.UpadteCommentById(id,text);
+            if (result.Result == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }

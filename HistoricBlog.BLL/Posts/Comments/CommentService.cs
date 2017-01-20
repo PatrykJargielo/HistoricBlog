@@ -33,6 +33,17 @@ namespace HistoricBlog.BLL.Posts.Comments
             return result;
         }
 
-   
+        public GenericResult<Comment> UpadteCommentById(int commentId, string text)
+        {
+            var result = base.GetById(commentId);
+            if (result.IsVaild && result.Result !=null)
+            {
+                Comment comment = result.Result;
+                comment.CommentText = text;
+                return base.Update(comment);
+            }
+
+            return result;
+        }
     }
 }
