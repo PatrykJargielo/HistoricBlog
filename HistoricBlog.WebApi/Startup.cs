@@ -4,6 +4,7 @@ using System.Linq;
 using HistoricBlog.WebApi.AutofacModule;
 using Microsoft.Owin;
 using Owin;
+using HistoricBlog.AutoMapper.App_Start;
 
 [assembly: OwinStartup(typeof(HistoricBlog.WebApi.Startup))]
 
@@ -15,6 +16,8 @@ namespace HistoricBlog.WebApi
         {
             ConfigureAuth(app);
             AutofacConfig.SetUpAutoFacWebApi();
+            AutoMapperConfig.SetUpAutoMapper();
+
         }
     }
 }
