@@ -7,6 +7,8 @@ using HistoricBlog.BLL.Base;
 using HistoricBlog.BLL.Logger;
 using HistoricBlog.DAL.Base;
 using HistoricBlog.DAL.Posts;
+using HistoricBlog.DAL.Posts.Categories;
+using HistoricBlog.DAL.Posts.Comments;
 using HistoricBlog.DAL.Posts.Tags;
 using HistoricBlog.DAL.Users;
 
@@ -36,6 +38,11 @@ namespace HistoricBlog.BLL.Posts
 
         public override GenericResult<Post> Create(Post entity)
         {
+            entity.PostedOn = DateTime.Now;
+            entity.Modified = entity.PostedOn;
+            entity.Categories = new List<Category>();
+            entity.Comments = new List<Comment>();
+            entity.Tags = new List<Tag>();
             entity.PostedOn = DateTime.Now;
             entity.Modified = entity.PostedOn;
             return base.Create(entity);
