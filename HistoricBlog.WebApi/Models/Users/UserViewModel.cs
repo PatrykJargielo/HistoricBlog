@@ -14,8 +14,8 @@ namespace HistoricBlog.WebApi.Models.Users
         public string Login { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public IList<Comment> Comments { get; set; }
-        public IList<Rating> Ratings { get; set; }
-        public IList<Role> Roles { get; set; }
+        public IList<CommentViewModel> Comments { get; set; }
+        public IList<RatingViewModel> Ratings { get; set; }
+        public IList<RoleViewModel> Roles { get; set; }
     }
 }

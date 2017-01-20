@@ -28,8 +28,6 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Get(int id)
         {
             var result = _userService.GetById(id);
-            Mapper.Initialize(x => x.CreateMap<User, UserViewModel>());
-
       
             if (!result.IsVaild)
             {
@@ -41,9 +39,10 @@ namespace HistoricBlog.WebApi.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
+            
             var users = Mapper.Map<IEnumerable<UserViewModel>>(result.Result);
 
-            return Request.CreateResponse(HttpStatusCode.OK, users);
+            return Request.CreateResponse(HttpStatusCode.OK, users.FirstOrDefault());
         }
 
         // POST: api/User
