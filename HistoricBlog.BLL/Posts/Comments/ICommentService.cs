@@ -12,6 +12,6 @@ namespace HistoricBlog.BLL.Posts.Comments
 {
     public interface ICommentService : IGenericService<Comment>
     {
-      
+        GenericResult<Comment> DeleteCommentWithId(int id);
     }
 }

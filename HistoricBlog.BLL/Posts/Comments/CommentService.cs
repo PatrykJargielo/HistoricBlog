@@ -28,5 +28,16 @@ namespace HistoricBlog.BLL.Posts.Comments
             //TO DO : GetLoggedUser!!!
             return base.Create(entity);
         }
+
+        public GenericResult<Comment> DeleteCommentWithId(int id)
+        {
+            var result = new GenericResult<Comment>();
+            var comment = GetById(id);
+            if (comment.IsVaild)
+            {
+                result = base.Delete(result.Result);
+            }
+            return result;
+        }
     }
 }

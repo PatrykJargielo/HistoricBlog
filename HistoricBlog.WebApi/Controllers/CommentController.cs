@@ -40,7 +40,6 @@ namespace HistoricBlog.WebApi.Controllers
             var result = _commentService.GetById(id);
             Mapper.Initialize(
                 cfg => { cfg.CreateMap<Comment, CommentViewModel>();
-                    cfg.CreateMap<User, UserInfoModel>();
                 });
    
             if (!result.IsVaild)
@@ -54,46 +53,18 @@ namespace HistoricBlog.WebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK,comments);
         }
 
-        [HttpPost]
-        // POST: api/Comment
-        public HttpResponseMessage Post(int id,[FromBody]string commentText)
-        {
-            var result = new GenericResult<Comment>();
-            var comment = new Comment()
-            {
-                Id = id,
-                CommentText = commentText
-            };
-
-            Mapper.Initialize(
-               cfg => { cfg.CreateMap<Comment, CommentViewModel>();
-                   cfg.CreateMap<User, UserInfoModel>();
-               }
-           );
-
-            if (id == 0)
-            {
-                
-                result = _commentService.Update(comment);
-              
-                return Request.CreateResponse(HttpStatusCode.OK);
-            }
-            if (!result.IsVaild)
-            {
-                var messages = string.Concat(result.Messages.ToArray());
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
-            }
-
-            
-            result = _commentService.Create(comment);
-          
-            return Request.CreateResponse(HttpStatusCode.OK);
-        }
-
         [HttpDelete]
         // DELETE: api/Comment/5
         public HttpResponseMessage Delete(int id)
         {
+            var result = _commentService.DeleteCommentWithId(id);
+            var commentDeleted = Mapper.Map<IEnumerable<CommentViewModel>>(result.Result);
+            if (result.IsVaild)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, commentDeleted);
+            }
+
+            
             return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
