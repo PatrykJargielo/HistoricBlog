@@ -13,7 +13,6 @@ namespace HistoricBlog.WebApi.Controllers
 
         public ActionResult Index()
         {
-            LoggerService.Log("Home Page!");
             ViewBag.Title = "Home Page";
 
             return View();
