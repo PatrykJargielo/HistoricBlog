@@ -45,17 +45,36 @@ namespace HistoricBlog.WebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, comments);
         }
 
+        [HttpPut]
+        public HttpResponseMessage Put(int id,[FromBody] string text)
+        {
+            var result = _commentService.UpadteCommentById(id,text);
+            if (result.Result == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+
+            if (!result.IsVaild)
+            {
+                var messages = result.Messages;
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, messages);
+            }
+
+            var comments = Mapper.Map<IEnumerable<CommentViewModel>>(result.Result);
+
+            return Request.CreateResponse(HttpStatusCode.OK, comments);
+        }
+
         [HttpDelete]
         // DELETE: api/Comment/5
         public HttpResponseMessage Delete(int id)
         {
-            var result = _commentService.DeleteCommentWithId(id);
+            var result = _commentService.DeleteById(id);
             var commentDeleted = Mapper.Map<IEnumerable<CommentViewModel>>(result.Result);
            
             if (!result.IsVaild)
             {
-                var messages = string.Concat(result.Messages.ToArray());
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, result.Messages);
             }
 
             return Request.CreateResponse(HttpStatusCode.OK, commentDeleted);
