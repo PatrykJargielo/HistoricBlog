@@ -59,8 +59,19 @@ namespace HistoricBlog.WebApi.Controllers
         }
 
         // DELETE: api/User/5
-        public void Delete(int id)
+        [HttpDelete]
+        public HttpResponseMessage Delete(int id)
         {
+            var result = _userService.DeleteById(id);
+            var userDeleted = Mapper.Map<IEnumerable<UserViewModel>>(result.Result);
+
+            if (result.IsVaild)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, userDeleted);
+            }
+
+            var messages = string.Concat(result.Messages.ToArray());
+            return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
         }
     }
 }
