@@ -11,9 +11,9 @@ namespace HistoricBlog.BLL.Posts.Categories
 {
     public class CategoryService : GenericService<Category>, ICategoryService
     {
-        private IGenericRepository<Category> _categoryRepository;
+        private ICategoryRepository _categoryRepository;
 
-        public CategoryService(IGenericRepository<Category> categoryRepository) : base(categoryRepository)
+        public CategoryService(ICategoryRepository categoryRepository) : base(categoryRepository)
         {
             _categoryRepository = categoryRepository;
         }
