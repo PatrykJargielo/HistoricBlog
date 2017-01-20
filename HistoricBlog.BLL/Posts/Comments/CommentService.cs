@@ -26,31 +26,6 @@ namespace HistoricBlog.BLL.Posts.Comments
             return base.Create(entity);
         }
 
-        public GenericResult<Comment> DeleteCommentWithId(int id)
-        {
-            var result = new GenericResult<Comment>();
-            var comment = GetById(id);
-            if (comment.IsVaild)
-            {
-                result = base.Delete(result.Result);
-            }
-            return result;
-        }
-
-        public GenericResult<IEnumerable<Comment>> GetCommentsByPostId(int postId)
-        {
-            var result = _commentRepository.FindBy(comment => comment.Post.Id == postId);
-            result.IsVaild = true;
-            return result;
-        }
-
-        public GenericResult<IEnumerable<Comment>> GetCommentByPostIdAndByCommentId(int postId, int commentId)
-        {
-            var result = _commentRepository.FindBy(comment => comment.Post.Id == postId && comment.Id == commentId);
-            result.IsVaild = true;
-            return result;
-        }
-
         public GenericResult<IEnumerable<Comment>> GetCommentsByUserId(int userId)
         {
             var result = _commentRepository.FindBy(comment => comment.User.Id == userId);
@@ -58,11 +33,6 @@ namespace HistoricBlog.BLL.Posts.Comments
             return result;
         }
 
-        public GenericResult<IEnumerable<Comment>> GetCommentByUserIdAndByCommentId(int userId, int commentId)
-        {
-            var result = _commentRepository.FindBy(comment => comment.User.Id == userId && comment.Id == commentId);
-            result.IsVaild = true;
-            return result;
-        }
+   
     }
 }

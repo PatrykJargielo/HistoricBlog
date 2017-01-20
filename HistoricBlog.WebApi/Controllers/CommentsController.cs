@@ -49,13 +49,12 @@ namespace HistoricBlog.WebApi.Controllers
         // DELETE: api/Comment/5
         public HttpResponseMessage Delete(int id)
         {
-            var result = _commentService.DeleteCommentWithId(id);
+            var result = _commentService.DeleteById(id);
             var commentDeleted = Mapper.Map<IEnumerable<CommentViewModel>>(result.Result);
            
             if (!result.IsVaild)
             {
-                var messages = string.Concat(result.Messages.ToArray());
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, result.Messages);
             }
 
             return Request.CreateResponse(HttpStatusCode.OK, commentDeleted);
