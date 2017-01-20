@@ -48,13 +48,10 @@ namespace HistoricBlog.WebApi.Controllers
             if (getResult.Result == null)
             {
                 Category category = new Category() { Name = name };
-                List<string> validationOutput = category.Validation();
-                if (validationOutput.Any()) return Request.CreateResponse(HttpStatusCode.OK, validationOutput);
-
                 var createResult = _categoryService.Create(category);
                 if (createResult.IsVaild) return Request.CreateResponse(HttpStatusCode.OK);
       
-                return Request.CreateResponse(HttpStatusCode.InternalServerError,"There was an error with your request");
+                return Request.CreateResponse(HttpStatusCode.InternalServerError,createResult.Messages);
             }
 
             return Request.CreateResponse(HttpStatusCode.OK);
