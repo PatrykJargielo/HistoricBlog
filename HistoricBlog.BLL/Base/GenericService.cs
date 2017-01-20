@@ -89,6 +89,12 @@ namespace HistoricBlog.BLL.Base
             return result;
         }
 
+        public GenericResult<T> DeleteById(int id)
+        {
+            var result = _genericRepository.Delete(x => x.Id == id);
+            return result;
+        }
+
         public GenericResult<IEnumerable<T>> GetById(int id)
         {
             var result = _genericRepository.FindBy(x => x.Id == id);
