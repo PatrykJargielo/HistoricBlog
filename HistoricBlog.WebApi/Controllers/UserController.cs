@@ -28,7 +28,7 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Get(int id)
         {
             var result = _userService.GetById(id);
-      
+
             if (!result.IsVaild)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Result is invalid");
@@ -47,7 +47,7 @@ namespace HistoricBlog.WebApi.Controllers
         [HttpPost]
         public void Post([FromBody]string value)
         {
-        //    var result = _userService.Create();
+            //    var result = _userService.Create();
 
             Request.CreateResponse(HttpStatusCode.OK);
         }
@@ -63,10 +63,10 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Delete(int id)
         {
             var result = _userService.DeleteById(id);
-            var userDeleted = Mapper.Map<IEnumerable<UserViewModel>>(result.Result);
-
+            
             if (result.IsVaild)
             {
+                var userDeleted = Mapper.Map<IEnumerable<UserViewModel>>(result.Result);
                 return Request.CreateResponse(HttpStatusCode.OK, userDeleted);
             }
 
