@@ -29,7 +29,7 @@ namespace HistoricBlog.WebApi.Controllers
         {
             var result = _commentService.GetById(id);
 
-            if (!result.Result.Any())
+            if (result.Result == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
