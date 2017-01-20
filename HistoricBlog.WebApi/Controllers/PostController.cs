@@ -64,76 +64,53 @@ namespace HistoricBlog.WebApi.Controllers
 
         }
 
-        //[HttpPost]
-        //// POST: api/Post
-        //public HttpResponseMessage Post(Post post)
-        //{
-        //    var result = _postService.Create(post);
+        [HttpPost]
+        public HttpResponseMessage Post([FromBody]PostViewModel post)
+        {
+            var postEntity = new Post()
+            {
+                Title = post.Title,
+                ShortDescription = post.ShortDescription,
+                Content = post.Content
+            };
+            var result = new GenericResult<Post>();
+            if (post.Id == 0)
+            {
+                result.IsVaild = true;
+                result = _postService.Create(postEntity);
+                return Request.CreateResponse(HttpStatusCode.Created, result.Result);
+            }
 
-        //    Mapper.Initialize(cfg =>
-        //    {
-        //        cfg.CreateMap<Post, PostViewModel>();
-        //        cfg.CreateMap<Category, CategoryViewModel>();
-        //        cfg.CreateMap<Tag, TagViewModel>();
-        //        cfg.CreateMap<User, UserViewModel>();
-        //        cfg.CreateMap<Comment, CommentViewModel>();
-        //    });
+            var editPost = _postService.Update(postEntity);
 
-        //    if (!result.IsVaild)
-        //    {
-        //        var messages = string.Concat(result.Messages.ToArray());
-        //        return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
-        //    }
+            if (!result.IsVaild)
+            {
+                var messages = string.Concat(result.Messages.ToArray());
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
+            }
 
-        //    var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
+            var updatePosts = Mapper.Map<IEnumerable<PostViewModel>>(editPost.Result);
 
-        //    return Request.CreateResponse(HttpStatusCode.OK, posts);
-
-        //}
-        //[HttpPost]
-        //public HttpResponseMessage Post(int id, [FromBody]string commentText)
-        //{
-        //    var result = new GenericResult<Post>();
-        //    var post = new Post()
-        //    {
-        //        Id = id,
-        //    };
-
-        //    if (id == 0)
-        //    {
-
-        //        result = _postService.Create(post);
-
-        //        return Request.CreateResponse(HttpStatusCode.OK);
-        //    }
-        //    if (!result.IsVaild)
-        //    {
-        //        var messages = string.Concat(result.Messages.ToArray());
-        //        return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
-        //    }
+            return Request.CreateResponse(HttpStatusCode.OK, updatePosts);
+        }
 
 
-        //    result = _postService.Update(post);
+        [HttpDelete]
+        // DELETE: api/Post/5
+        public HttpResponseMessage Delete(int id)
+        {
+            var result = _postService.DeleteById(id);
 
-        //    return Request.CreateResponse(HttpStatusCode.OK);
-        //}
+            if (!result.IsVaild)
+            {
+                var messages = result.Messages;
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, messages);
+            }
 
-        //[HttpDelete]
-        //// DELETE: api/Post/5
-        //public HttpResponseMessage Delete(int id)
-        //{
-        //    //var result = _postService.d
+            var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
 
-        //    //if (!result.IsVaild)
-        //    //{
-        //    //    var messages = string.Concat(result.Messages.ToArray());
-        //    //    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
-        //    //}
+            return Request.CreateResponse(HttpStatusCode.OK, posts);
 
-        //    //var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
-
-        //    return Request.CreateResponse(HttpStatusCode.OK, posts);
-
-        //}
+        }
     }
 }
