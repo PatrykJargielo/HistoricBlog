@@ -19,13 +19,7 @@ namespace HistoricBlog.WebApi.Models.Post
         public virtual IList<CategoryViewModel> Categories { get; set; }
 
         public virtual IList<TagViewModel> Tags { get; set; }
-
-        public string UserId { get; set; }
-
-        public string UserName { get; set; }
-
-        public string UserSurname { get; set; }
-
         
+        public virtual IList<CommentViewModel> Comments { get; set; }
     }
 }
