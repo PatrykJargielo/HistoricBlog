@@ -45,6 +45,9 @@ namespace HistoricBlog.WebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, comments);
         }
 
+
+        [HttpPatch]
+        [HttpPost]
         [HttpPut]
         public HttpResponseMessage Put(int id,[FromBody] string text)
         {
@@ -60,7 +63,7 @@ namespace HistoricBlog.WebApi.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, messages);
             }
 
-            var comments = Mapper.Map<IEnumerable<CommentViewModel>>(result.Result);
+            var comments = Mapper.Map<CommentViewModel>(result.Result);
 
             return Request.CreateResponse(HttpStatusCode.OK, comments);
         }
@@ -70,7 +73,7 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Delete(int id)
         {
             var result = _commentService.DeleteById(id);
-            var commentDeleted = Mapper.Map<IEnumerable<CommentViewModel>>(result.Result);
+            var commentDeleted = Mapper.Map<CommentViewModel>(result.Result);
            
             if (!result.IsVaild)
             {

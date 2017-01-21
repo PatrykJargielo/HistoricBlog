@@ -7,7 +7,7 @@ namespace HistoricBlog.WebApi.AutofacModule
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<HistoricBlogDbContext>().AsSelf();
+            builder.RegisterType<HistoricBlogDbContext>().AsSelf().InstancePerLifetimeScope();
         }
     }
 }

@@ -17,12 +17,14 @@ namespace HistoricBlog.BLL.Posts
     public class PostService : GenericService<Post>,IPostService
     {
         private readonly IPostRepository _postRepository;
+        private readonly IUserRepository _userRepository;
 
         public ILoggerService LoggerService { get; set; }
 
-        public PostService(IPostRepository postRepository) : base(postRepository)
+        public PostService(IPostRepository postRepository,IUserRepository userRepository) : base(postRepository)
         {
             _postRepository = postRepository;
+            _userRepository = userRepository;
         }
 
       
@@ -67,7 +69,7 @@ namespace HistoricBlog.BLL.Posts
 
             //Add
             comment.CommentText = commentText;
-            comment.User = new User(); //CommentedUser get logged user
+            comment.User = _userRepository.FindBy(user => user.Id == 1).Result.FirstOrDefault();
             comment.CommentedOn = DateTime.Now;
             post.Comments.Add(comment);
             _postRepository.Save();

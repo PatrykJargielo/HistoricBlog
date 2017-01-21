@@ -33,7 +33,7 @@ namespace HistoricBlog.WebApi.Controllers
             if (!result.IsVaild) return Request.CreateResponse(HttpStatusCode.InternalServerError, result.Messages);
             
 
-            var comments = Mapper.Map<IEnumerable<CommentViewModel>>(result.Result);
+            var comments = Mapper.Map<CommentViewModel>(result.Result);
 
             return Request.CreateResponse(HttpStatusCode.OK, comments);
         }
