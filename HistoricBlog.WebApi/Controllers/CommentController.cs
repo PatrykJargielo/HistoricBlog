@@ -40,7 +40,7 @@ namespace HistoricBlog.WebApi.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, messages);
             }
 
-            var comments = Mapper.Map<IEnumerable<CommentViewModel>>(result.Result);
+            var comments = Mapper.Map<CommentViewModel>(result.Result);
 
             return Request.CreateResponse(HttpStatusCode.OK, comments);
         }

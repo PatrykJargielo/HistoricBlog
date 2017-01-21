@@ -7,23 +7,26 @@ using System.Web.Http;
 using AutoMapper;
 using HistoricBlog.BLL.Posts.Comments;
 using HistoricBlog.WebApi.Models.Post;
+using HistoricBlog.BLL.Posts;
 
 namespace HistoricBlog.WebApi.Controllers
 {
     [RoutePrefix("api/post")]
     public class PostCommentsController : ApiController
     {
-        private readonly ICommentService _commentService;
+        private readonly IPostService _postService;
 
-        public PostCommentsController(ICommentService commentService)
+        public PostCommentsController(IPostService postService)
         {
-            _commentService = commentService;
+            _postService = postService;
         }
 
         [Route("{postId}/comment")]
         public HttpResponseMessage Post(int postId, [FromBody]string commentText)
         {
-            var result = _commentService.AddCommentToPostByPostId(postId, commentText);
+            var post = _postService.GetById(postId);
+            if (post.Result == null) return Request.CreateResponse(HttpStatusCode.NotFound);
+            var result = _postService.AddCommentToPost(post.Result, commentText);
             if (result.Result == null) return Request.CreateResponse(HttpStatusCode.NotFound);
             
 
