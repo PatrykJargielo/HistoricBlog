@@ -16,6 +16,5 @@ namespace HistoricBlog.BLL.Posts.Comments
         GenericResult<IEnumerable<Comment>> GetCommentsByUserId(int userId);
 
         GenericResult<Comment> UpadteCommentById(int commentId,string text);
-        GenericResult<Comment> AddCommentToPostByPostId(int postId, string commentText);
     }
 }

@@ -103,7 +103,7 @@ namespace HistoricBlog.BLL.Base
             GenericResult<T> genericResult = new GenericResult<T>();
             genericResult.Result = result.Result.FirstOrDefault();
             
-            result.IsVaild = true;
+            genericResult.IsVaild = true;
             
             return genericResult;
         }
