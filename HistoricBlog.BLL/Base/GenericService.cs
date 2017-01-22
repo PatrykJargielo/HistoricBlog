@@ -94,8 +94,9 @@ namespace HistoricBlog.BLL.Base
         {
             var result = new GenericResult<T>();
             result.Result = _genericRepository.FindBy(x => x.Id == id).Result.SingleOrDefault();
-            if (result.Result == null) return result; 
+            if (result.Result == null) return result;
             result = _genericRepository.Delete(result.Result);
+            _genericRepository.Save();
             result.IsVaild = true;
             return result;
         }
