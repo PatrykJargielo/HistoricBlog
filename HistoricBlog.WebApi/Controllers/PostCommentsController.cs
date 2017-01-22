@@ -24,6 +24,7 @@ namespace HistoricBlog.WebApi.Controllers
         }
 
         [Route("{postId}/comment")]
+        [HttpPost]
         public HttpResponseMessage Post(int postId, [FromBody]string commentText)
         {
             var post = _postService.GetById(postId);
