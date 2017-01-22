@@ -15,9 +15,6 @@ namespace HistoricBlog.WebApi.Controllers
     {
         private readonly ICommentService _commentService;
 
-
-        public ILoggerService LoggerService { get; set; }
-
         public CommentController(ICommentService commentService)
         {
             _commentService = commentService;
@@ -31,13 +28,7 @@ namespace HistoricBlog.WebApi.Controllers
 
             if (result.Result == null)
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-            }
-
-            if (!result.IsVaild)
-            {
-                var messages = result.Messages;
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, messages);
+                return Request.CreateResponse(HttpStatusCode.NotFound,"Comment not found!");
             }
 
             var comments = Mapper.Map<CommentViewModel>(result.Result);
@@ -51,35 +42,36 @@ namespace HistoricBlog.WebApi.Controllers
         [HttpPut]
         public HttpResponseMessage Put(int id,[FromBody] string text)
         {
-            var result = _commentService.UpadteCommentById(id,text);
-            if (result.Result == null)
+            var result = _commentService.GetById(id);
+            if (result.Result == null)      
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
+                return Request.CreateResponse(HttpStatusCode.NotFound,"Comment not found!");
             }
+
+            result = _commentService.Update(result.Result,text);
 
             if (!result.IsVaild)
             {
                 var messages = result.Messages;
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, messages);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, messages);
             }
 
             var comments = Mapper.Map<CommentViewModel>(result.Result);
 
-            return Request.CreateResponse(HttpStatusCode.OK, comments);
+            return Request.CreateResponse(HttpStatusCode.OK , comments);
         }
 
         [HttpDelete]
         // DELETE: api/Comment/5
         public HttpResponseMessage Delete(int id)
         {
-            var result = _commentService.DeleteById(id);
-            var commentDeleted = Mapper.Map<CommentViewModel>(result.Result);
-           
-            if (!result.IsVaild)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, result.Messages);
-            }
+            var result = _commentService.GetById(id);
+            if (result.Result == null) return Request.CreateResponse(HttpStatusCode.NotFound, "Comment not found!");
 
+            result = _commentService.Delete(result.Result);
+
+            var commentDeleted = Mapper.Map<CommentViewModel>(result.Result);
+         
             return Request.CreateResponse(HttpStatusCode.OK, commentDeleted);
            
         }

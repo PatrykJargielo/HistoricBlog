@@ -59,7 +59,7 @@ namespace HistoricBlog.BLL.Base
             else
             {
                 
-                result = _genericRepository.Edit(result.Result);
+                result = _genericRepository.Edit(entity);
                 _genericRepository.Save();
                 result.IsVaild = true;
             }

@@ -12,6 +12,5 @@ namespace HistoricBlog.BLL.Posts
 {
     public interface IPostService : IGenericService<Post>
     {
-        GenericResult<Comment> AddCommentToPost(Post post, string commentText);
     }
 }

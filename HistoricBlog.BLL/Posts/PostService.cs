@@ -49,35 +49,6 @@ namespace HistoricBlog.BLL.Posts
             return base.Create(entity);
         }
 
-        public GenericResult<Comment> AddCommentToPost(Post post, string commentText)
-        {
-            Comment comment = new Comment();
-            var result = new GenericResult<Comment>();
-            result.Messages = new List<string>();
-
-            if (post == null)
-            {
-                result.Messages.Add("No posts attatched to this comment");
-                result.IsVaild = false;
-                return result;
-            }
-
-            if (post.Comments == null)
-            {
-                post.Comments = new List<Comment>();
-            }
-
-            //Add
-            comment.CommentText = commentText;
-            comment.User = _userRepository.FindBy(user => user.Id == 1).Result.FirstOrDefault();
-            comment.CommentedOn = DateTime.Now;
-            post.Comments.Add(comment);
-            _postRepository.Save();
-
-
-            result.Result = comment; 
-            result.IsVaild = true;
-            return result;
-        }
+     
     }
 }

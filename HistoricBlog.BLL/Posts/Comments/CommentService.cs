@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HistoricBlog.DAL.Base;
 using HistoricBlog.DAL.Posts;
+using HistoricBlog.DAL.Users;
 
 namespace HistoricBlog.BLL.Posts.Comments
 {
@@ -14,12 +15,12 @@ namespace HistoricBlog.BLL.Posts.Comments
     {
 
         private readonly ICommentRepository _commentRepository;
-        private readonly IPostRepository _postRepository;
+        private readonly IUserRepository _userRepository;
 
-        public CommentService(ICommentRepository commentRepository,IPostRepository postRepository) : base(commentRepository)
+        public CommentService(ICommentRepository commentRepository,IUserRepository userRepository) : base(commentRepository)
         {
             _commentRepository = commentRepository;
-            _postRepository = postRepository;
+            _userRepository = userRepository;
         }
 
         public override GenericResult<Comment> Create(Comment entity)
@@ -35,18 +36,35 @@ namespace HistoricBlog.BLL.Posts.Comments
             return result;
         }
 
-        public GenericResult<Comment> UpadteCommentById(int commentId, string text)
+        public GenericResult<Comment> AddCommentToPost(Post post, string commentText)
         {
-            var result = base.GetById(commentId);
-            if (result.IsVaild && result.Result !=null)
+            var result = new GenericResult<Comment>();
+            Comment comment = new Comment();          
+            result.Messages = new List<string>();
+
+            if (post.Comments == null)
             {
-                Comment comment = result.Result;
-                comment.CommentText = text;
-                return base.Update(comment);
+                post.Comments = new List<Comment>();
             }
 
-            return result;
+            //Add
+            comment.CommentText = commentText;
+            comment.CommentedOn = DateTime.Now;
+            comment.User = _userRepository.FindBy(user => user.Id == 1).Result.FirstOrDefault();
+            if (comment.User == null)
+            {
+                result.IsVaild = false;
+                return result;
+            }
+
+            comment.Post = post;
+            return base.Create(comment);
         }
 
+        public GenericResult<Comment> Update(Comment comment, string text)
+        {
+            comment.CommentText = text;
+            return base.Update(comment);
+        }
     }
 }

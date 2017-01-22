@@ -15,9 +15,11 @@ namespace HistoricBlog.WebApi.Controllers
     public class PostCommentsController : ApiController
     {
         private readonly IPostService _postService;
+        private readonly ICommentService _commentService; 
 
-        public PostCommentsController(IPostService postService)
+        public PostCommentsController(IPostService postService,ICommentService commentService)
         {
+            _commentService = commentService;
             _postService = postService;
         }
 
@@ -25,17 +27,16 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Post(int postId, [FromBody]string commentText)
         {
             var post = _postService.GetById(postId);
-            if (post.Result == null) return Request.CreateResponse(HttpStatusCode.NotFound);
-            var result = _postService.AddCommentToPost(post.Result, commentText);
-            if (result.Result == null) return Request.CreateResponse(HttpStatusCode.NotFound);
+            if (post.Result == null) return Request.CreateResponse(HttpStatusCode.NotFound,"Post not found!");
+
+            var result = _commentService.AddCommentToPost(post.Result, commentText);
+            if (result.Result == null) return Request.CreateResponse(HttpStatusCode.Unauthorized,"You need to be logged!");
             
-
-            if (!result.IsVaild) return Request.CreateResponse(HttpStatusCode.InternalServerError, result.Messages);
+            if (!result.IsVaild) return Request.CreateResponse(HttpStatusCode.BadRequest, result.Messages);
             
+            var createdComment = Mapper.Map<CommentViewModel>(result.Result);
 
-            var comments = Mapper.Map<CommentViewModel>(result.Result);
-
-            return Request.CreateResponse(HttpStatusCode.OK, comments);
+            return Request.CreateResponse(HttpStatusCode.Created, createdComment);
         }
 
    
