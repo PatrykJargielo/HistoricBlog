@@ -82,7 +82,7 @@ namespace HistoricBlog.BLL.Base
             else
             {
                 
-                result = _genericRepository.Delete(result.Result);
+                result = _genericRepository.Delete(entity);
                 _genericRepository.Save();
                 result.IsVaild = true;
             }
@@ -92,7 +92,10 @@ namespace HistoricBlog.BLL.Base
 
         public GenericResult<T> DeleteById(int id)
         {
-            var result = _genericRepository.Delete(x => x.Id == id);
+            var result = new GenericResult<T>();
+            result.Result = _genericRepository.FindBy(x => x.Id == id).Result.SingleOrDefault();
+            if (result.Result == null) return result; 
+            result = _genericRepository.Delete(result.Result);
             result.IsVaild = true;
             return result;
         }
@@ -102,7 +105,7 @@ namespace HistoricBlog.BLL.Base
             var result = _genericRepository.FindBy(x => x.Id == id);
             GenericResult<T> genericResult = new GenericResult<T>();
             genericResult.Result = result.Result.FirstOrDefault();
-            
+            if (genericResult.Result == null) return genericResult;
             genericResult.IsVaild = true;
             
             return genericResult;

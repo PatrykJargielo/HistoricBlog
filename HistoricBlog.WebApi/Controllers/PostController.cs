@@ -34,12 +34,6 @@ namespace HistoricBlog.WebApi.Controllers
         {
             var result = _postService.GetAll();
 
-            if (!result.IsVaild)
-            {
-                var messages = string.Concat(result.Messages.ToArray());
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
-            }
-
             var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
 
             return Request.CreateResponse(HttpStatusCode.OK, posts);
@@ -52,19 +46,17 @@ namespace HistoricBlog.WebApi.Controllers
         {
             var result = _postService.GetById(id);
 
-            if (!result.IsVaild)
-            {
-                var messages = string.Concat(result.Messages.ToArray());
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
-            }
+            if (result.Result == null) return Request.CreateResponse(HttpStatusCode.NotFound, "Post not found!");
 
-            var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
+            var posts = Mapper.Map<PostViewModel> (result.Result);
 
             return Request.CreateResponse(HttpStatusCode.OK, posts);
 
         }
 
+        [HttpPut]
         [HttpPost]
+        [HttpPatch]
         public HttpResponseMessage Post([FromBody]PostViewModel post)
         {
             var postEntity = new Post()
@@ -100,14 +92,9 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Delete(int id)
         {
             var result = _postService.DeleteById(id);
-
-            if (!result.IsVaild)
-            {
-                var messages = result.Messages;
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, messages);
-            }
-
-            var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
+            if (result.Result == null) return Request.CreateResponse(HttpStatusCode.NotFound, "Post not found!");
+            
+            var posts = Mapper.Map<PostViewModel>(result.Result);
 
             return Request.CreateResponse(HttpStatusCode.OK, posts);
 
