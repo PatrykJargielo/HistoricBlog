@@ -11,13 +11,33 @@ namespace HistoricBlog.BLL.Posts.Ratings
 {
     public class RatingService : GenericService<Rating>, IRatingService
     {
-        private IGenericRepository<Rating> _ratingRepository;
+        private IRatingRepository _ratingRepository;
 
-        public RatingService(IGenericRepository<Rating> ratingRepository) : base(ratingRepository)
+
+        public RatingService(IRatingRepository ratingRepository) : base(ratingRepository)
         {
             _ratingRepository = ratingRepository;
         }
 
-   
+        public GenericResult<IEnumerable<Rating>> GetPostRatings(int postId)
+        {
+            var result = _ratingRepository.GetAll(rating => rating.PostId.Id == postId);
+            result.IsVaild = true;
+            return result;
+        }
+
+        public GenericResult<Rating> GetUserRatingForPost(int postId, int userId)
+        {
+            GenericResult<Rating> result = new GenericResult<Rating>();
+
+            var queryResult = _ratingRepository.GetAll(rating => (rating.PostId.Id == postId) && (rating.UserId.Id == userId));
+            result.Messages = result.Messages;
+            result.Result = queryResult.Result.FirstOrDefault();
+            result.IsVaild = true;
+
+            return result;
+        }
+
+      
     }
 }
