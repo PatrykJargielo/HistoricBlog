@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoricBlog.Tests", "Histo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoricBlog.WebApi", "HistoricBlog.WebApi\HistoricBlog.WebApi.csproj", "{92FCF4DE-3EC5-4A3D-B5EA-E6AB0071E635}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoricBlog.Web", "HistoricBlog.Web\HistoricBlog.Web.csproj", "{667EC06D-3146-420B-BDDE-C4439FC2C70D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{92FCF4DE-3EC5-4A3D-B5EA-E6AB0071E635}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92FCF4DE-3EC5-4A3D-B5EA-E6AB0071E635}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92FCF4DE-3EC5-4A3D-B5EA-E6AB0071E635}.Release|Any CPU.Build.0 = Release|Any CPU
+		{667EC06D-3146-420B-BDDE-C4439FC2C70D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{667EC06D-3146-420B-BDDE-C4439FC2C70D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{667EC06D-3146-420B-BDDE-C4439FC2C70D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{667EC06D-3146-420B-BDDE-C4439FC2C70D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
