@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.XPath;
 using HistoricBlog.DAL.Base;
 
 namespace HistoricBlog.BLL.Base
@@ -58,7 +59,7 @@ namespace HistoricBlog.BLL.Base
             else
             {
                 
-                result = _genericRepository.Edit(result.Result);
+                result = _genericRepository.Edit(entity);
                 _genericRepository.Save();
                 result.IsVaild = true;
             }
@@ -81,7 +82,7 @@ namespace HistoricBlog.BLL.Base
             else
             {
                 
-                result = _genericRepository.Delete(result.Result);
+                result = _genericRepository.Delete(entity);
                 _genericRepository.Save();
                 result.IsVaild = true;
             }
@@ -91,16 +92,24 @@ namespace HistoricBlog.BLL.Base
 
         public GenericResult<T> DeleteById(int id)
         {
-            var result = _genericRepository.Delete(x => x.Id == id);
+            var result = new GenericResult<T>();
+            result.Result = _genericRepository.FindBy(x => x.Id == id).Result.SingleOrDefault();
+            if (result.Result == null) return result;
+            result = _genericRepository.Delete(result.Result);
+            _genericRepository.Save();
             result.IsVaild = true;
             return result;
         }
 
-        public GenericResult<IEnumerable<T>> GetById(int id)
+        public GenericResult<T> GetById(int id)
         {
             var result = _genericRepository.FindBy(x => x.Id == id);
-            result.IsVaild = true;
-            return result;
+            GenericResult<T> genericResult = new GenericResult<T>();
+            genericResult.Result = result.Result.FirstOrDefault();
+            if (genericResult.Result == null) return genericResult;
+            genericResult.IsVaild = true;
+            
+            return genericResult;
         }
     }
 }

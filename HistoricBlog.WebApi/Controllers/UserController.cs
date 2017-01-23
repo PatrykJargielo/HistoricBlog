@@ -34,7 +34,7 @@ namespace HistoricBlog.WebApi.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Result is invalid");
 
             }
-            if (!result.Result.Any())
+            if (result.Result == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
