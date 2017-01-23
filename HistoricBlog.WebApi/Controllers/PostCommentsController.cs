@@ -28,10 +28,10 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Post(int postId, [FromBody]string commentText)
         {
             var post = _postService.GetById(postId);
-            if (post.Result == null) return Request.CreateResponse(HttpStatusCode.NotFound,"Post not found!");
+            if (post.Result == null) return Request.CreateResponse(HttpStatusCode.BadRequest,"Post not found!");
 
             var result = _commentService.AddCommentToPost(post.Result, commentText);
-            if (result.Result == null) return Request.CreateResponse(HttpStatusCode.Unauthorized,"You need to be logged!");
+            if (result.Result == null) return Request.CreateResponse(HttpStatusCode.BadRequest,"You need to be logged!");
             
             if (!result.IsVaild) return Request.CreateResponse(HttpStatusCode.BadRequest, result.Messages);
             

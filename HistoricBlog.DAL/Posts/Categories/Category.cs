@@ -12,7 +12,7 @@ namespace HistoricBlog.DAL.Posts.Categories
         {
             List<string> errorsList = new List<string>();
             ValidateCategoryName(errorsList);
-            return Validation();
+            return errorsList;
         }
 
         private void ValidateCategoryName(List<string> errorsList)

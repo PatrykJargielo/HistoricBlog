@@ -7,6 +7,7 @@ using System.Web.Http;
 using AutoMapper;
 using HistoricBlog.BLL.Logger;
 using HistoricBlog.BLL.Users;
+using HistoricBlog.DAL.Base;
 using HistoricBlog.DAL.Posts.Comments;
 using HistoricBlog.DAL.Users;
 using HistoricBlog.WebApi.Models.Post;
@@ -28,7 +29,7 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Get(int id)
         {
             var result = _userService.GetById(id);
-      
+
             if (!result.IsVaild)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Result is invalid");
@@ -38,24 +39,52 @@ namespace HistoricBlog.WebApi.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
-            var users = Mapper.Map<IEnumerable<UserViewModel>>(result.Result);
+            var users = Mapper.Map<UserViewModel>(result.Result);
 
-            return Request.CreateResponse(HttpStatusCode.OK, users.FirstOrDefault());
+            return Request.CreateResponse(HttpStatusCode.OK, users);
         }
 
         // POST: api/User
         [HttpPost]
-        public void Post([FromBody]string value)
+        [HttpPut]
+        public HttpResponseMessage Post([FromBody]UserViewModel user)
         {
-        //    var result = _userService.Create();
+            var newUserFields= new User
+            {
+                Name = user.Name,
+                Surname = user.Surname,
+                Email = user.Email,
+                Login = user.Login,
+                Password = user.Password,
+                Id = user.Id
+            };
+            var result=new GenericResult<User>();
+            if (user.Id==0)
+            {
 
-            Request.CreateResponse(HttpStatusCode.OK);
-        }
+                result = _userService.Create(newUserFields);
+                if (!result.IsVaild)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Result is invalid");
+                }
+                var newUser = Mapper.Map<UserViewModel>(result.Result);
+                return Request.CreateResponse(HttpStatusCode.OK, newUser);
+            }
 
-        // PUT: api/User/5
-        public void Put(int id, [FromBody]string value)
-        {
-            Request.CreateResponse(HttpStatusCode.OK);
+            result = _userService.Update(newUserFields);
+            if (result.Result == null)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "User not found!");
+            }
+
+            if (!result.IsVaild)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Result is invalid");
+            }
+            var updatedUser = Mapper.Map<UserViewModel>(result.Result);
+            return Request.CreateResponse(HttpStatusCode.OK, updatedUser);
+
+
         }
 
         // DELETE: api/User/5
@@ -63,10 +92,10 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Delete(int id)
         {
             var result = _userService.DeleteById(id);
-            var userDeleted = Mapper.Map<IEnumerable<UserViewModel>>(result.Result);
 
             if (result.IsVaild)
             {
+                var userDeleted = Mapper.Map<IEnumerable<UserViewModel>>(result.Result);
                 return Request.CreateResponse(HttpStatusCode.OK, userDeleted);
             }
 
