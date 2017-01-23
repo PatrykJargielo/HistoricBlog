@@ -257,7 +257,6 @@
     <Compile Include="AutofacModule\ServiceModule.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
-    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostCommentsController.cs" />
     <Compile Include="Controllers\PostController.cs" />
