@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HistoricBlog.DAL.Base;
 using HistoricBlog.DAL.Posts;
+using HistoricBlog.DAL.Users;
 
 namespace HistoricBlog.BLL.Posts.Comments
 {
@@ -14,41 +15,18 @@ namespace HistoricBlog.BLL.Posts.Comments
     {
 
         private readonly ICommentRepository _commentRepository;
+        private readonly IUserRepository _userRepository;
 
-        public CommentService(ICommentRepository commentRepository) : base(commentRepository)
+        public CommentService(ICommentRepository commentRepository,IUserRepository userRepository) : base(commentRepository)
         {
             _commentRepository = commentRepository;
+            _userRepository = userRepository;
         }
 
         public override GenericResult<Comment> Create(Comment entity)
         {
             //TO DO : GetLoggedUser!!!
             return base.Create(entity);
-        }
-
-        public GenericResult<Comment> DeleteCommentWithId(int id)
-        {
-            var result = new GenericResult<Comment>();
-            var comment = GetById(id);
-            if (comment.IsVaild)
-            {
-                result = base.Delete(result.Result);
-            }
-            return result;
-        }
-
-        public GenericResult<IEnumerable<Comment>> GetCommentsByPostId(int postId)
-        {
-            var result = _commentRepository.FindBy(comment => comment.Post.Id == postId);
-            result.IsVaild = true;
-            return result;
-        }
-
-        public GenericResult<IEnumerable<Comment>> GetCommentByPostIdAndByCommentId(int postId, int commentId)
-        {
-            var result = _commentRepository.FindBy(comment => comment.Post.Id == postId && comment.Id == commentId);
-            result.IsVaild = true;
-            return result;
         }
 
         public GenericResult<IEnumerable<Comment>> GetCommentsByUserId(int userId)
@@ -58,11 +36,35 @@ namespace HistoricBlog.BLL.Posts.Comments
             return result;
         }
 
-        public GenericResult<IEnumerable<Comment>> GetCommentByUserIdAndByCommentId(int userId, int commentId)
+        public GenericResult<Comment> AddCommentToPost(Post post, string commentText)
         {
-            var result = _commentRepository.FindBy(comment => comment.User.Id == userId && comment.Id == commentId);
-            result.IsVaild = true;
-            return result;
+            var result = new GenericResult<Comment>();
+            Comment comment = new Comment();          
+            result.Messages = new List<string>();
+
+            if (post.Comments == null)
+            {
+                post.Comments = new List<Comment>();
+            }
+
+            //Add
+            comment.CommentText = commentText;
+            comment.CommentedOn = DateTime.Now;
+            comment.User = _userRepository.FindBy(user => user.Id == 1).Result.FirstOrDefault();
+            if (comment.User == null)
+            {
+                result.IsVaild = false;
+                return result;
+            }
+
+            comment.Post = post;
+            return base.Create(comment);
+        }
+
+        public GenericResult<Comment> Update(Comment comment, string text)
+        {
+            comment.CommentText = text;
+            return base.Update(comment);
         }
     }
 }

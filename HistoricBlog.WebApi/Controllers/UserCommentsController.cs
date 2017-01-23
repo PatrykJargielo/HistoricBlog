@@ -27,12 +27,12 @@ namespace HistoricBlog.WebApi.Controllers
 
             if (!result.Result.Any())
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
             if (!result.IsVaild)
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, result.Messages);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, result.Messages);
             }
 
             var comments = Mapper.Map<IEnumerable<CommentViewModel>>(result.Result);

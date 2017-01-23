@@ -7,6 +7,8 @@ using HistoricBlog.BLL.Base;
 using HistoricBlog.BLL.Logger;
 using HistoricBlog.DAL.Base;
 using HistoricBlog.DAL.Posts;
+using HistoricBlog.DAL.Posts.Categories;
+using HistoricBlog.DAL.Posts.Comments;
 using HistoricBlog.DAL.Posts.Tags;
 using HistoricBlog.DAL.Users;
 
@@ -15,12 +17,14 @@ namespace HistoricBlog.BLL.Posts
     public class PostService : GenericService<Post>,IPostService
     {
         private readonly IPostRepository _postRepository;
+        private readonly IUserRepository _userRepository;
 
         public ILoggerService LoggerService { get; set; }
 
-        public PostService(IPostRepository postRepository) : base(postRepository)
+        public PostService(IPostRepository postRepository,IUserRepository userRepository) : base(postRepository)
         {
             _postRepository = postRepository;
+            _userRepository = userRepository;
         }
 
       
@@ -29,7 +33,6 @@ namespace HistoricBlog.BLL.Posts
         {
             entity.Modified = DateTime.Now;
             return base.Update(entity);
-
         }
 
      
@@ -38,7 +41,14 @@ namespace HistoricBlog.BLL.Posts
         {
             entity.PostedOn = DateTime.Now;
             entity.Modified = entity.PostedOn;
+            entity.Categories = new List<Category>();
+            entity.Comments = new List<Comment>();
+            entity.Tags = new List<Tag>();
+            entity.PostedOn = DateTime.Now;
+            entity.Modified = entity.PostedOn;
             return base.Create(entity);
         }
+
+     
     }
 }

@@ -7,20 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HistoricBlog.DAL.Base;
+using HistoricBlog.DAL.Posts;
 
 namespace HistoricBlog.BLL.Posts.Comments
 {
     public interface ICommentService : IGenericService<Comment>
     {
-        GenericResult<Comment> DeleteCommentWithId(int id);
-
-        GenericResult<IEnumerable<Comment>> GetCommentsByPostId(int postId);
-
-        GenericResult<IEnumerable<Comment>> GetCommentByPostIdAndByCommentId(int postId, int commentId);
-
+        GenericResult<Comment> AddCommentToPost(Post post, string commentText);
         GenericResult<IEnumerable<Comment>> GetCommentsByUserId(int userId);
-
-        GenericResult<IEnumerable<Comment>> GetCommentByUserIdAndByCommentId(int userId, int commentId);
-
+        GenericResult<Comment> Update(Comment comment,string text);
     }
 }
