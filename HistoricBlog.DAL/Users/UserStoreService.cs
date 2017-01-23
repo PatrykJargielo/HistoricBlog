@@ -49,7 +49,12 @@ namespace HistoricBlog.DAL.Users
 
         public Task SetPasswordHashAsync(User user, string passwordHash)
         {
-            throw new NotImplementedException();
+            if (user == null)
+            {
+                throw new ArgumentNullException("user");
+            }
+
+            return Task.FromResult(user.Password = passwordHash);
         }
 
         public Task<string> GetPasswordHashAsync(User user)
