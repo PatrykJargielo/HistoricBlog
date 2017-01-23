@@ -23,9 +23,9 @@ namespace HistoricBlog.WebApi.Controllers
         private readonly IPostService _postService;
         public ILoggerService LoggerService { get; set; }
 
-        public PostController(IPostService PostService)
+        public PostController(IPostService postService)
         {
-            _postService = PostService;
+            _postService = postService;
 
         }
         [HttpGet]
@@ -46,7 +46,7 @@ namespace HistoricBlog.WebApi.Controllers
         {
             var result = _postService.GetById(id);
 
-            if (result.Result == null) return Request.CreateResponse(HttpStatusCode.NotFound, "Post not found!");
+            if (result.Result == null) return Request.CreateResponse(HttpStatusCode.BadRequest, "Post not found!");
 
             var posts = Mapper.Map<PostViewModel> (result.Result);
 
@@ -78,7 +78,7 @@ namespace HistoricBlog.WebApi.Controllers
             if (!result.IsVaild)
             {
                 var messages = string.Concat(result.Messages.ToArray());
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, messages);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, messages);
             }
 
             var updatePosts = Mapper.Map<IEnumerable<PostViewModel>>(editPost.Result);
@@ -92,7 +92,7 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Delete(int id)
         {
             var result = _postService.DeleteById(id);
-            if (result.Result == null) return Request.CreateResponse(HttpStatusCode.NotFound, "Post not found!");
+            if (result.Result == null) return Request.CreateResponse(HttpStatusCode.BadRequest, "Post not found!");
             
             var posts = Mapper.Map<PostViewModel>(result.Result);
 
