@@ -82,7 +82,7 @@ namespace HistoricBlog.BLL.Base
             else
             {
                 
-                result = _genericRepository.Delete(result.Result);
+                result = _genericRepository.Delete(entity);
                 _genericRepository.Save();
                 result.IsVaild = true;
             }

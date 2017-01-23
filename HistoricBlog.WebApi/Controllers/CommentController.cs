@@ -28,7 +28,7 @@ namespace HistoricBlog.WebApi.Controllers
 
             if (result.Result == null)
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound,"Comment not found!");
+                return Request.CreateResponse(HttpStatusCode.BadRequest,"Comment not found!");
             }
 
             var comments = Mapper.Map<CommentViewModel>(result.Result);
@@ -45,7 +45,7 @@ namespace HistoricBlog.WebApi.Controllers
             var result = _commentService.GetById(id);
             if (result.Result == null)      
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound,"Comment not found!");
+                return Request.CreateResponse(HttpStatusCode.BadRequest,"Comment not found!");
             }
 
             result = _commentService.Update(result.Result,text);
@@ -65,11 +65,10 @@ namespace HistoricBlog.WebApi.Controllers
         // DELETE: api/Comment/5
         public HttpResponseMessage Delete(int id)
         {
-            var result = _commentService.GetById(id);
-            if (result.Result == null) return Request.CreateResponse(HttpStatusCode.NotFound, "Comment not found!");
+            var result = _commentService.DeleteById(id);
+            if (result.Result == null) return Request.CreateResponse(HttpStatusCode.BadRequest, "Comment not found!");
 
-            result = _commentService.Delete(result.Result);
-
+          
             var commentDeleted = Mapper.Map<CommentViewModel>(result.Result);
          
             return Request.CreateResponse(HttpStatusCode.OK, commentDeleted);
