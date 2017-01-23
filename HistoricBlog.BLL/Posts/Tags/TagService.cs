@@ -20,8 +20,11 @@ namespace HistoricBlog.BLL.Posts.Tags
             _tagRepository = tagRepository;
         }
 
-      
-
-
+        public GenericResult<Tag> GetTagByName(string name)
+        {
+            var result = new GenericResult<Tag>();
+            result.Result = _tagRepository.FindBy(tag => tag.Name == name).Result.FirstOrDefault();
+            return result;
+        }
     }
 }
