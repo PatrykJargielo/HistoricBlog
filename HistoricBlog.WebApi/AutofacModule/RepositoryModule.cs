@@ -6,6 +6,7 @@ using HistoricBlog.DAL.Posts.Comments;
 using HistoricBlog.DAL.Posts.Ratings;
 using HistoricBlog.DAL.Posts.Tags;
 using HistoricBlog.DAL.Users;
+using Microsoft.AspNet.Identity;
 
 namespace HistoricBlog.WebApi.AutofacModule
 {
@@ -13,6 +14,7 @@ namespace HistoricBlog.WebApi.AutofacModule
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<UserStoreService>().As<IUserStore<User,int>>().InstancePerRequest();
             builder.RegisterType<ConfigRepository>().As<IConfigRepository>().InstancePerRequest();
             builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerRequest();
             builder.RegisterType<PostRepository>().As<IPostRepository>().InstancePerRequest();

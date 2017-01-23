@@ -42,7 +42,9 @@ namespace HistoricBlog.DAL.Users
 
         public Task<User> FindByNameAsync(string userName)
         {
-            throw new NotImplementedException();
+            Task<User> task =
+                _historicBlogDbContext.Users.Where(user => user.UserName == userName).FirstOrDefaultAsync();
+            return task;
         }
 
         public Task SetPasswordHashAsync(User user, string passwordHash)
