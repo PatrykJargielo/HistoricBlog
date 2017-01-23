@@ -21,17 +21,22 @@ using HistoricBlog.WebApi.Results;
 
 namespace HistoricBlog.WebApi.Controllers
 {
-
+    [Authorize]
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
-        private UserManager<User, int> _userManager;
+        private UserManager<User,int> _userManager;
 
-        public AccountController(UserManager<User,int> userManager)
+        public AccountController(UserManager<User, int> userManager)
         {
             _userManager = userManager;
         }
+
+      
+       
+
+        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -56,8 +61,169 @@ namespace HistoricBlog.WebApi.Controllers
             return Ok();
         }
 
-       
-        
+
+        // POST api/Account/ChangePassword
+        [Route("ChangePassword")]
+        public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            IdentityResult result = await _userManager.ChangePasswordAsync(User.Identity.GetUserId<int>(), model.OldPassword,
+                model.NewPassword);
+            
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+        // POST api/Account/SetPassword
+        [Route("SetPassword")]
+        public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            IdentityResult result = await _userManager.AddPasswordAsync(User.Identity.GetUserId<int>(), model.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+        // POST api/Account/AddExternalLogin
+        [Route("AddExternalLogin")]
+        public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+
+            AuthenticationTicket ticket = AccessTokenFormat.Unprotect(model.ExternalAccessToken);
+
+            if (ticket == null || ticket.Identity == null || (ticket.Properties != null
+                && ticket.Properties.ExpiresUtc.HasValue
+                && ticket.Properties.ExpiresUtc.Value < DateTimeOffset.UtcNow))
+            {
+                return BadRequest("External login failure.");
+            }
+
+            ExternalLoginData externalData = ExternalLoginData.FromIdentity(ticket.Identity);
+
+            if (externalData == null)
+            {
+                return BadRequest("The external login is already associated with an account.");
+            }
+
+            IdentityResult result = await _userManager.AddLoginAsync(User.Identity.GetUserId<int>(),
+                new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+        // POST api/Account/RemoveLogin
+        [Route("RemoveLogin")]
+        public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            IdentityResult result;
+
+            if (model.LoginProvider == LocalLoginProvider)
+            {
+                result = await _userManager.RemovePasswordAsync(User.Identity.GetUserId<int>());
+            }
+            else
+            {
+                result = await _userManager.RemoveLoginAsync(User.Identity.GetUserId<int>(),
+                    new UserLoginInfo(model.LoginProvider, model.ProviderKey));
+            }
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+        // GET api/Account/ExternalLogin
+        [OverrideAuthentication]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
+        [AllowAnonymous]
+        [Route("ExternalLogin", Name = "ExternalLogin")]
+        public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
+        {
+            if (error != null)
+            {
+                return Redirect(Url.Content("~/") + "#error=" + Uri.EscapeDataString(error));
+            }
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                return new ChallengeResult(provider, this);
+            }
+
+            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+
+            if (externalLogin == null)
+            {
+                return InternalServerError();
+            }
+
+            if (externalLogin.LoginProvider != provider)
+            {
+                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                return new ChallengeResult(provider, this);
+            }
+
+            User user = await _userManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
+                externalLogin.ProviderKey));
+
+            bool hasRegistered = user != null;
+
+            if (hasRegistered)
+            {
+                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                
+                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(_userManager,
+                    OAuthDefaults.AuthenticationType);
+                ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(_userManager,
+                    CookieAuthenticationDefaults.AuthenticationType);
+
+                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
+                Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
+            }
+            else
+            {
+                IEnumerable<Claim> claims = externalLogin.GetClaims();
+                ClaimsIdentity identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
+                Authentication.SignIn(identity);
+            }
+
+            return Ok();
+        }
 
         // GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
         [AllowAnonymous]
@@ -98,6 +264,72 @@ namespace HistoricBlog.WebApi.Controllers
             }
 
             return logins;
+        }
+
+        // POST api/Account/Register
+        [AllowAnonymous]
+        [Route("Register")]
+        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = new User() { UserName = model.Email, Email = model.Email };
+
+            IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+        // POST api/Account/RegisterExternal
+        [OverrideAuthentication]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [Route("RegisterExternal")]
+        public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var info = await Authentication.GetExternalLoginInfoAsync();
+            if (info == null)
+            {
+                return InternalServerError();
+            }
+
+            var user = new User() { UserName = model.Email, Email = model.Email };
+
+            IdentityResult result = await _userManager.CreateAsync(user);
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            result = await _userManager.AddLoginAsync(user.Id, info.Login);
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result); 
+            }
+            return Ok();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && _userManager != null)
+            {
+                _userManager.Dispose();
+                _userManager = null;
+            }
+
+            base.Dispose(disposing);
         }
 
         #region Helpers
