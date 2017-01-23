@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace HistoricBlog.BLL.Posts.Tags
 {
     public interface ITagService : IGenericService<Tag>
-    {        
+    {
+        GenericResult<Tag> GetTagByName(string name);
     }
 }
