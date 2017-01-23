@@ -4,7 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Security;
 using HistoricBlog.BLL.Users;
+using HistoricBlog.DAL.Users;
 
 namespace HistoricBlog.WebApi.Controllers
 {
@@ -18,6 +20,7 @@ namespace HistoricBlog.WebApi.Controllers
         }
         // GET api/values
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IEnumerable<string> Get()
         {
 
@@ -34,6 +37,7 @@ namespace HistoricBlog.WebApi.Controllers
         [HttpPost]
         public void Post([FromBody]string value)
         {
+            var Hasrole = User.IsInRole("Admin");
         }
 
         // PUT api/values/5

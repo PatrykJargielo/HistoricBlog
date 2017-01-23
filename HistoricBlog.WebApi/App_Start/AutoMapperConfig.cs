@@ -7,7 +7,7 @@ using HistoricBlog.DAL.Posts.Tags;
 using HistoricBlog.DAL.Users;
 using HistoricBlog.WebApi.Models.Post;
 using HistoricBlog.WebApi.Models.Users;
-using HistoricBlog.WebApi.Models.Users.Permissions;
+
 using HistoricBlog.WebApi.Models.Users.Roles;
 using System;
 using System.Collections.Generic;
@@ -34,7 +34,7 @@ namespace HistoricBlog.AutoMapper.App_Start
                 cfg.CreateMap<Rating, RatingViewModel>();
                 cfg.CreateMap<User, UserViewModel>();
                 cfg.CreateMap<Role, RoleViewModel>();
-                cfg.CreateMap<Permission, PermissionViewModel>();
+               
             });
         }
     }

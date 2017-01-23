@@ -1,26 +1,27 @@
-﻿using System.Threading.Tasks;
+﻿using HistoricBlog.BLL.PasswordHasher.Hasher;
+using HistoricBlog.DAL.Users;
+using HistoricBlog.DAL.Users.Identity;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using HistoricBlog.WebApi.Models;
 
-namespace HistoricBlog.WebApi
+namespace HistoricBlog.BLL.Users.Identity
 {
-    // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
-
-    public class ApplicationUserManager : UserManager<ApplicationUser>
+    public class ApplicationUserManager : UserManager<User,int>
     {
-        public ApplicationUserManager(IUserStore<ApplicationUser> store)
-            : base(store)
+        private readonly IUserStore<User, int> _userStore;
+
+        public ApplicationUserManager(IUserStore<User, int> userStore)
+            : base(userStore)
         {
+            _userStore = userStore;
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+            var manager = new ApplicationUserManager(new UserStore());
             // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<ApplicationUser>(manager)
+            manager.UserValidator = new UserValidator<User, int>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
@@ -37,8 +38,10 @@ namespace HistoricBlog.WebApi
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+                manager.UserTokenProvider = new DataProtectorTokenProvider<User, int>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
+            
+            manager.PasswordHasher = new HashService();
             return manager;
         }
     }
