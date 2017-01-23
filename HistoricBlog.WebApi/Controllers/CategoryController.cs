@@ -13,8 +13,6 @@ using System.Web.Http;
 
 namespace HistoricBlog.WebApi.Controllers
 {
-
-    [RoutePrefix("api/category/{id}")]
     public class CategoryController : ApiController
     {
         private readonly ICategoryService _categoryService;
@@ -31,16 +29,11 @@ namespace HistoricBlog.WebApi.Controllers
         {
             var result = _categoryService.GetAll();
 
-            if (!result.IsVaild)
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, result.Messages);
-            if (result.Result.Count() == 0)
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, "No categories are present");
-
             var categories = Mapper.Map<IEnumerable<CategoryViewModel>>(result.Result);
             return Request.CreateResponse(HttpStatusCode.OK, categories);
         }
 
-        // POST: api/Comment
+     
         [HttpPost]
         public HttpResponseMessage Post([FromBody]string name)
         {
@@ -51,10 +44,10 @@ namespace HistoricBlog.WebApi.Controllers
                 var createResult = _categoryService.Create(category);
                 if (createResult.IsVaild) return Request.CreateResponse(HttpStatusCode.OK);
       
-                return Request.CreateResponse(HttpStatusCode.InternalServerError,createResult.Messages);
+                return Request.CreateResponse(HttpStatusCode.OK, createResult.Messages);
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.BadRequest,"There is a comment with this name!");
         }
 
         
@@ -63,8 +56,8 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Delete(int id)
         {
             var deleteResult = _categoryService.DeleteById(id);
-            if (!deleteResult.IsVaild)
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, deleteResult.Messages);
+            if (deleteResult.Result == null)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Category not found");
 
             return Request.CreateResponse(HttpStatusCode.OK);
         }
