@@ -68,6 +68,7 @@ namespace HistoricBlog.WebApi.Controllers
             var result = _commentService.DeleteById(id);
             if (result.Result == null) return Request.CreateResponse(HttpStatusCode.BadRequest, "Comment not found!");
 
+          
             var commentDeleted = Mapper.Map<CommentViewModel>(result.Result);
          
             return Request.CreateResponse(HttpStatusCode.OK, commentDeleted);
