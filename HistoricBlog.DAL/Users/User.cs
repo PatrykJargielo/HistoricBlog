@@ -9,15 +9,16 @@ using HistoricBlog.DAL.Base;
 using HistoricBlog.DAL.Posts.Comments;
 using HistoricBlog.DAL.Posts.Ratings;
 using System.Text.RegularExpressions;
+using Microsoft.AspNet.Identity;
 using static System.Configuration.ConfigurationManager;
 
 namespace HistoricBlog.DAL.Users
 {
-    public class User : BaseEntity
+    public class User : BaseEntity,IUser<int>
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Login { get; set; }
+        public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
 
@@ -38,10 +39,10 @@ namespace HistoricBlog.DAL.Users
 
             ValidateStringProperty(this.Name, errorMessage);
             ValidateStringProperty(this.Surname, errorMessage);
-            ValidateStringProperty(this.Login, errorMessage);
+            ValidateStringProperty(this.UserName, errorMessage);
 
             ValidateStringWithRegex(Email, errorMessage, emailRegex);
-            ValidateStringWithRegex(Login, errorMessage, loginRegex);
+            ValidateStringWithRegex(UserName, errorMessage, loginRegex);
             ValidateStringWithRegex(Password, errorMessage, passwordRegex);
             ValidateStringWithRegex(Name, errorMessage, credentialsRegex);
             ValidateStringWithRegex(Surname, errorMessage, credentialsRegex);
@@ -84,6 +85,8 @@ namespace HistoricBlog.DAL.Users
 
 
         }
+
+
     }
 }
 

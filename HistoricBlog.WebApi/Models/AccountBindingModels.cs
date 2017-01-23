@@ -60,7 +60,7 @@ namespace HistoricBlog.WebApi.Models
     public class RemoveLoginBindingModel
     {
         [Required]
-        [Display(Name = "Login provider")]
+        [Display(Name = "UserName provider")]
         public string LoginProvider { get; set; }
 
         [Required]
