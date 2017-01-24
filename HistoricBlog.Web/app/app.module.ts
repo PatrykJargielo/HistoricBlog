@@ -8,6 +8,7 @@ import { PostListComponent } from './posts/posts-list.component';
 import { createStore } from 'redux';
 import { rootReducer } from '../redux/reducers/rootReducer';
 import { PostActions } from '../redux/actions/post-actions';
+import { PostService } from './posts/post-service';
 
 export const AppStore = createStore(rootReducer);
 
@@ -23,7 +24,8 @@ export const AppStore = createStore(rootReducer);
       PostListComponent
   ],
   providers: [
-        PostActions
+      PostActions,
+      PostService
   ],
   bootstrap: [AppComponent, PostListComponent ]
 })

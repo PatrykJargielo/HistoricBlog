@@ -16,6 +16,7 @@ var posts_list_component_1 = require("./posts/posts-list.component");
 var redux_1 = require("redux");
 var rootReducer_1 = require("../redux/reducers/rootReducer");
 var post_actions_1 = require("../redux/actions/post-actions");
+var post_service_1 = require("./posts/post-service");
 exports.AppStore = redux_1.createStore(rootReducer_1.rootReducer);
 var AppModule = (function () {
     function AppModule() {
@@ -34,7 +35,8 @@ AppModule = __decorate([
             posts_list_component_1.PostListComponent
         ],
         providers: [
-            post_actions_1.PostActions
+            post_actions_1.PostActions,
+            post_service_1.PostService
         ],
         bootstrap: [app_component_1.AppComponent, posts_list_component_1.PostListComponent]
     }),

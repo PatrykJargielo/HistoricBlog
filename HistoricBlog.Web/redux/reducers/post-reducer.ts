@@ -13,10 +13,10 @@ export default function posts(state = initialState, action:any) {
         case EDIT_POST:
             return state;
         case GET_POSTS:
+
             return {
                 posts: state.posts.concat(action.posts)
             }
-
         default:
             return state;
     }

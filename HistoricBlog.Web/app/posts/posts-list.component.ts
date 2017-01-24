@@ -1,4 +1,4 @@
-﻿import { Component, OnInit} from '@angular/core';
+﻿import { Component, OnInit, Inject} from '@angular/core';
 import { IPost } from '../../redux/actions/post-interface';
 import { PostActions } from '../../redux/actions/post-actions';
 import { PostService } from './post-service';
@@ -7,28 +7,34 @@ import { AppStore } from '../app.module';
 
 @Component({
     selector: 'hb-posts-list',
-    moduleId: module.id,
-    templateUrl: 'post-list.component.html',
-    styleUrls: ['post-list.component.css']
+    templateUrl: 'app/posts/post-list.component.html',
+    styleUrls: ['app/posts/post-list.component.css']
 })
 
 export class PostListComponent implements OnInit {
     posts: IPost[];
+    private _postService: PostService; 
 
-    constructor(private _productService: PostService, private _postActions: PostActions) {
-        //let state = AppStore.getState();
+    constructor(@Inject(PostService) postService: PostService, private _postActions: PostActions) {
+        this._postService = postService;
+
         
         
     };
 
     ngOnInit(): void {
-        AppStore.subscribe(() => console.log(AppStore.getState()));
+  
         
 
-        this._productService.getProducts()
+        this._postService.getProducts()
             .subscribe(x => this.posts = x);
 
+        console.log(this.posts)
+
         AppStore.dispatch(this._postActions.getAllPosts(this.posts))
+
+
+       // console.log(AppStore.getState());
     }
 
 

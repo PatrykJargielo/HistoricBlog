@@ -8,33 +8,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var core_1 = require("@angular/core");
 var post_actions_1 = require("../../redux/actions/post-actions");
 var post_service_1 = require("./post-service");
 var app_module_1 = require("../app.module");
 var PostListComponent = (function () {
-    function PostListComponent(_productService, _postActions) {
-        //let state = AppStore.getState();
-        this._productService = _productService;
+    function PostListComponent(postService, _postActions) {
         this._postActions = _postActions;
+        this._postService = postService;
     }
     ;
     PostListComponent.prototype.ngOnInit = function () {
         var _this = this;
-        app_module_1.AppStore.subscribe(function () { return console.log(app_module_1.AppStore.getState()); });
-        this._productService.getProducts()
+        this._postService.getProducts()
             .subscribe(function (x) { return _this.posts = x; });
+        console.log(this.posts);
         app_module_1.AppStore.dispatch(this._postActions.getAllPosts(this.posts));
+        // console.log(AppStore.getState());
     };
     return PostListComponent;
 }());
 PostListComponent = __decorate([
     core_1.Component({
         selector: 'hb-posts-list',
-        moduleId: module.id,
-        templateUrl: 'post-list.component.html',
-        styleUrls: ['post-list.component.css']
+        templateUrl: 'app/posts/post-list.component.html',
+        styleUrls: ['app/posts/post-list.component.css']
     }),
+    __param(0, core_1.Inject(post_service_1.PostService)),
     __metadata("design:paramtypes", [post_service_1.PostService, post_actions_1.PostActions])
 ], PostListComponent);
 exports.PostListComponent = PostListComponent;
