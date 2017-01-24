@@ -10,7 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
+var http_1 = require("@angular/http");
 var app_component_1 = require("./app.component");
+var posts_list_component_1 = require("./posts/posts-list.component");
+var redux_1 = require("redux");
+var rootReducer_1 = require("../redux/reducers/rootReducer");
+var post_actions_1 = require("../redux/actions/post-actions");
+exports.AppStore = redux_1.createStore(rootReducer_1.rootReducer);
 var AppModule = (function () {
     function AppModule() {
     }
@@ -18,9 +24,19 @@ var AppModule = (function () {
 }());
 AppModule = __decorate([
     core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule],
-        declarations: [app_component_1.AppComponent],
-        bootstrap: [app_component_1.AppComponent]
+        imports: [
+            platform_browser_1.BrowserModule,
+            http_1.HttpModule,
+            http_1.JsonpModule,
+        ],
+        declarations: [
+            app_component_1.AppComponent,
+            posts_list_component_1.PostListComponent
+        ],
+        providers: [
+            post_actions_1.PostActions
+        ],
+        bootstrap: [app_component_1.AppComponent, posts_list_component_1.PostListComponent]
     }),
     __metadata("design:paramtypes", [])
 ], AppModule);

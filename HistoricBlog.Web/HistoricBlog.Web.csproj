@@ -158,6 +158,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\posts\post-list.component.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -171,6 +172,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="package.json" />
+    <Content Include="app\posts\post-list.component.html" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -220,6 +223,13 @@
     <TypeScriptCompile Include="app\app.component.ts" />
     <TypeScriptCompile Include="app\app.module.ts" />
     <TypeScriptCompile Include="app\main.ts" />
+    <TypeScriptCompile Include="app\posts\posts-list.component.ts" />
+    <TypeScriptCompile Include="app\posts\post-service.ts" />
+    <TypeScriptCompile Include="redux\actions\comment-actions.ts" />
+    <TypeScriptCompile Include="redux\actions\post-actions.ts" />
+    <TypeScriptCompile Include="redux\actions\post-interface.ts" />
+    <TypeScriptCompile Include="redux\reducers\post-reducer.ts" />
+    <TypeScriptCompile Include="redux\reducers\rootReducer.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

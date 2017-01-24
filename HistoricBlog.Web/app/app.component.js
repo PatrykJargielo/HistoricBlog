@@ -18,7 +18,7 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'hb-app',
-        template: "<h1>Historic blog app</h1>",
+        template: "<hb-posts-list>Loading post list component...</hb-posts-list>",
     }),
     __metadata("design:paramtypes", [])
 ], AppComponent);

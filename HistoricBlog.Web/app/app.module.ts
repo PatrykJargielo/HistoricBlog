@@ -1,11 +1,32 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule, JsonpModule } from '@angular/http';
 
-import { AppComponent }  from './app.component';
+import { AppComponent } from './app.component';
+import { PostListComponent } from './posts/posts-list.component';
+
+import { createStore } from 'redux';
+import { rootReducer } from '../redux/reducers/rootReducer';
+import { PostActions } from '../redux/actions/post-actions';
+
+export const AppStore = createStore(rootReducer);
+
 
 @NgModule({
-  imports:      [ BrowserModule ],
-  declarations: [ AppComponent ],
-  bootstrap:    [ AppComponent ]
+    imports: [
+        BrowserModule,
+        HttpModule,
+        JsonpModule,
+    ],
+  declarations: [
+      AppComponent,
+      PostListComponent
+  ],
+  providers: [
+        PostActions
+  ],
+  bootstrap: [AppComponent, PostListComponent ]
 })
 export class AppModule { }
+
+
