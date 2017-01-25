@@ -20,7 +20,6 @@ var PostListComponent = (function () {
         this._postActions = _postActions;
         this._postService = postService;
     }
-    ;
     PostListComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._postService.getProducts()

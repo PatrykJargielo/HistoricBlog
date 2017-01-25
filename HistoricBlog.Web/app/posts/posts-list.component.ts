@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Inject} from '@angular/core';
+﻿import { Component, OnInit, Inject } from '@angular/core';
 import { IPost } from '../../redux/actions/post-interface';
 import { PostActions } from '../../redux/actions/post-actions';
 import { PostService } from './post-service';
@@ -13,29 +13,17 @@ import { AppStore } from '../app.module';
 
 export class PostListComponent implements OnInit {
     posts: IPost[];
-    private _postService: PostService; 
-
-    constructor(@Inject(PostService) postService: PostService, private _postActions: PostActions) {
+    private _postService: PostService;
+    listFilter: string;
+    constructor( @Inject(PostService) postService: PostService, private _postActions: PostActions) {
         this._postService = postService;
-
-        
-        
-    };
-
-    ngOnInit(): void {
-  
-        
-
-        this._postService.getProducts()
-            .subscribe(x => this.posts = x);
-
-        console.log(this.posts)
-
-        AppStore.dispatch(this._postActions.getAllPosts(this.posts))
-
-
-       // console.log(AppStore.getState());
     }
 
-
+    ngOnInit(): void {
+        this._postService.getProducts()
+            .subscribe(x => this.posts = x);
+        console.log(this.posts);
+        AppStore.dispatch(this._postActions.getAllPosts(this.posts));
+        // console.log(AppStore.getState());
+    }
 }

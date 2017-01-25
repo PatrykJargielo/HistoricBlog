@@ -177,6 +177,7 @@
     <Content Include="package.json" />
     <Content Include="app\posts\post-list.component.html" />
     <Content Include="webpack.config.js" />
+    <TypeScriptCompile Include="app\posts\post-filter.pipe.ts" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
