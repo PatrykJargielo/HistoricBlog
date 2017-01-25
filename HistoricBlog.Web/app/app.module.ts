@@ -9,6 +9,7 @@ import { createStore } from 'redux';
 import { rootReducer } from '../redux/reducers/rootReducer';
 import { PostActions } from '../redux/actions/post-actions';
 import { PostService } from './posts/post-service';
+import 'redux-devtools-extension';
 
 export const AppStore = createStore(rootReducer);
 
