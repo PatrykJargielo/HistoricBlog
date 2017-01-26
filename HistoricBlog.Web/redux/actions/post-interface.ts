@@ -1,7 +1,8 @@
 ﻿export interface IPost {
-    title: string,
-    shortDescription: string,
-    content: string,
-    categories: string,
-    tags: string
+    Title: string,
+    ShortDescription: string,
+    Content: string,
+    Categories: string[],
+    Tags: string[]
+    Comments: string[]
 }

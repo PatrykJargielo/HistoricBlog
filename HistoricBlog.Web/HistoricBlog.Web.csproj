@@ -229,6 +229,7 @@
     <TypeScriptCompile Include="redux\actions\comment-actions.ts" />
     <TypeScriptCompile Include="redux\actions\post-actions.ts" />
     <TypeScriptCompile Include="redux\actions\post-interface.ts" />
+    <TypeScriptCompile Include="redux\post-state.ts" />
     <TypeScriptCompile Include="redux\reducers\post-reducer.ts" />
     <TypeScriptCompile Include="redux\reducers\rootReducer.ts" />
   </ItemGroup>

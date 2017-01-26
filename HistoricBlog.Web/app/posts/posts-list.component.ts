@@ -11,30 +11,39 @@ import { AppStore } from '../app.module';
     styleUrls: ['app/posts/post-list.component.css']
 })
 
+
+
+
 export class PostListComponent implements OnInit {
     posts: IPost[];
-    private _postService: PostService; 
+    _postService: PostService; 
 
-    constructor(@Inject(PostService) postService: PostService, private _postActions: PostActions) {
+    constructor( @Inject(PostService) postService: PostService, private _postActions: PostActions) {
         this._postService = postService;
+    }
 
-        
-        
-    };
+    getAllPosts() {
+        return (dispatch) => {
+            this._postService.getPosts().then(
+                posts => dispatch(this._postActions.getAllPosts(JSON.parse(posts._body)))
+            )
+        }
+    }
+
+    postListener() {
+        let state = AppStore.getState();
+        this.posts = state.posts
+    }
+
+    
 
     ngOnInit(): void {
-  
-        
 
-        this._postService.getProducts()
-            .subscribe(x => this.posts = x);
-
-        console.log(this.posts)
-
-        AppStore.dispatch(this._postActions.getAllPosts(this.posts))
+        AppStore.subscribe(this.postListener);
+        AppStore.dispatch(this.getAllPosts())
+        console.log(AppStore.getState());
 
 
-       // console.log(AppStore.getState());
     }
 
 

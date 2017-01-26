@@ -17,7 +17,12 @@ var redux_1 = require("redux");
 var rootReducer_1 = require("../redux/reducers/rootReducer");
 var post_actions_1 = require("../redux/actions/post-actions");
 var post_service_1 = require("./posts/post-service");
-exports.AppStore = redux_1.createStore(rootReducer_1.rootReducer);
+var post_state_1 = require("../redux/post-state");
+var redux_thunk_1 = require("redux-thunk");
+var createLogger = require("redux-logger");
+var logger = createLogger();
+var composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || redux_1.compose;
+exports.AppStore = redux_1.createStore(rootReducer_1.rootReducer, new post_state_1.PostsState(), composeEnhancers(redux_1.applyMiddleware(redux_thunk_1.default, logger)));
 var AppModule = (function () {
     function AppModule() {
     }

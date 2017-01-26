@@ -14,6 +14,7 @@ namespace HistoricBlog.WebApi
     {
         public void Configuration(IAppBuilder app)
         {
+  
             ConfigureAuth(app);
             AutofacConfig.SetUpAutoFacWebApi();
             AutoMapperConfig.SetUpAutoMapper();

@@ -15,9 +15,11 @@ using HistoricBlog.DAL.Posts.Tags;
 using HistoricBlog.DAL.Users;
 using HistoricBlog.WebApi.Models.Users;
 using HistoricBlog.DAL.Base;
+using System.Web.Http.Cors;
 
 namespace HistoricBlog.WebApi.Controllers
 {
+  
     public class PostController : ApiController
     {
         private readonly IPostService _postService;

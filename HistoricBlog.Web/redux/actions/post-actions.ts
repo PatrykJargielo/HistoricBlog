@@ -8,16 +8,18 @@ export const GET_POSTS = "GET_POSTS";
 
 export class PostActions {
 
-    addPost(post: IPost) {
-        return {ADD_POST, post}
+    //addPost(post: IPost[]) {
+    //    return {type: ADD_POST, post }
+    //}
+
+    getAllPosts(post: IPost[]) {
+        return { type: GET_POSTS, posts:post }
     }
 
-    getAllPosts(posts: IPost[]) {
-        return { type:GET_POSTS, posts }
-    }
+    //editPost(post: IPost[]) {
+    //    return { type: EDIT_POST, post }
+    //}
 
-    editPost(post: IPost) {
-        return { ADD_POST, post }
-    }   
 
+    
 }

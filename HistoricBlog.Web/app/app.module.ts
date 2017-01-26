@@ -5,12 +5,21 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { PostListComponent } from './posts/posts-list.component';
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose,Store } from 'redux';
 import { rootReducer } from '../redux/reducers/rootReducer';
 import { PostActions } from '../redux/actions/post-actions';
 import { PostService } from './posts/post-service';
+import { PostsState } from '../redux/post-state'
 
-export const AppStore = createStore(rootReducer);
+import thunk from 'redux-thunk';
+import * as createLogger from 'redux-logger';
+
+
+
+const logger = createLogger();
+
+const composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose;
+export const AppStore: Store<PostsState> = createStore(rootReducer, new PostsState(), composeEnhancers(applyMiddleware(thunk,logger)));
 
 
 @NgModule({

@@ -20,14 +20,20 @@ var PostListComponent = (function () {
         this._postActions = _postActions;
         this._postService = postService;
     }
-    ;
-    PostListComponent.prototype.ngOnInit = function () {
+    PostListComponent.prototype.getAllPosts = function () {
         var _this = this;
-        this._postService.getProducts()
-            .subscribe(function (x) { return _this.posts = x; });
-        console.log(this.posts);
-        app_module_1.AppStore.dispatch(this._postActions.getAllPosts(this.posts));
-        // console.log(AppStore.getState());
+        return function (dispatch) {
+            _this._postService.getPosts().then(function (posts) { return dispatch(_this._postActions.getAllPosts(JSON.parse(posts._body))); });
+        };
+    };
+    PostListComponent.prototype.postListener = function () {
+        var state = app_module_1.AppStore.getState();
+        this.posts = state.posts;
+    };
+    PostListComponent.prototype.ngOnInit = function () {
+        app_module_1.AppStore.subscribe(this.postListener);
+        app_module_1.AppStore.dispatch(this.getAllPosts());
+        console.log(app_module_1.AppStore.getState());
     };
     return PostListComponent;
 }());

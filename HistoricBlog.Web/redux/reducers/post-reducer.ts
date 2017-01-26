@@ -1,22 +1,23 @@
 ﻿import { ADD_POST, EDIT_POST, GET_POSTS } from '../actions/post-actions'
 import { IPost } from '../actions/post-interface'
-
-const initialState = {
-    posts: new Array<IPost>()
-}
+import { PostsState } from '../post-state'
+import * as clone from 'clone';
 
 
-export default function posts(state = initialState, action:any) {
+export default function posts(state = new PostsState(), action) {
     switch (action.type) {
         case ADD_POST:
             return state;
         case EDIT_POST:
             return state;
         case GET_POSTS:
+            //let clone = Object.assign(new PostsState(), state);
 
-            return {
-                posts: state.posts.concat(action.posts)
-            }
+            let d = clone();
+
+            //clone.posts = action.posts;
+            return clone;
+            
         default:
             return state;
     }

@@ -14,16 +14,20 @@ var Observable_1 = require("rxjs/Observable");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/do");
 require("rxjs/add/operator/catch");
+require("rxjs/add/operator/toPromise");
 var PostService = (function () {
     function PostService(_http) {
         this._http = _http;
         this._productUrl = 'http://localhost:58141/api/post/';
     }
-    PostService.prototype.getProducts = function () {
-        return this._http.get(this._productUrl)
-            .map(function (response) { return response.json(); })
-            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
-            .catch(this.handleError);
+    //getPosts(): Observable<IPost[]> {
+    //    return this._http.get(this._productUrl)
+    //        .map((response: Response) => <IPost[]>response.json())
+    //        .do(data => console.log('All: ' + JSON.stringify(data)))
+    //        .catch(this.handleError);
+    //}
+    PostService.prototype.getPosts = function () {
+        return this._http.get(this._productUrl).toPromise();
     };
     PostService.prototype.handleError = function (error) {
         console.error(error);
