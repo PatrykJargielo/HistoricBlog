@@ -3,21 +3,18 @@ import { IPost } from '../actions/post-interface'
 import { PostsState } from '../post-state'
 import * as clone from 'clone';
 
+let defaultState = new PostsState();
 
-export default function posts(state = new PostsState(), action) {
+export default function posts(state = defaultState, action) {
     switch (action.type) {
         case ADD_POST:
             return state;
         case EDIT_POST:
             return state;
         case GET_POSTS:
-            //let clone = Object.assign(new PostsState(), state);
-
-            let d = clone();
-
-            //clone.posts = action.posts;
-            return clone;
-            
+            let newState = Object.assign(new PostsState(), state);
+            newState.posts = action.posts;
+            return newState.posts;   
         default:
             return state;
     }

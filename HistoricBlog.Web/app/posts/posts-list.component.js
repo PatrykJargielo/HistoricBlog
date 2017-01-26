@@ -28,12 +28,11 @@ var PostListComponent = (function () {
     };
     PostListComponent.prototype.postListener = function () {
         var state = app_module_1.AppStore.getState();
-        this.posts = state.posts;
+        this.postsView = state.posts;
     };
     PostListComponent.prototype.ngOnInit = function () {
         app_module_1.AppStore.subscribe(this.postListener);
         app_module_1.AppStore.dispatch(this.getAllPosts());
-        console.log(app_module_1.AppStore.getState());
     };
     return PostListComponent;
 }());

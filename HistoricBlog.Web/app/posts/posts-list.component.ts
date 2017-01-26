@@ -15,7 +15,7 @@ import { AppStore } from '../app.module';
 
 
 export class PostListComponent implements OnInit {
-    posts: IPost[];
+    postsView: IPost[];
     _postService: PostService; 
 
     constructor( @Inject(PostService) postService: PostService, private _postActions: PostActions) {
@@ -32,18 +32,12 @@ export class PostListComponent implements OnInit {
 
     postListener() {
         let state = AppStore.getState();
-        this.posts = state.posts
+        this.postsView = state.posts
     }
 
-    
-
     ngOnInit(): void {
-
         AppStore.subscribe(this.postListener);
-        AppStore.dispatch(this.getAllPosts())
-        console.log(AppStore.getState());
-
-
+        AppStore.dispatch(this.getAllPosts());
     }
 
 
