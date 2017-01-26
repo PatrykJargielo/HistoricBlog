@@ -14,18 +14,17 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var core_1 = require("@angular/core");
 var post_actions_1 = require("../../redux/actions/post-actions");
 var post_service_1 = require("./post-service");
-var app_module_1 = require("../app.module");
 var PostListComponent = (function () {
     function PostListComponent(postService, _postActions) {
         this._postActions = _postActions;
+        this.listFilter = "aaa";
         this._postService = postService;
     }
     PostListComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this._postService.getProducts()
-            .subscribe(function (x) { return _this.posts = x; });
-        console.log(this.posts);
-        app_module_1.AppStore.dispatch(this._postActions.getAllPosts(this.posts));
+        // this._postService.getProducts()
+        //     .subscribe(x => this.posts = x);
+        // console.log(this.posts);
+        // AppStore.dispatch(this._postActions.getAllPosts(this.posts));
         // console.log(AppStore.getState());
     };
     return PostListComponent;
@@ -33,11 +32,11 @@ var PostListComponent = (function () {
 PostListComponent = __decorate([
     core_1.Component({
         selector: 'hb-posts-list',
-        templateUrl: 'app/posts/post-list.component.html',
-        styleUrls: ['app/posts/post-list.component.css']
+        templateUrl: './post-list.component.html',
+        styleUrls: ['./post-list.component.css']
     }),
     __param(0, core_1.Inject(post_service_1.PostService)),
     __metadata("design:paramtypes", [post_service_1.PostService, post_actions_1.PostActions])
 ], PostListComponent);
 exports.PostListComponent = PostListComponent;
-//# sourceMappingURL=posts-list.component.js.map
+//# sourceMappingURL=post-list.component.js.map

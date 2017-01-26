@@ -6,16 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
+var post_service_1 = require("./posts/post-service");
 var AppComponent = (function () {
     function AppComponent() {
-        this.name = 'Angular';
     }
     return AppComponent;
 }());
 AppComponent = __decorate([
     core_1.Component({
         selector: 'hb-app',
-        template: "<hb-posts-list>Loading post list component...</hb-posts-list>"
+        template: "\n  <div>\n     <hb-posts-list></hb-posts-list>\n  </div>\n  ",
+        providers: [post_service_1.PostService]
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;

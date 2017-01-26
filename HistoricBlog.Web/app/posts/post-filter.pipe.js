@@ -9,10 +9,10 @@ var core_1 = require("@angular/core");
 var PostFilterPipe = (function () {
     function PostFilterPipe() {
     }
-    PostFilterPipe.prototype.transform = function (value, args) {
-        var filter = args ? args.toLocaleLowerCase() : null;
-        return filter ? value.filter(function (product) {
-            return product.title.toLocaleLowerCase().indexOf(filter) !== -1;
+    PostFilterPipe.prototype.transform = function (value, filterBy) {
+        filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
+        return filterBy ? value.filter(function (post) {
+            return post.title.toLocaleLowerCase().indexOf(filterBy) !== -1;
         }) : value;
     };
     return PostFilterPipe;
