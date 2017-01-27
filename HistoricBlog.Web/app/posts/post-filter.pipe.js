@@ -10,6 +10,7 @@ var PostFilterPipe = (function () {
     function PostFilterPipe() {
     }
     PostFilterPipe.prototype.transform = function (value, filterBy) {
+        console.log({ filterBy: filterBy, value: value });
         filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
         return filterBy ? value.filter(function (post) {
             return post.title.toLocaleLowerCase().indexOf(filterBy) !== -1;

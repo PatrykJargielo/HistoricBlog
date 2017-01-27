@@ -14,10 +14,9 @@ var PostDetailsComponent = (function () {
 PostDetailsComponent = __decorate([
     core_1.Component({
         selector: 'hb-post-list',
-        templateUrl: 'app/posts/post-details.component.html',
+        templateUrl: 'app/posts/post.details.component.html',
         styleUrls: ['app/posts/post-list.component.css']
     })
 ], PostDetailsComponent);
 exports.PostDetailsComponent = PostDetailsComponent;
-;
-//# sourceMappingURL=post.details.component.js.map
+//# sourceMappingURL=post-details.component.js.map

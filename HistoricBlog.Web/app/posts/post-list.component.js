@@ -13,7 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 var core_1 = require("@angular/core");
 var post_actions_1 = require("../../redux/actions/post-actions");
-var post_service_1 = require("./post-service");
+var post_service_1 = require("./post.service");
 var PostListComponent = (function () {
     function PostListComponent(postService, _postActions) {
         this._postActions = _postActions;

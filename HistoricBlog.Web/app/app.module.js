@@ -15,6 +15,7 @@ var redux_1 = require("redux");
 var rootReducer_1 = require("../redux/reducers/rootReducer");
 var post_actions_1 = require("../redux/actions/post-actions");
 var post_filter_pipe_1 = require("./posts/post-filter.pipe");
+var post_service_1 = require("./posts/post.service");
 require("redux-devtools-extension");
 exports.AppStore = redux_1.createStore(rootReducer_1.rootReducer);
 var AppModule = (function () {
@@ -36,7 +37,7 @@ AppModule = __decorate([
             post_filter_pipe_1.PostFilterPipe
         ],
         providers: [
-            post_actions_1.PostActions
+            post_actions_1.PostActions, post_service_1.PostService
         ],
         bootstrap: [app_component_1.AppComponent, post_list_component_1.PostListComponent]
     })

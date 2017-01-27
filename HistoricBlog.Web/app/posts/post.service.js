@@ -40,4 +40,4 @@ PostService = __decorate([
     __metadata("design:paramtypes", [http_1.Http])
 ], PostService);
 exports.PostService = PostService;
-//# sourceMappingURL=post-service.js.map
+//# sourceMappingURL=post.service.js.map

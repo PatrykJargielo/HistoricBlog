@@ -8,6 +8,7 @@ import { createStore } from 'redux';
 import { rootReducer } from '../redux/reducers/rootReducer';
 import { PostActions } from '../redux/actions/post-actions';
 import { PostFilterPipe } from './posts/post-filter.pipe';
+import { PostService } from './posts/post.service';
 import 'redux-devtools-extension';
 
 export const AppStore = createStore(rootReducer);
@@ -26,7 +27,7 @@ export const AppStore = createStore(rootReducer);
         PostFilterPipe
     ],
     providers: [
-        PostActions
+        PostActions, PostService
     ],
     bootstrap: [AppComponent, PostListComponent]
 })
