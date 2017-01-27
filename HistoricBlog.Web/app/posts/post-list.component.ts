@@ -14,13 +14,15 @@ import { FormsModule } from '@angular/forms';
 
 export class PostListComponent implements OnInit {
     _postService: PostService;
-    listFilter: string = "";
+    listFilter: string;
     posts: IPost[]=[];
 
 
 
     constructor( @Inject(PostService) postService: PostService, private _postActions: PostActions, private zone: NgZone) {
         this._postService = postService;
+        let defaultState = AppStore.getState() as PostsState
+        this.listFilter = defaultState.filterTitle;
     }
 
     getAllPosts() {
@@ -31,15 +33,28 @@ export class PostListComponent implements OnInit {
         }
     }
 
+    setPostsTitleFilter(title:string) {
+        return (dispatch) => {
+            dispatch(this._postActions.setPostTitleFilter(title))
+               }
+    }
+
+    updateFilter(value) {
+        AppStore.dispatch(this.setPostsTitleFilter(value));
+        AppStore.dispatch(this.getAllPosts());
+    }
+
+
 
     postListener() {
+        //TODO filter
         let state = AppStore.getState() as PostsState
-        console.log('listener', this)
 
         this.zone.run(() => {
             this.posts = state.posts;         
         });
     }
+
 
 
 

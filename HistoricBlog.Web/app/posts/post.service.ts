@@ -13,7 +13,7 @@ import 'rxjs/add/operator/toPromise';
 export class PostService {
 
 
-    private _productUrl = './api/post/';
+    private _productUrl = 'http://localhost:58141/api/post';
 
     constructor(private _http: Http) { }
 
