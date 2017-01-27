@@ -11,15 +11,13 @@ import { AppStore } from '../app.module';
 })
 
 export class PostListComponent implements OnInit {
+    private _postService: PostService;
     listFilter: string;
-    posts: IPost[];
+    posts: IPost[]=[];
 
-  constructor(private _postService: PostService) {
-
+    constructor( @Inject(PostService) postService: PostService, private _postActions: PostActions) {
+        this._postService = postService;
     }
-    // constructor( @Inject(PostService) postService: PostService, private _postActions: PostActions) {
-    //     this._postService = postService;
-    // }
 
     ngOnInit(): void {
         // this._postService.getProducts()
