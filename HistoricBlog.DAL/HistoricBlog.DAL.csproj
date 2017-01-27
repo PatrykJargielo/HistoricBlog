@@ -59,9 +59,9 @@
     <Compile Include="Configs\Config.cs" />
     <Compile Include="Configs\ConfigRepository.cs" />
     <Compile Include="Configs\IConfigRepository.cs" />
-    <Compile Include="Migrations\201701231313109_Init.cs" />
-    <Compile Include="Migrations\201701231313109_Init.Designer.cs">
-      <DependentUpon>201701231313109_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201701271115463_Init.cs" />
+    <Compile Include="Migrations\201701271115463_Init.Designer.cs">
+      <DependentUpon>201701271115463_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Posts\Categories\Category.cs" />
     <Compile Include="Base\IBaseEntity.cs" />
@@ -100,8 +100,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701231313109_Init.resx">
-      <DependentUpon>201701231313109_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701271115463_Init.resx">
+      <DependentUpon>201701271115463_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

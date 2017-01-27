@@ -18,7 +18,9 @@ namespace HistoricBlog.DAL.Users
 
         public Task CreateAsync(User user)
         {
-            throw new NotImplementedException();
+            _historicBlogDbContext.Users.Add(user);
+            Task task = _historicBlogDbContext.SaveChangesAsync();
+            return task;
         }
 
         public Task UpdateAsync(User user)
