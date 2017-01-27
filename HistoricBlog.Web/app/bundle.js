@@ -58328,7 +58328,6 @@ var post_service_1 = __webpack_require__(156);
 var PostListComponent = (function () {
     function PostListComponent(postService, _postActions) {
         this._postActions = _postActions;
-        this.listFilter = "aaa";
         this._postService = postService;
     }
     PostListComponent.prototype.ngOnInit = function () {
@@ -58343,8 +58342,8 @@ var PostListComponent = (function () {
 PostListComponent = __decorate([
     core_1.Component({
         selector: 'hb-posts-list',
-        templateUrl: './post-list.component.html',
-        styleUrls: ['./post-list.component.css']
+        templateUrl: 'app/posts/post-list.component.html',
+        styleUrls: ['app/posts/post-list.component.css']
     }),
     __param(0, core_1.Inject(post_service_1.PostService)),
     __metadata("design:paramtypes", [post_service_1.PostService, post_actions_1.PostActions])

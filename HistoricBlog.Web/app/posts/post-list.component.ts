@@ -6,13 +6,13 @@ import { AppStore } from '../app.module';
 
 @Component({
     selector: 'hb-posts-list',
-    template: require('./post-list.component.html'),
-    styles: [require('./post-list.component.css')]
+    templateUrl: 'app/posts/post-list.component.html',
+    styleUrls: ['app/posts/post-list.component.css']
 })
 
 export class PostListComponent implements OnInit {
     private _postService: PostService;
-    listFilter: string="aaa";
+    listFilter: string;
     posts: IPost[];
 
     constructor( @Inject(PostService) postService: PostService, private _postActions: PostActions) {
