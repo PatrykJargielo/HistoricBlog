@@ -19,8 +19,7 @@ var PostListComponent = (function () {
     function PostListComponent(postService, _postActions, zone) {
         this._postActions = _postActions;
         this.zone = zone;
-        this.listFilter = "";
-        this.posts = [];
+        this.pageLoaded = false;
         this._postService = postService;
     }
     PostListComponent.prototype.getAllPosts = function () {
@@ -34,7 +33,8 @@ var PostListComponent = (function () {
         var state = app_module_1.AppStore.getState();
         console.log('listener', this);
         this.zone.run(function () {
-            _this.posts = state.posts;
+            _this.postsView = state.posts;
+            _this.pageLoaded = true;
         });
     };
     PostListComponent.prototype.ngOnInit = function () {
@@ -56,4 +56,4 @@ PostListComponent = __decorate([
     __metadata("design:paramtypes", [post_service_1.PostService, post_actions_1.PostActions, core_1.NgZone])
 ], PostListComponent);
 exports.PostListComponent = PostListComponent;
-//# sourceMappingURL=post-list.component.js.map
+//# sourceMappingURL=posts-list.component.js.map

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PostService } from './posts/post-service';
+import { PostService } from './posts/post.service';
 
 @Component({
   selector: 'hb-app',

@@ -1,7 +1,6 @@
 import { NgModule, NgZone } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { PostListComponent } from './posts/post-list.component';
@@ -9,8 +8,7 @@ import { createStore, applyMiddleware, compose,Store } from 'redux';
 import { post } from '../redux/reducers/post-reducer';
 import { PostActions } from '../redux/actions/post-actions';
 import { PostFilterPipe } from './posts/post-filter.pipe';
-import { PostsState } from '../redux/post-state'
-
+import { PostService } from './posts/post.service';
 import thunk from 'redux-thunk';
 import * as createLogger from 'redux-logger';
 
@@ -28,7 +26,7 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
         FormsModule,
         HttpModule,
         JsonpModule
-        FormsModule,
+
     ],
     declarations: [
         AppComponent,
@@ -36,8 +34,8 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
         PostFilterPipe
     ],
     providers: [
-        PostActions
-	PostService
+        PostActions,
+	    PostService
     ],
     bootstrap: [AppComponent, PostListComponent]
 })

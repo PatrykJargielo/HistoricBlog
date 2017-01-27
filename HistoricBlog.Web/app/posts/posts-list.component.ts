@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Inject, NgZone} from '@angular/core';
 import { IPost } from '../../redux/actions/post-interface';
 import { PostActions } from '../../redux/actions/post-actions';
-import { PostService } from './post-service';
+import { PostService } from './post.service';
 import { PostsState } from '../../redux/post-state';
 import { AppStore } from '../app.module';
 

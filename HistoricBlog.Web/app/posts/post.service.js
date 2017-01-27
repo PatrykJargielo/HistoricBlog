@@ -18,21 +18,10 @@ require("rxjs/add/operator/toPromise");
 var PostService = (function () {
     function PostService(_http) {
         this._http = _http;
-        this._postUrl = '/api/post/';
+        this._productUrl = './api/post/';
     }
     PostService.prototype.getPosts = function () {
-<<<<<<< HEAD
         return this._http.get(this._productUrl).toPromise();
-=======
-        return this._http.get(this._postUrl)
-            .map(function (response) { return response.json(); })
-            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
-            .catch(this.handleError);
->>>>>>> origin/posts_-_searchbar
-    };
-    PostService.prototype.getPost = function (id) {
-        return this.getPosts()
-            .map(function (posts) { return posts.find(function (p) { return p.id === id; }); });
     };
     PostService.prototype.handleError = function (error) {
         console.error(error);
@@ -45,4 +34,4 @@ PostService = __decorate([
     __metadata("design:paramtypes", [http_1.Http])
 ], PostService);
 exports.PostService = PostService;
-//# sourceMappingURL=post-service.js.map
+//# sourceMappingURL=post.service.js.map
