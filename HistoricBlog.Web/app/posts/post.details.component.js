@@ -6,18 +6,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
-var post_service_1 = require("./posts/post-service");
-var AppComponent = (function () {
-    function AppComponent() {
+var PostDetailsComponent = (function () {
+    function PostDetailsComponent() {
     }
-    return AppComponent;
+    return PostDetailsComponent;
 }());
-AppComponent = __decorate([
+PostDetailsComponent = __decorate([
     core_1.Component({
-        selector: 'hb-app',
-        template: "\n  <div>\n     <hb-posts-list></hb-posts-list>\n  </div>\n  ",
-        providers: [post_service_1.PostService]
+        selector: 'hb-post-list',
+        templateUrl: 'app/posts/post.details.component.html',
+        styleUrls: ['app/posts/post-list.component.css']
     })
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+], PostDetailsComponent);
+exports.PostDetailsComponent = PostDetailsComponent;
+;
+//# sourceMappingURL=post.details.component.js.map

@@ -2,7 +2,7 @@
     entry: './app/main.ts',
     output: {
         filename: 'bundle.js',
-        path: './'
+        path: './app/'
     },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.

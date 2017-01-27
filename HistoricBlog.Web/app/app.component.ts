@@ -1,7 +1,14 @@
 import { Component } from '@angular/core';
+import { PostService } from './posts/post-service';
 
 @Component({
   selector: 'hb-app',
-  template: `<hb-posts-list>Loading post list component...</hb-posts-list>`,
+  template: `
+  <div>
+     <hb-posts-list></hb-posts-list>
+  </div>
+  `,
+  providers: [PostService]
 })
-export class AppComponent  { name = 'Angular'; }
+export class AppComponent {
+}

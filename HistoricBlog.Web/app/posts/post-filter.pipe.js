@@ -6,18 +6,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
-var post_service_1 = require("./posts/post-service");
-var AppComponent = (function () {
-    function AppComponent() {
+var PostFilterPipe = (function () {
+    function PostFilterPipe() {
     }
-    return AppComponent;
+    PostFilterPipe.prototype.transform = function (value, filterBy) {
+        filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
+        return filterBy ? value.filter(function (post) {
+            return post.title.toLocaleLowerCase().indexOf(filterBy) !== -1;
+        }) : value;
+    };
+    return PostFilterPipe;
 }());
-AppComponent = __decorate([
-    core_1.Component({
-        selector: 'hb-app',
-        template: "\n  <div>\n     <hb-posts-list></hb-posts-list>\n  </div>\n  ",
-        providers: [post_service_1.PostService]
+PostFilterPipe = __decorate([
+    core_1.Pipe({
+        name: 'postFilter'
     })
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+], PostFilterPipe);
+exports.PostFilterPipe = PostFilterPipe;
+//# sourceMappingURL=post-filter.pipe.js.map

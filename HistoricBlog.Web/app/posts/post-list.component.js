@@ -14,10 +14,10 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var core_1 = require("@angular/core");
 var post_actions_1 = require("../../redux/actions/post-actions");
 var post_service_1 = require("./post-service");
-var app_module_1 = require("../app.module");
 var PostListComponent = (function () {
     function PostListComponent(postService, _postActions, _zone) {
         this._postActions = _postActions;
+<<<<<<< HEAD:HistoricBlog.Web/app/posts/posts-list.component.js
         this._zone = _zone;
         this.pageLoaded = false;
         this._postService = postService;
@@ -39,17 +39,28 @@ var PostListComponent = (function () {
     PostListComponent.prototype.ngOnInit = function () {
         app_module_1.AppStore.subscribe(this.postListener);
         app_module_1.AppStore.dispatch(this.getAllPosts());
+=======
+        this.listFilter = "aaa";
+        this._postService = postService;
+    }
+    PostListComponent.prototype.ngOnInit = function () {
+        // this._postService.getProducts()
+        //     .subscribe(x => this.posts = x);
+        // console.log(this.posts);
+        // AppStore.dispatch(this._postActions.getAllPosts(this.posts));
+        // console.log(AppStore.getState());
+>>>>>>> origin/posts_-_searchbar:HistoricBlog.Web/app/posts/post-list.component.js
     };
     return PostListComponent;
 }());
 PostListComponent = __decorate([
     core_1.Component({
         selector: 'hb-posts-list',
-        templateUrl: 'app/posts/post-list.component.html',
-        styleUrls: ['app/posts/post-list.component.css']
+        templateUrl: './post-list.component.html',
+        styleUrls: ['./post-list.component.css']
     }),
     __param(0, core_1.Inject(post_service_1.PostService)),
     __metadata("design:paramtypes", [post_service_1.PostService, post_actions_1.PostActions, core_1.NgZone])
 ], PostListComponent);
 exports.PostListComponent = PostListComponent;
-//# sourceMappingURL=posts-list.component.js.map
+//# sourceMappingURL=post-list.component.js.map

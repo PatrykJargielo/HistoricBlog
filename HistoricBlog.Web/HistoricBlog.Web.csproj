@@ -159,6 +159,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\posts\post-list.component.css" />
+    <Content Include="app\posts\single-post.component.html" />
+    <Content Include="bundle.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -175,6 +177,7 @@
     <Content Include="package.json" />
     <Content Include="app\posts\post-list.component.html" />
     <Content Include="webpack.config.js" />
+    <TypeScriptCompile Include="app\posts\post-filter.pipe.ts" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -223,9 +226,12 @@
     <TypeScriptCompile Include="app\app.component.spec.ts" />
     <TypeScriptCompile Include="app\app.component.ts" />
     <TypeScriptCompile Include="app\app.module.ts" />
+    <TypeScriptCompile Include="app\app.routing.ts" />
+    <TypeScriptCompile Include="app\app.ts" />
     <TypeScriptCompile Include="app\main.ts" />
-    <TypeScriptCompile Include="app\posts\posts-list.component.ts" />
+    <TypeScriptCompile Include="app\posts\post-list.component.ts" />
     <TypeScriptCompile Include="app\posts\post-service.ts" />
+    <TypeScriptCompile Include="app\posts\post.details.component.ts" />
     <TypeScriptCompile Include="redux\actions\comment-actions.ts" />
     <TypeScriptCompile Include="redux\actions\post-actions.ts" />
     <TypeScriptCompile Include="redux\actions\post-interface.ts" />
