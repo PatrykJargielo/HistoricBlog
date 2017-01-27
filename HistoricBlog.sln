@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoricBlog.Tests", "Histo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoricBlog.WebApi", "HistoricBlog.WebApi\HistoricBlog.WebApi.csproj", "{92FCF4DE-3EC5-4A3D-B5EA-E6AB0071E635}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoricBlog.BLL.PasswordHasher", "HistoricBlog.BLL.PasswordHasher\HistoricBlog.BLL.PasswordHasher.csproj", "{4ABD0735-F1DA-4F67-85CA-BC774F16D52F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{92FCF4DE-3EC5-4A3D-B5EA-E6AB0071E635}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92FCF4DE-3EC5-4A3D-B5EA-E6AB0071E635}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92FCF4DE-3EC5-4A3D-B5EA-E6AB0071E635}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ABD0735-F1DA-4F67-85CA-BC774F16D52F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ABD0735-F1DA-4F67-85CA-BC774F16D52F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ABD0735-F1DA-4F67-85CA-BC774F16D52F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ABD0735-F1DA-4F67-85CA-BC774F16D52F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,5 +54,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{65F6EBD1-B0B2-404D-AD3F-B0E68CA4295D} = {AB5D4071-1C1A-423C-9AB9-6277A09CE9DE}
 		{00269D9E-A707-49DB-9134-60AB0EC2FA2F} = {AB5D4071-1C1A-423C-9AB9-6277A09CE9DE}
+		{4ABD0735-F1DA-4F67-85CA-BC774F16D52F} = {AB5D4071-1C1A-423C-9AB9-6277A09CE9DE}
 	EndGlobalSection
 EndGlobal

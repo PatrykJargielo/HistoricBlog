@@ -10,10 +10,15 @@ namespace HistoricBlog.DAL.Users
 {
     public class UserStoreService : IUserStore<User,int>, IUserPasswordStore<User,int>
     {
-        HistoricBlogDbContext _historicBlogDbContext = new HistoricBlogDbContext();
+        private readonly HistoricBlogDbContext _historicBlogDbContext;
         public void Dispose()
         {
             _historicBlogDbContext.Dispose();
+        }
+
+        public UserStoreService()
+        {
+            _historicBlogDbContext = new HistoricBlogDbContext();
         }
 
         public Task CreateAsync(User user)

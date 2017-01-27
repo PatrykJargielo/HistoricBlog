@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HistoricBlog.BLL.PasswordHasher.Hasher;
 using HistoricBlog.DAL.Users;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -43,6 +44,8 @@ namespace HistoricBlog.BLL.Users
             {
                 manager.UserTokenProvider = new DataProtectorTokenProvider<User, int>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
+            
+            manager.PasswordHasher = new HashService();
             return manager;
         }
     }

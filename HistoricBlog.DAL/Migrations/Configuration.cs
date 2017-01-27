@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using HistoricBlog.BLL.PasswordHasher.Hasher;
 using HistoricBlog.DAL.Posts.Comments;
 using HistoricBlog.DAL.Posts.Ratings;
 using HistoricBlog.DAL.Users;
@@ -20,6 +21,9 @@ namespace HistoricBlog.DAL.Migrations
 
         protected override void Seed(HistoricBlogDbContext context)
         {
+            string adminPasword = "admin";
+            string notAdminPassword = "notadmin";
+            HashService hashService = new HashService();
             List<User> users = new List<User>();
             users.Add(new User()
             {
@@ -27,7 +31,7 @@ namespace HistoricBlog.DAL.Migrations
                 Name = "Admin",
                 Surname = "Admin",
                 UserName = "admin",
-                Password = "admin",
+                Password = hashService.HashPassword(adminPasword),
                 Roles = new List<Role>(),
                 Email = "admin@admin.pl",
                 Comments = new List<Comment>(),
@@ -40,7 +44,7 @@ namespace HistoricBlog.DAL.Migrations
                 Name = "NieAdmin",
                 Surname = "NieAdmin",
                 UserName = "nieadmin",
-                Password = "nieadmin",
+                Password = hashService.HashPassword(notAdminPassword),
                 Roles = new List<Role>(),
                 Email = "nieadmin@admin.pl",
                 Comments = new List<Comment>(),
@@ -99,5 +103,7 @@ namespace HistoricBlog.DAL.Migrations
 
             context.Posts.AddOrUpdate(posts.ToArray());
         }
+
+       
     }
 }

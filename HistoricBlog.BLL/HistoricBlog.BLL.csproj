@@ -65,6 +65,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -99,6 +100,10 @@
     <ProjectReference Include="..\HistoricBlog.BLL.Logger\HistoricBlog.BLL.Logger.csproj">
       <Project>{00269D9E-A707-49DB-9134-60AB0EC2FA2F}</Project>
       <Name>HistoricBlog.BLL.Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HistoricBlog.BLL.PasswordHasher\HistoricBlog.BLL.PasswordHasher.csproj">
+      <Project>{4abd0735-f1da-4f67-85ca-bc774f16d52f}</Project>
+      <Name>HistoricBlog.BLL.PasswordHasher</Name>
     </ProjectReference>
     <ProjectReference Include="..\HistoricBlog.DAL\HistoricBlog.DAL.csproj">
       <Project>{B804D12D-1726-4C2F-9E4F-AB9D455F56B6}</Project>

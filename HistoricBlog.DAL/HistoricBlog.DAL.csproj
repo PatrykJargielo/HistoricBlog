@@ -104,6 +104,12 @@
       <DependentUpon>201701271115463_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HistoricBlog.BLL.PasswordHasher\HistoricBlog.BLL.PasswordHasher.csproj">
+      <Project>{4abd0735-f1da-4f67-85ca-bc774f16d52f}</Project>
+      <Name>HistoricBlog.BLL.PasswordHasher</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
