@@ -1,7 +1,7 @@
 ﻿import { ADD_POST, EDIT_POST, GET_POSTS } from '../actions/post-actions'
 import { IPost } from '../actions/post-interface'
 //import { PostsState } from '../post-state'
-import * as clone from 'clone';
+
 
 let defaultState = {
     page:1,

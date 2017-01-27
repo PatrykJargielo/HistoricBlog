@@ -18,10 +18,18 @@ require("rxjs/add/operator/toPromise");
 var PostService = (function () {
     function PostService(_http) {
         this._http = _http;
-        this._productUrl = './api/post/';
+        this._productUrl = 'http://localhost:58141/api/post';
     }
     PostService.prototype.getPosts = function () {
         return this._http.get(this._productUrl).toPromise();
+    };
+    PostService.prototype.addPost = function (post) {
+        var bodyString = JSON.stringify(post);
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this._http.post(this._productUrl, post, options)
+            .map(function (res) { return res.json(); })
+            .catch(this.handleError);
     };
     PostService.prototype.handleError = function (error) {
         console.error(error);

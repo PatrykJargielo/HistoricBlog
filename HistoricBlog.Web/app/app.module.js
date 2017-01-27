@@ -19,6 +19,8 @@ var post_reducer_1 = require("../redux/reducers/post-reducer");
 var post_actions_1 = require("../redux/actions/post-actions");
 var post_filter_pipe_1 = require("./posts/post-filter.pipe");
 var post_service_1 = require("./posts/post.service");
+var post_editor_component_1 = require("./posts/post-editor.component");
+var ng2_ckeditor_1 = require("ng2-ckeditor");
 var redux_thunk_1 = require("redux-thunk");
 var createLogger = require("redux-logger");
 var logger = createLogger();
@@ -35,12 +37,14 @@ AppModule = __decorate([
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
             http_1.HttpModule,
-            http_1.JsonpModule
+            http_1.JsonpModule,
+            ng2_ckeditor_1.CKEditorModule
         ],
         declarations: [
             app_component_1.AppComponent,
             post_list_component_1.PostListComponent,
-            post_filter_pipe_1.PostFilterPipe
+            post_filter_pipe_1.PostFilterPipe,
+            post_editor_component_1.PostEditor
         ],
         providers: [
             post_actions_1.PostActions,

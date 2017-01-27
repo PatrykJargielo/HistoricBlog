@@ -18,7 +18,7 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'hb-app',
-        template: "\n  <div>\n     <hb-posts-list></hb-posts-list>\n  </div>\n  ",
+        template: "\n  <div>\n\n     <editor></editor>\n<hb-posts-list></hb-posts-list>\n  </div>\n\n\n  ",
         providers: [post_service_1.PostService]
     }),
     __metadata("design:paramtypes", [])
