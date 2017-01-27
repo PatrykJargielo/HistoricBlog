@@ -1,4 +1,11 @@
-﻿<ul *ngFor="let post of postsView">
-    <li>{{post.Title}}</li>  
-</ul>
+﻿
+<div *ngIf='pageLoaded'>
+    
+    <ul *ngFor="let post of postsView">
+        <li>{{post.Title}}</li>
+    </ul>
+</div>
+
+
+
 

@@ -16,8 +16,10 @@ var post_actions_1 = require("../../redux/actions/post-actions");
 var post_service_1 = require("./post-service");
 var app_module_1 = require("../app.module");
 var PostListComponent = (function () {
-    function PostListComponent(postService, _postActions) {
+    function PostListComponent(postService, _postActions, _zone) {
         this._postActions = _postActions;
+        this._zone = _zone;
+        this.pageLoaded = false;
         this._postService = postService;
     }
     PostListComponent.prototype.getAllPosts = function () {
@@ -27,8 +29,12 @@ var PostListComponent = (function () {
         };
     };
     PostListComponent.prototype.postListener = function () {
+        var _this = this;
         var state = app_module_1.AppStore.getState();
-        this.postsView = state.posts;
+        this._zone.run(function () {
+            _this.postsView = state.posts;
+            _this.pageLoaded = true;
+        });
     };
     PostListComponent.prototype.ngOnInit = function () {
         app_module_1.AppStore.subscribe(this.postListener);
@@ -43,7 +49,7 @@ PostListComponent = __decorate([
         styleUrls: ['app/posts/post-list.component.css']
     }),
     __param(0, core_1.Inject(post_service_1.PostService)),
-    __metadata("design:paramtypes", [post_service_1.PostService, post_actions_1.PostActions])
+    __metadata("design:paramtypes", [post_service_1.PostService, post_actions_1.PostActions, core_1.NgZone])
 ], PostListComponent);
 exports.PostListComponent = PostListComponent;
 //# sourceMappingURL=posts-list.component.js.map

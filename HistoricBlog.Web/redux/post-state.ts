@@ -1,9 +1,7 @@
 ﻿import {IPost} from './actions/post-interface'
 
 export class PostsState {
-    posts: any
+    posts: IPost[]
 
-    constructor() {
-        this.posts = [];
-    }
+    
 }

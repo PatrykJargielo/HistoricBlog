@@ -8,17 +8,17 @@ export const GET_POSTS = "GET_POSTS";
 
 export class PostActions {
 
-    //addPost(post: IPost[]) {
-    //    return {type: ADD_POST, post }
-    //}
-
-    getAllPosts(post: IPost[]) {
-        return { type: GET_POSTS, posts:post }
+    addPost(post: IPost[]) {
+        return {type: ADD_POST, post }
     }
 
-    //editPost(post: IPost[]) {
-    //    return { type: EDIT_POST, post }
-    //}
+    getAllPosts(post: IPost[]) {
+        return { type: GET_POSTS, post:post }
+    }
+
+    editPost(post: IPost[]) {
+        return { type: EDIT_POST, post }
+    }
 
 
     

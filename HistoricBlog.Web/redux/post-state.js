@@ -1,7 +1,6 @@
 "use strict";
 var PostsState = (function () {
     function PostsState() {
-        this.posts = [];
     }
     return PostsState;
 }());

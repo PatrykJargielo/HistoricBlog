@@ -5,11 +5,14 @@ exports.GET_POSTS = "GET_POSTS";
 var PostActions = (function () {
     function PostActions() {
     }
-    //addPost(post: IPost[]) {
-    //    return {type: ADD_POST, post }
-    //}
+    PostActions.prototype.addPost = function (post) {
+        return { type: exports.ADD_POST, post: post };
+    };
     PostActions.prototype.getAllPosts = function (post) {
-        return { type: exports.GET_POSTS, posts: post };
+        return { type: exports.GET_POSTS, post: post };
+    };
+    PostActions.prototype.editPost = function (post) {
+        return { type: exports.EDIT_POST, post: post };
     };
     return PostActions;
 }());

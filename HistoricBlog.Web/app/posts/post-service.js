@@ -20,12 +20,6 @@ var PostService = (function () {
         this._http = _http;
         this._productUrl = 'http://localhost:58141/api/post/';
     }
-    //getPosts(): Observable<IPost[]> {
-    //    return this._http.get(this._productUrl)
-    //        .map((response: Response) => <IPost[]>response.json())
-    //        .do(data => console.log('All: ' + JSON.stringify(data)))
-    //        .catch(this.handleError);
-    //}
     PostService.prototype.getPosts = function () {
         return this._http.get(this._productUrl).toPromise();
     };
