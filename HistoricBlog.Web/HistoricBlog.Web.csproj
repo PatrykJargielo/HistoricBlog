@@ -230,7 +230,6 @@
     <TypeScriptCompile Include="app\main.ts" />
     <TypeScriptCompile Include="app\posts\post-list.component.ts" />
     <TypeScriptCompile Include="app\posts\post.service.ts" />
-    <TypeScriptCompile Include="app\posts\post.details.component.ts" />
     <TypeScriptCompile Include="redux\actions\comment-actions.ts" />
     <TypeScriptCompile Include="redux\actions\post-actions.ts" />
     <TypeScriptCompile Include="redux\actions\post-interface.ts" />

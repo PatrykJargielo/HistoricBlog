@@ -39,7 +39,7 @@ var PostDetailsComponent = (function () {
             .subscribe(function (post) { return _this.post = post; });
     };
     PostDetailsComponent.prototype.onBack = function () {
-        this._router.navigate(['/posts']);
+        this._router.navigate(['']);
     };
     PostDetailsComponent.prototype.onRatingClicked = function (message) {
         this.pageTitle = 'Post Detail: ' + message;

@@ -32,7 +32,7 @@ export class PostService {
     //     return this._http.get(this._postUrl, { search: params }).toPromise();
     // }
 
-    getPost(id: number): Promise<IPost> {
+    getPost(id: number): Promise<any> {
         const url = `${this._postUrl}/${id}`;
         return this._http.get(url)
             .toPromise()

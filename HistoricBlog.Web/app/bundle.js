@@ -48077,12 +48077,12 @@ var AppModule = (function () {
                     { path: '', component: post_list_component_1.PostListComponent },
                     { path: 'posts', redirectTo: '', pathMatch: 'full' },
                     { path: '**', redirectTo: '', pathMatch: 'full' },
-                    {
+                ]),
+                router_1.RouterModule.forChild([{
                         path: 'post/:id',
                         canActivate: [post_guard_service_1.PostDetailGuard],
                         component: post_details_component_1.PostDetailsComponent
-                    }
-                ])
+                    }])
             ],
             declarations: [
                 app_component_1.AppComponent,
@@ -99770,7 +99770,7 @@ var PostDetailsComponent = (function () {
             .subscribe(function (post) { return _this.post = post; });
     };
     PostDetailsComponent.prototype.onBack = function () {
-        this._router.navigate(['/posts']);
+        this._router.navigate(['']);
     };
     PostDetailsComponent.prototype.onRatingClicked = function (message) {
         this.pageTitle = 'Post Detail: ' + message;

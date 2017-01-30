@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Inject } from '@angular/core';
+﻿import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { IPost } from '../../redux/actions/post-interface';
 import { PostActions } from '../../redux/actions/post-actions';
 import { PostService } from './post.service';
@@ -11,7 +11,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
     templateUrl: 'app/posts/post-details.component.html',
 })
 
-export class PostDetailsComponent implements OnInit {
+export class PostDetailsComponent implements OnInit, OnDestroy {
     pageTitle: string = 'Post Detail';
     post: IPost;
     errorMessage: string;
@@ -26,7 +26,7 @@ export class PostDetailsComponent implements OnInit {
     ngOnInit(): void {
         this.sub = this._route.params.subscribe(
             params => {
-                let id = +params['id'];
+                let id = + params['id'];
                 this.getPost(id);
             });
     }
@@ -45,7 +45,7 @@ export class PostDetailsComponent implements OnInit {
     }
 
     onBack(): void {
-        this._router.navigate(['/posts']);
+        this._router.navigate(['']);
     }
 
     onRatingClicked(message: string): void {

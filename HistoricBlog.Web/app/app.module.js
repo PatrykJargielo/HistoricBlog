@@ -37,15 +37,15 @@ AppModule = __decorate([
             http_1.HttpModule,
             http_1.JsonpModule,
             router_1.RouterModule.forRoot([
-                { path: 'posts', component: post_list_component_1.PostListComponent },
-                { path: '', redirectTo: 'posts', pathMatch: 'full' },
-                { path: '**', redirectTo: 'posts', pathMatch: 'full' },
-                {
+                { path: '', component: post_list_component_1.PostListComponent },
+                { path: 'posts', redirectTo: '', pathMatch: 'full' },
+                { path: '**', redirectTo: '', pathMatch: 'full' },
+            ]),
+            router_1.RouterModule.forChild([{
                     path: 'post/:id',
                     canActivate: [post_guard_service_1.PostDetailGuard],
                     component: post_details_component_1.PostDetailsComponent
-                }
-            ])
+                }])
         ],
         declarations: [
             app_component_1.AppComponent,

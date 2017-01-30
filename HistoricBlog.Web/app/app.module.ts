@@ -33,12 +33,13 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
             { path: '', component: PostListComponent },
             { path: 'posts', redirectTo: '', pathMatch: 'full' },
             { path: '**', redirectTo: '', pathMatch: 'full' },
-            {
-                path: 'post/:id',
-                canActivate: [PostDetailGuard],
-                component: PostDetailsComponent
-            }
-        ])
+
+        ]),
+        RouterModule.forChild([{
+            path: 'post/:id',
+            canActivate: [PostDetailGuard],
+            component: PostDetailsComponent
+        }])
     ],
     declarations: [
         AppComponent,
