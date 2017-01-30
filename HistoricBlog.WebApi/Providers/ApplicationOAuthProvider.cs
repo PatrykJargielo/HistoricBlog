@@ -45,8 +45,6 @@ namespace HistoricBlog.WebApi.Providers
             }
 
             //Generate the claims
-           
-
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
                OAuthDefaults.AuthenticationType);
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
@@ -107,5 +105,7 @@ namespace HistoricBlog.WebApi.Providers
             };
             return new AuthenticationProperties(data);
         }
+
+        
     }
 }
