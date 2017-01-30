@@ -19,7 +19,7 @@ namespace HistoricBlog.BLL.Users.Identity
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStoreService());
+            var manager = new ApplicationUserManager(new UserStore());
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<User, int>(manager)
             {

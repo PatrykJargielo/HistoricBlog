@@ -15,7 +15,7 @@ namespace HistoricBlog.WebApi.AutofacModule
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<UserStoreService>().As<IUserStore<User,int>>().InstancePerRequest();
+            builder.RegisterType<UserStore>().As<IUserStore<User,int>>().InstancePerRequest();
             builder.RegisterType<ConfigRepository>().As<IConfigRepository>().InstancePerRequest();
             builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerRequest();
             builder.RegisterType<PostRepository>().As<IPostRepository>().InstancePerRequest();

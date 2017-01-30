@@ -8,14 +8,15 @@ using Microsoft.AspNet.Identity;
 
 namespace HistoricBlog.DAL.Users.Identity
 {
-    public class RoleStoreService : IRoleStore<Role,int>
+    public class ApplicationRoleStore : IRoleStore<Role,int>
     {
         private readonly HistoricBlogDbContext _historicBlogDbContext;
 
-        public RoleStoreService()
+        public ApplicationRoleStore(HistoricBlogDbContext historicBlogDbContext)
         {
-            _historicBlogDbContext = new HistoricBlogDbContext();
+            _historicBlogDbContext = historicBlogDbContext;
         }
+
 
         public void Dispose()
         {

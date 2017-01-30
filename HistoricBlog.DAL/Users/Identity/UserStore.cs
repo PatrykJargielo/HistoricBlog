@@ -6,7 +6,7 @@ using Microsoft.AspNet.Identity;
 
 namespace HistoricBlog.DAL.Users.Identity
 {
-    public class UserStoreService : IUserStore<User,int>, IUserPasswordStore<User,int>
+    public class UserStore : IUserStore<User,int>, IUserPasswordStore<User,int>
     {
         private readonly HistoricBlogDbContext _historicBlogDbContext;
         public void Dispose()
@@ -14,7 +14,7 @@ namespace HistoricBlog.DAL.Users.Identity
             _historicBlogDbContext.Dispose();
         }
 
-        public UserStoreService()
+        public UserStore()
         {
             _historicBlogDbContext = new HistoricBlogDbContext();
         }

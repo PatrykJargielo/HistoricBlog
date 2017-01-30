@@ -73,7 +73,7 @@
     <Compile Include="Posts\Ratings\Rating.cs" />
     <Compile Include="Posts\Ratings\RatingRepository.cs" />
     <Compile Include="Posts\Tags\Tag.cs" />
-    <Compile Include="Users\Identity\RoleStoreService.cs" />
+    <Compile Include="Users\Identity\ApplicationRoleStore.cs" />
     <Compile Include="Users\IRoleRepository.cs" />
     <Compile Include="Users\Role.cs" />
     <Compile Include="Users\RoleRepository.cs" />
@@ -91,7 +91,7 @@
     <Compile Include="Posts\Tags\TagRepository.cs" />
     <Compile Include="Users\IUserRepository.cs" />
     <Compile Include="Users\UserRepository.cs" />
-    <Compile Include="Users\Identity\UserStoreService.cs" />
+    <Compile Include="Users\Identity\UserStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
