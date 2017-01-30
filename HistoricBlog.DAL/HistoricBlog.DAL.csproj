@@ -73,10 +73,8 @@
     <Compile Include="Posts\Ratings\Rating.cs" />
     <Compile Include="Posts\Ratings\RatingRepository.cs" />
     <Compile Include="Posts\Tags\Tag.cs" />
-    <Compile Include="Users\IPermissionRepository.cs" />
+    <Compile Include="Users\Identity\RoleStoreService.cs" />
     <Compile Include="Users\IRoleRepository.cs" />
-    <Compile Include="Users\Permission.cs" />
-    <Compile Include="Users\PermissionRepository.cs" />
     <Compile Include="Users\Role.cs" />
     <Compile Include="Users\RoleRepository.cs" />
     <Compile Include="Users\User.cs" />

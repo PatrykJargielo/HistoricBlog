@@ -16,7 +16,7 @@ namespace HistoricBlog.DAL
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Permission>Permissions { get; set; }
+ 
         public virtual DbSet<Rating> Ratings { get; set; }
         public virtual DbSet<Comment>Comments { get; set; }
         public virtual DbSet<Config> Config { get; set; }

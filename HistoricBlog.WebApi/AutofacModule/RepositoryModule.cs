@@ -21,7 +21,7 @@ namespace HistoricBlog.WebApi.AutofacModule
             builder.RegisterType<PostRepository>().As<IPostRepository>().InstancePerRequest();
             builder.RegisterType<CommentRepository>().As<ICommentRepository>().InstancePerRequest();
             builder.RegisterType<RoleRepository>().As<IRoleRepository>().InstancePerRequest();
-            builder.RegisterType<PermissionRepository>().As<IPermissionRepository>().InstancePerRequest();
+          
             builder.RegisterType<TagRepository>().As<ITagRepository>().InstancePerRequest();
             builder.RegisterType<CategoriesRepository>().As<ICategoryRepository>().InstancePerRequest();
             builder.RegisterType<RatingRepository>().As<IRatingRepository>().InstancePerRequest();

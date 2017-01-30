@@ -276,7 +276,6 @@
     <Compile Include="Models\Post\PostViewModel.cs" />
     <Compile Include="Models\Post\RatingViewModel.cs" />
     <Compile Include="Models\Post\TagViewModel.cs" />
-    <Compile Include="Models\Users\Permissions\PermissionViewModel.cs" />
     <Compile Include="Models\Users\Roles\RoleViewModel.cs" />
     <Compile Include="Models\Users\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
