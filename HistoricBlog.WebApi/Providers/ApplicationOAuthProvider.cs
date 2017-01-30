@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using HistoricBlog.BLL.Users;
+using HistoricBlog.BLL.Users.Identity;
 using HistoricBlog.DAL.Users;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;

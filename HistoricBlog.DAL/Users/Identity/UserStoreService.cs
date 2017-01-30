@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
-namespace HistoricBlog.DAL.Users
+namespace HistoricBlog.DAL.Users.Identity
 {
     public class UserStoreService : IUserStore<User,int>, IUserPasswordStore<User,int>
     {
@@ -30,12 +28,16 @@ namespace HistoricBlog.DAL.Users
 
         public Task UpdateAsync(User user)
         {
-            throw new NotImplementedException();
+            _historicBlogDbContext.Users.Attach(user);
+            Task task = _historicBlogDbContext.SaveChangesAsync();
+            return task;
         }
 
         public Task DeleteAsync(User user)
         {
-            throw new NotImplementedException();
+            _historicBlogDbContext.Users.Remove(user);
+            Task task = _historicBlogDbContext.SaveChangesAsync();
+            return task;
         }
 
         public Task<User> FindByIdAsync(int userId)

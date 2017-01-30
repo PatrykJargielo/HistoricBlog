@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using HistoricBlog.BLL.Users;
+using HistoricBlog.BLL.Users.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;

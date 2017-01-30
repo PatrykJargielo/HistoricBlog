@@ -93,7 +93,7 @@
     <Compile Include="Posts\Tags\TagRepository.cs" />
     <Compile Include="Users\IUserRepository.cs" />
     <Compile Include="Users\UserRepository.cs" />
-    <Compile Include="Users\UserStoreService.cs" />
+    <Compile Include="Users\Identity\UserStoreService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

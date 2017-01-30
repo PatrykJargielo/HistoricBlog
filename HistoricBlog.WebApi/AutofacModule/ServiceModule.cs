@@ -7,6 +7,7 @@ using HistoricBlog.BLL.Posts.Comments;
 using HistoricBlog.BLL.Posts.Ratings;
 using HistoricBlog.BLL.Posts.Tags;
 using HistoricBlog.BLL.Users;
+using HistoricBlog.BLL.Users.Identity;
 using HistoricBlog.DAL.Users;
 using Microsoft.AspNet.Identity;
 

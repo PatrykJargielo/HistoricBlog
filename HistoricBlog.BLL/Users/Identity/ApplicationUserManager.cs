@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HistoricBlog.BLL.PasswordHasher.Hasher;
+﻿using HistoricBlog.BLL.PasswordHasher.Hasher;
 using HistoricBlog.DAL.Users;
+using HistoricBlog.DAL.Users.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
-namespace HistoricBlog.BLL.Users
+namespace HistoricBlog.BLL.Users.Identity
 {
     public class ApplicationUserManager : UserManager<User,int>
     {

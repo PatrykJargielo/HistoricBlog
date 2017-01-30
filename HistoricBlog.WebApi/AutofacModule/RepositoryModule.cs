@@ -6,6 +6,7 @@ using HistoricBlog.DAL.Posts.Comments;
 using HistoricBlog.DAL.Posts.Ratings;
 using HistoricBlog.DAL.Posts.Tags;
 using HistoricBlog.DAL.Users;
+using HistoricBlog.DAL.Users.Identity;
 using Microsoft.AspNet.Identity;
 
 namespace HistoricBlog.WebApi.AutofacModule
