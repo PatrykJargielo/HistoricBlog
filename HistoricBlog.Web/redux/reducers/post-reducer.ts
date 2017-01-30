@@ -7,7 +7,6 @@
 } from '../actions/post-actions'
 
 import { IPost } from '../actions/post-interface'
-//import { PostsState } from '../post-state'
 import * as clone from 'clone';
 
 let defaultState = {
