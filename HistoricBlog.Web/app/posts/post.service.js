@@ -15,13 +15,26 @@ require("rxjs/add/operator/map");
 require("rxjs/add/operator/do");
 require("rxjs/add/operator/catch");
 require("rxjs/add/operator/toPromise");
+require("rxjs/Rx");
 var PostService = (function () {
     function PostService(_http) {
         this._http = _http;
-        this._productUrl = './api/post/';
+        this._postUrl = 'http://localhost:58141/api/post/';
     }
     PostService.prototype.getPosts = function () {
-        return this._http.get(this._productUrl).toPromise();
+        return this._http.get(this._postUrl).toPromise();
+    };
+    // getPost(id: number): Promise<IPost> {
+    //     let params: URLSearchParams = new URLSearchParams();
+    //     params.set('id', id.toString());
+    //     return this._http.get(this._postUrl, { search: params }).toPromise();
+    // }
+    PostService.prototype.getPost = function (id) {
+        var url = this._postUrl + "/" + id;
+        return this._http.get(url)
+            .toPromise()
+            .then(function (response) { return response.json().data; })
+            .catch(this.handleError);
     };
     PostService.prototype.handleError = function (error) {
         console.error(error);

@@ -12,7 +12,7 @@ var PostFilterPipe = (function () {
     PostFilterPipe.prototype.transform = function (value, filterBy) {
         filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
         return filterBy ? value.filter(function (post) {
-            return post.Title.toLocaleLowerCase().indexOf(filterBy) !== -1;
+            return post.title.toLocaleLowerCase().indexOf(filterBy) !== -1;
         }) : value;
     };
     return PostFilterPipe;

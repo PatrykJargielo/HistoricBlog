@@ -9,8 +9,11 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var platform_browser_1 = require("@angular/platform-browser");
 var http_1 = require("@angular/http");
+var router_1 = require("@angular/router");
 var app_component_1 = require("./app.component");
 var post_list_component_1 = require("./posts/post-list.component");
+var post_details_component_1 = require("./posts/post-details.component");
+var post_guard_service_1 = require("./posts/post-guard.service");
 var redux_1 = require("redux");
 var post_reducer_1 = require("../redux/reducers/post-reducer");
 var post_actions_1 = require("../redux/actions/post-actions");
@@ -32,18 +35,30 @@ AppModule = __decorate([
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
             http_1.HttpModule,
-            http_1.JsonpModule
+            http_1.JsonpModule,
+            router_1.RouterModule.forRoot([
+                { path: 'posts', component: post_list_component_1.PostListComponent },
+                { path: '', redirectTo: 'posts', pathMatch: 'full' },
+                { path: '**', redirectTo: 'posts', pathMatch: 'full' },
+                {
+                    path: 'post/:id',
+                    canActivate: [post_guard_service_1.PostDetailGuard],
+                    component: post_details_component_1.PostDetailsComponent
+                }
+            ])
         ],
         declarations: [
             app_component_1.AppComponent,
             post_list_component_1.PostListComponent,
-            post_filter_pipe_1.PostFilterPipe
+            post_filter_pipe_1.PostFilterPipe,
+            post_details_component_1.PostDetailsComponent
         ],
         providers: [
             post_actions_1.PostActions,
-            post_service_1.PostService
+            post_service_1.PostService,
+            post_guard_service_1.PostDetailGuard
         ],
-        bootstrap: [app_component_1.AppComponent, post_list_component_1.PostListComponent]
+        bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);
 exports.AppModule = AppModule;

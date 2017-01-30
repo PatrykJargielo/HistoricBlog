@@ -7,7 +7,7 @@ import { PostsState } from '../../redux/post-state';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-    selector: 'hb-posts-list',
+
     templateUrl: 'app/posts/post-list.component.html',
     styleUrls: ['app/posts/post-list.component.css']
 })
@@ -16,8 +16,6 @@ export class PostListComponent implements OnInit {
     _postService: PostService;
     listFilter: string = "";
     posts: IPost[] = [];
-
-
 
     constructor( @Inject(PostService) postService: PostService, private _postActions: PostActions, private zone: NgZone) {
         this._postService = postService;

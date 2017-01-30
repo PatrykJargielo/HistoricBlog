@@ -10,10 +10,12 @@
         <div class="container" *ngFor='let post of posts | postFilter: listFilter'>
             <div class="well">
                 <div class="row">
-                    <h3>{{post.Title}}</h3>
+                    <td>
+                        <a [routerLink]="['/post', post.Id]" [innerHtml]="post.Title"></a>
+                    </td>
                     <img src="http://www.scru.pl/upload/default.jpg" class="thumbnail" width="304" height="236" />
                 </div>
-                <p>{{post.ShortDescription}}</p>
+                <p [innerHtml]="post.ShortDescription"></p>
             </div>
         </div>
     </div>
