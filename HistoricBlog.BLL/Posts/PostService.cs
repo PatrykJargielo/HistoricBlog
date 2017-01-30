@@ -49,6 +49,11 @@ namespace HistoricBlog.BLL.Posts
             return base.Create(entity);
         }
 
-     
+        public GenericResult<IEnumerable<Post>> GetPostsByTitle(string Name)
+        {
+            var result = _postRepository.FindBy(post => post.Title.Contains(Name));
+            result.IsVaild = true;
+            return result;
+        }
     }
 }

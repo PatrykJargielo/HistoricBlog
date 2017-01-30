@@ -13,55 +13,63 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class PostListComponent implements OnInit {
-    _postService: PostService;
+    stateModel: PostsState;
     listFilter: string;
     posts: IPost[]=[];
 
-
-
-    constructor( @Inject(PostService) postService: PostService, private _postActions: PostActions, private zone: NgZone) {
-        this._postService = postService;
-        let defaultState = AppStore.getState() as PostsState
-        this.listFilter = defaultState.filterTitle;
+    constructor( private postService: PostService, private _postActions: PostActions, private zone: NgZone) {
+        this.postService = postService;
+        this.stateModel = AppStore.getState() as PostsState;
+        this.listFilter = '';
     }
-
-    getAllPosts() {
-        return (dispatch) => {
-            this._postService.getPosts().then(
-                posts => dispatch(this._postActions.getAllPosts(JSON.parse(posts._body)))
-            )
-        }
-    }
-
-    setPostsTitleFilter(title:string) {
-        return (dispatch) => {
-            dispatch(this._postActions.setPostTitleFilter(title))
-               }
-    }
-
-    updateFilter(value) {
-        AppStore.dispatch(this.setPostsTitleFilter(value));
-        AppStore.dispatch(this.getAllPosts());
-    }
-
-
-
-    postListener() {
-        //TODO filter
-        let state = AppStore.getState() as PostsState
-
-        this.zone.run(() => {
-            this.posts = state.posts;         
-        });
-    }
-
-
-
 
     ngOnInit(): void {
         AppStore.subscribe(() => {
             this.postListener()
         });
         AppStore.dispatch(this.getAllPosts());
+        
+    }
+
+    postListener() {
+        this.stateModel = AppStore.getState() as PostsState;
+        this.zone.run(() => {
+            this.posts = this.stateModel.posts;
+        });
+    }
+
+    getAllPosts() {
+        return (dispatch) => {
+            this.postService.getPostsFilteredPage(this.stateModel.pagination.pageNumber, this.stateModel.pagination.postsOnPage, this.stateModel.filterTitle).then(
+                posts => dispatch(this._postActions.getAllPosts(posts.json()),
+                )
+            )
+        }
+    }
+
+    setTitleFilter(value) {
+        AppStore.dispatch((dispatch) => {
+            dispatch(this._postActions.setPostTitleFilter(value))
+        });
+        AppStore.dispatch(this.getAllPosts());
+    }
+
+    getPostCount(): number {
+        return this.stateModel.pagination.totalFilteredPostCount;
+    }
+
+    getPostsOnPageCount(): number {
+        return this.stateModel.pagination.postsOnPage;
+    }
+
+    getCurrentPageNumber(): number {
+        return this.stateModel.pagination.pageNumber;
+    }
+
+    pageChanged(value): void{
+        AppStore.dispatch(
+            (dispatch) => { dispatch(this._postActions.setPostListPage(value)) }        
+        )
+       AppStore.dispatch(this.getAllPosts());
     }
 }

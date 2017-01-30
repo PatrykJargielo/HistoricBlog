@@ -9,6 +9,7 @@ import { post } from '../redux/reducers/post-reducer';
 import { PostActions } from '../redux/actions/post-actions';
 import { PostFilterPipe } from './posts/post-filter.pipe';
 import { PostService } from './posts/post.service';
+import { Ng2PaginationModule } from 'ng2-pagination';
 import thunk from 'redux-thunk';
 import * as createLogger from 'redux-logger';
 
@@ -25,7 +26,8 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
         BrowserModule,
         FormsModule,
         HttpModule,
-        JsonpModule
+        JsonpModule,
+        Ng2PaginationModule
 
     ],
     declarations: [

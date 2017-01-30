@@ -1,14 +1,15 @@
 ﻿import {IPost} from './actions/post-interface'
 
 export class PostsState {
-    pageCurrent: number
+    userName: string
+    token: string
     filterTitle: string
     filterCategory: string[]
     filterTag: string[]
     posts: IPost[]
     pagination: {
         pageNumber: number,
-        pagesTotal: number,
+        totalFilteredPostCount: number,
         postsOnPage: number
     } 
 }

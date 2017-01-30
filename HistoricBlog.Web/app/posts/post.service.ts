@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { IPost } from '../../redux/actions/post-interface';
-import { Http, Response, HttpModule } from '@angular/http';
+import { Http, Response, HttpModule, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -21,6 +21,16 @@ export class PostService {
 
     getPosts(): Promise<any> {
         return this._http.get(this._productUrl).toPromise();
+    }
+
+    getPostsFilteredPage(page: number, quantity: number, titleFilter: string): Promise<any> {
+
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('page', page.toString());
+        params.set('quantity', quantity.toString());
+        if(titleFilter.length>0) params.set('titleFilter', titleFilter);
+
+        return this._http.get(this._productUrl, { search: params }).toPromise();
     }
 
 

@@ -29,6 +29,7 @@
     "angular-in-memory-web-api": "~0.2.4",
     "core-js": "^2.4.1",
     "lodash": "^4.17.4",
+    "ng2-pagination": "^2.0.0",
     "redux-logger": "^2.7.4",
     "redux-thunk": "^2.2.0",
     "rxjs": "5.0.1",
