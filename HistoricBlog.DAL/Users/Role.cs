@@ -8,6 +8,8 @@ namespace HistoricBlog.DAL.Users
     {
         public string Name { get; set; }
 
+        public virtual IList<User> Users { get; set; }
+
         public override List<string> Validation()
         {
             List<string> errorList = new List<string>();

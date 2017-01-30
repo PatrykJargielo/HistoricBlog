@@ -59,9 +59,9 @@
     <Compile Include="Configs\Config.cs" />
     <Compile Include="Configs\ConfigRepository.cs" />
     <Compile Include="Configs\IConfigRepository.cs" />
-    <Compile Include="Migrations\201701271115463_Init.cs" />
-    <Compile Include="Migrations\201701271115463_Init.Designer.cs">
-      <DependentUpon>201701271115463_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201701300723582_Init.cs" />
+    <Compile Include="Migrations\201701300723582_Init.Designer.cs">
+      <DependentUpon>201701300723582_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Posts\Categories\Category.cs" />
     <Compile Include="Base\IBaseEntity.cs" />
@@ -98,15 +98,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701271115463_Init.resx">
-      <DependentUpon>201701271115463_Init.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\HistoricBlog.BLL.PasswordHasher\HistoricBlog.BLL.PasswordHasher.csproj">
       <Project>{4abd0735-f1da-4f67-85ca-bc774f16d52f}</Project>
       <Name>HistoricBlog.BLL.PasswordHasher</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201701300723582_Init.resx">
+      <DependentUpon>201701300723582_Init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

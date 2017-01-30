@@ -17,6 +17,11 @@ namespace HistoricBlog.DAL.Users.Identity
             _historicBlogDbContext = historicBlogDbContext;
         }
 
+        public ApplicationRoleStore()
+        {
+            _historicBlogDbContext = new HistoricBlogDbContext();
+        }
+
 
         public void Dispose()
         {

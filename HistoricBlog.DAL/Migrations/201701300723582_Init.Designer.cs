@@ -13,7 +13,7 @@ namespace HistoricBlog.DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201701271115463_Init"; }
+            get { return "201701300723582_Init"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using HistoricBlog.DAL.Posts;
 using HistoricBlog.DAL.Posts.Categories;
 using HistoricBlog.DAL.Posts.Comments;
@@ -30,6 +31,11 @@ namespace HistoricBlog.DAL
             : base(nameOrConnectionString)
         {
             
+        }
+
+        public static HistoricBlogDbContext Create()
+        {
+            return new HistoricBlogDbContext();
         }
     }
 }
