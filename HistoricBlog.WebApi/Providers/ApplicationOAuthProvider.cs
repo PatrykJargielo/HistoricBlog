@@ -33,6 +33,8 @@ namespace HistoricBlog.WebApi.Providers
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+           
+            
 
             User user = await userManager.FindAsync(context.UserName, context.Password);
 
@@ -42,10 +44,18 @@ namespace HistoricBlog.WebApi.Providers
                 return;
             }
 
+            //Generate the claims
+           
+
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
                OAuthDefaults.AuthenticationType);
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
+
+            foreach (var role in user.Roles)
+            {
+                oAuthIdentity.AddClaim(new Claim(ClaimTypes.Role,role.Name));
+            }
 
             AuthenticationProperties properties = CreateProperties(user.UserName);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);

@@ -139,32 +139,6 @@ namespace HistoricBlog.WebApi.Controllers
             return logins;
         }
 
-
-        // POST api/Account/Register
-        [AllowAnonymous]
-        [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var user = new User() { UserName = model.Email, Email = model.Email };
-            
-
-            IdentityResult result = await _userManager.CreateAsync(user, model.Password);
-
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
-        }
-
-       
-
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
