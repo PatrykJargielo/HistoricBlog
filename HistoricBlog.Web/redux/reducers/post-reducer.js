@@ -1,5 +1,6 @@
 "use strict";
 var post_actions_1 = require("../actions/post-actions");
+//import { PostsState } from '../post-state'
 var defaultState = {
     page: 1,
     posts: []

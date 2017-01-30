@@ -8,14 +8,14 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'hb-posts-list',
-        templateUrl: 'app/posts/post-list.component.html',
-            styleUrls: ['app/posts/post-list.component.css']
+    templateUrl: 'app/posts/post-list.component.html',
+    styleUrls: ['app/posts/post-list.component.css']
 })
 
 export class PostListComponent implements OnInit {
     _postService: PostService;
     listFilter: string = "";
-    posts: IPost[]=[];
+    posts: IPost[] = [];
 
 
 
@@ -37,7 +37,7 @@ export class PostListComponent implements OnInit {
         console.log('listener', this)
 
         this.zone.run(() => {
-            this.posts = state.posts;         
+            this.posts = state.posts;
         });
     }
 
