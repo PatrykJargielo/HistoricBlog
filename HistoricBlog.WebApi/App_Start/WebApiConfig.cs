@@ -15,7 +15,11 @@ namespace HistoricBlog.WebApi
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
             var cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
+<<<<<<< HEAD
        
+=======
+            //EnableCrossSiteRequests(config);
+>>>>>>> origin/frontent-merged
             // Web API routes
             config.MapHttpAttributeRoutes();
 
