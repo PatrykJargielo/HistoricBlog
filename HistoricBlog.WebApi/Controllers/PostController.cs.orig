@@ -9,6 +9,8 @@ using HistoricBlog.WebApi.Models.Post;
 using HistoricBlog.DAL.Posts;
 using HistoricBlog.DAL.Base;
 using System.Web.Http.Cors;
+using System.Linq;
+using HistoricBlog.DAL.Posts.Categories;
 
 namespace HistoricBlog.WebApi.Controllers
 {
@@ -51,10 +53,6 @@ namespace HistoricBlog.WebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, posts);
 
         }
-<<<<<<< HEAD
-          [HttpPost]
-=======
-
         [HttpGet]
         // GET: api/Post/{page}/{quantity}/{titleFilter}
         public HttpResponseMessage GetPostsFilteredPage(int page, int quantity,string titleFilter="")
@@ -73,14 +71,14 @@ namespace HistoricBlog.WebApi.Controllers
 
         }
 
-        [HttpPut]
         [HttpPost]
-        [HttpPatch]
->>>>>>> caa28adf7b5516376b7fe23c69f9994539a211eb
+
         public HttpResponseMessage Post([FromBody]PostViewModel post)
         {
+<<<<<<< HEAD
             var postEntity = new Post()
             {
+                
                 Title = post.Title,
                 ShortDescription = post.ShortDescription,
                 Content = post.Content
@@ -92,18 +90,25 @@ namespace HistoricBlog.WebApi.Controllers
                 result = _postService.Create(postEntity);
                 return Request.CreateResponse(HttpStatusCode.Created, result.Result);
             }
+=======
+            var postEntity = Mapper.Map<Post>(post);
+            var isPostNew = post.Id == 0;  //do test
+>>>>>>> aca3cf3a95fb7867589202e9cebe28e04760771a
 
-            var editPost = _postService.Update(postEntity);
+            var postResult = new GenericResult<Post>();
+            if (isPostNew)
+                postResult = _postService.Create(postEntity);
+            else
+                postResult = _postService.Update(postEntity);
 
-            if (!result.IsVaild)
+            if (!postResult.IsVaild)
             {
-                var messages = string.Concat(result.Messages.ToArray());
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, messages);
+                var errorMessages = string.Concat(postResult.Messages.ToArray());
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, errorMessages);
             }
 
-            var updatePosts = Mapper.Map<IEnumerable<PostViewModel>>(editPost.Result);
-
-            return Request.CreateResponse(HttpStatusCode.OK, updatePosts);
+            var viewResult = Mapper.Map<PostViewModel>(postResult.Result);
+            return Request.CreateResponse(HttpStatusCode.Created, viewResult);
         }
 
 

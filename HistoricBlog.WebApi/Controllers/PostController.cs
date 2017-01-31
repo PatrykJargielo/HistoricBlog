@@ -75,32 +75,24 @@ namespace HistoricBlog.WebApi.Controllers
 
         public HttpResponseMessage Post([FromBody]PostViewModel post)
         {
-            var postEntity = new Post()
-            {
+            var postEntity = Mapper.Map<Post>(post);
+            var isPostNew = post.Id == 0;  //do test
                 
-                Title = post.Title,
-                ShortDescription = post.ShortDescription,
-                Content = post.Content
-            };
-            var result = new GenericResult<Post>();
-            if (post.Id == 0)
+
+            var postResult = new GenericResult<Post>();
+            if (isPostNew)
+                postResult = _postService.Create(postEntity);
+            else
+                postResult = _postService.Update(postEntity);
+
+            if (!postResult.IsVaild)
             {
-                result.IsVaild = true;
-                result = _postService.Create(postEntity);
-                return Request.CreateResponse(HttpStatusCode.Created, result.Result);
+                var errorMessages = string.Concat(postResult.Messages.ToArray());
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, errorMessages);
             }
 
-            var editPost = _postService.Update(postEntity);
-
-            if (!result.IsVaild)
-            {
-                var messages = string.Concat(result.Messages.ToArray());
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, messages);
-            }
-
-            var updatePosts = Mapper.Map<IEnumerable<PostViewModel>>(editPost.Result);
-
-            return Request.CreateResponse(HttpStatusCode.OK, updatePosts);
+            var viewResult = Mapper.Map<PostViewModel>(postResult.Result);
+            return Request.CreateResponse(HttpStatusCode.Created, viewResult);
         }
 
 

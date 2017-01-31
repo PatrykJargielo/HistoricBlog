@@ -63,7 +63,10 @@
 		</httpModules>
 	</system.web>
 	<system.webServer>
+<<<<<<< HEAD
+=======
 
+>>>>>>> aca3cf3a95fb7867589202e9cebe28e04760771a
 		<modules runAllManagedModulesForAllRequests="true">
 			<remove name="FormsAuthentication" />
 			<remove name="ApplicationInsightsWebTracking" />
