@@ -74,7 +74,7 @@ namespace HistoricBlog.WebApi.Controllers
         public HttpResponseMessage Post([FromBody]PostViewModel post)
         {
             var postEntity = Mapper.Map<Post>(post);
-            var isPostNew = post.Id != 0;  //do test
+            var isPostNew = post.Id == 0;  //do test
 
             var postResult = new GenericResult<Post>();
             if (isPostNew)
