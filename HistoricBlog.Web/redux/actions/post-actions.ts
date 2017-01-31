@@ -21,7 +21,7 @@ export class PostActions {
         return { type: GET_POSTS, payload:post }
     }
 
-    editPost(post: IPost) {//todo
+    editPost(post: IPost) {
         return { type: EDIT_POST, payload: post }
     }
 
