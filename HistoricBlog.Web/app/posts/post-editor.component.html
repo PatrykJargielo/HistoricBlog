@@ -7,9 +7,9 @@
         <label>Shorts</label>
         <input type="text" class="form-control" placeholder="Short" [(ngModel)]="model.ShortDescription" name="ShortDescription">
         <label>Kategorie</label>
-        <input type="text" class="form-control" placeholder="kategorie" [(ngModel)]="model.Categories" name="Category">
+        <input type="text" class="form-control" placeholder="kategorie" [(ngModel)]="categories" name="Category">
         <label>Tagi</label>
-        <input type="text" class="form-control" placeholder="tagi" [(ngModel)]="model.Tags" name="Tag">
+        <input type="text" class="form-control" placeholder="tagi" [(ngModel)]="tags" name="Tag">
     </div>
     <button (click)="addPost()">Dodaj post</button>
 </form>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using HistoricBlog.DAL.Posts.Categories;
 using HistoricBlog.WebApi.Models.Users;
 
 
@@ -19,7 +20,7 @@ namespace HistoricBlog.WebApi.Models.Post
         public virtual IList<CategoryViewModel> Categories { get; set; }
 
         public virtual IList<TagViewModel> Tags { get; set; }
-        
+
         public virtual IList<CommentViewModel> Comments { get; set; }
     }
 }

@@ -12,26 +12,18 @@ import { Category } from './Category';
 
 })
 export class PostEditor{
-    errorMessage: string;
-    Categories;
-    Content;
-    Title;
     model: Post;
-    ShortDescription;
-    Tags;
+    tags: string
+    categories: string
 
     constructor(private postService: PostService, private categoryService: CategoryService) {
-        this.Content;
-        this.Title;
-        this.ShortDescription;
-        this.Categories;
-        this.Tags;
-        this.model = new Post('', '', '', '', '');
+        this.model = new Post();
     }
 
-
-
+    
     addPost() {
+        this.model.Tags = this.tags.(' ');
+        this.model.Categories = this.categories.split(' ');
         this.postService.addPost(this.model);
 
         console.log(this.model);

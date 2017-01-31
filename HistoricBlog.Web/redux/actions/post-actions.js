@@ -6,17 +6,18 @@ exports.SET_POSTS_CATEGORY_FILTER = "SET_POSTS_DESCRIPTION_FILTER";
 exports.SET_POSTS_TAG_FILTER = "SET_POSTS_TAG_FILTER";
 exports.SET_POSTS_TITLE_FILTER = "SET_POSTS_TITLE_FILTER";
 exports.SET_POSTS_LIST_PAGE = "SET_POSTS_LIST_PAGE";
+exports.SET_P_LIST_PAGE = "SET_POSTS_LIST_PAGE";
 var PostActions = (function () {
     function PostActions() {
     }
     PostActions.prototype.addPost = function (post) {
-        return { type: exports.ADD_POST, post: post };
+        return { type: exports.ADD_POST, payload: post };
     };
     PostActions.prototype.getAllPosts = function (post) {
         return { type: exports.GET_POSTS, payload: post };
     };
     PostActions.prototype.editPost = function (post) {
-        return { type: exports.EDIT_POST, post: post };
+        return { type: exports.EDIT_POST, payload: post };
     };
     PostActions.prototype.setPostCategoryFilter = function (categories) {
         return { type: exports.SET_POSTS_CATEGORY_FILTER, filterCategory: categories };
