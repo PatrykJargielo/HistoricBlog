@@ -85,7 +85,7 @@ namespace HistoricBlog.WebApi.Controllers
             if (!postResult.IsVaild)
             {
                 var errorMessages = string.Concat(postResult.Messages.ToArray());
-                Request.CreateErrorResponse(HttpStatusCode.BadRequest, errorMessages);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, errorMessages);
             }
 
             var viewResult = Mapper.Map<PostViewModel>(postResult.Result);
