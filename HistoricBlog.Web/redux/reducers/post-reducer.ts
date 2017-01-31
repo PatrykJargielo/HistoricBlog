@@ -7,7 +7,7 @@
 } from '../actions/post-actions'
 
 import { IPost } from '../actions/post-interface'
-import * as clone from 'clone';
+
 
 let defaultState = {
     userName: 'guest',

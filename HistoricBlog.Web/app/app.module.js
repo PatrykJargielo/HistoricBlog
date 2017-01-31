@@ -19,6 +19,7 @@ var post_reducer_1 = require("../redux/reducers/post-reducer");
 var post_actions_1 = require("../redux/actions/post-actions");
 var post_filter_pipe_1 = require("./posts/post-filter.pipe");
 var post_service_1 = require("./posts/post.service");
+var ng2_pagination_1 = require("ng2-pagination");
 var redux_thunk_1 = require("redux-thunk");
 var createLogger = require("redux-logger");
 var logger = createLogger();
@@ -35,7 +36,8 @@ AppModule = __decorate([
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
             http_1.HttpModule,
-            http_1.JsonpModule
+            http_1.JsonpModule,
+            ng2_pagination_1.Ng2PaginationModule
         ],
         declarations: [
             app_component_1.AppComponent,
