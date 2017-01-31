@@ -24,14 +24,20 @@ export class PostService {
         return this._http.get(this._productUrl).toPromise();
     }
 
-    addPost(post): Promise<any> {
-        let bodyString = JSON.stringify(post);
+    addPost(post: Post): Promise<Post[]> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-
-        return this._http.post(this._productUrl, post, options)
-            .toPromise();
+        let body = JSON.stringify(post);
+        return this._http.post(this._productUrl, body, options)
+            .toPromise()
+            .then((res: Response) => res.json());
+        
     }
+
+    //private extractData(res: Response) {
+    //    let body = res.json();
+    //    return body.data;
+    //}
 
 
     private handleError(error: Response) {

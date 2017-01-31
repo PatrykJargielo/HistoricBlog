@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -9,17 +7,15 @@ using HistoricBlog.BLL.Logger;
 using HistoricBlog.BLL.Posts;
 using HistoricBlog.WebApi.Models.Post;
 using HistoricBlog.DAL.Posts;
-using HistoricBlog.DAL.Posts.Categories;
-using HistoricBlog.DAL.Posts.Comments;
-using HistoricBlog.DAL.Posts.Tags;
-using HistoricBlog.DAL.Users;
-using HistoricBlog.WebApi.Models.Users;
 using HistoricBlog.DAL.Base;
 using System.Web.Http.Cors;
 
 namespace HistoricBlog.WebApi.Controllers
 {
-  
+
+
+    
+
     public class PostController : ApiController
     {
         private readonly IPostService _postService;
@@ -55,10 +51,7 @@ namespace HistoricBlog.WebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, posts);
 
         }
-
-        [HttpPut]
-        [HttpPost]
-        [HttpPatch]
+          [HttpPost]
         public HttpResponseMessage Post([FromBody]PostViewModel post)
         {
             var postEntity = new Post()

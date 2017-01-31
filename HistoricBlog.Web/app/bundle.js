@@ -28669,12 +28669,17 @@ var PostService = (function () {
         return this._http.get(this._productUrl).toPromise();
     };
     PostService.prototype.addPost = function (post) {
-        var bodyString = JSON.stringify(post);
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this._http.post(this._productUrl, post, options)
-            .toPromise();
+        var body = JSON.stringify(post);
+        return this._http.post(this._productUrl, body, options)
+            .toPromise()
+            .then(function (res) { return res.json(); });
     };
+    //private extractData(res: Response) {
+    //    let body = res.json();
+    //    return body.data;
+    //}
     PostService.prototype.handleError = function (error) {
         console.error(error);
         return Observable_1.Observable.throw(error.json().error || 'Server error');
@@ -76262,7 +76267,8 @@ var PostEditor = (function () {
         this.postService = postService;
         this.Content;
         this.Title;
-        this.model = new postEditor_1.Post('', '');
+        this.ShortDescription;
+        this.model = new postEditor_1.Post('', '', '');
     }
     PostEditor.prototype.addPost = function () {
         this.postService.addPost(this.model);
@@ -76271,7 +76277,7 @@ var PostEditor = (function () {
     PostEditor = __decorate([
         core_1.Component({
             selector: 'editor',
-            template: "\n    <form>\n    <div class=\"form-group\">\n    <ckeditor [(ngModel)]=\"model.Content\" debounce=\"500\" name=\"content\">\n      <p>Hello <strong>world</strong></p>\n    </ckeditor>\n    \n    <input type=\"text\" class=\"form-control\" placeholder=\"Tytul\" [(ngModel)]=\"model.Title\" name=\"title\">\n    </div>\n    <button (click)=\"addPost()\">Dodaj post</button>\n    </form>\n<p>{{Post}}</p>\n\n  "
+            template: "\n    <form>\n    <div class=\"form-group\">\n    <ckeditor [(ngModel)]=\"model.Content\" debounce=\"500\" name=\"content\">\n      <p>Hello <strong>world</strong></p>\n    </ckeditor>\n    \n    <input type=\"text\" class=\"form-control\" placeholder=\"Tytul\" [(ngModel)]=\"model.Title\" name=\"title\">\n    <input type=\"text\" class=\"form-control\" placeholder=\"Short\" [(ngModel)]=\"model.ShortDescription\" name=\"ShortDescription\">\n    </div>\n    <button (click)=\"addPost()\">Dodaj post</button>\n    </form>\n\n\n  "
         }), 
         __metadata('design:paramtypes', [post_service_1.PostService])
     ], PostEditor);
@@ -76388,10 +76394,9 @@ exports.PostListComponent = PostListComponent;
 "use strict";
 
 var Post = (function () {
-    function Post(Title, 
-        //public ShortDescription: string,
-        Content) {
+    function Post(Title, ShortDescription, Content) {
         this.Title = Title;
+        this.ShortDescription = ShortDescription;
         this.Content = Content;
     }
     return Post;

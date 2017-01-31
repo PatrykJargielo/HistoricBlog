@@ -13,8 +13,9 @@ namespace HistoricBlog.WebApi
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
-
-
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
+            //EnableCrossSiteRequests(config);
             // Web API routes
             config.MapHttpAttributeRoutes();
 
@@ -23,8 +24,18 @@ namespace HistoricBlog.WebApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
             config.Formatters.JsonFormatter.SupportedMediaTypes
-    .Add(new MediaTypeHeaderValue("text/html"));
+            .Add(new MediaTypeHeaderValue("multipart/form-data"));
         }
+
+        //private static void EnableCrossSiteRequests(HttpConfiguration config)
+        //{
+        //    var cors = new EnableCorsAttribute(
+        //        origins: "http://localhost:58141",
+        //        headers: "*",
+        //        methods: "*");
+        //    config.EnableCors(cors);
+        //}
     }
 }

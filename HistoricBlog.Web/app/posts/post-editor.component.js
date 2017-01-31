@@ -16,11 +16,11 @@ var PostEditor = (function () {
         this.postService = postService;
         this.Content;
         this.Title;
-        this.model = new postEditor_1.Post('', '');
+        this.ShortDescription;
+        this.model = new postEditor_1.Post('', '', '');
     }
     PostEditor.prototype.addPost = function () {
-        var _this = this;
-        this.postService.addPost(this.model).subscribe(function (post) { return _this.model = (post); });
+        this.postService.addPost(this.model);
         console.log(this.model);
     };
     return PostEditor;
@@ -28,7 +28,7 @@ var PostEditor = (function () {
 PostEditor = __decorate([
     core_1.Component({
         selector: 'editor',
-        template: "\n    <form>\n    <div class=\"form-group\">\n    <ckeditor [(ngModel)]=\"model.Content\" debounce=\"500\" name=\"content\">\n      <p>Hello <strong>world</strong></p>\n    </ckeditor>\n    \n    <input type=\"text\" class=\"form-control\" placeholder=\"Tytul\" [(ngModel)]=\"model.Title\" name=\"title\">\n    </div>\n    <button (click)=\"addPost()\">Dodaj post</button>\n    </form>\n\n  "
+        template: "\n    <form>\n    <div class=\"form-group\">\n    <ckeditor [(ngModel)]=\"model.Content\" debounce=\"500\" name=\"content\">\n      <p>Hello <strong>world</strong></p>\n    </ckeditor>\n    \n    <input type=\"text\" class=\"form-control\" placeholder=\"Tytul\" [(ngModel)]=\"model.Title\" name=\"title\">\n    <input type=\"text\" class=\"form-control\" placeholder=\"Short\" [(ngModel)]=\"model.ShortDescription\" name=\"ShortDescription\">\n    </div>\n    <button (click)=\"addPost()\">Dodaj post</button>\n    </form>\n\n\n  "
     }),
     __metadata("design:paramtypes", [post_service_1.PostService])
 ], PostEditor);

@@ -24,13 +24,17 @@ var PostService = (function () {
         return this._http.get(this._productUrl).toPromise();
     };
     PostService.prototype.addPost = function (post) {
-        var bodyString = JSON.stringify(post);
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this._http.post(this._productUrl, post, options)
-            .map(function (res) { return res.json(); })
-            .catch(this.handleError);
+        var body = JSON.stringify(post);
+        return this._http.post(this._productUrl, body, options)
+            .toPromise()
+            .then(function (res) { return res.json(); });
     };
+    //private extractData(res: Response) {
+    //    let body = res.json();
+    //    return body.data;
+    //}
     PostService.prototype.handleError = function (error) {
         console.error(error);
         return Observable_1.Observable.throw(error.json().error || 'Server error');
