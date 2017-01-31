@@ -2,7 +2,9 @@
     constructor(
         public Title: string,
         public ShortDescription: string,
-        public Content: string
+        public Content: string,
+        public Categories: list
+       
 
 
     ) { }

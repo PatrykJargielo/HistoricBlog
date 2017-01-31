@@ -1,0 +1,10 @@
+﻿<form>
+    <div class="form-group">
+        <ckeditor [(ngModel)]="model.Content" debounce="500" name="content">
+        </ckeditor>
+
+        <div>Tytuł</div><input type="text" class="form-control" placeholder="Tytul" [(ngModel)]="model.Title" name="title">
+        <input type="text" class="form-control" placeholder="Short" [(ngModel)]="model.ShortDescription" name="ShortDescription">
+    </div>
+    <button (click)="addPost()">Dodaj post</button>
+</form>

@@ -28840,12 +28840,13 @@ var PostService = (function () {
         return this._http.get(this._productUrl, { search: params }).toPromise();
     };
     PostService.prototype.addPost = function (post) {
+        var body = JSON.stringify(post);
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        var body = JSON.stringify(post);
+        console.log(body);
         return this._http.post(this._productUrl, body, options)
             .toPromise()
-            .then(function (res) { return res.json(); });
+            .then(function (res) { return res.json() || {}; });
     };
     //private extractData(res: Response) {
     //    let body = res.json();
@@ -76882,7 +76883,7 @@ var PostEditor = (function () {
     PostEditor = __decorate([
         core_1.Component({
             selector: 'editor',
-            template: "\n    <form>\n    <div class=\"form-group\">\n    <ckeditor [(ngModel)]=\"model.Content\" debounce=\"500\" name=\"content\">\n      <p>Hello <strong>world</strong></p>\n    </ckeditor>\n    \n    <input type=\"text\" class=\"form-control\" placeholder=\"Tytul\" [(ngModel)]=\"model.Title\" name=\"title\">\n    <input type=\"text\" class=\"form-control\" placeholder=\"Short\" [(ngModel)]=\"model.ShortDescription\" name=\"ShortDescription\">\n    </div>\n    <button (click)=\"addPost()\">Dodaj post</button>\n    </form>\n\n\n  "
+            templateUrl: 'app/posts/post-editor.component.html'
         }), 
         __metadata('design:paramtypes', [post_service_1.PostService])
     ], PostEditor);

@@ -70,7 +70,8 @@ namespace HistoricBlog.WebApi.Controllers
 
         }
 
-          [HttpPost]
+        [HttpPost]
+
         public HttpResponseMessage Post([FromBody]PostViewModel post)
         {
             var postEntity = new Post()

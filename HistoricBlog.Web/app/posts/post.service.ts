@@ -34,14 +34,28 @@ export class PostService {
         return this._http.get(this._productUrl, { search: params }).toPromise();
     }
 
-    addPost(post: Post): Promise<Post[]> {
+    addPost(post: Object): Promise<Post[]> {
+        
+        let body = JSON.stringify(post);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        let body = JSON.stringify(post);
+        console.log(body);
         return this._http.post(this._productUrl, body, options)
             .toPromise()
-            .then((res: Response) => res.json());
+            .then((res: Response) => res.json() || {});
         
+    }
+
+    uptadePost(post: Object): Promise<Post[]> {
+
+        let body = JSON.stringify(post);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        console.log(body);
+        return this._http.post(`${this._productUrl}/${body["id"]}`, body, options)
+            .toPromise()
+            .then((res: Response) => res.json() || {});
+
     }
 
     //private extractData(res: Response) {
