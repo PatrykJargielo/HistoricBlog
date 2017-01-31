@@ -1,6 +1,10 @@
 ﻿import { Injectable } from '@angular/core';
 import { IPost } from '../../redux/actions/post-interface';
-import { Http, Response, HttpModule, RequestOptions, Headers, URLSearchParams  } from '@angular/http';
+<<<<<<< HEAD
+import { Http, Response, HttpModule, RequestOptions, Headers  } from '@angular/http';
+=======
+import { Http, Response, HttpModule, URLSearchParams } from '@angular/http';
+>>>>>>> caa28adf7b5516376b7fe23c69f9994539a211eb
 import { Observable } from 'rxjs/Observable';
 import { Post } from './postEditor';
 import 'rxjs/add/operator/map';
@@ -24,16 +28,7 @@ export class PostService {
         return this._http.get(this._productUrl).toPromise();
     }
 
-    getPostsFilteredPage(page: number, quantity: number, titleFilter: string): Promise<any> {
-
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('page', page.toString());
-        params.set('quantity', quantity.toString());
-        if(titleFilter.length>0) params.set('titleFilter', titleFilter);
-
-        return this._http.get(this._productUrl, { search: params }).toPromise();
-    }
-
+<<<<<<< HEAD
     addPost(post: Post): Promise<Post[]> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
@@ -48,6 +43,17 @@ export class PostService {
     //    let body = res.json();
     //    return body.data;
     //}
+=======
+    getPostsFilteredPage(page: number, quantity: number, titleFilter: string): Promise<any> {
+
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('page', page.toString());
+        params.set('quantity', quantity.toString());
+        if(titleFilter.length>0) params.set('titleFilter', titleFilter);
+
+        return this._http.get(this._productUrl, { search: params }).toPromise();
+    }
+>>>>>>> caa28adf7b5516376b7fe23c69f9994539a211eb
 
 
     private handleError(error: Response) {

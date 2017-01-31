@@ -9,7 +9,6 @@ using HistoricBlog.WebApi.Models.Post;
 using HistoricBlog.DAL.Posts;
 using HistoricBlog.DAL.Base;
 using System.Web.Http.Cors;
-using System.Linq;
 
 namespace HistoricBlog.WebApi.Controllers
 {
@@ -52,6 +51,10 @@ namespace HistoricBlog.WebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, posts);
 
         }
+<<<<<<< HEAD
+          [HttpPost]
+=======
+
         [HttpGet]
         // GET: api/Post/{page}/{quantity}/{titleFilter}
         public HttpResponseMessage GetPostsFilteredPage(int page, int quantity,string titleFilter="")
@@ -70,7 +73,10 @@ namespace HistoricBlog.WebApi.Controllers
 
         }
 
-          [HttpPost]
+        [HttpPut]
+        [HttpPost]
+        [HttpPatch]
+>>>>>>> caa28adf7b5516376b7fe23c69f9994539a211eb
         public HttpResponseMessage Post([FromBody]PostViewModel post)
         {
             var postEntity = new Post()

@@ -9,9 +9,12 @@ import { post } from '../redux/reducers/post-reducer';
 import { PostActions } from '../redux/actions/post-actions';
 import { PostFilterPipe } from './posts/post-filter.pipe';
 import { PostService } from './posts/post.service';
+<<<<<<< HEAD
 import { PostEditor } from './posts/post-editor.component';
-import { Ng2PaginationModule } from 'ng2-pagination';
 import { CKEditorModule } from 'ng2-ckeditor';
+=======
+import { Ng2PaginationModule } from 'ng2-pagination';
+>>>>>>> caa28adf7b5516376b7fe23c69f9994539a211eb
 import thunk from 'redux-thunk';
 import * as createLogger from 'redux-logger';
 
@@ -29,8 +32,11 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
         FormsModule,
         HttpModule,
         JsonpModule,
-        CKEditorModule,
+<<<<<<< HEAD
+        CKEditorModule
+=======
         Ng2PaginationModule
+>>>>>>> caa28adf7b5516376b7fe23c69f9994539a211eb
 
     ],
     declarations: [
