@@ -7,21 +7,22 @@ export const SET_POSTS_CATEGORY_FILTER = "SET_POSTS_DESCRIPTION_FILTER";
 export const SET_POSTS_TAG_FILTER = "SET_POSTS_TAG_FILTER";
 export const SET_POSTS_TITLE_FILTER = "SET_POSTS_TITLE_FILTER";
 export const SET_POSTS_LIST_PAGE = "SET_POSTS_LIST_PAGE";
+export const SET_P_LIST_PAGE = "SET_POSTS_LIST_PAGE";
 
 
 
 export class PostActions {
 
-    addPost(post: IPost[]) {//todo
-        return {type: ADD_POST, post }
+    addPost(post: IPost) {
+        return { type: ADD_POST, payload:post }
     }
 
     getAllPosts(post) {
         return { type: GET_POSTS, payload:post }
     }
 
-    editPost(post: IPost[]) {//todo
-        return { type: EDIT_POST, post }
+    editPost(post: IPost) {//todo
+        return { type: EDIT_POST, payload: post }
     }
 
     setPostCategoryFilter(categories: string[]) {
