@@ -9,6 +9,7 @@ import { post } from '../redux/reducers/post-reducer';
 import { PostActions } from '../redux/actions/post-actions';
 import { PostFilterPipe } from './posts/post-filter.pipe';
 import { PostService } from './posts/post.service';
+import { CategoryService } from './posts/category.service';
 import { PostEditor } from './posts/post-editor.component';
 import { Ng2PaginationModule } from 'ng2-pagination';
 import { CKEditorModule } from 'ng2-ckeditor';
@@ -41,7 +42,8 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
     ],
     providers: [
         PostActions,
-	    PostService
+        PostService,
+        CategoryService
     ],
     bootstrap: [AppComponent, PostListComponent]
 })

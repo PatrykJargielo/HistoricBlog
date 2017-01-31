@@ -2,9 +2,14 @@
     <div class="form-group">
         <ckeditor [(ngModel)]="model.Content" debounce="500" name="content">
         </ckeditor>
-
-        <div>Tytuł</div><input type="text" class="form-control" placeholder="Tytul" [(ngModel)]="model.Title" name="title">
+        <label>Tytuł</label>
+        <input type="text" class="form-control" placeholder="Tytul" [(ngModel)]="model.Title" name="Title">
+        <label>Shorts</label>
         <input type="text" class="form-control" placeholder="Short" [(ngModel)]="model.ShortDescription" name="ShortDescription">
+        <label>Kategorie</label>
+        <input type="text" class="form-control" placeholder="kategorie" [(ngModel)]="model.Categories" name="Category">
+        <label>Tagi</label>
+        <input type="text" class="form-control" placeholder="tagi" [(ngModel)]="model.Tags" name="Tag">
     </div>
     <button (click)="addPost()">Dodaj post</button>
 </form>

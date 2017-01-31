@@ -26,14 +26,14 @@ namespace HistoricBlog.WebApi
             AutofacConfig.SetUpAutofacMvc();
             //WebApiConfig.Register(GlobalConfiguration.Configuration);
         }
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
-        }
+        //public void ConfigureServices(IServiceCollection services)
+        //{
+        //    services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+        //    {
+        //        builder.AllowAnyOrigin()
+        //               .AllowAnyMethod()
+        //               .AllowAnyHeader();
+        //    }));
+        //}
     }
 }

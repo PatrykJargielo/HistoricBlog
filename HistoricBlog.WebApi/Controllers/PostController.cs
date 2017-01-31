@@ -10,6 +10,7 @@ using HistoricBlog.DAL.Posts;
 using HistoricBlog.DAL.Base;
 using System.Web.Http.Cors;
 using System.Linq;
+using HistoricBlog.DAL.Posts.Categories;
 
 namespace HistoricBlog.WebApi.Controllers
 {
@@ -76,6 +77,7 @@ namespace HistoricBlog.WebApi.Controllers
         {
             var postEntity = new Post()
             {
+                
                 Title = post.Title,
                 ShortDescription = post.ShortDescription,
                 Content = post.Content

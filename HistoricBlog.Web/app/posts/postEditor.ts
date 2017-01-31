@@ -3,7 +3,8 @@
         public Title: string,
         public ShortDescription: string,
         public Content: string,
-        public Categories: list
+        public Categories: string,
+        public Tags: string
        
 
 

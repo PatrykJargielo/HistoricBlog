@@ -32,12 +32,22 @@ var PostService = (function () {
         return this._http.get(this._productUrl, { search: params }).toPromise();
     };
     PostService.prototype.addPost = function (post) {
+        var body = JSON.stringify(post);
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        var body = JSON.stringify(post);
+        console.log(body);
         return this._http.post(this._productUrl, body, options)
             .toPromise()
-            .then(function (res) { return res.json(); });
+            .then(function (res) { return res.json() || {}; });
+    };
+    PostService.prototype.uptadePost = function (post) {
+        var body = JSON.stringify(post);
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        console.log(body);
+        return this._http.post(this._productUrl + "/" + body["id"], body, options)
+            .toPromise()
+            .then(function (res) { return res.json() || {}; });
     };
     //private extractData(res: Response) {
     //    let body = res.json();
