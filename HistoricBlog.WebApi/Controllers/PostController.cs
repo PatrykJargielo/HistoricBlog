@@ -51,6 +51,24 @@ namespace HistoricBlog.WebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, posts);
 
         }
+        [HttpGet]
+        // GET: api/Post/{page}/{quantity}/{titleFilter}
+        public HttpResponseMessage GetPostsFilteredPage(int page, int quantity,string titleFilter="")
+        {
+            var result = _postService.GetPostsByTitle(titleFilter);
+            if (!result.IsVaild) return Request.CreateResponse(HttpStatusCode.BadRequest, result.Messages);
+            if (result.Result.Count() == 0) return Request.CreateResponse(HttpStatusCode.OK, $"No post found by title of {titleFilter} ");
+
+            var totalFilteredPostCount = result.Result.Count();
+            var pageStart = (page-1) * quantity;
+            result.Result = result.Result.Skip(pageStart).Take(quantity);
+
+            var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
+
+            return Request.CreateResponse(HttpStatusCode.OK,new { totalFilteredPostCount = totalFilteredPostCount, pageStart=pageStart, posts=posts });
+
+        }
+
           [HttpPost]
         public HttpResponseMessage Post([FromBody]PostViewModel post)
         {

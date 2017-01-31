@@ -24,6 +24,16 @@ export class PostService {
         return this._http.get(this._productUrl).toPromise();
     }
 
+    getPostsFilteredPage(page: number, quantity: number, titleFilter: string): Promise<any> {
+
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('page', page.toString());
+        params.set('quantity', quantity.toString());
+        if(titleFilter.length>0) params.set('titleFilter', titleFilter);
+
+        return this._http.get(this._productUrl, { search: params }).toPromise();
+    }
+
     addPost(post: Post): Promise<Post[]> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
