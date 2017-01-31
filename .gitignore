@@ -240,3 +240,7 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+#Angular 2 app
+HistoricBlog.Web/app/**/*.js
+HistoricBlog.Web/app/**/*.js.map
