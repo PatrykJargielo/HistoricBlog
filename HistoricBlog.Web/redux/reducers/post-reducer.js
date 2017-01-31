@@ -1,24 +1,41 @@
 "use strict";
 var post_actions_1 = require("../actions/post-actions");
-//import { PostsState } from '../post-state'
 var defaultState = {
-    page: 1,
-    posts: []
+    userName: 'guest',
+    token: '',
+    filterCategory: [],
+    filterTitle: '',
+    filterTag: [],
+    posts: [],
+    pagination: {
+        pageNumber: 1,
+        totalFilteredPostCount: 2,
+        postsOnPage: 5,
+    }
 };
 function post(state, action) {
     if (state === void 0) { state = defaultState; }
+    var newState = state;
     switch (action.type) {
+        case post_actions_1.SET_POSTS_LIST_PAGE:
+            newState = Object.assign({}, state);
+            newState.pagination.pageNumber = action.pageNumber;
+            return newState;
         case post_actions_1.ADD_POST:
             return state;
         case post_actions_1.EDIT_POST:
             return state;
         case post_actions_1.GET_POSTS:
-            return Object.assign({}, state, {
-                page: 10,
-                posts: action.post
-            });
+            newState = Object.assign({}, state);
+            newState.pagination.totalFilteredPostCount = action.payload.totalFilteredPostCount,
+                newState.posts = action.payload.posts;
+            return newState;
+        case post_actions_1.SET_POSTS_TITLE_FILTER:
+            newState = Object.assign({}, state);
+            newState.filterTitle = action.filterTitle;
+            return newState;
         default:
-            return state;
+            return newState;
     }
 }
 exports.post = post;

@@ -20,6 +20,7 @@ var post_actions_1 = require("../redux/actions/post-actions");
 var post_filter_pipe_1 = require("./posts/post-filter.pipe");
 var post_service_1 = require("./posts/post.service");
 var post_editor_component_1 = require("./posts/post-editor.component");
+var ng2_pagination_1 = require("ng2-pagination");
 var ng2_ckeditor_1 = require("ng2-ckeditor");
 var redux_thunk_1 = require("redux-thunk");
 var createLogger = require("redux-logger");
@@ -38,7 +39,8 @@ AppModule = __decorate([
             forms_1.FormsModule,
             http_1.HttpModule,
             http_1.JsonpModule,
-            ng2_ckeditor_1.CKEditorModule
+            ng2_ckeditor_1.CKEditorModule,
+            ng2_pagination_1.Ng2PaginationModule
         ],
         declarations: [
             app_component_1.AppComponent,

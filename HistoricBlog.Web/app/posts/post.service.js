@@ -23,6 +23,14 @@ var PostService = (function () {
     PostService.prototype.getPosts = function () {
         return this._http.get(this._productUrl).toPromise();
     };
+    PostService.prototype.getPostsFilteredPage = function (page, quantity, titleFilter) {
+        var params = new http_1.URLSearchParams();
+        params.set('page', page.toString());
+        params.set('quantity', quantity.toString());
+        if (titleFilter.length > 0)
+            params.set('titleFilter', titleFilter);
+        return this._http.get(this._productUrl, { search: params }).toPromise();
+    };
     PostService.prototype.addPost = function (post) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
