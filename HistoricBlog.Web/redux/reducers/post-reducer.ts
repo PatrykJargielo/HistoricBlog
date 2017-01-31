@@ -33,8 +33,13 @@ export function post(state = defaultState, action) {
             newState.pagination.pageNumber = action.pageNumber;
             return newState;
         case ADD_POST:
+            newState = Object.assign({}, state)
+            newState.posts.concat(action.payload.post)
             return state;
         case EDIT_POST:
+            newState = Object.assign({}, state)
+            newState.posts.filter((post) => post.Id != action.post.Id)
+            newState.posts.concat(action.payload.post)
             return state;
         case GET_POSTS:
             newState = Object.assign({}, state)
