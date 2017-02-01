@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { PostService } from './posts/post.service';
+import { RouterModule, Routes } from '@angular/router';
 
 @Component({
   selector: 'hb-app',
   template: `
-  <div>
-
-     <editor></editor>
-<hb-posts-list></hb-posts-list>
-  </div>
+    <div>
+        <div class='container'>
+            <router-outlet></router-outlet>
+        </div>
+     </div>
 
 
   `,

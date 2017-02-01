@@ -7,28 +7,26 @@ import { PostsState } from '../../redux/post-state';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-    selector: 'hb-posts-list',
-        templateUrl: 'app/posts/post-list.component.html',
-            styleUrls: ['app/posts/post-list.component.css']
+
+    templateUrl: 'app/posts/post-list.component.html',
+    styleUrls: ['app/posts/post-list.component.css']
 })
 
 export class PostListComponent implements OnInit {
     stateModel: PostsState;
     listFilter: string;
-    posts: IPost[]=[];
+    posts: IPost[] = [];
 
     constructor( private postService: PostService, private _postActions: PostActions, private zone: NgZone) {
         this.postService = postService;
         this.stateModel = AppStore.getState() as PostsState;
         this.listFilter = '';
     }
-
     ngOnInit(): void {
         AppStore.subscribe(() => {
             this.postListener()
         });
         AppStore.dispatch(this.getAllPosts());
-        
     }
 
     postListener() {

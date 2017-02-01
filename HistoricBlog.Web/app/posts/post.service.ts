@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/Rx';
 
 
 @Injectable()
@@ -21,7 +22,7 @@ export class PostService {
 
 
     getPosts(): Promise<any> {
-        return this._http.get(this._productUrl).toPromise();
+        return this._http.get(this._postUrl).toPromise();
     }
 
     getPostsFilteredPage(page: number, quantity: number, titleFilter: string): Promise<any> {
@@ -63,6 +64,21 @@ export class PostService {
     //    return body.data;
     //}
 
+    // getPost(id: number): Promise<IPost> {
+
+    //     let params: URLSearchParams = new URLSearchParams();
+    //     params.set('id', id.toString());
+
+    //     return this._http.get(this._postUrl, { search: params }).toPromise();
+    // }
+
+    getPost(id: number): Promise<any> {
+        const url = `${this._postUrl}/${id}`;
+        return this._http.get(url)
+            .toPromise()
+            .then(response => response.json().data as IPost)
+            .catch(this.handleError);
+    }
 
     private handleError(error: Response) {
 
