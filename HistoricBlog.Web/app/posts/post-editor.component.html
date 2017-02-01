@@ -1,15 +1,28 @@
-﻿<form>
+﻿<form [formGroup]="postForm" >
     <div class="form-group">
-        <ckeditor [(ngModel)]="model.Content" debounce="500" name="content">
+        <ckeditor formControlName="Content" debounce="500" name="content">
         </ckeditor>
         <label>Tytuł</label>
-        <input type="text" class="form-control" placeholder="Tytul" [(ngModel)]="model.Title" name="Title">
+        <input type="text" class="form-control" id="Title"  formControlName="Title" required>
+        <div *ngIf="formErrors.Title" class="alert alert-danger">
+            {{ formErrors.Title }}
+        </div>
         <label>Shorts</label>
-        <input type="text" class="form-control" placeholder="Short" [(ngModel)]="model.ShortDescription" name="ShortDescription">
+        <input type="text" class="form-control" placeholder="Short" formControlName="ShortDescription" name="ShortDescription">
+        <div *ngIf="formErrors.ShortDescription" class="alert alert-danger">
+            {{ formErrors.ShortDescription }}
+        </div>
         <label>Kategorie</label>
-        <input type="text" class="form-control" placeholder="kategorie" [(ngModel)]="categories" name="Category">
+        <input type="text" class="form-control" placeholder="kategorie" formControlName="categories" name="categories">
+        <div *ngIf="formErrors.categories" class="alert alert-danger">
+            {{ formErrors.categories }}
+        </div>
         <label>Tagi</label>
-        <input type="text" class="form-control" placeholder="tagi" [(ngModel)]="tags" name="Tag">
+        <input type="text" class="form-control" placeholder="tagi" formControlName="tags"  name="tags">
+        <div *ngIf="formErrors.tags" class="alert alert-danger">
+            {{ formErrors.tags }}
+        </div>
     </div>
     <button (click)="addPost()">Dodaj post</button>
 </form>
+

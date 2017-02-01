@@ -1,5 +1,5 @@
 import { NgModule, NgZone } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { AppComponent } from './app.component';
@@ -31,7 +31,8 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
         HttpModule,
         JsonpModule,
         CKEditorModule,
-        Ng2PaginationModule
+        Ng2PaginationModule,
+        ReactiveFormsModule
 
     ],
     declarations: [
@@ -45,7 +46,8 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
         PostService,
         CategoryService
     ],
-    bootstrap: [AppComponent, PostListComponent]
+    bootstrap: [AppComponent, PostListComponent],
+    exports: [PostEditor]
 })
 export class AppModule { }
 
