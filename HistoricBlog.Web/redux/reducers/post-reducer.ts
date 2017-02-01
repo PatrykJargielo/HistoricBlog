@@ -53,7 +53,7 @@ export function post(state = defaultState, action) {
             return newState;
         case GET_POST:
             newState = Object.assign({}, state)
-            newState.posts = [action.payload.post]
+            newState.posts = [action.payload]
             return newState;  
         default:
             return newState;

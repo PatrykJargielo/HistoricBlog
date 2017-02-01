@@ -158,8 +158,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\login\login.js" />
-    <Content Include="app\login\login.service.js" />
     <Content Include="app\posts\post-details.component.html" />
     <Content Include="app\posts\post-editor.component.html" />
     <Content Include="app\posts\post-list.component.css" />
@@ -186,8 +184,6 @@
     <TypeScriptCompile Include="app\posts\post-details.component.ts" />
     <TypeScriptCompile Include="app\posts\post-editor.component.ts" />
     <TypeScriptCompile Include="app\posts\post-filter.pipe.ts" />
-    <Content Include="app\login\login.js.map" />
-    <Content Include="app\login\login.service.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

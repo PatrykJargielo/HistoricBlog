@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+﻿import { Component,NgZone ,OnInit, Inject, OnDestroy } from '@angular/core';
 import { IPost } from '../../redux/actions/post-interface';
 import { PostActions } from '../../redux/actions/post-actions';
 import { PostService } from './post.service';
@@ -23,20 +23,29 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
         private _router: Router,
         private _postService: PostService,
         private route: ActivatedRoute,
-        private _postActions: PostActions    )
+        private _postActions: PostActions,
+        private zone:NgZone)
     {
         this.stateModel = AppStore.getState() as PostsState;
     }
 
     ngOnInit(): void {
+        AppStore.subscribe(() => {this.postListnener()});
         this.sub = this._route.params.subscribe(
             params => {
                 let id = + params['id'];
-                this.getPost(id);
+                AppStore.dispatch(this.getPost(id));
+                
             });
+    }
 
+    postListnener(): void {
         this.stateModel = AppStore.getState() as PostsState;
         this.post = this.stateModel.posts[0]
+
+        this.zone.run(() => {
+            this.post = this.stateModel.posts[0]
+        });
     }
 
     ngOnDestroy() {
@@ -47,13 +56,15 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
         //// this._postService.getPost(id).subscribe(
         ////     post => this.post = id,
         ////     error => this.errorMessage = <any>error);
-        let idFromRoute = this.route.params['id'];
+        let idFromRoute =+ this.route.snapshot.params['id'];
         //this._postService.getPost(idFromRoute);
         //    .subscribe(post => this.post = post/*);*/
 
+
+       
         return (dispatch) => {
             this._postService.getPost(idFromRoute).then(
-                post => dispatch(this._postActions.getAllPosts(post.json())
+                post => dispatch(this._postActions.getPost(post.json())
                 )
             );
         }
