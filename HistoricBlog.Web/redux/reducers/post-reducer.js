@@ -32,12 +32,17 @@ function post(state, action) {
             return state;
         case post_actions_1.GET_POSTS:
             newState = Object.assign({}, state);
-            newState.pagination.totalFilteredPostCount = action.payload.totalFilteredPostCount,
-                newState.posts = action.payload.posts;
+            newState.pagination.totalFilteredPostCount = action.payload.totalFilteredPostCount;
+            newState.posts = action.payload.posts;
             return newState;
         case post_actions_1.SET_POSTS_TITLE_FILTER:
             newState = Object.assign({}, state);
             newState.filterTitle = action.filterTitle;
+            return newState;
+        case post_actions_1.SET_ERRORS:
+            ;
+            newState = Object.assign({}, state);
+            newState.filterTitle = action.payload.errors;
             return newState;
         default:
             return newState;

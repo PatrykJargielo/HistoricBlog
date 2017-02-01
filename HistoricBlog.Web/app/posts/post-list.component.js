@@ -27,7 +27,7 @@ var PostListComponent = (function () {
         app_module_1.AppStore.subscribe(function () {
             _this.postListener();
         });
-        app_module_1.AppStore.dispatch(this.getAllPosts());
+        this.postService.getPostsFilteredPage();
     };
     PostListComponent.prototype.postListener = function () {
         var _this = this;
@@ -36,18 +36,12 @@ var PostListComponent = (function () {
             _this.posts = _this.stateModel.posts;
         });
     };
-    PostListComponent.prototype.getAllPosts = function () {
-        var _this = this;
-        return function (dispatch) {
-            _this.postService.getPostsFilteredPage(_this.stateModel.pagination.pageNumber, _this.stateModel.pagination.postsOnPage, _this.stateModel.filterTitle).then(function (posts) { return dispatch(_this._postActions.getAllPosts(posts.json())); });
-        };
-    };
     PostListComponent.prototype.setTitleFilter = function (value) {
         var _this = this;
         app_module_1.AppStore.dispatch(function (dispatch) {
             dispatch(_this._postActions.setPostTitleFilter(value));
         });
-        app_module_1.AppStore.dispatch(this.getAllPosts());
+        this.postService.getPostsFilteredPage();
     };
     PostListComponent.prototype.getPostCount = function () {
         return this.stateModel.pagination.totalFilteredPostCount;
@@ -61,7 +55,7 @@ var PostListComponent = (function () {
     PostListComponent.prototype.pageChanged = function (value) {
         var _this = this;
         app_module_1.AppStore.dispatch(function (dispatch) { dispatch(_this._postActions.setPostListPage(value)); });
-        app_module_1.AppStore.dispatch(this.getAllPosts());
+        this.postService.getPostsFilteredPage();
     };
     return PostListComponent;
 }());

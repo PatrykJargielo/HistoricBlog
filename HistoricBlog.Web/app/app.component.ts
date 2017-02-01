@@ -5,12 +5,10 @@ import { PostService } from './posts/post.service';
   selector: 'hb-app',
   template: `
   <div>
-
-     <editor></editor>
-<hb-posts-list></hb-posts-list>
+     <hb-error-display></hb-error-display>
+     <editor></editor> 
+     <hb-posts-list></hb-posts-list>
   </div>
-
-
   `,
   providers: [PostService]
 })

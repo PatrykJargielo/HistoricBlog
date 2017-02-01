@@ -6,7 +6,7 @@ exports.SET_POSTS_CATEGORY_FILTER = "SET_POSTS_DESCRIPTION_FILTER";
 exports.SET_POSTS_TAG_FILTER = "SET_POSTS_TAG_FILTER";
 exports.SET_POSTS_TITLE_FILTER = "SET_POSTS_TITLE_FILTER";
 exports.SET_POSTS_LIST_PAGE = "SET_POSTS_LIST_PAGE";
-exports.SET_P_LIST_PAGE = "SET_POSTS_LIST_PAGE";
+exports.SET_ERRORS = "SET_ERRORS";
 var PostActions = (function () {
     function PostActions() {
     }
@@ -30,6 +30,9 @@ var PostActions = (function () {
     };
     PostActions.prototype.setPostListPage = function (pageNumber) {
         return { type: exports.SET_POSTS_LIST_PAGE, pageNumber: pageNumber };
+    };
+    PostActions.prototype.setErrors = function (errors) {
+        return { type: exports.SET_ERRORS, payload: errors };
     };
     return PostActions;
 }());
