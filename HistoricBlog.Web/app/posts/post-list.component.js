@@ -67,7 +67,6 @@ var PostListComponent = (function () {
 }());
 PostListComponent = __decorate([
     core_1.Component({
-        selector: 'hb-posts-list',
         templateUrl: 'app/posts/post-list.component.html',
         styleUrls: ['app/posts/post-list.component.css']
     }),

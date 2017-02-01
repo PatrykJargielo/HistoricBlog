@@ -19,15 +19,41 @@ require("rxjs/Rx");
 var PostService = (function () {
     function PostService(_http) {
         this._http = _http;
-<<<<<<< HEAD
-        this._productUrl = 'http://localhost:58141/api/post';
-=======
-        this._postUrl = 'http://localhost:58141/api/post/';
->>>>>>> Patryk_Jargieło
+        this._postUrl = 'http://localhost:58141/api/post';
     }
     PostService.prototype.getPosts = function () {
         return this._http.get(this._postUrl).toPromise();
     };
+    PostService.prototype.getPostsFilteredPage = function (page, quantity, titleFilter) {
+        var params = new http_1.URLSearchParams();
+        params.set('page', page.toString());
+        params.set('quantity', quantity.toString());
+        if (titleFilter.length > 0)
+            params.set('titleFilter', titleFilter);
+        return this._http.get(this._postUrl, { search: params }).toPromise();
+    };
+    PostService.prototype.addPost = function (post) {
+        var body = JSON.stringify(post);
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        console.log(body);
+        return this._http.post(this._postUrl, body, options)
+            .toPromise()
+            .then(function (res) { return res.json() || {}; });
+    };
+    PostService.prototype.uptadePost = function (post) {
+        var body = JSON.stringify(post);
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        console.log(body);
+        return this._http.post(this._postUrl + "/" + body["id"], body, options)
+            .toPromise()
+            .then(function (res) { return res.json() || {}; });
+    };
+    //private extractData(res: Response) {
+    //    let body = res.json();
+    //    return body.data;
+    //}
     // getPost(id: number): Promise<IPost> {
     //     let params: URLSearchParams = new URLSearchParams();
     //     params.set('id', id.toString());
@@ -40,36 +66,6 @@ var PostService = (function () {
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
     };
-    PostService.prototype.getPostsFilteredPage = function (page, quantity, titleFilter) {
-        var params = new http_1.URLSearchParams();
-        params.set('page', page.toString());
-        params.set('quantity', quantity.toString());
-        if (titleFilter.length > 0)
-            params.set('titleFilter', titleFilter);
-        return this._http.get(this._productUrl, { search: params }).toPromise();
-    };
-    PostService.prototype.addPost = function (post) {
-        var body = JSON.stringify(post);
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
-        console.log(body);
-        return this._http.post(this._productUrl, body, options)
-            .toPromise()
-            .then(function (res) { return res.json() || {}; });
-    };
-    PostService.prototype.uptadePost = function (post) {
-        var body = JSON.stringify(post);
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
-        console.log(body);
-        return this._http.post(this._productUrl + "/" + body["id"], body, options)
-            .toPromise()
-            .then(function (res) { return res.json() || {}; });
-    };
-    //private extractData(res: Response) {
-    //    let body = res.json();
-    //    return body.data;
-    //}
     PostService.prototype.handleError = function (error) {
         console.error(error);
         return Observable_1.Observable.throw(error.json().error || 'Server error');
