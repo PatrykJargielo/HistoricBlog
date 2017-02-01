@@ -41,9 +41,9 @@ namespace HistoricBlog.BLL.Posts
         {
             entity.PostedOn = DateTime.Now;
             entity.Modified = entity.PostedOn;
-            entity.Categories = new List<Category>();
+            //entity.Categories = new List<Category>();
             entity.Comments = new List<Comment>();
-            entity.Tags = new List<Tag>();
+            //entity.Tags = new List<Tag>();
             entity.PostedOn = DateTime.Now;
             entity.Modified = entity.PostedOn;
             return base.Create(entity);

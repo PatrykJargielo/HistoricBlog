@@ -7,7 +7,7 @@ using HistoricBlog.DAL.Posts.Tags;
 using HistoricBlog.DAL.Users;
 using HistoricBlog.WebApi.Models.Post;
 using HistoricBlog.WebApi.Models.Users;
-using HistoricBlog.WebApi.Models.Users.Permissions;
+
 using HistoricBlog.WebApi.Models.Users.Roles;
 using System;
 using System.Collections.Generic;
@@ -22,15 +22,19 @@ namespace HistoricBlog.AutoMapper.App_Start
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Post, PostViewModel>();
-                cfg.CreateMap<PostViewModel,Post >();
+                cfg.CreateMap<Post, PostViewModel>();  
+                cfg.CreateMap<String, Category>()
+                    .ConstructUsing(str => new Category() { Name = str });
+                cfg.CreateMap<String, Tag>()
+                    .ConstructUsing(str => new Tag { Name = str });
+                cfg.CreateMap<PostInputViewModel, Post>();
                 cfg.CreateMap<Comment, CommentViewModel>();
                 cfg.CreateMap<Category, CategoryViewModel>();
                 cfg.CreateMap<Tag, TagViewModel>();
                 cfg.CreateMap<Rating, RatingViewModel>();
                 cfg.CreateMap<User, UserViewModel>();
                 cfg.CreateMap<Role, RoleViewModel>();
-                cfg.CreateMap<Permission, PermissionViewModel>();
+               
             });
         }
     }

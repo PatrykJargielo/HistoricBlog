@@ -2,6 +2,7 @@
 
 export const ADD_POST = "ADD_POST";
 export const EDIT_POST = "EDIT_POST";
+export const GET_POST = "GET_POST";
 export const GET_POSTS = "GET_POSTS";
 export const SET_POSTS_CATEGORY_FILTER = "SET_POSTS_DESCRIPTION_FILTER";
 export const SET_POSTS_TAG_FILTER = "SET_POSTS_TAG_FILTER";
@@ -41,4 +42,7 @@ export class PostActions {
         return { type: SET_POSTS_LIST_PAGE, pageNumber: pageNumber }
     }
 
+    getPost(post: IPost) {
+        return { type: GET_POST, payload:post}
+    }
 }

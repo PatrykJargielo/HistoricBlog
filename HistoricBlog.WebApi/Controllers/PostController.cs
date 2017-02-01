@@ -10,6 +10,7 @@ using HistoricBlog.DAL.Posts;
 using HistoricBlog.DAL.Base;
 using System.Web.Http.Cors;
 using System.Linq;
+using HistoricBlog.DAL.Posts.Categories;
 
 namespace HistoricBlog.WebApi.Controllers
 {
@@ -70,11 +71,13 @@ namespace HistoricBlog.WebApi.Controllers
 
         }
 
-          [HttpPost]
-        public HttpResponseMessage Post([FromBody]PostViewModel post)
+        [HttpPost]
+
+        public HttpResponseMessage Post([FromBody]PostInputViewModel post)
         {
             var postEntity = Mapper.Map<Post>(post);
             var isPostNew = post.Id == 0;  //do test
+                
 
             var postResult = new GenericResult<Post>();
             if (isPostNew)

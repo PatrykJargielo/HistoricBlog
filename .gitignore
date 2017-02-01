@@ -244,3 +244,4 @@ ModelManifest.xml
 #Angular 2 app
 HistoricBlog.Web/app/**/*.js
 HistoricBlog.Web/app/**/*.js.map
+HistoricBlog.Web/redux/**/*.jsHistoricBlog.Web/redux/**/*.js.map

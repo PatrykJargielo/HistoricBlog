@@ -34,7 +34,7 @@ namespace HistoricBlog.Tests
             var users = new List<User>
             {
                 new User()
-                { Login = login,Password = password,Name = name,Surname = surname,Email = email,Comments = null,Roles =null,Ratings = null}
+                { UserName = login,Password = password,Name = name,Surname = surname,Email = email,Comments = null,Roles =null,Ratings = null}
             }.AsQueryable();
 
             var userMock = UserMock(users);
@@ -50,7 +50,7 @@ namespace HistoricBlog.Tests
             var userFromService = userService.GetAll().Result.FirstOrDefault();
     
 
-             Assert.AreEqual(users.FirstOrDefault()?.Login, userFromService?.Login);
+             Assert.AreEqual(users.FirstOrDefault()?.UserName, userFromService?.UserName);
         }
 
         private static Mock<DbSet<User>> UserMock(IQueryable<User> users) 
