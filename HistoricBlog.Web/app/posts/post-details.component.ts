@@ -8,7 +8,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 
 @Component({
-    templateUrl: 'app/posts/post-details.component.html',
+    templateUrl: 'app/posts/post-details.component.html'
 })
 
 export class PostDetailsComponent implements OnInit, OnDestroy {
@@ -20,7 +20,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
     constructor(private _route: ActivatedRoute,
         private _router: Router,
         private _postService: PostService,
-        private route: ActivatedRoute, ) {
+        private route: ActivatedRoute ) {
     }
 
     ngOnInit(): void {

@@ -15,7 +15,7 @@ import 'rxjs/Rx';
 export class PostService {
 
 
-    private _productUrl = 'http://localhost:58141/api/post';
+    private _postUrl = 'http://localhost:58141/api/post';
 
     constructor(private _http: Http) { }
 
@@ -32,7 +32,7 @@ export class PostService {
         params.set('quantity', quantity.toString());
         if(titleFilter.length>0) params.set('titleFilter', titleFilter);
 
-        return this._http.get(this._productUrl, { search: params }).toPromise();
+        return this._http.get(this._postUrl, { search: params }).toPromise();
     }
 
     addPost(post: Object): Promise<Post[]> {
@@ -41,7 +41,7 @@ export class PostService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         console.log(body);
-        return this._http.post(this._productUrl, body, options)
+        return this._http.post(this._postUrl, body, options)
             .toPromise()
             .then((res: Response) => res.json() || {});
         
@@ -53,7 +53,7 @@ export class PostService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         console.log(body);
-        return this._http.post(`${this._productUrl}/${body["id"]}`, body, options)
+        return this._http.post(`${this._postUrl}/${body["id"]}`, body, options)
             .toPromise()
             .then((res: Response) => res.json() || {});
 

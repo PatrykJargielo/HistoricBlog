@@ -34,7 +34,7 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
         HttpModule,
         JsonpModule,
         CKEditorModule,
-        Ng2PaginationModule
+        Ng2PaginationModule,
         RouterModule.forRoot([
             { path: '', component: PostListComponent },
             { path: 'posts', redirectTo: '', pathMatch: 'full' },
@@ -51,13 +51,13 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
         AppComponent,
         PostListComponent,
         PostFilterPipe,
-        PostEditor
+        PostEditor,
         PostDetailsComponent
     ],
     providers: [
         PostActions,
         PostService,
-        CategoryService
+        CategoryService,
         PostDetailGuard
     ],
     bootstrap: [AppComponent]
