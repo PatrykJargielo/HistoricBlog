@@ -5,6 +5,7 @@ import { PostService } from './post.service';
 import { AppStore } from '../app.module';
 import { Subscription } from 'rxjs/Subscription';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { PostsState } from '../../redux/post-state';
 
 
 @Component({
@@ -14,13 +15,17 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 export class PostDetailsComponent implements OnInit, OnDestroy {
     pageTitle: string = 'Post Detail';
     post: IPost;
+    stateModel: PostsState;
     errorMessage: string;
     private sub: Subscription;
 
     constructor(private _route: ActivatedRoute,
         private _router: Router,
         private _postService: PostService,
-        private route: ActivatedRoute ) {
+        private route: ActivatedRoute,
+        private _postActions: PostActions    )
+    {
+        this.stateModel = AppStore.getState() as PostsState;
     }
 
     ngOnInit(): void {
@@ -29,6 +34,9 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
                 let id = + params['id'];
                 this.getPost(id);
             });
+
+        this.stateModel = AppStore.getState() as PostsState;
+        this.post = this.stateModel.posts[0]
     }
 
     ngOnDestroy() {
@@ -36,19 +44,26 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
     }
 
     getPost(id: number) {
-        // this._postService.getPost(id).subscribe(
-        //     product => this.post = id,
-        //     error => this.errorMessage = <any>error);
-        this.route.params
-            .switchMap((params: Params) => this._postService.getPost(+params['id']))
-            .subscribe(post => this.post = post);
+        //// this._postService.getPost(id).subscribe(
+        ////     post => this.post = id,
+        ////     error => this.errorMessage = <any>error);
+        let idFromRoute = this.route.params['id'];
+        //this._postService.getPost(idFromRoute);
+        //    .subscribe(post => this.post = post/*);*/
+
+        return (dispatch) => {
+            this._postService.getPost(idFromRoute).then(
+                post => dispatch(this._postActions.getAllPosts(post.json())
+                )
+            );
+        }
     }
 
     onBack(): void {
-        this._router.navigate(['']);
-    }
+            this._router.navigate(['']);
+        }
 
-    onRatingClicked(message: string): void {
-        this.pageTitle = 'Post Detail: ' + message;
-    }
-};
+        onRatingClicked(message: string): void {
+            this.pageTitle = 'Post Detail: ' + message;
+        }
+    };

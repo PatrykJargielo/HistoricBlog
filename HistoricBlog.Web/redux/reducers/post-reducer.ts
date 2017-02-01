@@ -2,6 +2,7 @@
     ADD_POST,
     EDIT_POST,
     GET_POSTS,
+    GET_POST,
     SET_POSTS_TITLE_FILTER,
     SET_POSTS_LIST_PAGE
 } from '../actions/post-actions'
@@ -50,6 +51,10 @@ export function post(state = defaultState, action) {
             newState = Object.assign({}, state)
             newState.filterTitle = action.filterTitle;
             return newState;
+        case GET_POST:
+            newState = Object.assign({}, state)
+            newState.posts = [action.payload.post]
+            return newState;  
         default:
             return newState;
     }

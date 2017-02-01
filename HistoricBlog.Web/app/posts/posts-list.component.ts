@@ -7,7 +7,6 @@ import { AppStore } from '../app.module';
 
 
 @Component({
-    selector: 'hb-posts-list',
     templateUrl: 'app/posts/post-list.component.html',
     styleUrls: ['app/posts/post-list.component.css']
 })

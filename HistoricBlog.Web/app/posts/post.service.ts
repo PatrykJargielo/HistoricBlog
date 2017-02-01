@@ -74,9 +74,7 @@ export class PostService {
 
     getPost(id: number): Promise<any> {
         const url = `${this._postUrl}/${id}`;
-        return this._http.get(url)
-            .toPromise()
-            .then(response => response.json().data as IPost)
+        return this._http.get(url).toPromise()
             .catch(this.handleError);
     }
 

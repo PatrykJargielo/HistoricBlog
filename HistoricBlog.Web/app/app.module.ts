@@ -37,15 +37,14 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
         Ng2PaginationModule,
         RouterModule.forRoot([
             { path: '', component: PostListComponent },
+            {
+                path: 'post/:id',
+                canActivate: [PostDetailGuard],
+                component: PostDetailsComponent
+            },
             { path: 'posts', redirectTo: '', pathMatch: 'full' },
-            { path: '**', redirectTo: '', pathMatch: 'full' },
-
-        ]),
-        RouterModule.forChild([{
-            path: 'post/:id',
-            canActivate: [PostDetailGuard],
-            component: PostDetailsComponent
-        }])
+            { path: '**', redirectTo: '', pathMatch: 'full' }
+        ])
     ],
     declarations: [
         AppComponent,
