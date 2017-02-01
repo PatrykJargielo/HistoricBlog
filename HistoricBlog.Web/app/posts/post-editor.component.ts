@@ -19,20 +19,23 @@ export class PostEditor implements OnInit {
     postForm: FormGroup;
 
     constructor(private postService: PostService, private fb: FormBuilder) {
-        this.model = new Post();
+        
     }
 
     addPost() {
+        console.log(this.postForm.value);
         this.model = this.postForm.value;
+        console.log(this.model);
+        console.log(this.postForm.value);
         this.model.Tags = this.tags.split(',');
         this.model.Categories = this.categories.split(',');
-        console.log(this.model);
         this.postService.addPost(this.model);
-
+        
         console.log(this.model);
     }
 
     ngOnInit(): void {
+        this.model = new Post();
         this.buildForm();
     }
 
