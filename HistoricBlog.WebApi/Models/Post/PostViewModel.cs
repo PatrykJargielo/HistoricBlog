@@ -17,10 +17,10 @@ namespace HistoricBlog.WebApi.Models.Post
 
         public DateTime? Modified { get; set; }
 
-        public virtual IList<CategoryViewModel> Categories { get; set; }
+        public virtual List<CategoryViewModel> Categories { get; set; }
 
-        public virtual IList<TagViewModel> Tags { get; set; }
+        public virtual List<TagViewModel> Tags { get; set; }
 
-        public virtual IList<CommentViewModel> Comments { get; set; }
+        public virtual List<CommentViewModel> Comments { get; set; }
     }
 }

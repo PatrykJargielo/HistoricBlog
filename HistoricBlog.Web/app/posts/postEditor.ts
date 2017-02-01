@@ -1,4 +1,6 @@
-﻿export class Post {
+﻿import {Category} from "./Category";
+
+export class Post {
     public Title: string;
     public ShortDescription: string;
     public Content: string;

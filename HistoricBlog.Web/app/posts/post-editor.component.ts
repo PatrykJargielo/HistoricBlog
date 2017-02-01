@@ -2,7 +2,6 @@
 import { CKEditorModule } from 'ng2-ckeditor';
 import { PostService } from './post.service';
 import { CategoryService } from './category.service';
-import { IPost } from '../../redux/actions/post-interface';
 import { Post } from './postEditor';
 import { Category } from './Category';
 
@@ -13,20 +12,22 @@ import { Category } from './Category';
 })
 export class PostEditor{
     model: Post;
-    tags: string
-    categories: string
+    tags: string;
+    categories: string;
 
-    constructor(private postService: PostService, private categoryService: CategoryService) {
+    constructor(private postService: PostService) {
         this.model = new Post();
     }
 
     
     addPost() {
-        this.model.Tags = this.tags.(' ');
-        this.model.Categories = this.categories.split(' ');
+        this.model.Tags = this.tags.split(',');
+        this.model.Categories = this.categories.split(',');
         this.postService.addPost(this.model);
 
         console.log(this.model);
+
+        
     }
 
 
