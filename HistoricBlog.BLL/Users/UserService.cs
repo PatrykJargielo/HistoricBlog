@@ -35,7 +35,7 @@ namespace HistoricBlog.BLL.Users
                 return new GenericResult<User>();
             }
             dbUser.Email = entity.Email;
-            dbUser.Login = entity.Login;
+            dbUser.UserName = entity.UserName;
             dbUser.Name = entity.Name;
             dbUser.Surname = entity.Surname;
             dbUser.Password = entity.Password;
