@@ -44,17 +44,18 @@ var PostEditor = (function () {
                 'maxlength': 'Tag może mieć maksymalnie 50 znaków.'
             }
         };
-        this.model = new postEditor_1.Post();
     }
     PostEditor.prototype.addPost = function () {
-        this.model = this.postForm.value;
-        this.model.Tags = this.tags.split(',');
-        this.model.Categories = this.categories.split(',');
+        this.tagAndCategorySplit = this.postForm.value;
+        this.model = this.tagAndCategorySplit;
+        this.model.Categories = this.tagAndCategorySplit.categories.split(',');
+        this.model.Tags = this.tagAndCategorySplit.tags.split(',');
         console.log(this.model);
         this.postService.addPost(this.model);
         console.log(this.model);
     };
     PostEditor.prototype.ngOnInit = function () {
+        this.model = new postEditor_1.Post();
         this.buildForm();
     };
     PostEditor.prototype.buildForm = function () {
@@ -78,14 +79,12 @@ var PostEditor = (function () {
             'categories': [
                 this.categories, [
                     forms_1.Validators.required,
-                    forms_1.Validators.required,
                     forms_1.Validators.minLength(2),
                     forms_1.Validators.maxLength(24)
                 ]
             ],
             'tags': [
                 this.tags, [
-                    forms_1.Validators.required,
                     forms_1.Validators.required,
                     forms_1.Validators.minLength(3),
                     forms_1.Validators.maxLength(24)

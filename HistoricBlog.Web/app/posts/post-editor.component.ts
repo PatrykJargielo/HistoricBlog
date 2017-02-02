@@ -17,20 +17,22 @@ export class PostEditor implements OnInit {
     tags: string;
     categories: string;
     postForm: FormGroup;
+    tagAndCategorySplit;
 
     constructor(private postService: PostService, private fb: FormBuilder) {
         
     }
 
     addPost() {
-        console.log(this.postForm.value);
-        this.model = this.postForm.value;
-        console.log(this.model);
-        console.log(this.postForm.value);
-        this.model.Tags = this.tags.split(',');
-        this.model.Categories = this.categories.split(',');
-        this.postService.addPost(this.model);
-        
+        this.tagAndCategorySplit = this.postForm.value;
+        this.model.Categories = this.tagAndCategorySplit.categories.split(',');
+        this.model.Tags = this.tagAndCategorySplit.tags.split(',');
+        this.model.Content = this.tagAndCategorySplit.Content;
+        this.model.ShortDescription = this.tagAndCategorySplit.ShortDescription;
+        this.model.Title = this.tagAndCategorySplit.Title;
+       
+        console.log(this.model);   
+        this.postService.addPost(this.model);   
         console.log(this.model);
     }
 
@@ -46,29 +48,29 @@ export class PostEditor implements OnInit {
             'Title': [
                 this.model.Title, [
                     Validators.required,
-                    Validators.minLength(4),
-                    Validators.maxLength(24)
+                    Validators.minLength(10),
+                    Validators.maxLength(50)
                 ]
             ],
             'ShortDescription': [
                 this.model.ShortDescription, [
                     Validators.required,
-                    Validators.minLength(4),
-                    Validators.maxLength(24)
+                    Validators.minLength(10),
+                    Validators.maxLength(500)
                 ]
             ],
             'categories': [
                 this.categories, [
                     Validators.required,
-                    Validators.minLength(2),
-                    Validators.maxLength(24)
+                    Validators.minLength(3),
+                    Validators.maxLength(20)
                 ]
             ],
             'tags': [
                 this.tags, [
                     Validators.required,
                     Validators.minLength(3),
-                    Validators.maxLength(24)
+                    Validators.maxLength(20)
                 ]
             ]
         });
@@ -110,23 +112,23 @@ export class PostEditor implements OnInit {
     validationMessages = {
         'Title': {
             'required': 'Tytuł jest wymagany',
-            'minlength': 'Tytuł musi sie składać z conajmniej 5 znaków',
-            'maxlength': 'Tytul może mieć maksymalnie 50 znaków.'
+            'minlength': 'Tytuł musi sie składać z co najmniej 10 znaków',
+            'maxlength': 'Tytuł może mieć maksymalnie 50 znaków.'
         },
         'ShortDescription': {
             'required': 'Krótki opis jest wymagany',
-            'minlength': 'Krótki opis musi sie składać z conajmniej 5 znaków',
-            'maxlength': 'Krótki opis może mieć maksymalnie 50 znaków.'
+            'minlength': 'Krótki opis musi sie składać z co najmniej 10 znaków',
+            'maxlength': 'Krótki opis może mieć maksymalnie 500 znaków.'
         },
         'categories': {
             'required': 'Kategoria jest wymagany',
-            'minlength': 'Kategoria musi sie składać z conajmniej 5 znaków',
-            'maxlength': 'Kategoria może mieć maksymalnie 50 znaków.'
+            'minlength': 'Kategoria musi sie składać z co najmniej 3 znaków',
+            'maxlength': 'Kategoria może mieć maksymalnie 20 znaków.'
         },
         'tags': {
             'required': 'Tag jest wymagany',
-            'minlength': 'Tag musi sie składać z conajmniej 5 znaków',
-            'maxlength': 'Tag może mieć maksymalnie 50 znaków.'
+            'minlength': 'Tag musi sie składać z co najmniej 3 znaków',
+            'maxlength': 'Tag może mieć maksymalnie 20 znaków.'
         }
     };
 

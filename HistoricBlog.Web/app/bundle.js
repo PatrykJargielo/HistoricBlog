@@ -76948,33 +76948,34 @@ var PostEditor = (function () {
         this.validationMessages = {
             'Title': {
                 'required': 'Tytuł jest wymagany',
-                'minlength': 'Tytuł musi sie składać z conajmniej 5 znaków',
-                'maxlength': 'Tytul może mieć maksymalnie 50 znaków.'
+                'minlength': 'Tytuł musi sie składać z co najmniej 10 znaków',
+                'maxlength': 'Tytuł może mieć maksymalnie 50 znaków.'
             },
             'ShortDescription': {
                 'required': 'Krótki opis jest wymagany',
-                'minlength': 'Krótki opis musi sie składać z conajmniej 5 znaków',
-                'maxlength': 'Krótki opis może mieć maksymalnie 50 znaków.'
+                'minlength': 'Krótki opis musi sie składać z co najmniej 10 znaków',
+                'maxlength': 'Krótki opis może mieć maksymalnie 500 znaków.'
             },
             'categories': {
                 'required': 'Kategoria jest wymagany',
-                'minlength': 'Kategoria musi sie składać z conajmniej 5 znaków',
-                'maxlength': 'Kategoria może mieć maksymalnie 50 znaków.'
+                'minlength': 'Kategoria musi sie składać z co najmniej 3 znaków',
+                'maxlength': 'Kategoria może mieć maksymalnie 20 znaków.'
             },
             'tags': {
                 'required': 'Tag jest wymagany',
-                'minlength': 'Tag musi sie składać z conajmniej 5 znaków',
-                'maxlength': 'Tag może mieć maksymalnie 50 znaków.'
+                'minlength': 'Tag musi sie składać z co najmniej 3 znaków',
+                'maxlength': 'Tag może mieć maksymalnie 20 znaków.'
             }
         };
     }
     PostEditor.prototype.addPost = function () {
-        console.log(this.postForm.value);
-        this.model = this.postForm.value;
+        this.tagAndCategorySplit = this.postForm.value;
+        this.model.Categories = this.tagAndCategorySplit.categories.split(',');
+        this.model.Tags = this.tagAndCategorySplit.tags.split(',');
+        this.model.Content = this.tagAndCategorySplit.Content;
+        this.model.ShortDescription = this.tagAndCategorySplit.ShortDescription;
+        this.model.Title = this.tagAndCategorySplit.Title;
         console.log(this.model);
-        console.log(this.postForm.value);
-        this.model.Tags = this.tags.split(',');
-        this.model.Categories = this.categories.split(',');
         this.postService.addPost(this.model);
         console.log(this.model);
     };
@@ -76989,29 +76990,29 @@ var PostEditor = (function () {
             'Title': [
                 this.model.Title, [
                     forms_1.Validators.required,
-                    forms_1.Validators.minLength(4),
-                    forms_1.Validators.maxLength(24)
+                    forms_1.Validators.minLength(10),
+                    forms_1.Validators.maxLength(50)
                 ]
             ],
             'ShortDescription': [
                 this.model.ShortDescription, [
                     forms_1.Validators.required,
-                    forms_1.Validators.minLength(4),
-                    forms_1.Validators.maxLength(24)
+                    forms_1.Validators.minLength(10),
+                    forms_1.Validators.maxLength(500)
                 ]
             ],
             'categories': [
-                this.categories.split(','), [
+                this.categories, [
                     forms_1.Validators.required,
-                    forms_1.Validators.minLength(2),
-                    forms_1.Validators.maxLength(24)
+                    forms_1.Validators.minLength(3),
+                    forms_1.Validators.maxLength(20)
                 ]
             ],
             'tags': [
-                this.tags.split(','), [
+                this.tags, [
                     forms_1.Validators.required,
                     forms_1.Validators.minLength(3),
-                    forms_1.Validators.maxLength(24)
+                    forms_1.Validators.maxLength(20)
                 ]
             ]
         });
