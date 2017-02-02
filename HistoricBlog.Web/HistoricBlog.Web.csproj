@@ -179,6 +179,7 @@
     <Content Include="app\posts\post-list.component.html" />
     <Content Include="webpack.config.js" />
     <TypeScriptCompile Include="app\login\login.component.ts" />
+    <TypeScriptCompile Include="app\login\login.module.ts" />
     <TypeScriptCompile Include="app\login\login.service.ts" />
     <TypeScriptCompile Include="app\login\login.ts" />
     <TypeScriptCompile Include="app\posts\category.service.ts" />
