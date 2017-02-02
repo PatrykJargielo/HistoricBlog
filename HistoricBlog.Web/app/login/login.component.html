@@ -1,25 +1,30 @@
 ﻿<div class="container">
     <div class="row">
-        <a class="btn btn-primary" data-toggle="modal" href="#myModal">Zaloguj</a>
-        <div class="modal hide" id="myModal">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">x</button>
-                <h3>Zaloguj się</h3>
-            </div>
-            <div class="modal-body">
-                <form method="post" action='' name="login_form">
-                    <p><input type="text" class="span3" name="eid" id="email" placeholder="Nazwa użytkownika"></p>
-                    <p><input type="password" class="span3" name="passwd" placeholder="Hasło"></p>
+        <button (click)="open()" class="btn btn-primary" data-toggle="modal" >Zaloguj</button>
+        <modal #modal>
+            <modal-header [show-close]="true">
+                <h4 class="modal-title">Zaloguj się</h4>
+            </modal-header>
+            <modal-body>
+                <form [formGroup]="loginForm">
+                    <ckeditor formControlName="Content" debounce="500" name="content">
+                    </ckeditor>
+                    <p>
+                        <input type="text" class="form-control" name="userName" id="userName" placeholder="Nazwa użytkownika" formControlName="userName">
+                    </p>
+                    <p>
+                        <input type="password" class="form-control" name="user" placeholder="Hasło" formControlName="password">
+                    </p>
                     <p>
                         <button type="submit" class="btn btn-primary">Zaloguj</button>
                         <a href="#">Zapomniałeś hasła?</a>
                     </p>
                 </form>
-            </div>
-            <div class="modal-footer">
+            </modal-body>
+            <modal-footer>
                 Jesteś nowy na stronie?
-                <a href="#" class="btn btn-primary">Zarejestruj</a>
-            </div>
-        </div>
+                <button class="btn btn-primary">Zarejestruj</button>
+            </modal-footer>
+        </modal>
     </div>
 </div>
