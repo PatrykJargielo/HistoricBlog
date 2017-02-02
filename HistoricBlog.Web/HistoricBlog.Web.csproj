@@ -158,6 +158,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\login\login.component.html" />
     <Content Include="app\posts\post-details.component.html" />
     <Content Include="app\posts\post-editor.component.html" />
     <Content Include="app\posts\post-list.component.css" />
@@ -177,6 +178,7 @@
     <Content Include="package.json" />
     <Content Include="app\posts\post-list.component.html" />
     <Content Include="webpack.config.js" />
+    <TypeScriptCompile Include="app\login\login.component.ts" />
     <TypeScriptCompile Include="app\login\login.service.ts" />
     <TypeScriptCompile Include="app\login\login.ts" />
     <TypeScriptCompile Include="app\posts\category.service.ts" />
@@ -217,6 +219,7 @@
     <Content Include="tslint.json" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\register\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
