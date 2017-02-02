@@ -37,8 +37,6 @@ export class PostListComponent implements OnInit {
         });
     }
 
-                this.stateModel.pagination.postsOnPage,
-                this.stateModel.filterTitle).then(
     setTitleFilter(value) {
         AppStore.dispatch((dispatch) => {
             dispatch(this._postActions.setPostTitleFilter(value));
