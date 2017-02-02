@@ -8,7 +8,7 @@ export const SET_POSTS_CATEGORY_FILTER = "SET_POSTS_DESCRIPTION_FILTER";
 export const SET_POSTS_TAG_FILTER = "SET_POSTS_TAG_FILTER";
 export const SET_POSTS_TITLE_FILTER = "SET_POSTS_TITLE_FILTER";
 export const SET_POSTS_LIST_PAGE = "SET_POSTS_LIST_PAGE";
-export const SET_P_LIST_PAGE = "SET_POSTS_LIST_PAGE";
+export const SET_ERRORS = "SET_ERRORS";
 
 
 
@@ -40,6 +40,10 @@ export class PostActions {
 
     setPostListPage(pageNumber:number) {
         return { type: SET_POSTS_LIST_PAGE, pageNumber: pageNumber }
+    }
+
+    setErrors(errors: string[]) {
+        return { type: SET_ERRORS, payload: errors }
     }
 
     getPost(post: IPost) {
