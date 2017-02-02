@@ -54,7 +54,7 @@ namespace HistoricBlog.WebApi.Controllers
                 Name = user.Name,
                 Surname = user.Surname,
                 Email = user.Email,
-                Login = user.Login,
+                UserName = user.Login,
                 Password = user.Password,
                 Id = user.Id
             };

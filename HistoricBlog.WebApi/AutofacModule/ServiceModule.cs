@@ -7,6 +7,9 @@ using HistoricBlog.BLL.Posts.Comments;
 using HistoricBlog.BLL.Posts.Ratings;
 using HistoricBlog.BLL.Posts.Tags;
 using HistoricBlog.BLL.Users;
+using HistoricBlog.BLL.Users.Identity;
+using HistoricBlog.DAL.Users;
+using Microsoft.AspNet.Identity;
 
 namespace HistoricBlog.WebApi.AutofacModule
 {
@@ -14,6 +17,7 @@ namespace HistoricBlog.WebApi.AutofacModule
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<ApplicationUserManager>().As<UserManager<User, int>>();
             builder.RegisterType<UserService>().As<IUserService>().PropertiesAutowired();
             builder.RegisterType<PostService>().As<IPostService>().PropertiesAutowired();
             builder.RegisterType<CommentService>().As<ICommentService>().PropertiesAutowired();

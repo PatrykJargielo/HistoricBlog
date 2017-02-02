@@ -5,19 +5,22 @@ using System.Data;
 using System.Dynamic;
 using System.Net.Mail;
 using System.Reflection;
+using System.Security.Claims;
 using HistoricBlog.DAL.Base;
 using HistoricBlog.DAL.Posts.Comments;
 using HistoricBlog.DAL.Posts.Ratings;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 using static System.Configuration.ConfigurationManager;
 
 namespace HistoricBlog.DAL.Users
 {
-    public class User : BaseEntity
+    public class User : BaseEntity,IUser<int>
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Login { get; set; }
+        public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
 
@@ -25,6 +28,15 @@ namespace HistoricBlog.DAL.Users
         public virtual IList<Rating> Ratings { get; set; }
         public virtual IList<Role> Roles { get; set; }
 
+
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User,int> manager, string authenticationType)
+        {
+            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+            var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
+            // Add custom user claims here
+          
+            return userIdentity;
+        }
 
         public override List<string> Validation()
         {
@@ -38,10 +50,10 @@ namespace HistoricBlog.DAL.Users
 
             ValidateStringProperty(this.Name, errorMessage);
             ValidateStringProperty(this.Surname, errorMessage);
-            ValidateStringProperty(this.Login, errorMessage);
+            ValidateStringProperty(this.UserName, errorMessage);
 
             ValidateStringWithRegex(Email, errorMessage, emailRegex);
-            ValidateStringWithRegex(Login, errorMessage, loginRegex);
+            ValidateStringWithRegex(UserName, errorMessage, loginRegex);
             ValidateStringWithRegex(Password, errorMessage, passwordRegex);
             ValidateStringWithRegex(Name, errorMessage, credentialsRegex);
             ValidateStringWithRegex(Surname, errorMessage, credentialsRegex);
@@ -84,6 +96,8 @@ namespace HistoricBlog.DAL.Users
 
 
         }
+
+
     }
 }
 
