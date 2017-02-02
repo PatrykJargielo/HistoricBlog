@@ -23,7 +23,7 @@
 </div>
 
 </div>
-<div class='panel-body'>
+<div class='panel-body' *ngIf='post'>
     <div class="container" *ngFor='let comment of post.Comments'>
         <div class="well">
             <td>
