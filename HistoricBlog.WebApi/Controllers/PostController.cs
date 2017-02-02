@@ -11,6 +11,7 @@ using HistoricBlog.DAL.Base;
 using System.Web.Http.Cors;
 using System.Linq;
 using HistoricBlog.DAL.Posts.Categories;
+using System;
 
 namespace HistoricBlog.WebApi.Controllers
 {
@@ -87,8 +88,7 @@ namespace HistoricBlog.WebApi.Controllers
 
             if (!postResult.IsVaild)
             {
-                var errorMessages = string.Concat(postResult.Messages.ToArray());
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, errorMessages);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, postResult.Messages);
             }
 
             var viewResult = Mapper.Map<PostViewModel>(postResult.Result);

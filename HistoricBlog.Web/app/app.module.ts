@@ -7,10 +7,10 @@ import { AppComponent } from './app.component';
 import { PostListComponent } from './posts/post-list.component';
 import { PostDetailsComponent } from './posts/post-details.component';
 import { PostDetailGuard } from './posts/post-guard.service';
+import { ErrorDisplayComponent } from './shared/error-display.component';
 import { createStore, applyMiddleware, compose, Store } from 'redux';
 import { post } from '../redux/reducers/post-reducer';
 import { PostActions } from '../redux/actions/post-actions';
-import { PostFilterPipe } from './posts/post-filter.pipe';
 import { PostService } from './posts/post.service';
 import { CategoryService } from './posts/category.service';
 import { PostEditor } from './posts/post-editor.component';
@@ -49,7 +49,7 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
     declarations: [
         AppComponent,
         PostListComponent,
-        PostFilterPipe,
+        ErrorDisplayComponent,
         PostEditor,
         PostDetailsComponent
     ],

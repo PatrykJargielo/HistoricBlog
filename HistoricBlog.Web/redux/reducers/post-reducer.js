@@ -1,17 +1,6 @@
-﻿import {
-    ADD_POST,
-    EDIT_POST,
-    GET_POSTS,
-    GET_POST,
-    SET_POSTS_TITLE_FILTER,
-    SET_POSTS_LIST_PAGE,
-    SET_ERRORS
-} from '../actions/post-actions'
-
-import { IPost } from '../actions/post-interface'
-
-
-let defaultState = {
+"use strict";
+var post_actions_1 = require("../actions/post-actions");
+var defaultState = {
     userName: 'guest',
     token: '',
     filterCategory: [],
@@ -22,56 +11,44 @@ let defaultState = {
         pageNumber: 1,
         totalFilteredPostCount: 2,
         postsOnPage: 5,
-    },
-    errors: []
-
-}
-
-export function post(state = defaultState, action) {
-
-    let newState = state;
+    }
+};
+function post(state, action) {
+    if (state === void 0) { state = defaultState; }
+    var newState = state;
     switch (action.type) {
-        case SET_POSTS_LIST_PAGE:
+        case post_actions_1.SET_POSTS_LIST_PAGE:
             newState = Object.assign({}, state);
             newState.pagination.pageNumber = action.pageNumber;
-            newState.errors = [];
             return newState;
-        case ADD_POST:
+        case post_actions_1.ADD_POST:
             newState = Object.assign({}, state);
             newState.posts.concat(action.payload.post);
-            newState.errors = [];
             return state;
-        case EDIT_POST:
+        case post_actions_1.EDIT_POST:
             newState = Object.assign({}, state);
-            newState.posts.filter((post) => post.Id != action.post.Id);
+            newState.posts.filter(function (post) { return post.Id != action.post.Id; });
             newState.posts.concat(action.payload.post);
-            newState.errors = [];
             return state;
-        case GET_POSTS:
+        case post_actions_1.GET_POSTS:
             newState = Object.assign({}, state);
             newState.pagination.totalFilteredPostCount = action.payload.totalFilteredPostCount;
             newState.posts = action.payload.posts;
-            newState.errors = [];
-            return newState;  
-        case SET_POSTS_TITLE_FILTER:
+            return newState;
+        case post_actions_1.SET_POSTS_TITLE_FILTER:
             newState = Object.assign({}, state);
             newState.filterTitle = action.filterTitle;
-            newState.errors = [];
             return newState;
-        case SET_ERRORS:;
+        case post_actions_1.SET_ERRORS:
+            ;
             newState = Object.assign({}, state);
-            newState.errors = action.payload;
+            newState.filterTitle = action.payload.errors;
             return newState;
-        case GET_POST:
-            newState = Object.assign({}, state)
-            newState.posts = [action.payload]
-            return newState;  
         default:
             return newState;
     }
 }
-
-export default post;
-
-
-
+exports.post = post;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = post;
+//# sourceMappingURL=post-reducer.js.map

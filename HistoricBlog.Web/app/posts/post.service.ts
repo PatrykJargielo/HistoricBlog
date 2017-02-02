@@ -3,6 +3,9 @@ import { IPost } from '../../redux/actions/post-interface';
 import { Http, Response, HttpModule, RequestOptions, Headers, URLSearchParams  } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Post } from './postEditor';
+import { AppStore } from '../app.module';
+import { PostsState } from '../../redux/post-state';
+import { PostActions } from '../../redux/actions/post-actions';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
@@ -17,22 +20,31 @@ export class PostService {
 
     private _postUrl = 'http://localhost:58141/api/post';
 
-    constructor(private _http: Http) { }
+    constructor(private _http: Http, private _postActions: PostActions) { }
 
 
 
-    getPosts(): Promise<any> {
+    getPosts(): Promise<any> {//deprecated
         return this._http.get(this._postUrl).toPromise();
     }
 
-    getPostsFilteredPage(page: number, quantity: number, titleFilter: string): Promise<any> {
+    getPostsFilteredPage() {
+        let stateModel = AppStore.getState() as PostsState;
+        let pageNumber:number = stateModel.pagination.pageNumber;
+        let postsOnPage: number = stateModel.pagination.postsOnPage;
+        let filterTitle: string = stateModel.filterTitle;
 
         let params: URLSearchParams = new URLSearchParams();
-        params.set('page', page.toString());
-        params.set('quantity', quantity.toString());
-        if(titleFilter.length>0) params.set('titleFilter', titleFilter);
+        params.set('page', pageNumber.toString());
+        params.set('quantity', postsOnPage.toString());
+        if (filterTitle.length > 0) params.set('titleFilter', filterTitle);
 
-        return this._http.get(this._postUrl, { search: params }).toPromise();
+
+        let promise = this._http.get(this._postUrl, { search: params }).toPromise()
+            .then((posts: Response) => AppStore.dispatch(this._postActions.getAllPosts(posts.json())))
+            .catch((error:Response) => this.setErrors(error));
+
+
     }
 
     addPost(post: Object): Promise<Post[]> {
@@ -43,7 +55,8 @@ export class PostService {
         console.log(body);
         return this._http.post(this._postUrl, body, options)
             .toPromise()
-            .then((res: Response) => res.json() || {});
+            .then((res: Response) => res.json() || {})
+            .catch((error: Response) => this.setErrors(error));
         
     }
 
@@ -58,11 +71,6 @@ export class PostService {
             .then((res: Response) => res.json() || {});
 
     }
-
-    //private extractData(res: Response) {
-    //    let body = res.json();
-    //    return body.data;
-    //}
 
     // getPost(id: number): Promise<IPost> {
 
@@ -80,9 +88,17 @@ export class PostService {
 
     private handleError(error: Response) {
 
-        console.error(error);
+        console.error(error.json());
 
         return Observable.throw(error.json().error || 'Server error');
 
+    }
+
+    private setErrors(error: Response): void {
+        let stateModel = AppStore.getState() as PostsState;
+
+        AppStore.dispatch((dispatch) => {
+            dispatch(this._postActions.setErrors(error.json()));
+        }); 
     }
 }

@@ -26,7 +26,8 @@ export class PostListComponent implements OnInit {
         AppStore.subscribe(() => {
             this.postListener();
         });
-        AppStore.dispatch(this.getAllPosts());
+        this.postService.getPostsFilteredPage();  
+
     }
 
     postListener() {
@@ -36,22 +37,13 @@ export class PostListComponent implements OnInit {
         });
     }
 
-    getAllPosts() {
-        return (dispatch) => {
-            this.postService.getPostsFilteredPage(this.stateModel.pagination.pageNumber,
                 this.stateModel.pagination.postsOnPage,
                 this.stateModel.filterTitle).then(
-                posts => dispatch(this._postActions.getAllPosts(posts.json()),
-                )
-            );
-        }
-    }
-
     setTitleFilter(value) {
         AppStore.dispatch((dispatch) => {
             dispatch(this._postActions.setPostTitleFilter(value));
         });
-        AppStore.dispatch(this.getAllPosts());
+        this.postService.getPostsFilteredPage();
     }
 
     getPostCount(): number {
@@ -69,7 +61,7 @@ export class PostListComponent implements OnInit {
     pageChanged(value): void{
         AppStore.dispatch(
             (dispatch) => { dispatch(this._postActions.setPostListPage(value)) }        
-        ),
-       AppStore.dispatch(this.getAllPosts());
+        )
+        this.postService.getPostsFilteredPage();
     }
 }
