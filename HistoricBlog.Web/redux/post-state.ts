@@ -1,4 +1,5 @@
 ﻿import {IPost} from './actions/post-interface'
+import {Post} from '../app/posts/postEditor';
 
 export class PostsState {
     userName: string;
@@ -7,6 +8,7 @@ export class PostsState {
     filterCategory: string[];
     filterTag: string[];
     posts: IPost[];
+    updatePost: Post;
     pagination: {
         pageNumber: number,
         totalFilteredPostCount: number,

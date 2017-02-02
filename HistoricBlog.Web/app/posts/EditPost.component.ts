@@ -1,58 +1,111 @@
-﻿import { Component, OnInit} from '@angular/core';
+﻿import { Component, NgZone, OnInit, OnDestroy } from '@angular/core';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { PostService } from './post.service';
 import { CategoryService } from './category.service';
 import { Post } from './postEditor';
+import { Subscription } from 'rxjs/Subscription';
+import { PostActions } from '../../redux/actions/post-actions';
 import { Category } from './Category';
-import { FormGroup, FormBuilder, Validators, FormsModule} from '@angular/forms';
+import { IPost } from '../../redux/actions/post-interface'
+
+
+import { PostsState } from '../../redux/post-state';
+import { AppStore } from '../app.module';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { FormGroup, FormBuilder, Validators, FormsModule } from '@angular/forms';
 
 @Component({
-    selector: 'editor',
+    selector: 'edit',
     templateUrl: 'app/posts/post-editor.component.html',
 
 
 })
-export class PostEditor implements OnInit {
-    model: Post;
+export class EditPost implements OnInit, OnDestroy {
+    model: IPost;
     tags: string;
     categories: string;
     postForm: FormGroup;
-    tagAndCategorySplit;
-
-    constructor(private postService: PostService, private fb: FormBuilder) {
-        this.model = new Post();
+    postTemp;
+    stateModel: PostsState;
+    private sub: Subscription;
+    
+    constructor(private postService: PostService,
+        private fb: FormBuilder,
+        private route: ActivatedRoute,
+        private _postActions: PostActions,
+        private _router: Router,
+        private zone: NgZone) {
+        //this.model = new IPost();
+        this.stateModel = AppStore.getState() as PostsState;
+        
+        
     }
 
-    addPost() {
-        this.tagAndCategorySplit = this.postForm.value;
-        this.model.Categories = this.tagAndCategorySplit.categories.split(',');
-        this.model.Tags = this.tagAndCategorySplit.tags.split(',');
-        this.model.Content = this.tagAndCategorySplit.Content;
-        this.model.ShortDescription = this.tagAndCategorySplit.ShortDescription;
-        this.model.Title = this.tagAndCategorySplit.Title;
-       
-        console.log(this.model);   
-        this.postService.addPost(this.model);   
+    updatePost() {
+        this.postTemp = this.postForm.value;
+        this.model.categories = this.postTemp.categories.split(',');
+        this.model.tags = this.postTemp.tags.split(',');
+        this.model.content = this.postTemp.Content;
+        this.model.shortDescription = this.postTemp.ShortDescription;
+        this.model.title = this.postTemp.Title;
+
+        
+        this.postService.uptadePost(this.model);
         console.log(this.model);
     }
 
     ngOnInit(): void {
-        this.buildForm();
+        //AppStore.subscribe(() => { this.postListnener() });
+        //this.sub = this.route.params.subscribe(
+        //    params => {
+        //        let id = + params['id'];
+        //        AppStore.dispatch(this.getPost(id));
+        //    });
+        this.stateModel = AppStore.getState() as PostsState;
+        this.model = this.stateModel.posts[0]
+        console.log(this.model)
+        this.buildForm(); 
+           
+    }
+    //postListnener(): void {
+    //    this.stateModel = AppStore.getState() as PostsState;
+    //    this.model = this.stateModel.posts[0]
+
+    //    this.zone.run(() => {
+    //        this.model = this.stateModel.posts[0]
+    //    });
+    //}
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
     }
 
+    //getPost(id: number) {
+    //    let idFromRoute = + this.route.snapshot.params['id'];
+
+    //    return (dispatch) => {
+    //        this.postService.getPost(idFromRoute).then(
+    //            post => dispatch(this._postActions.getPost(post.json())
+    //            )
+    //        );
+    //    }
+    //}
 
     buildForm(): void {
+        console.log(this.model);
+
+        
         this.postForm = this.fb.group({
-            'Content': [this.model.Content],
+            'Content': [this.model.content],
             'Title': [
-                this.model.Title, [
+                this.model.title, [
                     Validators.required,
                     Validators.minLength(10),
                     Validators.maxLength(50)
                 ]
             ],
             'ShortDescription': [
-                this.model.ShortDescription, [
+                this.model.shortDescription, [
                     Validators.required,
                     Validators.minLength(10),
                     Validators.maxLength(500)
@@ -73,7 +126,7 @@ export class PostEditor implements OnInit {
                 ]
             ]
         });
-
+        console.log(this.postForm)
         this.postForm.valueChanges.subscribe(data => this.onValueChanged(data));
 
         this.onValueChanged();
@@ -133,5 +186,5 @@ export class PostEditor implements OnInit {
 
 
 }
-    
+
 

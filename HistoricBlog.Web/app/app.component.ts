@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 @Component({
   selector: 'hb-app',
   template: `
-<editor></editor>
     <div>
       <hb-error-display></hb-error-display>
       <div class='container'>

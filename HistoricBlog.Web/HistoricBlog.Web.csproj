@@ -181,6 +181,7 @@
     <TypeScriptCompile Include="app\login\login.ts" />
     <TypeScriptCompile Include="app\posts\category.service.ts" />
     <TypeScriptCompile Include="app\posts\Category.ts" />
+    <TypeScriptCompile Include="app\posts\EditPost.component.ts" />
     <TypeScriptCompile Include="app\posts\post-details.component.ts" />
     <TypeScriptCompile Include="app\posts\post-editor.component.ts" />
     <TypeScriptCompile Include="app\posts\post-filter.pipe.ts" />

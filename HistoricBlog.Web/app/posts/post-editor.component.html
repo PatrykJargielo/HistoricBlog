@@ -1,28 +1,25 @@
-﻿<form [formGroup]="postForm" >
+﻿<form [(formGroup)]="postForm" >
     <div class="form-group">
         <ckeditor formControlName="Content" debounce="500" name="content">
         </ckeditor>
         <label>Tytuł</label>
-        <input type="text" class="form-control" id="Title"  formControlName="Title" required>
-        <div *ngIf="formErrors.Title" class="alert alert-danger">
-            {{ formErrors.Title }}
+        <input type="text" class="form-control" placeholder="Tytuł" id="Title"  formControlName="Title" [(ngModel)]="model.Title" required>
+        <div *ngIf="formErrors.Title" class="alert alert-danger" [innerHtml]="formErrors.Title">
         </div>
         <label>Shorts</label>
-        <input type="text" class="form-control" placeholder="Short" formControlName="ShortDescription" name="ShortDescription">
-        <div *ngIf="formErrors.ShortDescription" class="alert alert-danger">
-            {{ formErrors.ShortDescription }}
+        <input type="text" class="form-control" placeholder="Krótki opis" formControlName="ShortDescription" name="ShortDescription">
+        <div *ngIf="formErrors.ShortDescription" class="alert alert-danger" [innerHtml]="formErrors.ShortDescription">
         </div>
         <label>Kategorie</label>
-        <input type="text" class="form-control" placeholder="kategorie" formControlName="categories" name="categories">
-        <div *ngIf="formErrors.categories" class="alert alert-danger">
-            {{ formErrors.categories }}
+        <input type="text" class="form-control" placeholder="Kategorie" formControlName="categories" name="categories">
+        <div *ngIf="formErrors.categories" class="alert alert-danger" [innerHtml]="formErrors.categories">     
         </div>
         <label>Tagi</label>
-        <input type="text" class="form-control" placeholder="tagi" formControlName="tags"  name="tags">
-        <div *ngIf="formErrors.tags" class="alert alert-danger">
-            {{ formErrors.tags }}
+        <input type="text" class="form-control" placeholder="Tagi" formControlName="tags"  name="tags">
+        <div *ngIf="formErrors.tags" class="alert alert-danger" [innerHtml]="formErrors.tags">
         </div>
     </div>
-    <button (click)="addPost()">Dodaj post</button>
+    <button class="btn btn-default" [disabled]="!postForm.valid" (click)="updatePost()">Dodaj post</button>
+    <button class="btn btn-default" (click)="getP()">gg</button>
 </form>
 
