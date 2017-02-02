@@ -245,3 +245,9 @@ ModelManifest.xml
 HistoricBlog.Web/app/**/*.js
 HistoricBlog.Web/app/**/*.js.map
 HistoricBlog.Web/redux/**/*.jsHistoricBlog.Web/redux/**/*.js.map
+HistoricBlog.Web/redux/actions/post-actions.js
+HistoricBlog.Web/redux/actions/post-actions.js.map
+HistoricBlog.Web/redux/hblog-state.js
+HistoricBlog.Web/redux/hblog-state.js.map
+HistoricBlog.Web/redux/reducers/post-reducer.js
+HistoricBlog.Web/redux/reducers/post-reducer.js.map
