@@ -1,11 +1,10 @@
 <div class='panel panel-primary' *ngIf='post'>
-    <div class='panel-heading' style='font-size:large'> {{pageTitle + ': ' + post.Title}}</div>
+    <div class='panel-heading' style='font-size:large' [innerHtml]="pageTitle +': '+ post.Title"></div>
 
 <div class='panel-body'>
     <div class='row'>
         <div class='col-md-6'>
             <div class='row'>
-                <div class='col-md-3'>Tytuł:</div>
                 <div class='col-md-6' [innerHtml]="post.Title"></div>
             </div>
             <div class='row'>
@@ -13,24 +12,18 @@
             </div>
         </div>
     </div>
-
-</div>
-
-<div class='panel-footer'>
-    <a class='btn btn-default' (click)='onBack()' style='width:80px'>
-<i class='glyphicon glyphicon-chevron-left'></i> Back
-</a>
-</div>
-
-</div>
-<div class='panel-body' *ngIf='post'>
-    <div class="container" *ngFor='let comment of post.Comments'>
-        <div class="well">
-            <td>
-                <p [innerHtml]="comment.CommentText"></p>
-                <br>
-                <p [innerHtml]="comment.CommentedOn | date:'MM/dd/yyyy @ h:mma'"></p>
-            </td>
-        </div>
+    <div class='panel-footer'>
+        <a class='btn btn-default' (click)='onBack()' style='width:80px'><i class='glyphicon glyphicon-chevron-left'></i> Back</a>
     </div>
+</div>
+
+</div>
+<div class="panel panel-default" *ngIf='post'>
+    <div class='panel-heading' style='font-size:large'>Komentarze</div>
+<div class="panel-body" *ngFor='let comment of post.Comments'>
+    <p [innerHtml]="comment.UserName"></p>
+    <h6 class="text-muted time" [innerHtml]="comment.CommentedOn | date:'MM/dd/yyyy @ h:mma'"></h6>
+    <p [innerHtml]="comment.CommentText"></p>
+    <br>
+</div>
 </div>

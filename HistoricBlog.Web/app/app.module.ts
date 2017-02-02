@@ -18,6 +18,7 @@ import { Ng2PaginationModule } from 'ng2-pagination';
 import { CKEditorModule } from 'ng2-ckeditor';
 import thunk from 'redux-thunk';
 import * as createLogger from 'redux-logger';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 
@@ -57,7 +58,9 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
         PostActions,
         PostService,
         CategoryService,
-        PostDetailGuard
+        PostDetailGuard,
+        {provide: LocationStrategy, useClass: HashLocationStrategy}
+
     ],
     bootstrap: [AppComponent]
 })
