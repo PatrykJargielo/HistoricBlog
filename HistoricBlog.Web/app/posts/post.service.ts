@@ -17,14 +17,14 @@ import 'rxjs/add/operator/toPromise';
 export class PostService {
 
 
-    private _productUrl = 'http://localhost:58141/api/post';
+    private _postUrl = 'http://localhost:58141/api/post';
 
     constructor(private _http: Http, private _postActions: PostActions) { }
 
 
 
     getPosts(): Promise<any> {//deprecated
-        return this._http.get(this._productUrl).toPromise();
+        return this._http.get(this._postUrl).toPromise();
     }
 
     getPostsFilteredPage() {
@@ -39,7 +39,7 @@ export class PostService {
         if (filterTitle.length > 0) params.set('titleFilter', filterTitle);
 
 
-        let promise = this._http.get(this._productUrl, { search: params }).toPromise()
+        let promise = this._http.get(this._postUrl, { search: params }).toPromise()
             .then((posts: Response) => AppStore.dispatch(this._postActions.getAllPosts(posts.json())))
             .catch((error:Response) => this.setErrors(error));
 
@@ -52,7 +52,7 @@ export class PostService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         console.log(body);
-        return this._http.post(this._productUrl, body, options)
+        return this._http.post(this._postUrl, body, options)
             .toPromise()
             .then((res: Response) => res.json() || {})
             .catch((error: Response) => this.setErrors(error));
@@ -65,7 +65,7 @@ export class PostService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         console.log(body);
-        return this._http.post(`${this._productUrl}/${body["id"]}`, body, options)
+        return this._http.post(`${this._postUrl}/${body["id"]}`, body, options)
             .toPromise()
             .then((res: Response) => res.json() || {});
 
