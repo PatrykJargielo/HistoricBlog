@@ -9,23 +9,26 @@
 } from '../actions/post-actions'
 
 import { IPost } from '../actions/post-interface'
+import { HBlogState } from '../hblog-state'
 
 
-let defaultState = {
-    userName: 'guest',
-    token: '',
-    filterCategory: [],
-    filterTitle: '',
-    filterTag: [],
-    posts: [],
-    pagination: {
-        pageNumber: 1,
-        totalFilteredPostCount: 2,
-        postsOnPage: 5,
-    },
-    errors: []
+//let defaultState = {
+//    userName: 'guest',
+//    token: '',
+//    filterCategory: [],
+//    filterTitle: '',
+//    filterTag: [],
+//    posts: [],
+//    pagination: {
+//        pageNumber: 1,
+//        totalFilteredPostCount: 2,
+//        postsOnPage: 5,
+//    },
+//    errors: []
 
-}
+//}
+
+let defaultState = new HBlogState();
 
 export function post(state = defaultState, action) {
 
@@ -43,7 +46,7 @@ export function post(state = defaultState, action) {
             return state;
         case EDIT_POST:
             newState = Object.assign({}, state);
-            newState.posts.filter((post) => post.Id != action.post.Id);
+            newState.posts.filter((post) => post.id != action.post.Id);
             newState.posts.concat(action.payload.post);
             newState.errors = [];
             return state;

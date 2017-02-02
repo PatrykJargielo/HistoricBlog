@@ -342,6 +342,7 @@
     <Compile Include="Models\Post\CategoryViewModel.cs" />
     <Compile Include="Models\Post\CommentViewModel.cs" />
     <Compile Include="Models\Post\PostInputViewModel.cs" />
+    <Compile Include="Models\Post\PostShortViewModel.cs" />
     <Compile Include="Models\Post\PostViewModel.cs" />
     <Compile Include="Models\Post\RatingViewModel.cs" />
     <Compile Include="Models\Post\TagViewModel.cs" />

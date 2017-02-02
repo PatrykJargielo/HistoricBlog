@@ -3,7 +3,7 @@ import { IPost } from '../../redux/actions/post-interface';
 import { PostActions } from '../../redux/actions/post-actions';
 import { PostService } from './post.service';
 import { AppStore } from '../app.module';
-import { PostsState } from '../../redux/post-state';
+import { HBlogState as PostsState } from '../../redux/hblog-state';
 import { FormsModule } from '@angular/forms';
 
 @Component({

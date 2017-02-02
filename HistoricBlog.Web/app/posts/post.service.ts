@@ -4,7 +4,7 @@ import { Http, Response, HttpModule, RequestOptions, Headers, URLSearchParams  }
 import { Observable } from 'rxjs/Observable';
 import { Post } from './postEditor';
 import { AppStore } from '../app.module';
-import { PostsState } from '../../redux/post-state';
+import { HBlogState as PostsState } from '../../redux/hblog-state';
 import { PostActions } from '../../redux/actions/post-actions';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
