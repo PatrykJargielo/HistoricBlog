@@ -189,7 +189,6 @@
     <TypeScriptCompile Include="app\posts\EditPost.component.ts" />
     <TypeScriptCompile Include="app\posts\post-details.component.ts" />
     <TypeScriptCompile Include="app\posts\post-editor.component.ts" />
-    <TypeScriptCompile Include="app\posts\post-filter.pipe.ts" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -246,7 +245,7 @@
     <TypeScriptCompile Include="redux\actions\comment-actions.ts" />
     <TypeScriptCompile Include="redux\actions\post-actions.ts" />
     <TypeScriptCompile Include="redux\actions\post-interface.ts" />
-    <TypeScriptCompile Include="redux\post-state.ts" />
+    <TypeScriptCompile Include="redux\hblog-state.ts" />
     <TypeScriptCompile Include="redux\reducers\post-reducer.ts" />
   </ItemGroup>
   <ItemGroup>

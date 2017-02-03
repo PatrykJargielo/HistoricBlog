@@ -1,6 +1,6 @@
 ﻿import { Component, NgZone } from '@angular/core';
 import { AppStore } from '../app.module';
-import { PostsState } from '../../redux/post-state';
+import { HBlogState as PostsState } from '../../redux/hblog-state';
 
 @Component({
     selector: 'hb-error-display',

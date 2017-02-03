@@ -5,7 +5,7 @@ import { PostService } from './post.service';
 import { AppStore } from '../app.module';
 import { Subscription } from 'rxjs/Subscription';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { PostsState } from '../../redux/post-state';
+import { HBlogState as PostsState } from '../../redux/hblog-state';
 
 
 @Component({

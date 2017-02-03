@@ -2,8 +2,8 @@
     id: number;
     title: string;
     shortDescription: string;
-    content: string;
+    content?: string;
     categories: string[];
     tags: string[];
-    comments: string[];
+    comments?: string[];
 }

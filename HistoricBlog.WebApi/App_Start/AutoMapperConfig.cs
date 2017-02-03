@@ -22,7 +22,8 @@ namespace HistoricBlog.AutoMapper.App_Start
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Post, PostViewModel>();  
+                cfg.CreateMap<Post, PostViewModel>();
+                cfg.CreateMap<Post, PostShortViewModel>();
                 cfg.CreateMap<String, Category>()
                     .ConstructUsing(str => new Category() { Name = str });
                 cfg.CreateMap<String, Tag>()
