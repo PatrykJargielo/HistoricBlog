@@ -16,7 +16,7 @@ using static System.Configuration.ConfigurationManager;
 
 namespace HistoricBlog.DAL.Users
 {
-    public class User : BaseEntity, IUser<int>
+    public class User : BaseEntity,IUser<int>
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -28,12 +28,13 @@ namespace HistoricBlog.DAL.Users
         public virtual IList<Rating> Ratings { get; set; }
         public virtual IList<Role> Roles { get; set; }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, int> manager, string authenticationType)
+
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User,int> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
             // Add custom user claims here
-
+          
             return userIdentity;
         }
 
@@ -45,7 +46,8 @@ namespace HistoricBlog.DAL.Users
             string credentialsRegex = AppSettings["credentialsexp"];
 
             var errorMessage = new List<string>();
-            
+
+
             ValidateStringProperty(this.Name, errorMessage);
             ValidateStringProperty(this.Surname, errorMessage);
             ValidateStringProperty(this.UserName, errorMessage);
@@ -71,11 +73,12 @@ namespace HistoricBlog.DAL.Users
             {
                 errorMessage.Add($"Your {valueValidate} is invalid");
             }
+
         }
 
         private void ValidateStringProperty(string valueValidate, List<string> errorMessage)
         {
-
+            
             if (string.IsNullOrEmpty(valueValidate))
             {
                 errorMessage.Add($"Please provide {valueValidate}");
@@ -90,7 +93,11 @@ namespace HistoricBlog.DAL.Users
             {
                 errorMessage.Add($"The value should be between {minimumLength} and {maximumLength}");
             }
+
+
         }
+
+
     }
 }
 
