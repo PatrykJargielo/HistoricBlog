@@ -16,9 +16,25 @@
     </div>
 </div>
 
-<div class='panel-footer'>
-    <a class='btn btn-default' (click)='onBack()' style='width:80px'>
-        <i class='glyphicon glyphicon-chevron-left'></i> Back
-    </a>
+    <div class='panel-footer'>
+        <div class="row">
+            <a class='btn btn-default col-md-1' (click)='onBack()' style='width: 80px'>
+                <i class='glyphicon glyphicon-chevron-left'></i> Back
+            </a>
+            <div class='panel-footer'>
+                <a class='btn btn-default col-md-1' [routerLink]="['/editPost', post.Id]"  style='width: 80px'>
+                    <i class='glyphicon glyphicon-chevron-left'></i> Edytuj
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default" *ngIf='post'>
+    <div class='panel-heading' style='font-size:large'>Komentarze</div>
+<div class="panel-body" *ngFor='let comment of post.Comments'>
+    <p [innerHtml]="comment.UserName"></p>
+    <h6 class="text-muted time" [innerHtml]="comment.CommentedOn | date:'MM/dd/yyyy @ h:mma'"></h6>
+    <p [innerHtml]="comment.CommentText"></p>
+    <br>
 </div>
 </div>

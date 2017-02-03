@@ -158,7 +158,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\login\login.component.html" />
     <Content Include="app\posts\post-details.component.html" />
     <Content Include="app\posts\post-editor.component.html" />
     <Content Include="app\posts\post-list.component.css" />
@@ -178,15 +177,10 @@
     <Content Include="package.json" />
     <Content Include="app\posts\post-list.component.html" />
     <Content Include="webpack.config.js" />
-    <TypeScriptCompile Include="app\login\ilogin.service.ts" />
-    <TypeScriptCompile Include="app\login\login.component.ts" />
-    <TypeScriptCompile Include="app\login\login.module.ts" />
     <TypeScriptCompile Include="app\login\login.service.ts" />
-    <TypeScriptCompile Include="app\login\ilogin.ts" />
     <TypeScriptCompile Include="app\login\login.ts" />
     <TypeScriptCompile Include="app\posts\category.service.ts" />
     <TypeScriptCompile Include="app\posts\Category.ts" />
-    <TypeScriptCompile Include="app\posts\EditPost.component.ts" />
     <TypeScriptCompile Include="app\posts\post-details.component.ts" />
     <TypeScriptCompile Include="app\posts\post-editor.component.ts" />
     <TypeScriptCompile Include="app\posts\post-filter.pipe.ts" />
@@ -216,11 +210,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="tsconfig.json" />
     <Content Include="tslint.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\register\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>

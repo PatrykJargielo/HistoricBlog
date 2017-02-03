@@ -12,13 +12,14 @@ import { createStore, applyMiddleware, compose, Store } from 'redux';
 import { post } from '../redux/reducers/post-reducer';
 import { PostActions } from '../redux/actions/post-actions';
 import { PostService } from './posts/post.service';
+import { EditPost } from './posts/EditPost.component'
 import { CategoryService } from './posts/category.service';
 import { PostEditor } from './posts/post-editor.component';
 import { Ng2PaginationModule } from 'ng2-pagination';
 import { CKEditorModule } from 'ng2-ckeditor';
 import thunk from 'redux-thunk';
 import * as createLogger from 'redux-logger';
-
+import { HashLocationStrategy, LocationStrategy} from '@angular/common'
 
 
 const logger = createLogger();
@@ -43,6 +44,14 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
                 canActivate: [PostDetailGuard],
                 component: PostDetailsComponent
             },
+            {
+                path: 'addPost',
+                component: PostEditor
+            },
+            {
+                path: 'editPost/:id',
+                component: EditPost
+            },
             { path: 'posts', redirectTo: '', pathMatch: 'full' },
             { path: '**', redirectTo: '', pathMatch: 'full' }
         ])
@@ -52,13 +61,15 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
         PostListComponent,
         ErrorDisplayComponent,
         PostEditor,
-        PostDetailsComponent
+        PostDetailsComponent,
+        EditPost
     ],
     providers: [
         PostActions,
         PostService,
         CategoryService,
-        PostDetailGuard
+        PostDetailGuard,
+        { provide: LocationStrategy, useClass: HashLocationStrategy}
     ],
     bootstrap: [AppComponent],
     exports: [PostEditor]

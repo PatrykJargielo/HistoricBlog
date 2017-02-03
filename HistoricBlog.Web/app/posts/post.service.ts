@@ -47,7 +47,7 @@ export class PostService {
 
     }
 
-    addPost(post: Object): Promise<Post[]> {
+    addPost(post: Object): Promise<IPost> {
         
         let body = JSON.stringify(post);
         let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -60,13 +60,13 @@ export class PostService {
         
     }
 
-    uptadePost(post: Object): Promise<Post[]> {
+    updatePost(post: IPost): Promise<IPost> {
 
         let body = JSON.stringify(post);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         console.log(body);
-        return this._http.post(`${this._postUrl}/${body["id"]}`, body, options)
+        return this._http.post(`${this._postUrl}/${post.id}`, body, options)
             .toPromise()
             .then((res: Response) => res.json() || {});
 
@@ -83,6 +83,11 @@ export class PostService {
     getPost(id: number): Promise<any> {
         const url = `${this._postUrl}/${id}`;
         return this._http.get(url).toPromise()
+            .catch(this.handleError);
+    }
+    getPostt(id: number): Promise<Post> {
+        const url = `${this._postUrl}/${id}`;
+        return this._http.get(url).toPromise().then((response: Response )=> response.json().data)
             .catch(this.handleError);
     }
 
