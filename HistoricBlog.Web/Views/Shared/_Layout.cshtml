@@ -20,29 +20,9 @@
 <script type="text/javascript" src="~/app/bundle.js" charset="utf-8"></script>
     <script src="https://cdn.ckeditor.com/4.5.11/full/ckeditor.js"></script>
 
-
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button> @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new {
-                @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
     <div class="container body-content">
         @RenderBody()
-
+        <hb-app>Wczytywanie zawartości...</hb-app>
         <hr />
 
         <footer>
