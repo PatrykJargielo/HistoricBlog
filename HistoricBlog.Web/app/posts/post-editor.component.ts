@@ -1,35 +1,45 @@
-﻿import { Component, OnInit} from '@angular/core';
+﻿import { Component, NgZone, OnInit, OnDestroy } from '@angular/core';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { PostService } from './post.service';
 import { CategoryService } from './category.service';
 import { Post } from './postEditor';
-import { Category } from './Category';
+import { IPost } from '../../redux/actions/post-interface'
+import { PostsState } from '../../redux/post-state';
+import { AppStore } from '../app.module';
+import { PostActions } from '../../redux/actions/post-actions';
+import { Subscription } from 'rxjs/Subscription';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormsModule} from '@angular/forms';
 
 @Component({
     selector: 'editor',
-    templateUrl: 'app/posts/post-editor.component.html',
+    templateUrl: 'app/posts/post-editor.component.html'
 
 
 })
-export class PostEditor implements OnInit {
-    model: Post;
-    tags: string;
-    categories: string;
+export class PostEditor implements OnInit, OnDestroy {
+    model: IPost;
     postForm: FormGroup;
     tagAndCategorySplit;
+    stateModel: PostsState;
+    private sub: Subscription;
 
-    constructor(private postService: PostService, private fb: FormBuilder) {
-        this.model = new Post();
+    constructor(private postService: PostService,
+        private fb: FormBuilder,
+        private route: ActivatedRoute,
+        private _postActions: PostActions,
+        private _router: Router,
+        private zone: NgZone) {
+        this.stateModel = AppStore.getState() as PostsState;
     }
 
     addPost() {
-        this.tagAndCategorySplit = this.postForm.value;
-        this.model.Categories = this.tagAndCategorySplit.categories.split(',');
-        this.model.Tags = this.tagAndCategorySplit.tags.split(',');
-        this.model.Content = this.tagAndCategorySplit.Content;
-        this.model.ShortDescription = this.tagAndCategorySplit.ShortDescription;
-        this.model.Title = this.tagAndCategorySplit.Title;
+        //this.tagAndCategorySplit = this.postForm.value;
+        //this.model.Categories = this.tagAndCategorySplit.categories.split(',');
+        //this.model.Tags = this.tagAndCategorySplit.tags.split(',');
+        //this.model.Content = this.tagAndCategorySplit.Content;
+        //this.model.ShortDescription = this.tagAndCategorySplit.ShortDescription;
+        //this.model.Title = this.tagAndCategorySplit.Title;
        
         console.log(this.model);   
         this.postService.addPost(this.model);   
@@ -37,39 +47,30 @@ export class PostEditor implements OnInit {
     }
 
     ngOnInit(): void {
-        this.buildForm();
+        console.log(this.model)
+        this.buildForm(); 
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
     }
 
 
     buildForm(): void {
         this.postForm = this.fb.group({
-            'Content': [this.model.Content],
+            'Content': [this.model.content],
             'Title': [
-                this.model.Title, [
+                this.model.title, [
                     Validators.required,
                     Validators.minLength(10),
                     Validators.maxLength(50)
                 ]
             ],
             'ShortDescription': [
-                this.model.ShortDescription, [
+                this.model.shortDescription, [
                     Validators.required,
                     Validators.minLength(10),
                     Validators.maxLength(500)
-                ]
-            ],
-            'categories': [
-                this.categories, [
-                    Validators.required,
-                    Validators.minLength(3),
-                    Validators.maxLength(20)
-                ]
-            ],
-            'tags': [
-                this.tags, [
-                    Validators.required,
-                    Validators.minLength(3),
-                    Validators.maxLength(20)
                 ]
             ]
         });

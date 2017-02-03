@@ -2,10 +2,8 @@
 import { CKEditorModule } from 'ng2-ckeditor';
 import { PostService } from './post.service';
 import { CategoryService } from './category.service';
-import { Post } from './postEditor';
 import { Subscription } from 'rxjs/Subscription';
 import { PostActions } from '../../redux/actions/post-actions';
-import { Category } from './Category';
 import { IPost } from '../../redux/actions/post-interface'
 
 
@@ -14,17 +12,16 @@ import { AppStore } from '../app.module';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormsModule } from '@angular/forms';
 
+
 @Component({
     selector: 'edit',
-    templateUrl: 'app/posts/post-editor.component.html',
+    templateUrl: 'app/posts/editPost.component.html',
 
 
 })
 export class EditPost implements OnInit, OnDestroy {
     model: IPost;
-    tags: string;
-    categories: string;
-    postForm: FormGroup;
+    editPostForm: FormGroup;
     postTemp;
     stateModel: PostsState;
     private sub: Subscription;
@@ -42,12 +39,12 @@ export class EditPost implements OnInit, OnDestroy {
     }
 
     updatePost() {
-        this.postTemp = this.postForm.value;
-        this.model.categories = this.postTemp.categories.split(',');
-        this.model.tags = this.postTemp.tags.split(',');
-        this.model.content = this.postTemp.Content;
-        this.model.shortDescription = this.postTemp.ShortDescription;
-        this.model.title = this.postTemp.Title;
+        //this.postTemp = this.postForm.value;
+        //this.model.categories = this.postTemp.categories.split(',');
+        //this.model.tags = this.postTemp.tags.split(',');
+        this.model = this.editPostForm.value;
+        //this.model.shortDescription = this.postTemp.ShortDescription;
+        //this.model.title = this.postTemp.Title;
 
         
         this.postService.uptadePost(this.model);
@@ -95,7 +92,7 @@ export class EditPost implements OnInit, OnDestroy {
         console.log(this.model);
 
         
-        this.postForm = this.fb.group({
+        this.editPostForm = this.fb.group({
             'Content': [this.model.content],
             'Title': [
                 this.model.title, [
@@ -110,34 +107,21 @@ export class EditPost implements OnInit, OnDestroy {
                     Validators.minLength(10),
                     Validators.maxLength(500)
                 ]
-            ],
-            'categories': [
-                this.categories, [
-                    Validators.required,
-                    Validators.minLength(3),
-                    Validators.maxLength(20)
-                ]
-            ],
-            'tags': [
-                this.tags, [
-                    Validators.required,
-                    Validators.minLength(3),
-                    Validators.maxLength(20)
-                ]
             ]
+            
         });
-        console.log(this.postForm)
-        this.postForm.valueChanges.subscribe(data => this.onValueChanged(data));
+        console.log(this.editPostForm)
+        this.editPostForm.valueChanges.subscribe(data => this.onValueChanged(data));
 
         this.onValueChanged();
     }
 
 
     onValueChanged(data?: any) {
-        if (!this.postForm) {
+        if (!this.editPostForm) {
             return;
         }
-        const form = this.postForm;
+        const form = this.editPostForm;
 
         for (const field in this.formErrors) {
             this.formErrors[field] = '';

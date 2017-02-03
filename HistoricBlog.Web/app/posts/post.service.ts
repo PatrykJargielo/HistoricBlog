@@ -47,7 +47,7 @@ export class PostService {
 
     }
 
-    addPost(post: Object): Promise<Post[]> {
+    addPost(post: Object): Promise<IPost> {
         
         let body = JSON.stringify(post);
         let headers = new Headers({ 'Content-Type': 'application/json' });
