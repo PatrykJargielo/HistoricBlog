@@ -17,7 +17,7 @@ import { FormGroup, FormBuilder, Validators, FormsModule} from '@angular/forms';
 
 
 })
-export class PostEditor implements OnInit, OnDestroy {
+export class PostEditor implements OnInit /*OnDestroy*/ {
     model: IPost;
     postForm: FormGroup;
     tagAndCategorySplit;
@@ -30,7 +30,7 @@ export class PostEditor implements OnInit, OnDestroy {
         private _postActions: PostActions,
         private _router: Router,
         private zone: NgZone) {
-        this.stateModel = AppStore.getState() as PostsState;
+        //this.stateModel = AppStore.getState() as PostsState;
         
     }
 
@@ -48,13 +48,13 @@ export class PostEditor implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        console.log(this.model)
+        //console.log(this.model)
         this.buildForm(); 
     }
 
-    ngOnDestroy() {
-        this.sub.unsubscribe();
-    }
+    //ngOnDestroy() {
+    //    this.sub.unsubscribe();
+    //}
 
 
     buildForm(): void {
@@ -104,9 +104,7 @@ export class PostEditor implements OnInit, OnDestroy {
 
     formErrors = {
         'Title': '',
-        'ShortDescription': '',
-        'categories': '',
-        'tags': ''
+        'ShortDescription': ''
 
     };
 
@@ -120,16 +118,6 @@ export class PostEditor implements OnInit, OnDestroy {
             'required': 'Krótki opis jest wymagany',
             'minlength': 'Krótki opis musi sie składać z co najmniej 10 znaków',
             'maxlength': 'Krótki opis może mieć maksymalnie 500 znaków.'
-        },
-        'categories': {
-            'required': 'Kategoria jest wymagany',
-            'minlength': 'Kategoria musi sie składać z co najmniej 3 znaków',
-            'maxlength': 'Kategoria może mieć maksymalnie 20 znaków.'
-        },
-        'tags': {
-            'required': 'Tag jest wymagany',
-            'minlength': 'Tag musi sie składać z co najmniej 3 znaków',
-            'maxlength': 'Tag może mieć maksymalnie 20 znaków.'
         }
     };
 
