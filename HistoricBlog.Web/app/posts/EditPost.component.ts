@@ -6,8 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { PostActions } from '../../redux/actions/post-actions';
 import { IPost } from '../../redux/actions/post-interface'
 
-
-import { PostsState } from '../../redux/post-state';
+import { HBlogState } from '../../redux/hblog-state';
 import { AppStore } from '../app.module';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormsModule } from '@angular/forms';
@@ -23,7 +22,7 @@ export class EditPost implements OnInit, OnDestroy {
     model: IPost;
     editPostForm: FormGroup;
     postTemp;
-    stateModel: PostsState;
+    stateModel: HBlogState;
     private sub: Subscription;
     
     constructor(private postService: PostService,
@@ -33,7 +32,7 @@ export class EditPost implements OnInit, OnDestroy {
         private _router: Router,
         private zone: NgZone) {
         //this.model = new IPost();
-        this.stateModel = AppStore.getState() as PostsState;
+        this.stateModel = AppStore.getState() as HBlogState;
         
         
     }
@@ -58,7 +57,7 @@ export class EditPost implements OnInit, OnDestroy {
         //        let id = + params['id'];
         //        AppStore.dispatch(this.getPost(id));
         //    });
-        this.stateModel = AppStore.getState() as PostsState;
+        this.stateModel = AppStore.getState() as HBlogState;
         this.model = this.stateModel.posts[0]
         console.log(this.model)
         this.buildForm(); 

@@ -4,7 +4,7 @@ import { PostService } from './post.service';
 import { CategoryService } from './category.service';
 import { Post } from './postEditor';
 import { IPost } from '../../redux/actions/post-interface'
-import { PostsState } from '../../redux/post-state';
+import { HBlogState } from '../../redux/hblog-state';
 import { AppStore } from '../app.module';
 import { PostActions } from '../../redux/actions/post-actions';
 import { Subscription } from 'rxjs/Subscription';
@@ -21,7 +21,7 @@ export class PostEditor implements OnInit /*OnDestroy*/ {
     model: IPost;
     postForm: FormGroup;
     tagAndCategorySplit;
-    stateModel: PostsState;
+    stateModel: HBlogState;
     private sub: Subscription;
 
     constructor(private postService: PostService,
