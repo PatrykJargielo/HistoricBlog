@@ -31,6 +31,7 @@ export class PostEditor implements OnInit, OnDestroy {
         private _router: Router,
         private zone: NgZone) {
         this.stateModel = AppStore.getState() as PostsState;
+        
     }
 
     addPost() {
@@ -40,7 +41,7 @@ export class PostEditor implements OnInit, OnDestroy {
         //this.model.Content = this.tagAndCategorySplit.Content;
         //this.model.ShortDescription = this.tagAndCategorySplit.ShortDescription;
         //this.model.Title = this.tagAndCategorySplit.Title;
-       
+        this.model = this.postForm.value;
         console.log(this.model);   
         this.postService.addPost(this.model);   
         console.log(this.model);

@@ -42,12 +42,12 @@ export class EditPost implements OnInit, OnDestroy {
         //this.postTemp = this.postForm.value;
         //this.model.categories = this.postTemp.categories.split(',');
         //this.model.tags = this.postTemp.tags.split(',');
-        this.model = this.editPostForm.value;
+        //this.model = this.editPostForm.value;
         //this.model.shortDescription = this.postTemp.ShortDescription;
         //this.model.title = this.postTemp.Title;
 
         
-        this.postService.uptadePost(this.model);
+        this.postService.updatePost(this.model);
         console.log(this.model);
     }
 

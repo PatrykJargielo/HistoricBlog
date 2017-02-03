@@ -60,7 +60,7 @@ export class PostService {
         
     }
 
-    uptadePost(post: IPost): Promise<IPost> {
+    updatePost(post: IPost): Promise<IPost> {
 
         let body = JSON.stringify(post);
         let headers = new Headers({ 'Content-Type': 'application/json' });
