@@ -29,3 +29,12 @@
         </div>
     </div>
 </div>
+<div class="panel panel-default" *ngIf='post'>
+    <div class='panel-heading' style='font-size:large'>Komentarze</div>
+<div class="panel-body" *ngFor='let comment of post.Comments'>
+    <p [innerHtml]="comment.UserName"></p>
+    <h6 class="text-muted time" [innerHtml]="comment.CommentedOn | date:'MM/dd/yyyy @ h:mma'"></h6>
+    <p [innerHtml]="comment.CommentText"></p>
+    <br>
+</div>
+</div>
