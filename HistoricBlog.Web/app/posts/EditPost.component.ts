@@ -47,7 +47,7 @@ export class EditPost implements OnInit, OnDestroy {
         //this.model.title = this.postTemp.Title;
 
         
-        this.postService.uptadePost(this.model);
+        this.postService.updatePost(this.model);
         console.log(this.model);
     }
 
