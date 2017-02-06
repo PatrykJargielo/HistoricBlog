@@ -47,17 +47,17 @@ export class PostService {
 
     }
 
-    addPost(post: Object): Promise<IPost> {
+    addPost(post: IPost): Promise<any> {
         
         let body = JSON.stringify(post);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         console.log(body);
         return this._http.post(this._postUrl, body, options)
-            .toPromise()
-            .then((res: Response) => res.json() || {})
-            .catch((error: Response) => this.setErrors(error));
-        
+            .toPromise();
+        // .then((res: Response) => res.json() || {})
+        //  .catch((error: Response) => this.setErrors(error));
+
     }
 
     updatePost(post: IPost): Promise<IPost> {

@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\login\login.component.html" />
+    <Content Include="app\posts\editPost.component.html" />
     <Content Include="app\posts\post-details.component.html" />
     <Content Include="app\posts\post-editor.component.html" />
     <Content Include="app\posts\post-list.component.css" />

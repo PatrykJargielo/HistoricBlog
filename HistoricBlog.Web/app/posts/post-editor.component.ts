@@ -9,10 +9,10 @@ import { AppStore } from '../app.module';
 import { PostActions } from '../../redux/actions/post-actions';
 import { Subscription } from 'rxjs/Subscription';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { HBlogState as PostsState } from '../../redux/hblog-state';
 import { FormGroup, FormBuilder, Validators, FormsModule} from '@angular/forms';
 
 @Component({
-    selector: 'editor',
     templateUrl: 'app/posts/post-editor.component.html'
 
 
@@ -43,14 +43,35 @@ export class PostEditor implements OnInit /*OnDestroy*/ {
         //this.model.Title = this.tagAndCategorySplit.Title;
         this.model = this.postForm.value;
         console.log(this.model);   
-        this.postService.addPost(this.model);   
-        console.log(this.model);
+        this._postActions.addPost(this.model);
+        
+       
     }
 
     ngOnInit(): void {
-        //console.log(this.model)
-        this.buildForm(); 
+        AppStore.subscribe(() => {
+            this.postListener();
+        });
+        this.model = { id: 0, title: "", shortDescription: "", categories: [], tags: [], content: "" };
+        this.buildForm();
+        
+
     }
+
+    postListener() {
+        this.stateModel = AppStore.getState() as PostsState;
+        
+        this.zone.run(() => {
+            
+            this.model= this.stateModel.posts[0];
+        });
+    }
+    //ngOnInit(): void {
+
+    //    this.stateModel = AppStore.getState() as HBlogState;
+    //    this.model ={ id: 0, title: "", shortDescription: "", categories: [], tags: [], content: "" };
+    //    this.buildForm(); 
+    //}
 
     //ngOnDestroy() {
     //    this.sub.unsubscribe();
