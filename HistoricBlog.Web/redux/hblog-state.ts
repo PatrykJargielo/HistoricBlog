@@ -1,4 +1,4 @@
-﻿import {IPost} from './actions/post-interface'
+﻿import { IPost } from './actions/post-interface'
 
 export class HBlogState {
     userName: string;
@@ -11,7 +11,7 @@ export class HBlogState {
         pageNumber: number;
         totalFilteredPostCount: number;
         postsOnPage: number;
-    } 
+    }
     errors: string[];
 
     constructor() {

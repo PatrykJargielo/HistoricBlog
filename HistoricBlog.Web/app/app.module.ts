@@ -19,7 +19,8 @@ import { Ng2PaginationModule } from 'ng2-pagination';
 import { CKEditorModule } from 'ng2-ckeditor';
 import thunk from 'redux-thunk';
 import * as createLogger from 'redux-logger';
-
+import { NavbarComponent } from './navbar/navbar.component';
+import { ContactComponent } from './shared/contact.component';
 
 const logger = createLogger();
 
@@ -47,6 +48,10 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
                 path: 'addPost',
                 component: PostEditor
             },
+                        {
+                path: 'contact',
+                component: ContactComponent
+            },
             {
                 path: 'editPost/:id',
                 component: EditPost
@@ -61,7 +66,9 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
         ErrorDisplayComponent,
         PostEditor,
         PostDetailsComponent,
-        EditPost
+        EditPost,
+        NavbarComponent,
+        ContactComponent
     ],
     providers: [
         PostActions,

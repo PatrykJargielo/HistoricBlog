@@ -1,5 +1,4 @@
 ﻿<form [(formGroup)]="postForm">
-<form [(formGroup)]="postForm" >
     <div class="form-group">
         <ckeditor formControlName="Content" debounce="500" name="Content">
         </ckeditor>
@@ -13,5 +12,11 @@
         </div>
     </div>
     <button class="btn btn-default" [disabled]="!postForm.valid" (click)="addPost()">Dodaj post</button>
+<<<<<<< HEAD
    
 </form>
+
+=======
+    <button class="btn btn-default" (click)="getP()">gg</button>
+</form>
+>>>>>>> 5f9f02f41dde994fd54ddc309a24dd977aa1e8ba
