@@ -13,12 +13,11 @@ import { FormGroup, FormBuilder, Validators, FormsModule } from '@angular/forms'
 
 
 @Component({
-    selector: 'edit',
     templateUrl: 'app/posts/editPost.component.html',
 
 
 })
-export class EditPost implements OnInit, OnDestroy {
+export class EditPost implements OnInit/*, OnDestroy*/ {
     model: IPost;
     editPostForm: FormGroup;
     postTemp;
@@ -58,10 +57,17 @@ export class EditPost implements OnInit, OnDestroy {
         //        AppStore.dispatch(this.getPost(id));
         //    });
         this.stateModel = AppStore.getState() as HBlogState;
-        this.model = this.stateModel.posts[0]
+
+        if (this.stateModel.posts.length == 0) {
+            this.model =
+                {id: 0 , title: "", shortDescription: "", categories: [], tags: [], content: "" };
+        } else {
+            this.model = this.stateModel.posts[0]
+
+        }
         console.log(this.model)
-        this.buildForm(); 
-           
+        this.buildForm();
+
     }
     //postListnener(): void {
     //    this.stateModel = AppStore.getState() as PostsState;
@@ -72,9 +78,9 @@ export class EditPost implements OnInit, OnDestroy {
     //    });
     //}
 
-    ngOnDestroy() {
-        this.sub.unsubscribe();
-    }
+    //ngOnDestroy() {
+    //    this.sub.unsubscribe();
+    //}
 
     //getPost(id: number) {
     //    let idFromRoute = + this.route.snapshot.params['id'];
