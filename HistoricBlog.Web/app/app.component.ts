@@ -6,12 +6,13 @@ import { RouterModule, Routes } from '@angular/router';
   selector: 'hb-app',
   template: `
     <div>
+      <navbar></navbar>
+<br>
       <hb-error-display></hb-error-display>
       <div class='container'>
             <router-outlet></router-outlet>
        </div>
     </div>
-
   `,
   providers: [PostService]
 })
