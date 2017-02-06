@@ -1,18 +1,20 @@
 ﻿<div class="panel panel-primary">
     <div class="panel-body">
         <div class='row'>
-            <div><td>
-                  <a [routerLink]="['/addPost']">Dodaj Post</a>
-             </td></div>
-            <div class='col-md-2'>Filter by:</div>
+            <div>
+                <a class='btn btn-default col-md-1' [routerLink]="['/addPost']" style="width: 110px margin=20px"> <i class='glyphicon glyphicon-plus'></i>Dodaj Post</a>
+            </div>
+                 <div class="clearfix"></div>
+
+            <p>Filter by:</p>
             <div class='col-md-4'>
-                <input type='text' [(ngModel)]='listFilter' (ngModelChange)="setTitleFilter($event)"/>
+                <input type='text' [(ngModel)]='listFilter' (ngModelChange)="setTitleFilter($event)" />
 
             </div>
         </div>
 
         <div class="container" *ngFor='let post of posts | paginate: { itemsPerPage: getPostsOnPageCount(),currentPage:getCurrentPageNumber(),totalItems:getPostCount()}'>
-           
+
             <div class="well">
                 <div class="row">
                     <td>

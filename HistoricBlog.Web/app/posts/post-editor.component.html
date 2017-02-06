@@ -1,9 +1,9 @@
-﻿<form [(formGroup)]="postForm" >
+﻿<form [(formGroup)]="postForm">
     <div class="form-group">
         <ckeditor formControlName="Content" debounce="500" name="Content">
         </ckeditor>
         <label>Tytuł</label>
-        <input type="text" class="form-control" placeholder="Tytuł" id="Title"  formControlName="Title" required>
+        <input type="text" class="form-control" placeholder="Tytuł" id="Title" formControlName="Title" required>
         <div *ngIf="formErrors.Title" class="alert alert-danger" [innerHtml]="formErrors.Title">
         </div>
         <label>Shorts</label>
@@ -14,4 +14,3 @@
     <button class="btn btn-default" [disabled]="!postForm.valid" (click)="addPost()">Dodaj post</button>
     <button class="btn btn-default" (click)="getP()">gg</button>
 </form>
-

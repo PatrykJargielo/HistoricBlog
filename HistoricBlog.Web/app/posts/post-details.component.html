@@ -23,7 +23,7 @@
             </a>
             <div class='panel-footer'>
                 <a class='btn btn-default col-md-1' [routerLink]="['/editPost', post.Id]"  style='width: 80px'>
-                    <i class='glyphicon glyphicon-chevron-left'></i> Edytuj
+                    <i class='glyphicon glyphicon-pencil'></i> Edytuj
                 </a>
             </div>
         </div>
@@ -35,6 +35,6 @@
     <p [innerHtml]="comment.UserName"></p>
     <h6 class="text-muted time" [innerHtml]="comment.CommentedOn | date:'MM/dd/yyyy @ h:mma'"></h6>
     <p [innerHtml]="comment.CommentText"></p>
-    <br>
+     <div class="clearfix"></div>
 </div>
 </div>
