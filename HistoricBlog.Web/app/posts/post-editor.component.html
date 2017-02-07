@@ -1,13 +1,13 @@
 ﻿<form [(formGroup)]="postForm" >
     <div class="form-group">
-        <ckeditor formControlName="Content" debounce="500" name="Content">
+        <ckeditor formControlName="Content" [(ngModel)]="model.Content" debounce="500" name="Content">
         </ckeditor>
         <label>Tytuł</label>
-        <input type="text" class="form-control" placeholder="Tytuł" id="Title"  formControlName="Title" required>
+        <input type="text" class="form-control" placeholder="Tytuł" id="Title"  formControlName="Title" [(ngModel)]="model.Title" required>
         <div *ngIf="formErrors.Title" class="alert alert-danger" [innerHtml]="formErrors.Title">
         </div>
         <label>Shorts</label>
-        <input type="text" class="form-control" placeholder="Krótki opis" formControlName="ShortDescription" name="ShortDescription">
+        <input type="text" class="form-control" placeholder="Krótki opis" formControlName="ShortDescription" [(ngModel)]="model.ShortDescription" name="ShortDescription">
         <div *ngIf="formErrors.ShortDescription" class="alert alert-danger" [innerHtml]="formErrors.ShortDescription">
         </div>
     </div>

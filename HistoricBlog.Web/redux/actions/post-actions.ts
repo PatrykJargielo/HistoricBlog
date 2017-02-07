@@ -13,6 +13,9 @@ import { Http, Response, HttpModule, RequestOptions, Headers, URLSearchParams } 
 
 
 export const ADD_POST = "ADD_POST";
+export const ADD_POST_REQUEST = "ADD_POST_REQUEST";
+export const ADD_POST_SUCCESS = "DD_POST_SUCCESS";
+export const ADD_POST_ERROR = "ADD_POST_ERROR";
 export const EDIT_POST = "EDIT_POST";
 export const GET_POST = "GET_POST";
 export const GET_POSTS = "GET_POSTS";
@@ -34,16 +37,44 @@ export class PostActions {
     //    return { type: ADD_POST, payload:post }
     //}
 
-    addPost(post) {
+    //addPost(post) {
+    //    let body = JSON.stringify(post);
+    //    let headers = new Headers({ 'Content-Type': 'application/json' });
+    //    let options = new RequestOptions({ headers: headers });
+    //    console.log(body);
+    //    const request =  this._http.post(`${this._postUrl}/${post.id}`, body, options)
+    //        .toPromise()
+
+    //    request.then((post: Response) => AppStore.dispatch({ type: 'ADD_POST_REQUEST', payload: post.json() }))
+    //        .catch((error: Response) => AppStore.dispatch({ type: 'SET_ERRORS', payload: error.json() }));
+
+    //    return { type: 'ADD_POST', payload: request }
+    //}
+    addPostRequest(request) {
+        return { type: ADD_POST_REQUEST, payload: request }
+    }
+    addPostSuccess(response) {
+        return { type: ADD_POST_SUCCESS, payload: response }
+    }
+
+    addPostError(error: string[]) {
+        return { type: SET_ERRORS, payload: error }
+    }
+    addPost(post) {        
         let body = JSON.stringify(post);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        console.log(body);
-        const request = this._http.post(this._postUrl, body, options)
+        
+        const request = this._http.post(`${this._postUrl}/${post.id}`, body, options)
             .toPromise();
+        AppStore.dispatch({ type: 'ADD_POST_REQUEST', payload: request });
 
-        request.then((post: Response) => AppStore.dispatch({ type: 'ADD_POST', payload: post.json() }))
+        return request
+            .then((response: Response) => AppStore.dispatch({ type: 'ADD_POST_SUCCESS', payload: response.json() }))
             .catch((error: Response) => AppStore.dispatch({ type: 'SET_ERRORS', payload: error.json() }));
+        
+
+        
 
     }
 

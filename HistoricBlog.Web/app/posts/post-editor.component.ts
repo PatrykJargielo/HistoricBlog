@@ -1,4 +1,4 @@
-﻿import { Component, NgZone, OnInit, OnDestroy } from '@angular/core';
+﻿import { Component, NgZone, OnInit, OnDestroy} from '@angular/core';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { PostService } from './post.service';
 import { CategoryService } from './category.service';
@@ -17,8 +17,9 @@ import { FormGroup, FormBuilder, Validators, FormsModule} from '@angular/forms';
 
 
 })
-export class PostEditor implements OnInit /*OnDestroy*/ {
+export class PostEditor implements OnInit {
     model: IPost;
+    id: number;
     postForm: FormGroup;
     tagAndCategorySplit;
     stateModel: HBlogState;
@@ -30,23 +31,50 @@ export class PostEditor implements OnInit /*OnDestroy*/ {
         private _postActions: PostActions,
         private _router: Router,
         private zone: NgZone) {
-        //this.stateModel = AppStore.getState() as PostsState;
+        this.stateModel = AppStore.getState() as PostsState;
         
     }
 
     addPost() {
-        //this.tagAndCategorySplit = this.postForm.value;
-        //this.model.Categories = this.tagAndCategorySplit.categories.split(',');
-        //this.model.Tags = this.tagAndCategorySplit.tags.split(',');
-        //this.model.Content = this.tagAndCategorySplit.Content;
-        //this.model.ShortDescription = this.tagAndCategorySplit.ShortDescription;
-        //this.model.Title = this.tagAndCategorySplit.Title;
+
         this.model = this.postForm.value;
         console.log(this.model);   
-        this._postActions.addPost(this.model);
+        this._postActions.addPost(this.model).then(function() {
+            //TODO po dodaniu posta
+        }).catch(function(parameters) {
+            //TODO po nieudanym  dodaniu
+        })
         
        
     }
+
+    //ngOnInit(): void {
+    //    AppStore.subscribe(() => {
+    //        this.postListener();
+    //    });
+                
+
+    //    if (this.stateModel.posts.length == 0) {
+            
+    //        this.model =
+    //            { id: 0, title: "", shortDescription: "", categories: [], tags: [], content: "" };
+    //    } else {
+    //        this.model = this.stateModel.posts[0];
+    //    }
+
+    //    this.buildForm();
+
+
+    //}
+
+    //postListener() {
+    //    this.stateModel = AppStore.getState() as PostsState;
+  
+    //    this.zone.run(() => {
+
+    //        this.model = this.stateModel.posts[0];
+    //    });
+    //}
 
     ngOnInit(): void {
         AppStore.subscribe(() => {
@@ -62,20 +90,11 @@ export class PostEditor implements OnInit /*OnDestroy*/ {
         this.stateModel = AppStore.getState() as PostsState;
         
         this.zone.run(() => {
-            
-            this.model= this.stateModel.posts[0];
+            //AppStore.dispatch(this._postActions.getPost(this.id));
+            this.model= this.stateModel.post.data;
         });
     }
-    //ngOnInit(): void {
 
-    //    this.stateModel = AppStore.getState() as HBlogState;
-    //    this.model ={ id: 0, title: "", shortDescription: "", categories: [], tags: [], content: "" };
-    //    this.buildForm(); 
-    //}
-
-    //ngOnDestroy() {
-    //    this.sub.unsubscribe();
-    //}
 
 
     buildForm(): void {

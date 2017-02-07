@@ -1,4 +1,5 @@
-﻿import {IPost} from './actions/post-interface'
+﻿import { IPost } from './actions/post-interface'
+import { AsyncDataWrapper } from './actions/generic-post';
 
 export class HBlogState {
     userName: string;
@@ -6,7 +7,8 @@ export class HBlogState {
     filterTitle: string;
     filterCategory: string[];
     filterTag: string[];
-    posts: IPost[];
+    posts;
+    post;
     pagination: {
         pageNumber: number;
         totalFilteredPostCount: number;
@@ -20,7 +22,9 @@ export class HBlogState {
         this.filterCategory = [];
         this.filterTitle = '';
         this.filterTag = [];
-        this.posts = [];
+        this.posts = new AsyncDataWrapper<IPost[]>();
+        this.post = new AsyncDataWrapper<IPost>();
+        this.posts.data = [];
         this.pagination = {
             pageNumber: 1,
             totalFilteredPostCount: 2,

@@ -6,6 +6,7 @@ import { AppStore } from '../app.module';
 import { HBlogState as PostsState } from '../../redux/hblog-state';
 import { FormsModule } from '@angular/forms';
 
+
 @Component({
 
     templateUrl: 'app/posts/post-list.component.html',

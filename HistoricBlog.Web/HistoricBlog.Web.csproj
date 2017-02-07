@@ -244,6 +244,7 @@
     <TypeScriptCompile Include="app\posts\postEditor.ts" />
     <TypeScriptCompile Include="app\shared\error-display.component.ts" />
     <TypeScriptCompile Include="redux\actions\comment-actions.ts" />
+    <TypeScriptCompile Include="redux\actions\generic-post.ts" />
     <TypeScriptCompile Include="redux\actions\post-actions.ts" />
     <TypeScriptCompile Include="redux\actions\post-interface.ts" />
     <TypeScriptCompile Include="redux\hblog-state.ts" />
