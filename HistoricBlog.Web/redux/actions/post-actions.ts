@@ -73,9 +73,6 @@ export class PostActions {
             .then((response: Response) => AppStore.dispatch({ type: 'ADD_POST_SUCCESS', payload: response.json() }))
             .catch((error: Response) => AppStore.dispatch({ type: 'SET_ERRORS', payload: error.json() }));
         
-
-        
-
     }
 
     getAllPosts(post) {

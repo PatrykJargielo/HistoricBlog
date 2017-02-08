@@ -10,7 +10,7 @@
                 <div class='col-md-6'>{{post.Title}}</div>
             </div>
             <div class='row'>
-                <div class='col-md-6'>{{post.Content}}</div>
+                <div class='col-md-6' [innerHTML]="post.Content"></div>
             </div>
         </div>
     </div>

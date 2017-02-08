@@ -6,6 +6,7 @@ import { AppStore } from '../app.module';
 import { Subscription } from 'rxjs/Subscription';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HBlogState as PostsState } from '../../redux/hblog-state';
+import { AsyncDataWrapper } from '../../redux/actions/generic-post';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { HBlogState as PostsState } from '../../redux/hblog-state';
 
 export class PostDetailsComponent implements OnInit, OnDestroy {
     pageTitle: string = 'Post Detail';
-    post: IPost;
+    post: AsyncDataWrapper<IPost>;
     stateModel: PostsState;
     errorMessage: string;
     private sub: Subscription;
@@ -41,10 +42,10 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 
     postListnener(): void {
         this.stateModel = AppStore.getState() as PostsState;
-        this.post = this.stateModel.posts[0]
+        this.post = this.stateModel.post.data;
 
         this.zone.run(() => {
-            this.post = this.stateModel.posts[0]
+            this.post = this.stateModel.post.data;
         });
     }
 

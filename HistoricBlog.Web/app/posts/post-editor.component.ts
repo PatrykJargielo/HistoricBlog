@@ -10,7 +10,8 @@ import { PostActions } from '../../redux/actions/post-actions';
 import { Subscription } from 'rxjs/Subscription';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HBlogState as PostsState } from '../../redux/hblog-state';
-import { FormGroup, FormBuilder, Validators, FormsModule} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormsModule } from '@angular/forms';
+import { AsyncDataWrapper } from '../../redux/actions/generic-post';
 
 @Component({
     templateUrl: 'app/posts/post-editor.component.html'
@@ -19,7 +20,6 @@ import { FormGroup, FormBuilder, Validators, FormsModule} from '@angular/forms';
 })
 export class PostEditor implements OnInit {
     model: IPost;
-    id: number;
     postForm: FormGroup;
     tagAndCategorySplit;
     stateModel: HBlogState;
@@ -30,7 +30,8 @@ export class PostEditor implements OnInit {
         private route: ActivatedRoute,
         private _postActions: PostActions,
         private _router: Router,
-        private zone: NgZone) {
+        private zone: NgZone,
+        private _postService: PostService) {
         this.stateModel = AppStore.getState() as PostsState;
         
     }
@@ -38,51 +39,48 @@ export class PostEditor implements OnInit {
     addPost() {
 
         this.model = this.postForm.value;
-        console.log(this.model);   
-        this._postActions.addPost(this.model).then(function() {
-            //TODO po dodaniu posta
-        }).catch(function(parameters) {
-            //TODO po nieudanym  dodaniu
-        })
-        
-       
+        console.log(this.model);
+        this._postActions.addPost(this.model);
+        //    .then(function () {
+        //    //TODO po dodaniu posta
+        //}).catch(function(parameters) {
+        //    //TODO po nieudanym  dodaniu
+        //})
+
+
     }
 
-    //ngOnInit(): void {
-    //    AppStore.subscribe(() => {
-    //        this.postListener();
-    //    });
-                
-
-    //    if (this.stateModel.posts.length == 0) {
-            
-    //        this.model =
-    //            { id: 0, title: "", shortDescription: "", categories: [], tags: [], content: "" };
-    //    } else {
-    //        this.model = this.stateModel.posts[0];
-    //    }
-
-    //    this.buildForm();
-
-
-    //}
-
-    //postListener() {
-    //    this.stateModel = AppStore.getState() as PostsState;
-  
-    //    this.zone.run(() => {
-
-    //        this.model = this.stateModel.posts[0];
-    //    });
-    //}
-
     ngOnInit(): void {
-        AppStore.subscribe(() => {
-            this.postListener();
-        });
-        this.model = { id: 0, title: "", shortDescription: "", categories: [], tags: [], content: "" };
+
+        AppStore.subscribe(() => { this.postListener() });
+        this.sub = this.route.params.subscribe(
+            params => {
+                let id = + params['id'];
+                console.log(id, "idCheck")
+                if (typeof params['id'] === 'undefined') {
+                    console.log("Test");
+                } else {
+                    AppStore.dispatch(this.getPost(id));
+                    console.log("Test2");
+                }
+
+            });
+           //TODO dispatch na getPost     
+
+
+        this.model = this.stateModel.post;
+        //if (typeof this.stateModel.post.data == "undefined") {
+
+        //    this.model=
+        //    { id: 0, title: "", shortDescription: "", categories: [], tags: [], content: "" };
+
+        //} else {
+        //    this.model = this.stateModel.post;
+            
+        //}
+
         this.buildForm();
-        
+        console.log(this.model, 'model');
 
     }
 
@@ -90,9 +88,23 @@ export class PostEditor implements OnInit {
         this.stateModel = AppStore.getState() as PostsState;
         
         this.zone.run(() => {
-            //AppStore.dispatch(this._postActions.getPost(this.id));
-            this.model= this.stateModel.post.data;
+
+            this.model = this.stateModel.post.data;
+            console.log(this.model, 'dd2');
+            
+            
         });
+    }
+    getPost(id: number) {
+
+        let idFromRoute = + this.route.snapshot.params['id'];
+
+        return (dispatch) => {
+            this._postService.getPost(idFromRoute).then(
+                post => dispatch(this._postActions.getPost(post.json())
+                )
+            );
+        }
     }
 
 

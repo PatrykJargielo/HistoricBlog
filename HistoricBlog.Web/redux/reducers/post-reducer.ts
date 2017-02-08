@@ -47,12 +47,7 @@ export function post(state = defaultState, action) {
             newState = Object.assign({}, state);
             newState.pagination.pageNumber = action.pageNumber;
             newState.errors = [];
-            return newState;
-        //case ADD_POST:
-        //    newState = Object.assign({}, state);
-        //    newState.post.data = action.payload.post;
-        //    newState.post.errors.error = [];
-        //    return newState;
+            return newState;               
         case ADD_POST_REQUEST:
             newState = Object.assign({}, state);
             newState.post.promise = action.payload;
@@ -92,7 +87,7 @@ export function post(state = defaultState, action) {
             return newState;
         case GET_POST:
             newState = Object.assign({}, state);
-            newState.posts = [action.payload];
+            newState.post.data = action.payload;
             return newState;
         default:
             return newState;
