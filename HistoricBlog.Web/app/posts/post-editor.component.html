@@ -11,6 +11,8 @@
         <div *ngIf="formErrors.ShortDescription" class="alert alert-danger" [innerHtml]="formErrors.ShortDescription">
         </div>
     </div>
+                   <a class='btn btn-default' (click)='onBack()'>
+                <i class='glyphicon glyphicon-chevron-left'></i>Powrót</a>
     <button class="btn btn-default" [disabled]="!postForm.valid" (click)="addPost()">Dodaj post</button>
-   
+
 </form>

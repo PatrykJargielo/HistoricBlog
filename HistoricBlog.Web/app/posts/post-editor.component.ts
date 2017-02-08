@@ -46,12 +46,9 @@ export class PostEditor implements OnInit {
         //}).catch(function(parameters) {
         //    //TODO po nieudanym  dodaniu
         //})
-
-
     }
 
     ngOnInit(): void {
-
         AppStore.subscribe(() => { this.postListener() });
         this.sub = this.route.params.subscribe(
             params => {
@@ -90,9 +87,7 @@ export class PostEditor implements OnInit {
         this.zone.run(() => {
 
             this.model = this.stateModel.post.data;
-            console.log(this.model, 'dd2');
-            
-            
+            console.log(this.model, 'dd2');                    
         });
     }
     getPost(id: number) {
@@ -106,8 +101,6 @@ export class PostEditor implements OnInit {
             );
         }
     }
-
-
 
     buildForm(): void {
         this.postForm = this.fb.group({
