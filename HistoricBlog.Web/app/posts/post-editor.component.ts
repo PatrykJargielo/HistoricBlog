@@ -51,6 +51,7 @@ export class PostEditor implements OnInit {
     }
 
     ngOnInit(): void {
+        
 
         AppStore.subscribe(() => { this.postListener() });
         this.sub = this.route.params.subscribe(
@@ -58,17 +59,19 @@ export class PostEditor implements OnInit {
                 let id = + params['id'];
                 console.log(id, "idCheck")
                 if (typeof params['id'] === 'undefined') {
+                    this.model = this.stateModel.post;
                     console.log("Test");
                 } else {
                     AppStore.dispatch(this.getPost(id));
+                    this.model = this.stateModel.post.data;
                     console.log("Test2");
                 }
 
             });
            //TODO dispatch na getPost     
 
-
-        this.model = this.stateModel.post;
+       
+        
         //if (typeof this.stateModel.post.data == "undefined") {
 
         //    this.model=
@@ -78,7 +81,7 @@ export class PostEditor implements OnInit {
         //    this.model = this.stateModel.post;
             
         //}
-
+        
         this.buildForm();
         console.log(this.model, 'model');
 
@@ -126,6 +129,8 @@ export class PostEditor implements OnInit {
                     Validators.maxLength(500)
                 ]
             ]
+            
+
         });
 
         this.postForm.valueChanges.subscribe(data => this.onValueChanged(data));

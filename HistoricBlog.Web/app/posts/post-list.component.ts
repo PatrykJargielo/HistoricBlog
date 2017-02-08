@@ -17,7 +17,7 @@ import { AsyncDataWrapper } from '../../redux/actions/generic-post';
 export class PostListComponent implements OnInit {
     stateModel: PostsState;
     listFilter: string;
-    posts: AsyncDataWrapper<IPost[]>;
+    posts: IPost[];
 
     constructor( private postService: PostService, private _postActions: PostActions, private zone: NgZone) {
         this.postService = postService;

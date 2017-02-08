@@ -1,14 +1,11 @@
 <div class='panel panel-primary' *ngIf='post'>
-    <div class='panel-heading' style='font-size:large'> {{pageTitle + ': ' + post.Title}}
+    <div class='panel-heading' style='font-size:large' [innerHTML]="post.Title">
 </div>
 
 <div class='panel-body'>
     <div class='row'>
         <div class='col-md-6'>
-            <div class='row'>
-                <div class='col-md-3'>Tytuł:</div>
-                <div class='col-md-6'>{{post.Title}}</div>
-            </div>
+    
             <div class='row'>
                 <div class='col-md-6' [innerHTML]="post.Content"></div>
             </div>

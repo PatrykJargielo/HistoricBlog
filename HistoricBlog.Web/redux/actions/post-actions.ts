@@ -65,7 +65,7 @@ export class PostActions {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         
-        const request = this._http.post(`${this._postUrl}/${post.id}`, body, options)
+        const request = this._http.post(`${this._postUrl}/${post.Id}`, body, options)
             .toPromise();
         AppStore.dispatch({ type: 'ADD_POST_REQUEST', payload: request });
 

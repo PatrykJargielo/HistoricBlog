@@ -15,7 +15,7 @@ import { AsyncDataWrapper } from '../../redux/actions/generic-post';
 
 export class PostDetailsComponent implements OnInit, OnDestroy {
     pageTitle: string = 'Post Detail';
-    post: AsyncDataWrapper<IPost>;
+    post: IPost;
     stateModel: PostsState;
     errorMessage: string;
     private sub: Subscription;
