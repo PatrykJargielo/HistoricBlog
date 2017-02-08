@@ -1,4 +1,4 @@
-﻿import { Component, NgZone, OnInit, OnDestroy } from '@angular/core';
+﻿import { Component, NgZone, OnInit, OnDestroy} from '@angular/core';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { PostService } from './post.service';
 import { CategoryService } from './category.service';
@@ -10,14 +10,15 @@ import { PostActions } from '../../redux/actions/post-actions';
 import { Subscription } from 'rxjs/Subscription';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HBlogState as PostsState } from '../../redux/hblog-state';
-import { FormGroup, FormBuilder, Validators, FormsModule} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormsModule } from '@angular/forms';
+import { AsyncDataWrapper } from '../../redux/actions/generic-post';
 
 @Component({
     templateUrl: 'app/posts/post-editor.component.html'
 
 
 })
-export class PostEditor implements OnInit /*OnDestroy*/ {
+export class PostEditor implements OnInit {
     model: IPost;
     postForm: FormGroup;
     tagAndCategorySplit;
@@ -29,32 +30,57 @@ export class PostEditor implements OnInit /*OnDestroy*/ {
         private route: ActivatedRoute,
         private _postActions: PostActions,
         private _router: Router,
-        private zone: NgZone) {
-        //this.stateModel = AppStore.getState() as PostsState;
+        private zone: NgZone,
+        private _postService: PostService) {
+        this.stateModel = AppStore.getState() as PostsState;
         
     }
 
     addPost() {
-        //this.tagAndCategorySplit = this.postForm.value;
-        //this.model.Categories = this.tagAndCategorySplit.categories.split(',');
-        //this.model.Tags = this.tagAndCategorySplit.tags.split(',');
-        //this.model.Content = this.tagAndCategorySplit.Content;
-        //this.model.ShortDescription = this.tagAndCategorySplit.ShortDescription;
-        //this.model.Title = this.tagAndCategorySplit.Title;
+
         this.model = this.postForm.value;
-        console.log(this.model);   
+        console.log(this.model);
         this._postActions.addPost(this.model);
-        
-       
+        //    .then(function () {
+        //    //TODO po dodaniu posta
+        //}).catch(function(parameters) {
+        //    //TODO po nieudanym  dodaniu
+        //})
+
+
     }
 
     ngOnInit(): void {
-        AppStore.subscribe(() => {
-            this.postListener();
-        });
-        this.model = { id: 0, title: "", shortDescription: "", categories: [], tags: [], content: "" };
+
+        AppStore.subscribe(() => { this.postListener() });
+        this.sub = this.route.params.subscribe(
+            params => {
+                let id = + params['id'];
+                console.log(id, "idCheck")
+                if (typeof params['id'] === 'undefined') {
+                    console.log("Test");
+                } else {
+                    AppStore.dispatch(this.getPost(id));
+                    console.log("Test2");
+                }
+
+            });
+           //TODO dispatch na getPost     
+
+
+        this.model = this.stateModel.post;
+        //if (typeof this.stateModel.post.data == "undefined") {
+
+        //    this.model=
+        //    { id: 0, title: "", shortDescription: "", categories: [], tags: [], content: "" };
+
+        //} else {
+        //    this.model = this.stateModel.post;
+            
+        //}
+
         this.buildForm();
-        
+        console.log(this.model, 'model');
 
     }
 
@@ -62,20 +88,25 @@ export class PostEditor implements OnInit /*OnDestroy*/ {
         this.stateModel = AppStore.getState() as PostsState;
         
         this.zone.run(() => {
+
+            this.model = this.stateModel.post.data;
+            console.log(this.model, 'dd2');
             
-            this.model= this.stateModel.posts[0];
+            
         });
     }
-    //ngOnInit(): void {
+    getPost(id: number) {
 
-    //    this.stateModel = AppStore.getState() as HBlogState;
-    //    this.model ={ id: 0, title: "", shortDescription: "", categories: [], tags: [], content: "" };
-    //    this.buildForm(); 
-    //}
+        let idFromRoute = + this.route.snapshot.params['id'];
 
-    //ngOnDestroy() {
-    //    this.sub.unsubscribe();
-    //}
+        return (dispatch) => {
+            this._postService.getPost(idFromRoute).then(
+                post => dispatch(this._postActions.getPost(post.json())
+                )
+            );
+        }
+    }
+
 
 
     buildForm(): void {

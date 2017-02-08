@@ -7,6 +7,8 @@ import { PostActions } from '../../redux/actions/post-actions';
 import { IPost } from '../../redux/actions/post-interface'
 
 import { HBlogState } from '../../redux/hblog-state';
+import { HBlogState as PostsState } from '../../redux/hblog-state';
+
 import { AppStore } from '../app.module';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormsModule } from '@angular/forms';
@@ -30,34 +32,37 @@ export class EditPost implements OnInit/*, OnDestroy*/ {
         private _postActions: PostActions,
         private _router: Router,
         private zone: NgZone) {
-        //this.model = new IPost();
         this.stateModel = AppStore.getState() as HBlogState;
         
         
     }
 
     updatePost() {
-        //this.postTemp = this.postForm.value;
-        //this.model.categories = this.postTemp.categories.split(',');
-        //this.model.tags = this.postTemp.tags.split(',');
-        //this.model = this.editPostForm.value;
-        //this.model.shortDescription = this.postTemp.ShortDescription;
-        //this.model.title = this.postTemp.Title;
-
-        
-        this.postService.updatePost(this.model);
+      
+        this._postActions.addPost(this.model);
         console.log(this.model);
     }
 
-    ngOnInit(): void {
-        //AppStore.subscribe(() => { this.postListnener() });
-        //this.sub = this.route.params.subscribe(
-        //    params => {
-        //        let id = + params['id'];
-        //        AppStore.dispatch(this.getPost(id));
-        //    });
-        this.stateModel = AppStore.getState() as HBlogState;
+    //ngOnInit(): void {
 
+    //    this.stateModel = AppStore.getState() as HBlogState;
+
+    //    if (this.stateModel.posts.length == 0) {
+    //        this.model =
+    //            {id: 0 , title: "", shortDescription: "", categories: [], tags: [], content: "" };
+    //    } else {
+    //        this.model = this.stateModel.posts[0]
+
+    //    }
+    //    console.log(this.model)
+    //    this.buildForm();
+
+    //}
+
+    ngOnInit(): void {
+        AppStore.subscribe(() => {
+            this.postListener();
+        });
         if (this.stateModel.posts.length == 0) {
             this.model =
                 {id: 0 , title: "", shortDescription: "", categories: [], tags: [], content: "" };
@@ -65,33 +70,19 @@ export class EditPost implements OnInit/*, OnDestroy*/ {
             this.model = this.stateModel.posts[0]
 
         }
-        console.log(this.model)
         this.buildForm();
 
+
     }
-    //postListnener(): void {
-    //    this.stateModel = AppStore.getState() as PostsState;
-    //    this.model = this.stateModel.posts[0]
 
-    //    this.zone.run(() => {
-    //        this.model = this.stateModel.posts[0]
-    //    });
-    //}
+    postListener() {
+        this.stateModel = AppStore.getState() as PostsState;
 
-    //ngOnDestroy() {
-    //    this.sub.unsubscribe();
-    //}
+        this.zone.run(() => {
 
-    //getPost(id: number) {
-    //    let idFromRoute = + this.route.snapshot.params['id'];
-
-    //    return (dispatch) => {
-    //        this.postService.getPost(idFromRoute).then(
-    //            post => dispatch(this._postActions.getPost(post.json())
-    //            )
-    //        );
-    //    }
-    //}
+            this.model = this.stateModel.posts[0];
+        });
+    }
 
     buildForm(): void {
         console.log(this.model);

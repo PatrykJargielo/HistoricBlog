@@ -5,6 +5,8 @@ import { PostService } from './post.service';
 import { AppStore } from '../app.module';
 import { HBlogState as PostsState } from '../../redux/hblog-state';
 import { FormsModule } from '@angular/forms';
+import { AsyncDataWrapper } from '../../redux/actions/generic-post';
+
 
 @Component({
 
@@ -15,7 +17,7 @@ import { FormsModule } from '@angular/forms';
 export class PostListComponent implements OnInit {
     stateModel: PostsState;
     listFilter: string;
-    posts: IPost[] = [];
+    posts: AsyncDataWrapper<IPost[]>;
 
     constructor( private postService: PostService, private _postActions: PostActions, private zone: NgZone) {
         this.postService = postService;
@@ -33,7 +35,7 @@ export class PostListComponent implements OnInit {
     postListener() {
         this.stateModel = AppStore.getState() as PostsState;
         this.zone.run(() => {
-            this.posts = this.stateModel.posts;
+            this.posts = this.stateModel.posts.data;
         });
     }
 

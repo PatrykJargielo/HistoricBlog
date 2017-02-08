@@ -11,6 +11,7 @@ import { ErrorDisplayComponent } from './shared/error-display.component';
 import { createStore, applyMiddleware, compose, Store } from 'redux';
 import { post } from '../redux/reducers/post-reducer';
 import { PostActions } from '../redux/actions/post-actions';
+import { AsyncDataWrapper } from '../redux/actions/generic-post';
 import { PostService } from './posts/post.service';
 import { EditPost } from './posts/EditPost.component'
 import { CategoryService } from './posts/category.service';
@@ -54,7 +55,7 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
             },
             {
                 path: 'editPost/:id',
-                component: EditPost
+                component: PostEditor
             },
             { path: 'posts', redirectTo: '', pathMatch: 'full' },
             { path: '**', redirectTo: '', pathMatch: 'full' }
@@ -75,6 +76,7 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
         PostService,
         CategoryService,
         PostDetailGuard,
+        AsyncDataWrapper,
     ],
     bootstrap: [AppComponent],
     exports: [PostEditor]
