@@ -1,4 +1,4 @@
-﻿import { Component, NgZone, OnInit, OnDestroy} from '@angular/core';
+﻿import { Component, NgZone, OnInit, OnDestroy } from '@angular/core';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { PostService } from './post.service';
 import { CategoryService } from './category.service';
@@ -18,13 +18,14 @@ import { AsyncDataWrapper } from '../../redux/actions/generic-post';
 
 
 })
-export class PostEditor implements OnInit {
+export class PostEditor implements OnInit, OnDestroy {
     model: IPost;
     postForm: FormGroup;
     tagAndCategorySplit;
     stateModel: HBlogState;
     private sub: Subscription;
-
+    post;
+  
     constructor(private postService: PostService,
         private fb: FormBuilder,
         private route: ActivatedRoute,
@@ -33,44 +34,49 @@ export class PostEditor implements OnInit {
         private zone: NgZone,
         private _postService: PostService) {
         this.stateModel = AppStore.getState() as PostsState;
-        
+
     }
 
     addPost() {
 
-        this.model = this.postForm.value;
-        console.log(this.model);
-        this._postActions.addPost(this.model);
-        //    .then(function () {
-        //    //TODO po dodaniu posta
+        this.post = this.postForm.value as IPost;
+
+        console.log(this.model, " POST");
+        this._postActions.addPost(this.model).then(
+            this.getPost(this.model.Id)
+            //AppStore.dispatch(this._postActions.getPost(this.model))
+        );
+        //console.log(this.stateModel.post.data.Id);
+        //this._router.navigate(['/post', + this.model.id])
+
+        //TODO po dodaniu posta
         //}).catch(function(parameters) {
         //    //TODO po nieudanym  dodaniu
         //})
-
-
     }
 
     ngOnInit(): void {
-        
-
         AppStore.subscribe(() => { this.postListener() });
         this.sub = this.route.params.subscribe(
             params => {
                 let id = + params['id'];
-                console.log(id, "idCheck")
+                //this.model = this.stateModel.post;
+                console.log(id, "idCheck");
                 if (typeof params['id'] === 'undefined') {
-                    this.model = this.stateModel.post;
-                    console.log("Test");
+                    this.model = { Id: 0, Title: "", ShortDescription: "", Categories: [], Tags: [], Content: "" };
+
+                    console.log(this.model, "Test");
                 } else {
                     AppStore.dispatch(this.getPost(id));
-                    this.model = this.stateModel.post.data;
-                    console.log("Test2");
+                    this.model = this.stateModel.post;
+                    console.log(this.model, "Test2");
                 }
+                
 
             });
-           //TODO dispatch na getPost     
+        //TODO dispatch na getPost     
 
-       
+
         
         //if (typeof this.stateModel.post.data == "undefined") {
 
@@ -79,9 +85,9 @@ export class PostEditor implements OnInit {
 
         //} else {
         //    this.model = this.stateModel.post;
-            
+
         //}
-        
+
         this.buildForm();
         console.log(this.model, 'model');
 
@@ -89,13 +95,12 @@ export class PostEditor implements OnInit {
 
     postListener() {
         this.stateModel = AppStore.getState() as PostsState;
-        
+
         this.zone.run(() => {
 
             this.model = this.stateModel.post.data;
             console.log(this.model, 'dd2');
-            
-            
+            this.buildForm();
         });
     }
     getPost(id: number) {
@@ -110,32 +115,30 @@ export class PostEditor implements OnInit {
         }
     }
 
-
-
     buildForm(): void {
-        this.postForm = this.fb.group({
-            'Content': [this.model.content],
-            'Title': [
-                this.model.title, [
-                    Validators.required,
-                    Validators.minLength(10),
-                    Validators.maxLength(50)
+        if (this.model !== undefined) {
+            this.postForm = this.fb.group({
+                'Content': [this.model.Content],
+                'Title': [
+                    this.model.Title, [
+                        Validators.required,
+                        Validators.minLength(10),
+                        Validators.maxLength(50)
+                    ]
+                ],
+                'ShortDescription': [
+                    this.model.ShortDescription, [
+                        Validators.required,
+                        Validators.minLength(10),
+                        Validators.maxLength(500)
+                    ]
                 ]
-            ],
-            'ShortDescription': [
-                this.model.shortDescription, [
-                    Validators.required,
-                    Validators.minLength(10),
-                    Validators.maxLength(500)
-                ]
-            ]
-            
+            });
 
-        });
+            this.postForm.valueChanges.subscribe(data => this.onValueChanged(data));
 
-        this.postForm.valueChanges.subscribe(data => this.onValueChanged(data));
-
-        this.onValueChanged();
+            this.onValueChanged();
+        }
     }
 
 
@@ -178,7 +181,7 @@ export class PostEditor implements OnInit {
         }
     };
 
-
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
 }
-    
-

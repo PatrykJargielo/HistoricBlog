@@ -14,7 +14,7 @@ import { Http, Response, HttpModule, RequestOptions, Headers, URLSearchParams } 
 
 export const ADD_POST = "ADD_POST";
 export const ADD_POST_REQUEST = "ADD_POST_REQUEST";
-export const ADD_POST_SUCCESS = "DD_POST_SUCCESS";
+export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
 export const ADD_POST_ERROR = "ADD_POST_ERROR";
 export const EDIT_POST = "EDIT_POST";
 export const GET_POST = "GET_POST";
@@ -67,11 +67,11 @@ export class PostActions {
         
         const request = this._http.post(`${this._postUrl}/${post.Id}`, body, options)
             .toPromise();
-        AppStore.dispatch({ type: 'ADD_POST_REQUEST', payload: request });
+        AppStore.dispatch({ type: ADD_POST_REQUEST, payload: request });
 
         return request
-            .then((response: Response) => AppStore.dispatch({ type: 'ADD_POST_SUCCESS', payload: response.json() }))
-            .catch((error: Response) => AppStore.dispatch({ type: 'SET_ERRORS', payload: error.json() }));
+            .then((response: Response) => AppStore.dispatch({ type: ADD_POST_SUCCESS, payload: response.json }))
+            .catch((error: Response) => AppStore.dispatch({ type: SET_ERRORS, payload: error.json }));
         
     }
 

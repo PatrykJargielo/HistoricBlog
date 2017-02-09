@@ -66,7 +66,7 @@ export class PostService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         console.log(body);
-        return this._http.post(`${this._postUrl}/${post.id}`, body, options)
+        return this._http.post(`${this._postUrl}/${post.Id}`, body, options)
             .toPromise()
             .then((res: Response) => res.json() || {});
 

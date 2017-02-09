@@ -55,7 +55,7 @@ export function post(state = defaultState, action) {
             return newState;
         case ADD_POST_SUCCESS:
             newState = Object.assign({}, state);
-            newState.post.data = action.payload;
+            newState.post.data = action.payload.post;
             //newState.posts.status = STATUS_SUCCEEDED;
             return newState;
         case ADD_POST_ERROR:

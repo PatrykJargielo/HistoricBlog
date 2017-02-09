@@ -4,7 +4,7 @@ import { HBlogState as PostsState } from '../../redux/hblog-state';
 
 @Component({
     selector: 'hb-error-display',
-    template: `<div *ngIf='errorList.length > 0;'>
+    template: `<div *ngIf='errorList !== undefined;'>
                     <ul *ngFor='let error of errorList'>
                         <li>{{error}}</li>
                     </ul>

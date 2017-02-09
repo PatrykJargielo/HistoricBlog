@@ -1,9 +1,9 @@
-﻿<form [(formGroup)]="postForm" >
-    <div class="form-group">
+﻿<form [(formGroup)]="postForm"  >
+    <div class="form-group" *ngIf='model'>
         <ckeditor formControlName="Content" [(ngModel)]="model.Content" debounce="500" name="Content">
         </ckeditor>
         <label>Tytuł</label>
-        <input type="text" class="form-control" placeholder="Tytuł" id="Title"  formControlName="Title" [(ngModel)]="model.Title" required>
+        <input type="text" class="form-control" placeholder="Tytuł" id="title"  formControlName="Title" [(ngModel)]="model.Title" required>
         <div *ngIf="formErrors.Title" class="alert alert-danger" [innerHtml]="formErrors.Title">
         </div>
         <label>Shorts</label>
@@ -11,6 +11,6 @@
         <div *ngIf="formErrors.ShortDescription" class="alert alert-danger" [innerHtml]="formErrors.ShortDescription">
         </div>
     </div>
-    <button class="btn btn-default" [disabled]="!postForm.valid" (click)="addPost()">Dodaj post</button>
+    <button class="btn btn-default" [disabled]="!postForm.valid" (click)="addPost()" [routerLink]="['/post', model.Id]">Dodaj post</button>
    
 </form>
