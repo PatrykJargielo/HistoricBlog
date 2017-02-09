@@ -38,7 +38,11 @@ export class PostEditor implements OnInit {
 
     addPost() {
 
-        this.model = this.postForm.value;
+
+        this.model.title = (this.postForm.value as IPost).title;
+        this.model.content = (this.postForm.value as IPost).content;
+        this.model.shortDescription = (this.postForm.value as IPost).shortDescription;
+
         console.log(this.model);
         this._postActions.addPost(this.model);
         //    .then(function () {

@@ -262,3 +262,13 @@ HistoricBlog.Web/redux/actions/post-actions.js
 HistoricBlog.Web/redux/actions/post-actions.js.map
 HistoricBlog.Web/redux/reducers/post-reducer.js
 HistoricBlog.Web/redux/reducers/post-reducer.js.map
+HistoricBlog.Web/app/app.module.js
+HistoricBlog.Web/app/app.module.js.map
+HistoricBlog.Web/app/posts/post.service.js
+HistoricBlog.Web/app/posts/post.service.js.map
+HistoricBlog.Web/app/posts/postEditor.js.map
+HistoricBlog.Web/redux/actions/post-actions.js
+HistoricBlog.Web/redux/actions/post-actions.js.map
+HistoricBlog.Web/redux/reducers/post-reducer.js
+HistoricBlog.Web/redux/reducers/post-reducer.js.map
+HistoricBlog.WebApi/App_Data/Logs/log2.txt.2017-02-08

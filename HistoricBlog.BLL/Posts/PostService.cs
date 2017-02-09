@@ -14,20 +14,20 @@ using HistoricBlog.DAL.Users;
 
 namespace HistoricBlog.BLL.Posts
 {
-    public class PostService : GenericService<Post>,IPostService
+    public class PostService : GenericService<Post>, IPostService
     {
         private readonly IPostRepository _postRepository;
         private readonly IUserRepository _userRepository;
 
         public ILoggerService LoggerService { get; set; }
 
-        public PostService(IPostRepository postRepository,IUserRepository userRepository) : base(postRepository)
+        public PostService(IPostRepository postRepository, IUserRepository userRepository) : base(postRepository)
         {
             _postRepository = postRepository;
             _userRepository = userRepository;
         }
 
-      
+
 
         public override GenericResult<Post> Update(Post entity)
         {
@@ -35,7 +35,7 @@ namespace HistoricBlog.BLL.Posts
             return base.Update(entity);
         }
 
-     
+
 
         public override GenericResult<Post> Create(Post entity)
         {
@@ -52,6 +52,7 @@ namespace HistoricBlog.BLL.Posts
         public GenericResult<IEnumerable<Post>> GetPostsByTitle(string Name)
         {
             var result = _postRepository.FindBy(post => post.Title.Contains(Name));
+            result.Result = result.Result.OrderByDescending(x => x.PostedOn).ToList();
             result.IsVaild = true;
             return result;
         }
