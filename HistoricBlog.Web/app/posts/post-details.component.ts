@@ -15,7 +15,7 @@ import { AsyncDataWrapper } from '../../redux/actions/generic-post';
 
 export class PostDetailsComponent implements OnInit, OnDestroy {
     pageTitle: string = 'Post Detail';
-    post: AsyncDataWrapper<IPost>;
+    post: IPost;
     stateModel: PostsState;
     errorMessage: string;
     private sub: Subscription;
@@ -36,7 +36,6 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
             params => {
                 let id = + params['id'];
                 AppStore.dispatch(this.getPost(id));
-                
             });
     }
 
@@ -61,8 +60,6 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
         //this._postService.getPost(idFromRoute);
         //    .subscribe(post => this.post = post/*);*/
 
-
-       
         return (dispatch) => {
             this._postService.getPost(idFromRoute).then(
                 post => dispatch(this._postActions.getPost(post.json())

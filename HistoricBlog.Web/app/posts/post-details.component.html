@@ -1,24 +1,14 @@
 <div class='panel panel-primary' *ngIf='post'>
     <div class='panel-heading' style='font-size:large' [innerHtml]="post.Title">
     </div>
-
     <div class='panel-body'>
-        <div class='row'>
-            <div class='col-md-6'>
-                <div class='row'>
-                    <div class='col-md-6' [innerHTML]="post.Content"></div>
-                </div>
-            </div>
-        </div>
+        <div class='col-md-6' [innerHTML]="post.Content"></div>
     </div>
-
     <div class='panel-footer'>
-        <div class="row">
-            <a class='btn btn-default' (click)='onBack()'>
-                <i class='glyphicon glyphicon-chevron-left'></i>Powrót</a>
-            <a class='btn btn-default' [routerLink]="['/editPost', post.Id]">
-                <i class='glyphicon glyphicon-pencil'></i>Edytuj</a>
-        </div>
+        <a class='btn btn-default' (click)='onBack()'>
+            <i class='glyphicon glyphicon-chevron-left'></i>Powrót</a>
+        <a class='btn btn-default' [routerLink]="['/editPost', post.Id]">
+            <i class='glyphicon glyphicon-pencil'></i>Edytuj</a>
     </div>
 </div>
 <div class="panel panel-default" *ngIf='post'>
