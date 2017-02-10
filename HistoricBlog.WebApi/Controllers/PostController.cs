@@ -79,7 +79,7 @@ namespace HistoricBlog.WebApi.Controllers
             var postEntity = Mapper.Map<Post>(post);
             var isPostNew = post.Id == 0;  //do test
                 
-
+            
             var postResult = new GenericResult<Post>();
             if (isPostNew)
                 postResult = _postService.Create(postEntity);

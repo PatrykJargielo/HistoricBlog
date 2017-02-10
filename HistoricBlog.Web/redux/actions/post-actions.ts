@@ -50,8 +50,8 @@ export class PostActions {
     private _postUrl = 'http://localhost:58141/api/post';
     constructor( @Inject(Http) private _http: Http) { }
 
-    addPostRequest(request) {
-        return { type: ADD_OR_UPDATE_POST_REQUEST, payload: request }
+    addPostRequest(post) {
+        return { type: ADD_OR_UPDATE_POST_REQUEST, payload: post }
     }
     addPostSuccess(response) {
         return { type: ADD_OR_UPDATE_POST_SUCCESS, payload: response }
@@ -64,8 +64,8 @@ export class PostActions {
     getAllPostsRequest(request) {
         return { type: GET_POSTS_REQUEST, payload: request }
     }
-    getAllPostsSuccess(response) {
-        return { type: GET_POSTS_SUCCESS, payload: response }
+    getAllPostsSuccess(posts) {
+        return { type: GET_POSTS_SUCCESS, payload: posts }
     }
     getAllPostsError(post) {
         return { type: GET_POSTS_ERROR, payload: post }
@@ -101,7 +101,7 @@ export class PostActions {
         return { type: SET_ERRORS, payload: errors }
     }
 
-    addPost(post) {
+    addPost(post: IPost) {
         let body = JSON.stringify(post);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
@@ -111,7 +111,7 @@ export class PostActions {
         AppStore.dispatch({ type: ADD_OR_UPDATE_POST_REQUEST, payload: request });
 
         return request
-            .then((response: Response) => AppStore.dispatch({ type: ADD_OR_UPDATE_POST_SUCCESS, payload: response.json() }))
+            .then((post: Response) => AppStore.dispatch({ type: ADD_OR_UPDATE_POST_SUCCESS, payload: post.json()}))
             .catch((error: Response) => AppStore.dispatch({ type: SET_ERRORS, payload: error.json }));
 
     }
@@ -126,8 +126,8 @@ export class PostActions {
             .catch((error: Response) => AppStore.dispatch({ type: SET_ERRORS, payload: error.json() }));
     }
 
-    getAllPosts(posts) {
-        return { type: GET_POSTS_REQUEST, payload: posts }
+    getAllPosts(post) {
+        return { type: GET_POSTS_REQUEST, payload: post }
     }
 
     getPostsFilteredPage() {
@@ -142,10 +142,10 @@ export class PostActions {
         if (filterTitle.length > 0) params.set('titleFilter', filterTitle);
 
 
-        const request = this._http.get(this._postUrl, { search: params }).toPromise()
+        let request = this._http.get(this._postUrl, { search: params }).toPromise();
         AppStore.dispatch({ type: GET_POSTS_REQUEST, payload: request });
 
-        return request.then((response: Response) => AppStore.dispatch({ type: GET_POSTS_SUCCESS, payload: response.json() }))
+        return request.then((posts: Response) => AppStore.dispatch({ type: GET_POSTS_SUCCESS, payload: posts.json() }))
             .catch((error: Response) => AppStore.dispatch({ type: SET_ERRORS, payload: error.json }));
 
 

@@ -11,6 +11,6 @@
         <div *ngIf="formErrors.ShortDescription" class="alert alert-danger" [innerHtml]="formErrors.ShortDescription">
         </div>
     </div>
-    <button class="btn btn-default" [disabled]="!postForm.valid" (click)="addPost()" [routerLink]="['/post', model.Id]">Dodaj post</button>
+    <button class="btn btn-default" [disabled]="!postForm.valid" (click)="addPost()" >Dodaj post</button>
    
 </form>

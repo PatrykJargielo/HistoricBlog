@@ -1,4 +1,4 @@
-﻿import { Component, NgZone, OnInit, OnDestroy } from '@angular/core';
+﻿import { Component, NgZone, OnInit, OnDestroy, Inject } from '@angular/core';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { PostService } from './post.service';
 import { CategoryService } from './category.service';
@@ -18,7 +18,7 @@ import { AsyncDataWrapper } from '../../redux/actions/generic-post';
 
 
 })
-export class PostEditor implements OnInit, OnDestroy {
+export class PostEditor implements OnInit {
     model: IPost;
     postForm: FormGroup;
     tagAndCategorySplit;
@@ -26,9 +26,9 @@ export class PostEditor implements OnInit, OnDestroy {
     private sub: Subscription;
     post;
     asd;
-  
+
     constructor(private postService: PostService,
-        private fb: FormBuilder,
+        @Inject(FormBuilder)private fb: FormBuilder,
         private route: ActivatedRoute,
         private _postActions: PostActions,
         private _router: Router,
@@ -40,9 +40,11 @@ export class PostEditor implements OnInit, OnDestroy {
 
     addPost() {
 
-        this.post = this.postForm.value as IPost;
-
-        console.log(this.model, " POST");
+        this.post = this.postForm.value;
+        this.model.Content = this.post.Content;
+        this.model.Title = this.post.Title;
+        this.model.ShortDescription = this.post.ShortDescription;
+        console.log(this.model, " POSTSTATE");
         this._postActions.addPost(this.model)
 
         //console.log(this.stateModel.post.data.Id);
@@ -67,26 +69,16 @@ export class PostEditor implements OnInit, OnDestroy {
 
                     console.log(this.model, "Test");
                 } else {
-                    this.getPost(id);
-                    this.model = this.stateModel.post;
+                    let idFromRoute = + this.route.snapshot.params['id'];
+                    this._postActions.getPost(idFromRoute);
+                    this.model = this.stateModel.post.data
+
                     console.log(this.model, "Test2");
                 }
-                
+
 
             });
         //TODO dispatch na getPost     
-
-
-        
-        //if (typeof this.stateModel.post.data == "undefined") {
-
-        //    this.model=
-        //    { id: 0, title: "", shortDescription: "", categories: [], tags: [], content: "" };
-
-        //} else {
-        //    this.model = this.stateModel.post;
-
-        //}
 
         this.buildForm();
         console.log(this.model, 'model');
@@ -97,45 +89,44 @@ export class PostEditor implements OnInit, OnDestroy {
         this.stateModel = AppStore.getState() as PostsState;
 
         this.zone.run(() => {
-
             this.model = this.stateModel.post.data;
             console.log(this.model, 'dd2');
-            this.buildForm();
+
         });
     }
-    getPost(id: number) {
+    //getPost(id: number) {
 
-        let idFromRoute = + this.route.snapshot.params['id'];
+    //    let idFromRoute = + this.route.snapshot.params['id'];
 
-        this._postActions.getPost(idFromRoute);
-        console.log(this._postActions.getPost(idFromRoute), 'actionrIdRoute');
+    //    this._postActions.getPost(idFromRoute);
+    //    console.log(this._postActions.getPost(idFromRoute), 'actionrIdRoute');
 
-    }
+    //}
 
     buildForm(): void {
-        
-            this.postForm = this.fb.group({
-                'Content': [this.model.Content],
-                'Title': [
-                    this.model.Title, [
-                        Validators.required,
-                        Validators.minLength(10),
-                        Validators.maxLength(50)
-                    ]
-                ],
-                'ShortDescription': [
-                    this.model.ShortDescription, [
-                        Validators.required,
-                        Validators.minLength(10),
-                        Validators.maxLength(500)
-                    ]
+
+        this.postForm = this.fb.group({
+            'Content': [this.model.Content],
+            'Title': [
+                this.model.Title, [
+                    Validators.required,
+                    Validators.minLength(10),
+                    Validators.maxLength(50)
                 ]
-            });
+            ],
+            'ShortDescription': [
+                this.model.ShortDescription, [
+                    Validators.required,
+                    Validators.minLength(10),
+                    Validators.maxLength(500)
+                ]
+            ]
+        });
 
-            this.postForm.valueChanges.subscribe(data => this.onValueChanged(data));
+        this.postForm.valueChanges.subscribe(data => this.onValueChanged(data));
 
-            this.onValueChanged();
-        
+        this.onValueChanged();
+
     }
 
 
@@ -178,7 +169,5 @@ export class PostEditor implements OnInit, OnDestroy {
         }
     };
 
-    ngOnDestroy() {
-        this.sub.unsubscribe();
-    }
+
 }
