@@ -35,7 +35,7 @@ namespace HistoricBlog.WebApi.Controllers
         {
             var result = _postService.GetAll();
 
-            var posts = Mapper.Map<IEnumerable<PostShortViewModel>>(result.Result);
+            var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
             return Request.CreateResponse(HttpStatusCode.OK, posts);
 
         }
@@ -65,14 +65,14 @@ namespace HistoricBlog.WebApi.Controllers
             var pageStart = (page-1) * quantity;
             result.Result = result.Result.Skip(pageStart).Take(quantity);
 
-            var posts = Mapper.Map<IEnumerable<PostShortViewModel>>(result.Result);
+            var posts = Mapper.Map<IEnumerable<PostViewModel>>(result.Result);
             return Request.CreateResponse(HttpStatusCode.OK,new { totalFilteredPostCount = totalFilteredPostCount, pageStart=pageStart, posts=posts });
 
         }
 
         [HttpPost]
 
-        public HttpResponseMessage Post([FromBody]PostInputViewModel post)
+        public HttpResponseMessage Post([FromBody]PostViewModel post)
         {
             var postEntity = Mapper.Map<Post>(post);
             var isPostNew = post.Id == 0;  //do test
