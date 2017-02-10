@@ -71,7 +71,6 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
     onBack(): void {
             this._router.navigate(['']);
         }
-
         onRatingClicked(message: string): void {
             this.pageTitle = 'Post Detail: ' + message;
         }

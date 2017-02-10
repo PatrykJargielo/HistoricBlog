@@ -70,8 +70,8 @@ export class PostActions {
         AppStore.dispatch({ type: ADD_POST_REQUEST, payload: request });
 
         return request
-            .then((response: Response) => AppStore.dispatch({ type: ADD_POST_SUCCESS, payload: response.json }))
-            .catch((error: Response) => AppStore.dispatch({ type: SET_ERRORS, payload: error.json }));
+            .then((response: Response) => AppStore.dispatch({ type: ADD_POST_SUCCESS, payload: response.json() }))
+            .catch((error: Response) => AppStore.dispatch({ type: SET_ERRORS, payload: error.json() }));
         
     }
 

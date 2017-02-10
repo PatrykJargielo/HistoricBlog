@@ -1,5 +1,4 @@
-﻿<form [(formGroup)]="postForm">
-    <div class="form-group" *ngIf='model'>
+﻿<form [formGroup]="postForm">
         <ckeditor formControlName="Content" [(ngModel)]="model.Content" debounce="500" name="Content">
         </ckeditor>
         <label>Tytuł</label>
@@ -10,8 +9,6 @@
         <input type="text" class="form-control" placeholder="Krótki opis" formControlName="ShortDescription" [(ngModel)]="model.ShortDescription" name="ShortDescription">
         <div *ngIf="formErrors.ShortDescription" class="alert alert-danger" [innerHtml]="formErrors.ShortDescription">
         </div>
-    </div>
     <a class='btn btn-default' (click)='onBack()'><i class='glyphicon glyphicon-chevron-left'></i>Powrót</a>
     <button class="btn btn-default" [disabled]="!postForm.valid" (click)="addPost()">Dodaj post</button>
-
 </form>

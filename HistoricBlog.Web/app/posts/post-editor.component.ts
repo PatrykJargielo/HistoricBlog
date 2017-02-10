@@ -39,13 +39,15 @@ export class PostEditor implements OnInit, OnDestroy {
 
     addPost() {
 
-        this.post = this.postForm.value as IPost;
+        this.model = this.postForm.value;
 
-        console.log(this.model, " POST");
-        this._postActions.addPost(this.model).then(
-            this.getPost(this.model.Id)
-            //AppStore.dispatch(this._postActions.getPost(this.model))
-        );
+        console.log(this.model.Id, "POST");
+        this._postActions.addPost(this.model)
+       //     .then(AppStore.dispatch(this.addPost(this.model.Id)));
+        //     .then(
+        //     this.getPost(this.model.Id)
+        //     //AppStore.dispatch(this._postActions.getPost(this.model))
+        // );
         //console.log(this.stateModel.post.data.Id);
         //this._router.navigate(['/post', + this.model.id])
 
@@ -116,17 +118,16 @@ export class PostEditor implements OnInit, OnDestroy {
     }
 
     buildForm(): void {
-        if (this.model !== undefined) {
             this.postForm = this.fb.group({
-                'Content': [this.model.Content],
-                'Title': [
+                Content: [this.model.Content],
+                Title: [
                     this.model.Title, [
                         Validators.required,
                         Validators.minLength(10),
                         Validators.maxLength(50)
                     ]
                 ],
-                'ShortDescription': [
+                ShortDescription: [
                     this.model.ShortDescription, [
                         Validators.required,
                         Validators.minLength(10),
@@ -139,7 +140,7 @@ export class PostEditor implements OnInit, OnDestroy {
 
             this.onValueChanged();
         }
-    }
+    
 
 
     onValueChanged(data?: any) {

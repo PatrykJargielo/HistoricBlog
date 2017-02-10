@@ -13,7 +13,6 @@ import { post } from '../redux/reducers/post-reducer';
 import { PostActions } from '../redux/actions/post-actions';
 import { AsyncDataWrapper } from '../redux/actions/generic-post';
 import { PostService } from './posts/post.service';
-import { EditPost } from './posts/EditPost.component'
 import { CategoryService } from './posts/category.service';
 import { PostEditor } from './posts/post-editor.component';
 import { Ng2PaginationModule } from 'ng2-pagination';
@@ -33,11 +32,11 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
     imports: [
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         HttpModule,
         JsonpModule,
         CKEditorModule,
         Ng2PaginationModule,       
-        ReactiveFormsModule,
         RouterModule.forRoot([
             { path: '', component: PostListComponent },
             {
@@ -67,7 +66,6 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
         ErrorDisplayComponent,
         PostEditor,
         PostDetailsComponent,
-        EditPost,
         NavbarComponent,
         ContactComponent
     ],
