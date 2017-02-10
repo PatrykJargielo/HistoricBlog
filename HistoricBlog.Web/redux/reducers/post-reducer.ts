@@ -1,14 +1,19 @@
 ﻿import {
-    ADD_POST,
-    EDIT_POST,
-    GET_POSTS,
-    GET_POST,
+    GET_POST_REQUEST,
+    GET_POST_SUCCESS,
+    GET_POST_ERROR,
+
+    GET_POSTS_REQUEST,
+    GET_POSTS_SUCCESS,
+    GET_POSTS_ERROR,
+
     SET_POSTS_TITLE_FILTER,
     SET_POSTS_LIST_PAGE,
     SET_ERRORS,
-    ADD_POST_SUCCESS,
-    ADD_POST_ERROR,
-    ADD_POST_REQUEST
+
+    ADD_OR_UPDATE_POST_SUCCESS,
+    ADD_OR_UPDATE_POST_ERROR,
+    ADD_OR_UPDATE_POST_REQUEST
 
 } from '../actions/post-actions'
 import {
@@ -47,32 +52,35 @@ export function post(state = defaultState, action) {
             newState = Object.assign({}, state);
             newState.pagination.pageNumber = action.pageNumber;
             newState.errors = [];
-            return newState;               
-        case ADD_POST_REQUEST:
+            return newState;
+        case ADD_OR_UPDATE_POST_REQUEST:
             newState = Object.assign({}, state);
             newState.post.promise = action.payload;
             newState.post.status = STATUS_STARTED;
             return newState;
-        case ADD_POST_SUCCESS:
+        case ADD_OR_UPDATE_POST_SUCCESS:
             newState = Object.assign({}, state);
             newState.post.data = action.payload.post;
             //newState.posts.status = STATUS_SUCCEEDED;
             return newState;
-        case ADD_POST_ERROR:
+        case ADD_OR_UPDATE_POST_ERROR:
             newState = Object.assign({}, state);
             newState.post.status = STATUS_FAILED;
             newState.post.errors.error = [];
             return newState;
-        case EDIT_POST:
+        case GET_POSTS_REQUEST:
             newState = Object.assign({}, state);
-            newState.posts.filter((post) => post.id != action.post.Id);
-            newState.posts.concat(action.payload.post);
-            newState.errors = [];
-            return state;
-        case GET_POSTS:
+            newState.posts.promise = action.payload;
+            newState.posts.status = STATUS_STARTED;
+            return newState;
+        case GET_POSTS_SUCCESS:
             newState = Object.assign({}, state);
             newState.pagination.totalFilteredPostCount = action.payload.totalFilteredPostCount;
             newState.posts.data = action.payload.posts;
+            return newState;
+        case GET_POSTS_ERROR:
+            newState = Object.assign({}, state);
+            newState.posts.status = STATUS_FAILED;
             newState.errors = [];
             return newState;
         case SET_POSTS_TITLE_FILTER:
@@ -85,9 +93,19 @@ export function post(state = defaultState, action) {
             newState.posts.status = STATUS_FAILED;
             newState.errors = action.payload;
             return newState;
-        case GET_POST:
+        case GET_POST_REQUEST:
+            newState = Object.assign({}, state);
+            newState.post.promise = action.payload;
+            newState.post.status = STATUS_STARTED;
+            return newState;
+        case GET_POST_SUCCESS:
             newState = Object.assign({}, state);
             newState.post.data = action.payload;
+            return newState;
+        case GET_POST_ERROR:
+            newState = Object.assign({}, state);
+            newState.post.status = STATUS_FAILED;
+            newState.errors = [];
             return newState;
         default:
             return newState;

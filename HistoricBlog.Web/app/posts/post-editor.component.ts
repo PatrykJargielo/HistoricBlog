@@ -25,6 +25,7 @@ export class PostEditor implements OnInit, OnDestroy {
     stateModel: HBlogState;
     private sub: Subscription;
     post;
+    asd;
   
     constructor(private postService: PostService,
         private fb: FormBuilder,
@@ -42,10 +43,8 @@ export class PostEditor implements OnInit, OnDestroy {
         this.post = this.postForm.value as IPost;
 
         console.log(this.model, " POST");
-        this._postActions.addPost(this.model).then(
-            this.getPost(this.model.Id)
-            //AppStore.dispatch(this._postActions.getPost(this.model))
-        );
+        this._postActions.addPost(this.model)
+
         //console.log(this.stateModel.post.data.Id);
         //this._router.navigate(['/post', + this.model.id])
 
@@ -57,6 +56,7 @@ export class PostEditor implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         AppStore.subscribe(() => { this.postListener() });
+        
         this.sub = this.route.params.subscribe(
             params => {
                 let id = + params['id'];
@@ -67,7 +67,7 @@ export class PostEditor implements OnInit, OnDestroy {
 
                     console.log(this.model, "Test");
                 } else {
-                    AppStore.dispatch(this.getPost(id));
+                    this.getPost(id);
                     this.model = this.stateModel.post;
                     console.log(this.model, "Test2");
                 }
@@ -107,16 +107,13 @@ export class PostEditor implements OnInit, OnDestroy {
 
         let idFromRoute = + this.route.snapshot.params['id'];
 
-        return (dispatch) => {
-            this._postService.getPost(idFromRoute).then(
-                post => dispatch(this._postActions.getPost(post.json())
-                )
-            );
-        }
+        this._postActions.getPost(idFromRoute);
+        console.log(this._postActions.getPost(idFromRoute), 'actionrIdRoute');
+
     }
 
     buildForm(): void {
-        if (this.model !== undefined) {
+        
             this.postForm = this.fb.group({
                 'Content': [this.model.Content],
                 'Title': [
@@ -138,7 +135,7 @@ export class PostEditor implements OnInit, OnDestroy {
             this.postForm.valueChanges.subscribe(data => this.onValueChanged(data));
 
             this.onValueChanged();
-        }
+        
     }
 
 

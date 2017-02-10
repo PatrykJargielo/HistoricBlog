@@ -1,4 +1,4 @@
-﻿import { Component,NgZone ,OnInit, Inject, OnDestroy } from '@angular/core';
+﻿import { Component, NgZone, OnInit, Inject, OnDestroy } from '@angular/core';
 import { IPost } from '../../redux/actions/post-interface';
 import { PostActions } from '../../redux/actions/post-actions';
 import { PostService } from './post.service';
@@ -25,18 +25,18 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
         private _postService: PostService,
         private route: ActivatedRoute,
         private _postActions: PostActions,
-        private zone:NgZone)
-    {
+        private zone: NgZone) {
         this.stateModel = AppStore.getState() as PostsState;
     }
 
     ngOnInit(): void {
-        AppStore.subscribe(() => {this.postListnener()});
+        this.stateModel = AppStore.getState() as PostsState;
+        AppStore.subscribe(() => { this.postListnener() });
         this.sub = this._route.params.subscribe(
             params => {
                 let id = + params['id'];
                 AppStore.dispatch(this.getPost(id));
-                
+
             });
     }
 
@@ -57,25 +57,22 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
         //// this._postService.getPost(id).subscribe(
         ////     post => this.post = id,
         ////     error => this.errorMessage = <any>error);
-        let idFromRoute =+ this.route.snapshot.params['id'];
+        let idFromRoute = + this.route.snapshot.params['id'];
         //this._postService.getPost(idFromRoute);
         //    .subscribe(post => this.post = post/*);*/
 
 
-       
+
         return (dispatch) => {
-            this._postService.getPost(idFromRoute).then(
-                post => dispatch(this._postActions.getPost(post.json())
-                )
-            );
+            this._postActions.getPost(idFromRoute)
         }
     }
 
     onBack(): void {
-            this._router.navigate(['']);
-        }
+        this._router.navigate(['']);
+    }
 
-        onRatingClicked(message: string): void {
-            this.pageTitle = 'Post Detail: ' + message;
-        }
-    };
+    onRatingClicked(message: string): void {
+        this.pageTitle = 'Post Detail: ' + message;
+    }
+};

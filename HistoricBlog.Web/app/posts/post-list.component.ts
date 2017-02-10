@@ -19,7 +19,7 @@ export class PostListComponent implements OnInit {
     listFilter: string;
     posts: IPost[];
 
-    constructor( private postService: PostService, private _postActions: PostActions, private zone: NgZone) {
+    constructor(private postService: PostService, private _postActions: PostActions, private zone: NgZone) {
         this.postService = postService;
         this.stateModel = AppStore.getState() as PostsState;
         this.listFilter = '';
@@ -28,7 +28,7 @@ export class PostListComponent implements OnInit {
         AppStore.subscribe(() => {
             this.postListener();
         });
-        this.postService.getPostsFilteredPage();  
+        this._postActions.getPostsFilteredPage();
 
     }
 
@@ -58,9 +58,9 @@ export class PostListComponent implements OnInit {
         return this.stateModel.pagination.pageNumber;
     }
 
-    pageChanged(value): void{
+    pageChanged(value): void {
         AppStore.dispatch(
-            (dispatch) => { dispatch(this._postActions.setPostListPage(value)) }        
+            (dispatch) => { dispatch(this._postActions.setPostListPage(value)) }
         )
         this.postService.getPostsFilteredPage();
     }
