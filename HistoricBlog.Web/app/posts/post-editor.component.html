@@ -10,7 +10,7 @@
         <input type="text" class="form-control" placeholder="Krótki opis" formControlName="ShortDescription" [(ngModel)]="model.ShortDescription" name="ShortDescription">
         <div *ngIf="formErrors.ShortDescription" class="alert alert-danger" [innerHtml]="formErrors.ShortDescription">
         </div>
+    <a class='btn btn-default' (click)='onBack()'><i class='glyphicon glyphicon-chevron-left'></i>Powrót</a>
     </div>
     <button class="btn btn-default" [disabled]="!postForm.valid" (click)="addPost()" >Dodaj post</button>
-   
 </form>

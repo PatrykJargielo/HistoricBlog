@@ -36,7 +36,6 @@ namespace HistoricBlog.WebApi.Controllers
             var result = _postService.GetAll();
 
             var posts = Mapper.Map<IEnumerable<PostShortViewModel>>(result.Result);
-
             return Request.CreateResponse(HttpStatusCode.OK, posts);
 
         }
@@ -67,7 +66,6 @@ namespace HistoricBlog.WebApi.Controllers
             result.Result = result.Result.Skip(pageStart).Take(quantity);
 
             var posts = Mapper.Map<IEnumerable<PostShortViewModel>>(result.Result);
-
             return Request.CreateResponse(HttpStatusCode.OK,new { totalFilteredPostCount = totalFilteredPostCount, pageStart=pageStart, posts=posts });
 
         }

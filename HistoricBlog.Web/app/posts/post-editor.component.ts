@@ -18,15 +18,14 @@ import { AsyncDataWrapper } from '../../redux/actions/generic-post';
 
 
 })
-export class PostEditor implements OnInit {
+export class PostEditor implements OnInit, OnDestroy {
     model: IPost;
     postForm: FormGroup;
     tagAndCategorySplit;
     stateModel: HBlogState;
     private sub: Subscription;
     post;
-    asd;
-
+  
     constructor(private postService: PostService,
         @Inject(FormBuilder)private fb: FormBuilder,
         private route: ActivatedRoute,
@@ -168,6 +167,10 @@ export class PostEditor implements OnInit {
             'maxlength': 'Krótki opis może mieć maksymalnie 500 znaków.'
         }
     };
-
-
+    onBack(): void {
+            this._router.navigate(['']);
+        }
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
 }
