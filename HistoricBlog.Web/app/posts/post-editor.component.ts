@@ -20,7 +20,6 @@ import { AsyncDataWrapper } from '../../redux/actions/generic-post';
 })
 export class PostEditor implements OnInit, OnDestroy {
     model: IPost;
-    //testowe: AsyncDataWrapper<IPost>;
     postForm: FormGroup;
     tagAndCategorySplit;
     stateModel: HBlogState;
@@ -39,25 +38,17 @@ export class PostEditor implements OnInit, OnDestroy {
     }
 
     addPost() {
-        
+
         this.post = this.postForm.value;
         this.model.Content = this.post.Content;
         this.model.Title = this.post.Title;
         this.model.ShortDescription = this.post.ShortDescription;
-        console.log(this.model, 'Co mam w modelu')
-        this.stateModel.post.data = this.model;
+        console.log(this.model, " POSTSTATE");
+        this._postActions.addPost(this.model)
 
-        console.log(this.stateModel.post.data, " POSTSTATE");
-        console.log(this.stateModel, " POSTSTATE2");
-        console.log(this.stateModel.post, " POSTSTATE3");
-        this._postActions.addPost(this.stateModel.post.data)
-            //.catch(function (error) {
-            //    this._postActions.setErrors(error);
-            //})
-            //.then(
-            ////this._postActions.getPost(this.stateModel.post.da);
-            
-        //);
+        //console.log(this.stateModel.post.data.Id);
+        //this._router.navigate(['/post', + this.model.id])
+
         //TODO po dodaniu posta
         //}).catch(function(parameters) {
         //    //TODO po nieudanym  dodaniu
@@ -70,12 +61,11 @@ export class PostEditor implements OnInit, OnDestroy {
         this.sub = this.route.params.subscribe(
             params => {
                 let id = + params['id'];
-                
+                //this.model = this.stateModel.post;
                 console.log(id, "idCheck");
                 if (typeof params['id'] === 'undefined') {
-
                     this.model = { Id: 0, Title: "", ShortDescription: "", Categories: [], Tags: [], Content: "" };
-                    
+
                     console.log(this.model, "Test");
                 } else {
                     let idFromRoute = + this.route.snapshot.params['id'];
