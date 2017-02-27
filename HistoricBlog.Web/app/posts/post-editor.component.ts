@@ -38,21 +38,12 @@ export class PostEditor implements OnInit, OnDestroy {
     }
 
     addPost() {
-
         this.post = this.postForm.value;
         this.model.Content = this.post.Content;
         this.model.Title = this.post.Title;
         this.model.ShortDescription = this.post.ShortDescription;
-        console.log(this.model, " POSTSTATE");
-        this._postActions.addPost(this.model)
+        this._postActions.addPost(this.model);
 
-        //console.log(this.stateModel.post.data.Id);
-        //this._router.navigate(['/post', + this.model.id])
-
-        //TODO po dodaniu posta
-        //}).catch(function(parameters) {
-        //    //TODO po nieudanym  dodaniu
-        //})
     }
 
     ngOnInit(): void {
@@ -152,7 +143,6 @@ export class PostEditor implements OnInit, OnDestroy {
     formErrors = {
         'Title': '',
         'ShortDescription': ''
-
     };
 
     validationMessages = {
