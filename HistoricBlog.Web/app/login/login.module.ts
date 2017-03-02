@@ -4,23 +4,30 @@ import { LoginService } from "./login.service";
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
-import { CKEditorModule } from 'ng2-ckeditor';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-    imports: [ 
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
         BrowserModule,
         HttpModule,
         Ng2Bs3ModalModule,
-        CKEditorModule
+        RouterModule.forRoot([{
+            path: 'login',
+            component: LoginComponent
+        }])
     ],
     declarations: [
         LoginComponent
+
     ],
     providers: [
         LoginService
     ]
-    
+
 })
 export class LoginModule {
-    
+
 }

@@ -1,25 +1,16 @@
 ﻿<div class="container">
     <div class="row">
-        <button (click)="open()" class="btn btn-primary" data-toggle="modal" >Zaloguj</button>
+        <button (click)='openModal()' class="btn btn-primary" data-toggle="modal" >Zaloguj</button>
         <modal #modal>
-            <modal-header [show-close]="true">
+            <modal-header>
                 <h4 class="modal-title">Zaloguj się</h4>
             </modal-header>
             <modal-body>
-                <form [formGroup]="loginForm">
-                    <ckeditor formControlName="Content" debounce="500" name="content">
-                    </ckeditor>
-                    <p>
-                        <input type="text" class="form-control" name="userName" id="userName" placeholder="Nazwa użytkownika" formControlName="userName">
-                    </p>
-                    <p>
-                        <input type="password" class="form-control" name="user" placeholder="Hasło" formControlName="password">
-                    </p>
-                    <p>
-                        <button type="submit" class="btn btn-primary">Zaloguj</button>
-                        <a href="#">Zapomniałeś hasła?</a>
-                    </p>
-                </form>
+                        <input type="text" name="userName" id="userName" placeholder="Nazwa użytkownika">
+                 
+                        <input type="password"  name="user" placeholder="Hasło">
+                
+                        <button type="submit">Zaloguj</button>                   
             </modal-body>
             <modal-footer>
                 Jesteś nowy na stronie?

@@ -2,7 +2,6 @@
 import { ILogin } from "./ilogin";
 import { LoginService } from "./login.service";
 import { CKEditorModule } from 'ng2-ckeditor';
-import { FormGroup, FormBuilder, Validators, FormsModule } from '@angular/forms';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal'
 
 @Component({
@@ -13,16 +12,12 @@ export class LoginComponent  {
     //docs about modal https://github.com/dougludlow/ng2-bs3-modal
     modal: ModalComponent;
 
-
-    constructor(private loginService: LoginService, private formBuilder: FormBuilder) {
-
-    }
-
-    close(): void {
+  
+    closeModal(): void {
         this.modal.close();
     }
 
-    open(): void {
+    openModal(): void {
         this.modal.open();
     }
 }
