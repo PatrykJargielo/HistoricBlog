@@ -113,8 +113,9 @@ export class PostActions {
         return request
             .then((post: Response) => AppStore.dispatch({ type: ADD_OR_UPDATE_POST_SUCCESS, payload: post.json()}))
             .catch((error: Response) => AppStore.dispatch({ type: SET_ERRORS, payload: error.json }));
-
     }
+
+    
 
     getPost(id: number) {
 

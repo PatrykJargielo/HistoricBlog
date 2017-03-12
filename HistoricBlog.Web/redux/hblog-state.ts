@@ -17,11 +17,7 @@ export class HBlogState {
     errors: string[];
 
     constructor() {
-        this.userName = 'guest';
-        this.token = '';
-        this.filterCategory = [];
         this.filterTitle = '';
-        this.filterTag = [];
         this.posts = new AsyncDataWrapper<IPost[]>();
         this.post = new AsyncDataWrapper<IPost>();
         this.posts.data = [];

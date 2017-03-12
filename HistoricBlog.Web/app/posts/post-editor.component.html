@@ -1,4 +1,4 @@
-﻿<form [(formGroup)]="postForm"  >
+﻿<form [(formGroup)]="postForm" >
     <div class="form-group" *ngIf='model'>
         <ckeditor formControlName="Content" [(ngModel)]="model.Content" debounce="500" name="Content">
         </ckeditor>
@@ -13,5 +13,6 @@
     
     </div>
     <a class='btn btn-default' (click)='onBack()'><i class='glyphicon glyphicon-chevron-left'></i>Powrót</a>
-    <button class="btn btn-default" [disabled]="!postForm.valid" (click)="addPost()" >Dodaj post</button>
+    <button class="btn btn-default" [disabled]="!postForm.valid" (click)="addPost()">Dodaj post</button>
+    <button class="btn btn-default" (click)="deletePost()">Usuń post</button>
 </form>

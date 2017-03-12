@@ -1,19 +1,22 @@
 "use strict";
 var post_actions_1 = require("../actions/post-actions");
-var defaultState = {
-    userName: 'guest',
-    token: '',
-    filterCategory: [],
-    filterTitle: '',
-    filterTag: [],
-    posts: [],
-    pagination: {
-        pageNumber: 1,
-        totalFilteredPostCount: 2,
-        postsOnPage: 5,
-    },
-    errors: []
-};
+var generic_post_1 = require("../actions/generic-post");
+var hblog_state_1 = require("../hblog-state");
+//let defaultState = {
+//    userName: 'guest',
+//    token: '',
+//    filterCategory: [],
+//    filterTitle: '',
+//    filterTag: [],
+//    posts: [],
+//    pagination: {
+//        pageNumber: 1,
+//        totalFilteredPostCount: 2,
+//        postsOnPage: 5,
+//    },
+//    errors: []
+//}
+var defaultState = new hblog_state_1.HBlogState();
 function post(state, action) {
     if (state === void 0) { state = defaultState; }
     var newState = state;
@@ -23,21 +26,34 @@ function post(state, action) {
             newState.pagination.pageNumber = action.pageNumber;
             newState.errors = [];
             return newState;
-        case post_actions_1.ADD_POST:
+        case post_actions_1.ADD_OR_UPDATE_POST_REQUEST:
             newState = Object.assign({}, state);
-            newState.posts.concat(action.payload.post);
-            newState.errors = [];
-            return state;
-        case post_actions_1.EDIT_POST:
+            newState.post.promise = action.payload;
+            newState.post.status = generic_post_1.STATUS_STARTED;
+            return newState;
+        case post_actions_1.ADD_OR_UPDATE_POST_SUCCESS:
             newState = Object.assign({}, state);
-            newState.posts.filter(function (post) { return post.Id != action.post.Id; });
-            newState.posts.concat(action.payload.post);
-            newState.errors = [];
-            return state;
-        case post_actions_1.GET_POSTS:
+            newState.post.data = action.payload.post;
+            //newState.posts.status = STATUS_SUCCEEDED;
+            return newState;
+        case post_actions_1.ADD_OR_UPDATE_POST_ERROR:
+            newState = Object.assign({}, state);
+            newState.post.status = generic_post_1.STATUS_FAILED;
+            newState.post.errors.error = [];
+            return newState;
+        case post_actions_1.GET_POSTS_REQUEST:
+            newState = Object.assign({}, state);
+            newState.posts.promise = action.payload;
+            newState.posts.status = generic_post_1.STATUS_STARTED;
+            return newState;
+        case post_actions_1.GET_POSTS_SUCCESS:
             newState = Object.assign({}, state);
             newState.pagination.totalFilteredPostCount = action.payload.totalFilteredPostCount;
-            newState.posts = action.payload.posts;
+            newState.posts.data = action.payload.posts;
+            return newState;
+        case post_actions_1.GET_POSTS_ERROR:
+            newState = Object.assign({}, state);
+            newState.posts.status = generic_post_1.STATUS_FAILED;
             newState.errors = [];
             return newState;
         case post_actions_1.SET_POSTS_TITLE_FILTER:
@@ -48,11 +64,22 @@ function post(state, action) {
         case post_actions_1.SET_ERRORS:
             ;
             newState = Object.assign({}, state);
+            newState.posts.status = generic_post_1.STATUS_FAILED;
             newState.errors = action.payload;
             return newState;
-        case post_actions_1.GET_POST:
+        case post_actions_1.GET_POST_REQUEST:
             newState = Object.assign({}, state);
-            newState.posts = [action.payload];
+            newState.post.promise = action.payload;
+            newState.post.status = generic_post_1.STATUS_STARTED;
+            return newState;
+        case post_actions_1.GET_POST_SUCCESS:
+            newState = Object.assign({}, state);
+            newState.post.data = action.payload;
+            return newState;
+        case post_actions_1.GET_POST_ERROR:
+            newState = Object.assign({}, state);
+            newState.post.status = generic_post_1.STATUS_FAILED;
+            newState.errors = [];
             return newState;
         default:
             return newState;

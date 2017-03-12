@@ -8,16 +8,15 @@ import { HBlogState } from '../../redux/hblog-state';
 import { AppStore } from '../app.module';
 import { PostActions } from '../../redux/actions/post-actions';
 import { Subscription } from 'rxjs/Subscription';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute  } from '@angular/router';
 import { HBlogState as PostsState } from '../../redux/hblog-state';
-import { FormGroup, FormBuilder, Validators, FormsModule } from '@angular/forms';
-import { AsyncDataWrapper } from '../../redux/actions/generic-post';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 
 @Component({
     templateUrl: 'app/posts/post-editor.component.html'
-
-
 })
+
 export class PostEditor implements OnInit, OnDestroy {
     model: IPost;
     postForm: FormGroup;
@@ -45,7 +44,14 @@ export class PostEditor implements OnInit, OnDestroy {
         this._postActions.addPost(this.model);
 
     }
+    deletePost() {
+            this.post = this.postForm.value;
+        this.model.Content = this.post.Content;
+        this.model.Title = this.post.Title;
+        this.model.ShortDescription = this.post.ShortDescription;
+        this._postActions.addPost(this.model);
 
+    }
     ngOnInit(): void {
         AppStore.subscribe(() => { this.postListener() });
         
@@ -61,16 +67,14 @@ export class PostEditor implements OnInit, OnDestroy {
                 } else {
                     let idFromRoute = + this.route.snapshot.params['id'];
                     this._postActions.getPost(idFromRoute);
-                    this.model = this.stateModel.post.data
+                    this.model = this.stateModel.post.data;
 
                     console.log(this.model, "Test2");
                 }
 
-
+        this.buildForm();
             });
         //TODO dispatch na getPost     
-
-        this.buildForm();
         console.log(this.model, 'model');
 
     }
@@ -96,16 +100,16 @@ export class PostEditor implements OnInit, OnDestroy {
     buildForm(): void {
 
         this.postForm = this.fb.group({
-            'Content': [this.model.Content],
+            'Content': this.fb.group,
             'Title': [
-                this.model.Title, [
+                this.fb.group, [
                     Validators.required,
                     Validators.minLength(10),
                     Validators.maxLength(50)
                 ]
             ],
             'ShortDescription': [
-                this.model.ShortDescription, [
+                this.fb.group, [
                     Validators.required,
                     Validators.minLength(10),
                     Validators.maxLength(500)

@@ -21,9 +21,7 @@ import thunk from 'redux-thunk';
 import * as createLogger from 'redux-logger';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContactComponent } from './shared/contact.component';
-import { LoginModule } from './login/login.module';
 
-import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 const logger = createLogger();
 
@@ -33,7 +31,6 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
 
 @NgModule({
     imports: [
-        LoginModule,
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
@@ -72,7 +69,7 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
         PostEditor,
         PostDetailsComponent,
         NavbarComponent,
-        ContactComponent        
+        ContactComponent
     ],
     providers: [
         PostActions,
@@ -80,7 +77,7 @@ export const AppStore = createStore(post, composeEnhancers(applyMiddleware(thunk
         CategoryService,
         PostDetailGuard,
         AsyncDataWrapper,
-            ],
+    ],
     bootstrap: [AppComponent],
     exports: [PostEditor]
 })
